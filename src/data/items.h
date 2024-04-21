@@ -11595,6 +11595,97 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
+    [ITEM_BICYCLE] =
+    {
+        .name = _("BICYCLE"),
+        .itemId = ITEM_BICYCLE,
+        .price = 0,
+        .description = sBicycleDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_TOWN_MAP] =
+    {
+        .name = _("TOWN MAP"),
+        .itemId = ITEM_TOWN_MAP,
+        .price = 0,
+        .description = sTownMapDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_VS_SEEKER] =
+    {
+        .name = _("VS SEEKER"),
+        .itemId = ITEM_VS_SEEKER,
+        .price = 0,
+        .description = sVSSeekerDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_FAME_CHECKER] =
+    {
+        .name = _("FAME CHECKER"),
+        .itemId = ITEM_FAME_CHECKER,
+        .price = 0,
+        .description = sFameCheckerDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_TM_CASE] =
+    {
+        .name = _("TM CASE"),
+        .itemId = ITEM_TM_CASE,
+        .price = 0,
+        .description = sTMCaseDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_TmCase,
+    },
+
+    [ITEM_BERRY_POUCH] =
+    {
+        .name = _("BERRY POUCH"),
+        .itemId = ITEM_BERRY_POUCH,
+        .price = 0,
+        .description = sBerryPouchDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
+    [ITEM_TEACHY_TV] =
+    {
+        .name = _("TEACHY TV"),
+        .itemId = ITEM_TEACHY_TV,
+        .price = 0,
+        .description = sTeachyTVDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
     [ITEM_TRI_PASS] =
     {
         .name = _("Tri-Pass"),
