@@ -495,7 +495,7 @@ static void DoMoveRelearnerMain(void)
 
         HideHeartSpritesAndShowTeachMoveText(FALSE);
         sMoveRelearnerStruct->state++;
-        //AddScrollArrows();
+        AddScrollArrows();
         break;
     case MENU_STATE_IDLE_BATTLE_MODE:
         HandleInput(FALSE);
@@ -503,7 +503,7 @@ static void DoMoveRelearnerMain(void)
     case MENU_STATE_SETUP_CONTEST_MODE:
         ShowTeachMoveText(FALSE);
         sMoveRelearnerStruct->state++;
-        //AddScrollArrows();
+        AddScrollArrows();
         break;
     case MENU_STATE_IDLE_CONTEST_MODE:
         HandleInput(TRUE);
