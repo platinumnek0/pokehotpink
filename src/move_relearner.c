@@ -24,6 +24,7 @@
 #include "task.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "party_menu.h"
 
 /*
  * Move relearner state machine
@@ -494,7 +495,7 @@ static void DoMoveRelearnerMain(void)
 
         HideHeartSpritesAndShowTeachMoveText(FALSE);
         sMoveRelearnerStruct->state++;
-        AddScrollArrows();
+        //AddScrollArrows();
         break;
     case MENU_STATE_IDLE_BATTLE_MODE:
         HandleInput(FALSE);
@@ -502,7 +503,7 @@ static void DoMoveRelearnerMain(void)
     case MENU_STATE_SETUP_CONTEST_MODE:
         ShowTeachMoveText(FALSE);
         sMoveRelearnerStruct->state++;
-        AddScrollArrows();
+        //AddScrollArrows();
         break;
     case MENU_STATE_IDLE_CONTEST_MODE:
         HandleInput(TRUE);
@@ -539,7 +540,7 @@ static void DoMoveRelearnerMain(void)
                 }
                 else if (sMoveRelearnerMenuSate.showContestInfo == TRUE)
                 {
-                    sMoveRelearnerStruct->state = MENU_STATE_SETUP_CONTEST_MODE;
+                    sMoveRelearnerStruct->state = MENU_STATE_SETUP_BATTLE_MODE;
                 }
             }
         }
@@ -568,7 +569,7 @@ static void DoMoveRelearnerMain(void)
                 }
                 else if (sMoveRelearnerMenuSate.showContestInfo == TRUE)
                 {
-                    sMoveRelearnerStruct->state = MENU_STATE_SETUP_CONTEST_MODE;
+                    sMoveRelearnerStruct->state = MENU_STATE_SETUP_BATTLE_MODE;
                 }
             }
         }
@@ -628,7 +629,7 @@ static void DoMoveRelearnerMain(void)
                 }
                 else if (sMoveRelearnerMenuSate.showContestInfo == TRUE)
                 {
-                    sMoveRelearnerStruct->state = MENU_STATE_SETUP_CONTEST_MODE;
+                    sMoveRelearnerStruct->state = MENU_STATE_SETUP_BATTLE_MODE;
                 }
                 sMoveRelearnerStruct->state = MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT;
             }
@@ -644,7 +645,7 @@ static void DoMoveRelearnerMain(void)
             }
             else if (sMoveRelearnerMenuSate.showContestInfo == TRUE)
             {
-                sMoveRelearnerStruct->state = MENU_STATE_SETUP_CONTEST_MODE;
+                sMoveRelearnerStruct->state = MENU_STATE_SETUP_BATTLE_MODE;
             }
         }
         break;
@@ -679,7 +680,15 @@ static void DoMoveRelearnerMain(void)
         if (!gPaletteFade.active)
         {
             FreeMoveRelearnerResources();
-            SetMainCallback2(CB2_ReturnToField);
+            if (FlagGet(FLAG_PARTY_MOVES))
+			{
+				CB2_ReturnToPartyMenuFromSummaryScreen();
+				FlagClear(FLAG_PARTY_MOVES);
+			}
+			else
+			{
+				SetMainCallback2(CB2_ReturnToField);
+			}
         }
         break;
     case MENU_STATE_FADE_FROM_SUMMARY_SCREEN:
@@ -691,7 +700,7 @@ static void DoMoveRelearnerMain(void)
         }
         else if (sMoveRelearnerMenuSate.showContestInfo == TRUE)
         {
-            ShowTeachMoveText(TRUE);
+            HideHeartSpritesAndShowTeachMoveText(TRUE);
         }
         RemoveScrollArrows();
         CopyWindowToVram(RELEARNERWIN_MSG, COPYWIN_GFX);
@@ -786,20 +795,6 @@ static void HandleInput(bool8 showContest)
         if (!(JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
             break;
 
-        PlaySE(SE_SELECT);
-
-        if (showContest == FALSE)
-        {
-            PutWindowTilemap(RELEARNERWIN_DESC_CONTEST);
-            sMoveRelearnerStruct->state = MENU_STATE_SETUP_CONTEST_MODE;
-            sMoveRelearnerMenuSate.showContestInfo = TRUE;
-        }
-        else
-        {
-            PutWindowTilemap(RELEARNERWIN_DESC_BATTLE);
-            sMoveRelearnerStruct->state = MENU_STATE_SETUP_BATTLE_MODE;
-            sMoveRelearnerMenuSate.showContestInfo = FALSE;
-        }
 
         ScheduleBgCopyTilemapToVram(1);
         MoveRelearnerShowHideHearts(GetCurrentSelectedMove());
@@ -849,7 +844,7 @@ static void CreateUISprites(void)
 
     sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
     sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
-    AddScrollArrows();
+    //AddScrollArrows();
 
     // These are the appeal hearts.
     for (i = 0; i < 8; i++)

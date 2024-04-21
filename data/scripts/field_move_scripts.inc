@@ -3,10 +3,15 @@ EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
 	checkpartymove MOVE_CUT
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CutBuffer_Cut
+	checkpartymove MOVE_POUND
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CutBuffer_Pound
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
+	end
+
+EventScript_CutTree_Part2::
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	buffermovename STR_VAR_2, MOVE_CUT
 	msgbox Text_WantToCut, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
@@ -14,6 +19,18 @@ EventScript_CutTree::
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
 	goto EventScript_CutTreeDown
+	end
+
+@ Load "cut" into the move name
+EventScript_CutBuffer_Cut::
+	buffermovename STR_VAR_2, MOVE_CUT
+	goto EventScript_CutTree_Part2
+	end
+
+@ Load "pound" into the move name
+EventScript_CutBuffer_Pound::
+	buffermovename STR_VAR_2, MOVE_POUND
+	goto EventScript_CutTree_Part2
 	end
 
 @ Use cut from party menu
