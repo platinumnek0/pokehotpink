@@ -1858,12 +1858,3 @@ const u8 gText_Fertilize[] = _("FERTILIZE");
 const u8 gText_PlantBerry[] = _("PLANT BERRY");
 const u8 gText_Moves_Menu[] = _("Change Moves");
 const u8 gText_Nickname[] = _("Nickname");
-
-// frlg_tm_case_port
-const u8 gText_TMCase[] =               _("TM Case");
-const u8 gText_Close[] =                _("Close");
-const u8 gText_TMCaseWillBePutAway[] =  _("The TM Case will be\nput away.");
-const u8 gText_FontSmall[] =            _("{FONT_SMALL}");
-const u8 gText_FontShort[] =            _("{FONT_SHORT}");
-const u8 gText_TMCase_Blue[] =          _("{COLOR_HIGHLIGHT_SHADOW BLUE TRANSPARENT LIGHT_BLUE}{STR_VAR_2}");
-

@@ -361,8 +361,6 @@ SECTIONS {
         src/pokemon_debug.o(.text);
         src/expansion_intro.o(.text);
     } > ROM =0
-        src/tm_case.o(.text);
-    } =0
 
     script_data :
     ALIGN(4)
