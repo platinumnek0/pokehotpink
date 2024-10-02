@@ -2661,6 +2661,7 @@ static bool32 AI_CanBeParalyzed(u32 battler, u32 ability)
     if (ability == ABILITY_LIMBER
       || ability == ABILITY_COMATOSE
       || IS_BATTLER_OF_TYPE(battler, TYPE_ELECTRIC)
+      || IS_BATTLER_OF_TYPE(battler, TYPE_RUBBER)
       || gBattleMons[battler].status1 & STATUS1_ANY
       || IsAbilityStatusProtected(battler))
         return FALSE;
@@ -2709,6 +2710,7 @@ bool32 AI_CanBeBurned(u32 battler, u32 ability)
       || ability == ABILITY_WATER_BUBBLE
       || ability == ABILITY_COMATOSE
       || IS_BATTLER_OF_TYPE(battler, TYPE_FIRE)
+      || IS_BATTLER_OF_TYPE(battler, TYPE_DRAGON)
       || gBattleMons[battler].status1 & STATUS1_ANY
       || IsAbilityStatusProtected(battler)
       || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD)

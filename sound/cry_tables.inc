@@ -2424,6 +2424,19 @@ gCryTable::
 	cry Cry_Pecharunt
 .endif @ P_FAMILY_PECHARUNT
 
+	cry Cry_Croconut
+	cry Cry_Tropidile
+	cry Cry_Oiligator
+	cry Cry_Skrappup
+	cry Cry_Hotweiler
+	cry Cry_Cerberawl
+	cry Cry_Kitfisk
+	cry Cry_Ampurr
+	cry Cry_Panthunder
+	cry Cry_Cixno
+	cry Cry_Parasoul
+	cry Cry_Horrohorra
+
 	.align 2
 gCryTable_Reverse::
 .if P_FAMILY_BULBASAUR == TRUE
@@ -4849,3 +4862,16 @@ gCryTable_Reverse::
 .if P_FAMILY_PECHARUNT == TRUE
 	cry_reverse Cry_Pecharunt
 .endif @ P_FAMILY_PECHARUNT
+
+	cry_reverse Cry_Croconut
+	cry_reverse Cry_Tropidile
+	cry_reverse Cry_Oiligator
+	cry_reverse Cry_Skrappup
+	cry_reverse Cry_Hotweiler
+	cry_reverse Cry_Cerberawl
+	cry_reverse Cry_Kitfisk
+	cry_reverse Cry_Ampurr
+	cry_reverse Cry_Panthunder
+	cry_reverse Cry_Cixno
+	cry_reverse Cry_Parasoul
+	cry_reverse Cry_Horrohorra

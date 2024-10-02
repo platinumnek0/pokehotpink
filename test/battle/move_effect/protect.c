@@ -13,6 +13,7 @@ ASSUMPTIONS
     ASSUME(gMovesInfo[MOVE_CRAFTY_SHIELD].effect == EFFECT_PROTECT);
     ASSUME(gMovesInfo[MOVE_BANEFUL_BUNKER].effect == EFFECT_PROTECT);
     ASSUME(gMovesInfo[MOVE_BURNING_BULWARK].effect == EFFECT_PROTECT);
+    ASSUME(gMovesInfo[MOVE_HOLLOW_GUARD].effect == EFFECT_PROTECT);
     ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);
     ASSUME(gMovesInfo[MOVE_LEER].category == DAMAGE_CATEGORY_STATUS);
@@ -64,9 +65,10 @@ SINGLE_BATTLE_TEST("King's Shield, Silk Trap and Obstruct protect from damaging 
     u32 j;
     static const u16 protectMoves[][3] =
     {   // Move             Stat      Stages
-        {MOVE_KINGS_SHIELD, STAT_ATK,   1},
+        {MOVE_KINGS_SHIELD, STAT_ATK,   2},
         {MOVE_SILK_TRAP,    STAT_SPEED, 1},
         {MOVE_OBSTRUCT,     STAT_DEF,   2},
+        {MOVE_HOLLOW_GUARD, STAT_ATK,   2},
     };
     u16 protectMove = MOVE_NONE;
     u16 usedMove = MOVE_NONE;
@@ -225,7 +227,7 @@ SINGLE_BATTLE_TEST("Burning Bulwark burns pokemon for moves making contact")
 SINGLE_BATTLE_TEST("Recoil damage is not applied if target was protected")
 {
     u32 j, k;
-    static const u16 protectMoves[] = { MOVE_PROTECT, MOVE_DETECT, MOVE_KINGS_SHIELD, MOVE_BANEFUL_BUNKER, MOVE_SILK_TRAP, MOVE_OBSTRUCT, MOVE_SPIKY_SHIELD };
+    static const u16 protectMoves[] = { MOVE_PROTECT, MOVE_DETECT, MOVE_KINGS_SHIELD, MOVE_BANEFUL_BUNKER, MOVE_SILK_TRAP, MOVE_OBSTRUCT, MOVE_SPIKY_SHIELD, MOVE_HOLLOW_GUARD };
     static const u16 recoilMoves[] = { MOVE_VOLT_TACKLE, MOVE_HEAD_SMASH, MOVE_TAKE_DOWN, MOVE_DOUBLE_EDGE };
     u16 protectMove = MOVE_NONE;
     u16 recoilMove = MOVE_NONE;
@@ -276,6 +278,7 @@ SINGLE_BATTLE_TEST("Multi-hit moves don't hit a protected target and fail only o
     PARAMETRIZE { move = MOVE_SILK_TRAP; }
     PARAMETRIZE { move = MOVE_OBSTRUCT; }
     PARAMETRIZE { move = MOVE_SPIKY_SHIELD; }
+    PARAMETRIZE { move = MOVE_HOLLOW_GUARD; }
 
     GIVEN {
         ASSUME(gMovesInfo[MOVE_ARM_THRUST].effect == EFFECT_MULTI_HIT);
@@ -291,7 +294,7 @@ SINGLE_BATTLE_TEST("Multi-hit moves don't hit a protected target and fail only o
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ARM_THRUST, player);
         MESSAGE("Foe Beautifly protected itself!");
         // Each effect happens only once.
-        if (move == MOVE_KINGS_SHIELD || move == MOVE_SILK_TRAP || move == MOVE_OBSTRUCT) {
+        if (move == MOVE_KINGS_SHIELD || move == MOVE_SILK_TRAP || move == MOVE_OBSTRUCT || move == MOVE_HOLLOW_GUARD) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         } else if (move == MOVE_SPIKY_SHIELD) {
             HP_BAR(player);
@@ -299,7 +302,7 @@ SINGLE_BATTLE_TEST("Multi-hit moves don't hit a protected target and fail only o
             STATUS_ICON(player, STATUS1_POISON);
         }
         NONE_OF {
-            if (move == MOVE_KINGS_SHIELD || move == MOVE_SILK_TRAP || move == MOVE_OBSTRUCT) {
+            if (move == MOVE_KINGS_SHIELD || move == MOVE_SILK_TRAP || move == MOVE_OBSTRUCT || move == MOVE_HOLLOW_GUARD) {
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
             } else if (move == MOVE_SPIKY_SHIELD) {
                 HP_BAR(player);

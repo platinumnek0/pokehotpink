@@ -295,6 +295,9 @@
 #define EVO_LEVEL_MOVE_TWENTY_TIMES       47     // Pokémon levels up after having used a move for at least 20 times
 #define EVO_LEVEL_RECOIL_DAMAGE_MALE      48     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a male
 #define EVO_LEVEL_RECOIL_DAMAGE_FEMALE    49     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a female
+#define EVO_LEVEL_COMMON                  50     // evolves into common chodent
+#define EVO_LEVEL_EPIC                    51     // evolves into epic chodent by personality randomness
+#define EVO_ABILITY_EPIC                  52     // evolves into epic chodent via ability being gooey
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0

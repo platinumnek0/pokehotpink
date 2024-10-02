@@ -19,8 +19,8 @@ const u8 gText_ExpandedPlaceholder_Kyogre[] = _("KYOGRE");
 const u8 gText_ExpandedPlaceholder_Groudon[] = _("GROUDON");
 const u8 gText_ExpandedPlaceholder_Brendan[] = _("BRENDAN");
 const u8 gText_ExpandedPlaceholder_May[] = _("MAY");
-const u8 gText_EggNickname[] = _("EGG");
-const u8 gText_Pokemon[] = _("POKéMON");
+const u8 gText_EggNickname[] = _("Egg");
+const u8 gText_Pokemon[] = _("Pokémon");
 const u8 gText_ProfBirchMatchCallName[] = _("PROF. BIRCH");
 const u8 gText_MainMenuNewGame[] = _("New Game");
 const u8 gText_MainMenuContinue[] = _("Continue");
@@ -98,7 +98,7 @@ const u8 gText_DefaultNameLillie[] = _("LILLIE");
 const u8 gText_DefaultNameTerra[] = _("TERRA");
 const u8 gText_DefaultNameLucy[] = _("LUCY");
 const u8 gText_DefaultNameHalie[] = _("HALIE");
-const u8 gText_ThisIsAPokemon[] = _("This is what we call a “PokéMon.”{PAUSE 96}\p");
+const u8 gText_ThisIsAPokemon[] = _("This is what we call a “Pokémon.”{PAUSE 96}\p");
 const u8 gText_5MarksPokemon[] = _("????? Pokémon");
 const u8 gText_UnkHeight[] = _("{CLEAR_TO 0x0C}??'??”");
 const u8 gText_UnkHeightMetric[] = _("???.? m");
@@ -253,7 +253,7 @@ const u8 gText_BoxFull[] = _("The Box is full.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PowderQty[] = _("POWDER QTY: {STR_VAR_1}{PAUSE_UNTIL_PRESS}");
 const u8 gText_TheField[] = _("the field");
 const u8 gText_TheBattle[] = _("the battle");
-const u8 gText_ThePokemonList[] = _("the Pokémon LIST");
+const u8 gText_ThePokemonList[] = _("the Pokémon List");
 const u8 gText_TheShop[] = _("the shop");
 const u8 gText_ThePC[] = _("the PC");
 
@@ -392,20 +392,20 @@ const u8 gText_CantSwitchWithAlly[] = _("You can't switch {STR_VAR_1}'s\nPokémo
 const u8 gText_EggCantBattle[] = _("An Egg can't battle!{PAUSE_UNTIL_PRESS}");
 const u8 gText_CantUseUntilNewBadge[] = _("This can't be used until a new\nBadge is obtained.{PAUSE_UNTIL_PRESS}");
 const u8 gText_NoMoreThanVar1Pkmn[] = _("No more than {STR_VAR_1} Pokémon\nmay enter.{PAUSE_UNTIL_PRESS}");
-const u8 gText_SendMailToPC[] = _("Send the removed MAIL to\nyour PC?");
+const u8 gText_SendMailToPC[] = _("Send the removed Mail to\nyour PC?");
 const u8 gText_MailSentToPC[] = _("The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}");
-const u8 gText_PCMailboxFull[] = _("Your PC's MAILBOX is full.{PAUSE_UNTIL_PRESS}");
-const u8 gText_MailMessageWillBeLost[] = _("If the MAIL is removed, the\nmessage will be lost. Okay?");
-const u8 gText_RemoveMailBeforeItem[] = _("MAIL must be removed before\nholding an item.{PAUSE_UNTIL_PRESS}");
+const u8 gText_PCMailboxFull[] = _("Your PC's Mailbox is full.{PAUSE_UNTIL_PRESS}");
+const u8 gText_MailMessageWillBeLost[] = _("If the Mail is removed, the\nmessage will be lost. Okay?");
+const u8 gText_RemoveMailBeforeItem[] = _("Mail must be removed before\nholding an item.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnWasGivenItem[] = _("{STR_VAR_1} was given the\n{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnAlreadyHoldingItemSwitch[] = _("{STR_VAR_1} is already holding\none {STR_VAR_2}.\pWould you like to switch the\ntwo items?");
 const u8 gText_PkmnNotHolding[] = _("{STR_VAR_1} isn't holding\nanything.{PAUSE_UNTIL_PRESS}");
 const u8 gText_ReceivedItemFromPkmn[] = _("Received the {STR_VAR_2}\nfrom {STR_VAR_1}.{PAUSE_UNTIL_PRESS}");
-const u8 gText_MailTakenFromPkmn[] = _("MAIL was taken from the\nPOKéMON.{PAUSE_UNTIL_PRESS}");
+const u8 gText_MailTakenFromPkmn[] = _("Mail was taken from the\nPokémon.{PAUSE_UNTIL_PRESS}");
 const u8 gText_SwitchedPkmnItem[] = _("The {STR_VAR_2} was taken and\nreplaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}");
-const u8 gText_PkmnHoldingItemCantHoldMail[] = _("This POKéMON is holding an\nitem. It cannot hold MAIL.{PAUSE_UNTIL_PRESS}");
-const u8 gText_MailTransferredFromMailbox[] = _("MAIL was transferred from\nthe MAILBOX.{PAUSE_UNTIL_PRESS}");
-const u8 gText_BagFullCouldNotRemoveItem[] = _("The BAG is full. The Pokémon's\nitem could not be removed.{PAUSE_UNTIL_PRESS}");
+const u8 gText_PkmnHoldingItemCantHoldMail[] = _("This Pokémon is holding an\nitem. It cannot hold Mail.{PAUSE_UNTIL_PRESS}");
+const u8 gText_MailTransferredFromMailbox[] = _("Mail was transferred from\nthe Mailbox.{PAUSE_UNTIL_PRESS}");
+const u8 gText_BagFullCouldNotRemoveItem[] = _("The Bag is full. The Pokémon's\nitem could not be removed.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnLearnedMove3[] = _("{STR_VAR_1} learned\n{STR_VAR_2}!");
 const u8 gText_PkmnCantLearnMove[] = _("{STR_VAR_1} and {STR_VAR_2}\nare not compatible.\p{STR_VAR_2} can't be\nlearned.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnNeedsToReplaceMove[] = _("{STR_VAR_1} wants to learn the\nmove {STR_VAR_2}.\pHowever, {STR_VAR_1} already\nknows four moves.\pShould a move be deleted and\nreplaced with {STR_VAR_2}?");
@@ -517,7 +517,7 @@ const u8 gText_NextLv[] = _("To next Lv.");
 const u8 gText_RibbonsVar1[] = _("RIBBONS: {STR_VAR_1}");
 const u8 gText_EmptyString5[] = _("");
 const u8 gText_Events[] = _("EVENTS"); // Unused
-const u8 gText_Switch[] = _("Swtich");
+const u8 gText_Switch[] = _("Switch");
 const u8 gText_PkmnInfo[] = _("Pokémon Info");
 const u8 gText_PkmnSkills[] = _("Pokémon Skills");
 const u8 gText_BattleMoves[] = _("Moves");
@@ -528,14 +528,37 @@ const u8 gText_EggWillTakeSomeTime[] = _("What will hatch from this?\nIt will ta
 const u8 gText_EggWillHatchSoon[] = _("It moves occasionally.\nIt should hatch soon.");
 const u8 gText_EggAboutToHatch[] = _("It's making sounds.\nIt's about to hatch!");
 const u8 gText_HMMovesCantBeForgotten2[] = _("HM moves can't be\nforgotten now.");
-const u8 gText_XNatureMetAtYZ[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nmet at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
-const u8 gText_XNatureHatchedAtYZ[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
-const u8 gText_XNatureObtainedInTrade[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a trade.");
-const u8 gText_XNatureFatefulEncounter[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a fateful\nencounter at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.");
-const u8 gText_XNatureProbablyMetAt[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nprobably met at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
+
+const u8 gText_XNatureMetAtYZ[] = _(
+    "{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature, met at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n"
+    "{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
+
+const u8 gText_XNatureHatchedAtYZ[] = _(
+    "{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\n"
+    "hatched at {DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
+
+const u8 gText_XNatureObtainedInTrade[] = _(
+    "{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\n"
+    "obtained in a trade.");
+
+const u8 gText_XNatureFatefulEncounter[] = _(
+    "{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\n"
+    "obtained in a fateful\nencounter at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.");
+
+const u8 gText_XNatureProbablyMetAt[] = _(
+    "{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature, met at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n"
+    "{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
+
 const u8 gText_XNature[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature");
-const u8 gText_XNatureMetSomewhereAt[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nmet somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.");
-const u8 gText_XNatureHatchedSomewhereAt[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.");
+
+const u8 gText_XNatureMetSomewhereAt[] = _(
+    "{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\n"
+    "met somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.");
+
+const u8 gText_XNatureHatchedSomewhereAt[] = _(
+    "{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\n"
+    "hatched somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.");
+
 const u8 gText_OddEggFoundByCouple[] = _("An odd Pokémon Egg found\nby the DAY CARE couple.");
 const u8 gText_PeculiarEggNicePlace[] = _("A peculiar Pokémon Egg\nobtained at the nice place.");
 const u8 gText_PeculiarEggTrade[] = _("A peculiar Pokémon Egg\nobtained in a trade.");
@@ -587,11 +610,11 @@ const u8 gText_Dennis[] = _("DENNIS");
 const u8 gText_Roberto[] = _("ROBERTO");
 const u8 gText_TurnOff[] = _("Turn Off");
 const u8 gText_Decoration[] = _("DECORATION");
-const u8 gText_ItemStorage[] = _("ITEM STORAGE");
-const u8 gText_Mailbox[] = _("MAILBOX");
-const u8 gText_DepositItem[] = _("DEPOSIT ITEM");
-const u8 gText_WithdrawItem[] = _("WITHDRAW ITEM");
-const u8 gText_TossItem[] = _("TOSS ITEM");
+const u8 gText_ItemStorage[] = _("Item Storage");
+const u8 gText_Mailbox[] = _("Mailbox");
+const u8 gText_DepositItem[] = _("Deposit Item");
+const u8 gText_WithdrawItem[] = _("Withdraw Item");
+const u8 gText_TossItem[] = _("Toss Item");
 const u8 gText_StoreItemsInPC[] = _("Store items in the PC.");
 const u8 gText_TakeOutItemsFromPC[] = _("Take out items from the PC.");
 const u8 gText_ThrowAwayItemsInPC[] = _("Throw away items stored in the PC.");
@@ -599,14 +622,14 @@ const u8 gText_NoItems[] = _("There are no items.{PAUSE_UNTIL_PRESS}");
 const u8 gText_NoRoomInBag[] = _("There is no more\nroom in the BAG.");
 const u8 gText_WithdrawHowManyItems[] = _("Withdraw how many\n{STR_VAR_1}(s)?");
 const u8 gText_WithdrawXItems[] = _("Withdrew {STR_VAR_2}\n{STR_VAR_1}(s).");
-const u8 gText_Read[] = _("READ");
-const u8 gText_MoveToBag[] = _("MOVE TO BAG");
-const u8 gText_Give2[] = _("GIVE");
-const u8 gText_NoMailHere[] = _("There's no MAIL here.{PAUSE_UNTIL_PRESS}");
+const u8 gText_Read[] = _("Read");
+const u8 gText_MoveToBag[] = _("Move to Bag");
+const u8 gText_Give2[] = _("Give");
+const u8 gText_NoMailHere[] = _("There's no Mail here.{PAUSE_UNTIL_PRESS}");
 const u8 gText_WhatToDoWithVar1sMail[] = _("What would you like to do with\n{STR_VAR_1}'s MAIL?");
 const u8 gText_MessageWillBeLost[] = _("The message will be lost.\nIs that okay?");
-const u8 gText_BagIsFull[] = _("The BAG is full.{PAUSE_UNTIL_PRESS}");
-const u8 gText_MailToBagMessageErased[] = _("The MAIL was returned to the BAG\nwith its message erased.{PAUSE_UNTIL_PRESS}");
+const u8 gText_BagIsFull[] = _("The Bag is full.{PAUSE_UNTIL_PRESS}");
+const u8 gText_MailToBagMessageErased[] = _("The Mail was returned to the Bag\nwith its message erased.{PAUSE_UNTIL_PRESS}");
 const u8 gText_Dad[] = _("DAD");
 const u8 gText_Mom[] = _("MOM");
 const u8 gText_Wallace[] = _("WALLACE");
@@ -1848,9 +1871,9 @@ const u8 gText_Cancel5[] = _("CANCEL");
 const u8 gText_Ok2[] = _("OK");
 const u8 gText_Quiz[] = _("QUIZ");
 const u8 gText_Answer[] = _("ANSWER");
-const u8 gText_PokeBalls[] = _("POKé BALLS");
-const u8 gText_Berry[] = _("BERRY");
-const u8 gText_Berries[] = _("BERRIES");
+const u8 gText_PokeBalls[] = _("Pokéballs");
+const u8 gText_Berry[] = _("Berry");
+const u8 gText_Berries[] = _("Berries");
 const u8 gText_ExpShareOn[] = _("The Exp. Share has been turned on.{PAUSE_UNTIL_PRESS}");
 const u8 gText_ExpShareOff[] = _("The Exp. Share has been turned off.{PAUSE_UNTIL_PRESS}");
 const u8 gText_BasePointsResetToZero[] = _("{STR_VAR_1}'s base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");

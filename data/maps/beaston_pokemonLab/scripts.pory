@@ -1,0 +1,767 @@
+raw`
+beaston_pokemonLab_MapScripts::
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, beaston_lab_onWarp
+	.byte 0
+
+beaston_lab_onWarp::
+    map_script_2 VAR_LITTLEROOT_INTRO_STATE, 3, beaston_lab_Intro
+    .2byte 0
+`
+
+script beaston_lab_notebooks1{
+    lockall
+    msgbox("It's a stack of notebooks labeled\n“Rubber Type Notes.” Read it?", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, YES, beaston_lab_notebooks_rubber)
+    goto_if_eq(VAR_RESULT, NO, beaston_lab_notebooks_close)
+}
+script beaston_lab_notebooks_rubber{
+    msgbox("You flip to a random page.\p…\pWe've been able to single out this\nfabled 20th type based on the\lproperties of some Pokémon.\pPokémon with this type seem to be very\nresistant to electricity, and unfazed\lby water.\pTheir attacks are effective on Pokémon\nwith the Electric type. Because of\lthis, and how many have stretchy,\lbouncy bodies, we have dubbed this\ltype “Rubber.”")
+    goto(beaston_lab_notebooks_close)
+}
+
+script beaston_lab_notebooks2{
+    lockall
+    msgbox("It's a stack of notebooks labeled\n“Evo Schematics.” Read it?", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, YES, beaston_lab_notebooks_evo_croconut)
+    goto_if_eq(VAR_RESULT, NO, beaston_lab_notebooks_close)
+    releaseall
+}
+script beaston_lab_notebooks_evo_croconut{
+    msgbox("You flip to a random page.\p…\pA drawing of a reptilian Pokémon covered\nin bones fills the page. Various arrows\lpoint to it, with text reading…\p“Fire-type”\p“Skull face”\p“Saurian”.\pContinue reading?", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, YES, beaston_lab_notebooks_evo_skrappup)
+    goto_if_eq(VAR_RESULT, NO, beaston_lab_notebooks_close)
+}
+script beaston_lab_notebooks_evo_skrappup{
+    msgbox("You flip to the next page.\p…\pA drawing of a canine but fish-like\nPokémon fills the page. Various arrows\lpoint to it, with text reading…\p“Water-type”\p“Hydrodynamic fins”\p“Inflatable mane”\pContinue reading?", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, YES, beaston_lab_notebooks_evo_kitfisk)
+    goto_if_eq(VAR_RESULT, NO, beaston_lab_notebooks_close)
+}
+script beaston_lab_notebooks_evo_kitfisk{
+    msgbox("You flip to the next page.\p…\pA drawing of a fierce-looking feline\nPokémon fills the page. Various arrows\lpoint to it, with text reading…\p“Grass-type”\p“Camouflage stripes”\p“Cattail”")
+    goto(beaston_lab_notebooks_close)
+}
+script beaston_lab_notebooks_close{
+    msgbox("You close the notebook.")
+    releaseall
+}
+
+script beaston_lab_notebooks3{
+    lockall
+    msgbox("It's a stack of notebooks labeled\n“Null Type Notes.” Read it?", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, YES, beaston_lab_notebooks_nullType)
+    goto_if_eq(VAR_RESULT, NO, beaston_lab_notebooks_close)
+}
+script beaston_lab_notebooks_nullType{
+    msgbox("You flip to a random page.\p…\pIt was thought for decades that Infinity\nEnergy only manifested in 18 discrete\lforms.\pThese forms, different wavelengths of\nenergy, are what the layperson knows\las Pokémon types.\pHowever, it seems there may be more\ntypes than once thought-\lmy research has shown that certain\lattacks, once thought to lack any\lInfinity Energy altogether, instead\lare imbued with a 19th form of energy.\pThis “new type” seems not to react with\nany others. As such, I will call it\lthe “Null type” for the time being.\pIf channeled properly, I believe this\ntype may have the potential for\limmense damage in battle…")
+    goto(beaston_lab_notebooks_close)
+}
+
+script beaston_lab_Intro{
+    lockall
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 4)
+    setflag(FLAG_UNUSED_0x029)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkUp)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    applymovement(1, beaston_lab_quigley_lookAround)
+    waitmovement(1)
+    msgbox("looks like dad's busy\pi guess just chill til he comes back", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(1, beaston_lab_quigley_standAround)
+    waitmovement(1)
+    release
+    releaseall
+}
+
+movement beaston_lab_player_walkUp{
+    walk_up*4
+}
+
+movement beaston_lab_quigley_lookAround{
+    walk_in_place_right
+    delay_4
+    walk_in_place_down
+    delay_4
+    walk_in_place_up
+    delay_4
+    walk_in_place_left
+    delay_8
+    walk_in_place_down
+}
+movement beaston_lab_quigley_standAround{
+    walk_up*2
+    walk_in_place_down
+}
+
+script beaston_lab_quigley_dialogue{
+    if(var(VAR_LITTLEROOT_INTRO_STATE) == 5)
+    {
+        msgbox("fuck of", MSGBOX_NPC)
+        waitmessage
+        applymovement(1, lookDown)
+    }
+    else
+    {
+        msgbox("idk when dad's gonna be back so just\ndon't mess with anything", MSGBOX_NPC)
+    }
+}
+
+script beaston_lab_quigley_stopExit_left{
+    lockall
+    applymovement(1, playerSurprise)
+    msgbox("hey dude no", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(1, beaston_lab_quigley_grab_left)
+    waitmovement(1)
+    msgbox("we gotta wait for dad", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(1, beaston_lab_quigley_walkBack_left)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround)
+    waitmovement(1)
+    releaseall
+}
+script beaston_lab_quigley_stopExit_middle{
+    lockall
+    applymovement(1, playerSurprise)
+    msgbox("hey dude no", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(1, beaston_lab_quigley_grab_middle)
+    waitmovement(1)
+    msgbox("we gotta wait for dad", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(1, beaston_lab_quigley_walkBack_middle)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround)
+    waitmovement(1)
+    releaseall
+}
+script beaston_lab_quigley_stopExit_right{
+    lockall
+    applymovement(1, playerSurprise)
+    msgbox("hey dude no", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(1, beaston_lab_quigley_grab_right)
+    waitmovement(1)
+    msgbox("we gotta wait for dad", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(1, beaston_lab_quigley_walkBack_right)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround)
+    waitmovement(1)
+    releaseall
+}
+movement beaston_lab_quigley_grab_left{
+    walk_down*4
+}
+movement beaston_lab_quigley_grab_middle{
+    walk_right
+    walk_down*4
+}
+movement beaston_lab_quigley_grab_right{
+    walk_right*2
+    walk_down*4
+}
+movement beaston_lab_quigley_walkBack_left{
+    walk_up*4
+    walk_in_place_down
+}
+movement beaston_lab_quigley_walkBack_middle{
+    walk_up*4
+    walk_left
+    walk_in_place_down
+}
+movement beaston_lab_quigley_walkBack_right{
+    walk_up*4
+    walk_left*2
+    walk_in_place_down
+}
+
+script beaston_lab_pokeballs_left{
+    lockall
+    goto_if_eq(VAR_LITTLEROOT_INTRO_STATE, 5, beaston_lab_croconut)
+    call(beaston_lab_professor_appear)
+    call_if_eq(VAR_FACING, DIR_EAST, beaston_lab_player_comeAround_left_side)
+    call_if_eq(VAR_FACING, DIR_SOUTH, beaston_lab_player_comeAround_left_top)
+    goto(beaston_lab_professor_intro)
+}
+script beaston_lab_pokeballs_middle{
+    lockall
+    goto_if_eq(VAR_LITTLEROOT_INTRO_STATE, 5, beaston_lab_skrappup)
+    call(beaston_lab_professor_appear)
+    call_if_eq(VAR_FACING, DIR_NORTH, beaston_lab_player_comeAround_middle_bottom)
+    call_if_eq(VAR_FACING, DIR_SOUTH, beaston_lab_player_comeAround_middle_top)
+    goto(beaston_lab_professor_intro)
+}
+script beaston_lab_pokeballs_right{
+    lockall
+    goto_if_eq(VAR_LITTLEROOT_INTRO_STATE, 5, beaston_lab_kitfisk)
+    call(beaston_lab_professor_appear)
+    call_if_eq(VAR_FACING, DIR_NORTH, beaston_lab_player_comeAround_right_bottom)
+    call_if_eq(VAR_FACING, DIR_WEST, beaston_lab_player_comeAround_right_side)
+    call_if_eq(VAR_FACING, DIR_SOUTH, beaston_lab_player_comeAround_right_top)
+    goto(beaston_lab_professor_intro)
+}
+
+script beaston_lab_professor_intro{
+    msgbox("so ur {PLAYER} huh\psweet\pi bet quigley already told u but i've\nheard a lot abt u and i think u would\lmake a good help\pnow i won't force u but i do wanna say\nif u wanna come along u get a partner\lmon as a gift\pi'm studying pokemon genetics and how\nthey're related, it'll be a huge help\lif u can log me info on more mons\pso what do u say", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, NO, beaston_lab_professor_help_no)
+    msgbox("freakin sweet lewis")
+    goto(beaston_lab_professor_starter_choice)
+}
+script beaston_lab_professor_help_no{
+    msgbox("aw, well, i'll still let u take a partner mon", MSGBOX_AUTOCLOSE)
+    waitmessage
+    goto(beaston_lab_professor_starter_choice)
+}
+script beaston_lab_professor_starter_choice{
+    msgbox("quigley move so {PLAYER} can pick a mon")
+    applymovement(1, beaston_lab_quigley_moveAway)
+    msgbox("fine")
+    waitmovement(1)
+    applymovement(5, beaston_lab_professor_shuffle)
+    msgbox("alright kid now pick a mon", MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+movement beaston_lab_quigley_moveAway{
+    walk_left*2
+    walk_up
+    walk_in_place_down
+}
+movement beaston_lab_professor_shuffle{
+    walk_in_place_up*2
+}
+
+script beaston_lab_professor_appear{
+    clearflag(FLAG_UNUSED_0x024)
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 5)
+    addobject(5)
+    playse(SE_DOOR)
+    applymovement(5, beaston_lab_professor_walkUp)
+    waitmovement(5)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_faceDown)
+    msgbox("oh shit i forgot", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(5, beaston_lab_professor_frantic)
+    waitmovement(5)
+    msgbox("this place is a mess, sorry\pwhy don't u come on and introduce\nurself", MSGBOX_AUTOCLOSE)
+    waitmessage
+}
+movement beaston_lab_professor_walkUp{
+    walk_up*5
+    delay_4
+    emote_exclamation_mark
+}
+movement beaston_lab_professor_frantic{
+    walk_in_place_left
+    delay_4
+    walk_in_place_right
+    delay_4
+    walk_in_place_up
+}
+
+script beaston_lab_player_comeAround_left_side{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_left_side)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+movement beaston_lab_player_walkDown_left_side{
+    walk_down*2
+    walk_right*2
+    walk_in_place_down
+}
+script beaston_lab_player_comeAround_left_top{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_left_top)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+movement beaston_lab_player_walkDown_left_top{
+    walk_left
+    walk_down*3
+    walk_right*2
+    walk_in_place_down
+}
+script beaston_lab_player_comeAround_middle_bottom{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_middle_bottom)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+movement beaston_lab_player_walkDown_middle_bottom{
+    walk_down
+}
+script beaston_lab_player_comeAround_middle_top{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_middle_top)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+movement beaston_lab_player_walkDown_middle_top{
+    walk_right*2
+    walk_down*3
+    walk_left*2
+    walk_in_place_down
+}
+script beaston_lab_player_comeAround_right_bottom{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_right_bottom)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+movement beaston_lab_player_walkDown_right_bottom{
+    walk_left
+    walk_down
+}
+script beaston_lab_player_comeAround_right_side{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_right_side)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+movement beaston_lab_player_walkDown_right_side{
+    walk_down
+    walk_left*2
+    walk_down
+}
+script beaston_lab_player_comeAround_right_top{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_right_top)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+movement beaston_lab_player_walkDown_right_top{
+    walk_right*1
+    walk_down*2
+    walk_left*2
+    walk_down
+}
+movement beaston_lab_player_faceDown{
+    walk_in_place_down
+}
+
+script beaston_lab_croconut{
+    lockall
+    showmonpic(SPECIES_CROCONUT, 10, 3)
+    playmoncry(SPECIES_CROCONUT, CRY_MODE_NORMAL)
+    msgbox("Ah, the Grass-type Croconut! This\neasygoing Pokémon likes lying in the\lsun.")
+    msgbox("Say, is Croconut your choice for your\nPokémon partner?", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, YES, beaston_lab_chose_croconut)
+    hidemonpic
+    releaseall
+}
+script beaston_lab_chose_croconut{
+    hidemonpic
+    msgbox("Ah, then Croconut it is!", MSGBOX_AUTOCLOSE)
+    waitmessage
+    givemon(SPECIES_CROCONUT, 5)
+    setflag(FLAG_SYS_POKEMON_GET)
+    setvar(VAR_STARTER_MON, 1)
+    setflag(FLAG_UNUSED_0x025)
+    removeobject(3)
+    playfanfare(MUS_EVOLVED)
+    msgbox("{PLAYER} received Croconut!", MSGBOX_AUTOCLOSE)
+    waitfanfare
+    waitmessage
+    call_if_eq(VAR_FACING, DIR_EAST, beaston_lab_choseCroconut_WalkAroundLeft)
+    call_if_eq(VAR_FACING, DIR_SOUTH, beaston_lab_choseCroconut_WalkAroundTop)
+    call(beaston_lab_nicknameStarter)
+    applymovement(1, beaston_lab_quigley_approach_croconut)
+    applymovement(OBJ_EVENT_ID_PLAYER, look_left)
+    waitmovement(1)
+    call(beaston_lab_quigleyBattle)
+    applymovement(1, beaston_lab_quigley_leaveCroconut)
+    waitmovement(1)
+    applymovement(5, look_down)
+    applymovement(1, beaston_lab_quigley_leave)
+    waitmovement(1)
+    goto(beaston_lab_cokbern_AfterBattle)
+}
+script beaston_lab_skrappup{
+    lockall
+    showmonpic(SPECIES_SKRAPPUP, 10, 3)
+    playmoncry(SPECIES_SKRAPPUP, CRY_MODE_NORMAL)
+    msgbox("Ah, the Fire-type Skrappup! This high-\nenergy Pokémon is very loyal!")
+    msgbox("Is Skrappup the Pokémon you'd like as\nyour first partner?", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, YES, beaston_lab_chose_skrappup)
+    hidemonpic
+    releaseall
+}
+script beaston_lab_chose_skrappup{
+    hidemonpic
+    msgbox("Ah, then Skrappup it is!", MSGBOX_AUTOCLOSE)
+    waitmessage
+    givemon(SPECIES_SKRAPPUP, 5)
+    setflag(FLAG_SYS_POKEMON_GET)
+    setvar(VAR_STARTER_MON, 2)
+    setflag(FLAG_UNUSED_0x026)
+    removeobject(2)
+    playfanfare(MUS_EVOLVED)
+    msgbox("{PLAYER} received Skrappup!", MSGBOX_AUTOCLOSE)
+    waitfanfare
+    waitmessage
+    call_if_eq(VAR_FACING, DIR_SOUTH, beaston_lab_choseSkrappup_WalkAroundTop)
+    call(beaston_lab_nicknameStarter)
+    applymovement(1, beaston_lab_quigley_approach_skrappup)
+    applymovement(OBJ_EVENT_ID_PLAYER, look_left)
+    waitmovement(1)
+    call(beaston_lab_quigleyBattle)
+    applymovement(1, beaston_lab_quigley_leaveSkrappup)
+    waitmovement(1)
+    applymovement(5, look_down)
+    applymovement(1, beaston_lab_quigley_leave)
+    waitmovement(1)
+    goto(beaston_lab_cokbern_AfterBattle)
+}
+script beaston_lab_kitfisk{
+    lockall
+    showmonpic(SPECIES_KITFISK, 10, 3)
+    playmoncry(SPECIES_KITFISK, CRY_MODE_NORMAL)
+    msgbox("Ah, the Water-type Kitfisk! This sneaky\nPokémon has a keen hunter's instinct!")
+    msgbox("Would you like to choose Kitfisk as\nyour partner Pokémon?", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, YES, beaston_lab_chose_kitfisk)
+    hidemonpic
+    releaseall
+}
+script beaston_lab_chose_kitfisk{
+    hidemonpic
+    msgbox("Ah, then Kitfisk it is!", MSGBOX_AUTOCLOSE)
+    waitmessage
+    givemon(SPECIES_KITFISK, 5)
+    setflag(FLAG_SYS_POKEMON_GET)
+    setvar(VAR_STARTER_MON, 3)
+    setflag(FLAG_UNUSED_0x027)
+    removeobject(4)
+    playfanfare(MUS_EVOLVED)
+    msgbox("{PLAYER} received Kitfisk!", MSGBOX_AUTOCLOSE)
+    waitfanfare
+    waitmessage
+    call_if_eq(VAR_FACING, DIR_WEST, beaston_lab_choseKitfisk_WalkAroundRight)
+    call_if_eq(VAR_FACING, DIR_SOUTH, beaston_lab_choseKitfisk_WalkAroundTop)
+    call(beaston_lab_nicknameStarter)
+    applymovement(1, beaston_lab_quigley_approach_kitfisk)
+    applymovement(OBJ_EVENT_ID_PLAYER, look_left)
+    waitmovement(1)
+    call(beaston_lab_quigleyBattle)
+    applymovement(1, beaston_lab_quigley_leaveKitfisk)
+    waitmovement(1)
+    applymovement(5, look_down)
+    applymovement(1, beaston_lab_quigley_leave)
+    waitmovement(1)
+    goto(beaston_lab_cokbern_AfterBattle)
+}
+
+movement beaston_lab_choseCroconut_facingRight{
+    walk_down * 2
+    walk_right
+}
+movement beaston_lab_choseCroconut_facingDown{
+    walk_left
+    walk_down * 2
+    walk_right
+}
+movement beaston_lab_choseSkrappup_facingDown{
+    walk_right *2 
+    walk_down * 2
+    walk_left * 2
+}
+movement beaston_lab_choseKitfisk_facingLeft{
+    walk_down * 2
+    walk_left
+}
+movement beaston_lab_choseKitfisk_facingDown{
+    walk_right
+    walk_down * 2
+    walk_left
+}
+
+script beaston_lab_choseCroconut_WalkAroundLeft{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_choseCroconut_facingRight)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+script beaston_lab_choseCroconut_WalkAroundTop{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_choseCroconut_facingDown)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+script beaston_lab_choseSkrappup_WalkAroundTop{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_choseSkrappup_facingDown)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+script beaston_lab_choseKitfisk_WalkAroundRight{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_choseKitfisk_facingLeft)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+script beaston_lab_choseKitfisk_WalkAroundTop{
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_choseKitfisk_facingDown)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+}
+
+script beaston_lab_nicknameStarter{
+    applymovement(OBJ_EVENT_ID_PLAYER, lookDown)
+    msgbox("Now, would you like to give your new\npartner a nickname?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES)
+    {
+        call(Common_EventScript_GetGiftMonPartySlot)
+        call(Common_EventScript_NameReceivedPartyMon)
+    }
+    elif(var(VAR_RESULT) == NO)
+    {
+        msgbox("I see. Well, I suppose you can always\ngive it one later, if you'd like.", MSGBOX_AUTOCLOSE)
+    }
+    releaseall
+    call(beaston_lab_battleSetup)
+}
+
+movement lookDown{
+    walk_in_place_down
+}
+
+script beaston_lab_battleSetup{
+    msgbox("Hmm…", MSGBOX_AUTOCLOSE)
+    applymovement(5, beaston_lab_professor_frantic)
+    waitmovement(5)
+    applymovement(5, playerSurprise)
+    msgbox("Ah!\p{PLAYER}, since you have your own\nPokémon now, how about challenging\lQuigley to a battle?\pI'd offer myself, but, ah…\nI don't seem to have any Pokémon with\lme.", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(1, beaston_lab_quigley_shuffle)
+    msgbox("Hey! You never told me I'd be BATTLING\n{PLAYER}!", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(5, beaston_lab_professor_shuffle)
+    msgbox("Now, now, Quigley.\pIt's just one battle so {PLAYER} can\nlearn the ropes. I'm sure you'd want\lthem to do the same if you were in\ltheir shoes.")
+    waitmessage
+    applymovement(1, beaston_lab_quigley_shuffle)
+    msgbox("…fine.\p{PLAYER}, you're lucky I only have one mon on me.")
+}
+
+movement beaston_lab_quigley_shuffle{
+    walk_in_place_down *2
+}
+
+movement beaston_lab_quigley_approach_croconut{
+    walk_down
+    walk_right
+}
+movement beaston_lab_quigley_approach_skrappup{
+    walk_down
+    walk_right * 2
+}
+movement beaston_lab_quigley_approach_kitfisk{
+    walk_down
+    walk_right * 3
+}
+
+movement look_left{
+    face_left
+}
+movement look_down{
+    face_down
+}
+movement look_right{
+    face_right
+}
+
+script beaston_lab_quigleyBattle{
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 6)
+    trainerbattle_single(TRAINER_BRENDAN_ROUTE_103_MUDKIP, "Well… here goes.", "Sigh… about what I expected.", beaston_lab_PostQuigleyBattle)
+}
+script beaston_lab_PostQuigleyBattle{
+    applymovement(5, beaston_lab_professor_shuffle)
+    applymovement(OBJ_EVENT_ID_PLAYER, look_down)
+    msgbox("Aha! You're a natural, {PLAYER}!\pNow, what was I going to say…\pAh, right.\pMy niece, Stella, lives in the next town\nover. I'm sure you two are familiar\lwith each other.\pI'd like for you to bring her back\nhere.", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(1, beaston_lab_quigley_shuffle)
+    msgbox("Ugh… of course you ask {PLAYER} to do\nit.\pWhatever. I'm going home.", MSGBOX_AUTOCLOSE)
+    waitmessage
+}
+
+movement beaston_lab_quigley_leaveCroconut{
+    walk_down * 3
+    walk_right
+}
+movement beaston_lab_quigley_leaveSkrappup{
+    walk_down * 3
+}
+movement beaston_lab_quigley_leaveKitfisk{
+    walk_down
+    walk_right
+    walk_down * 2
+}
+movement beaston_lab_quigley_leave{
+    walk_down * 3
+}
+
+script beaston_lab_cokbern_AfterBattle{
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 7)
+    removeobject(1)
+    setflag(FLAG_UNUSED_0x028)
+    playse(SE_EXIT)
+    msgbox("Ah, that Quigley…\pHe can be a bit of a handful at times.", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(5, beaston_lab_professor_shuffle)
+    msgbox("I'll be waiting here for you and Stella,\n{PLAYER}.\pI have something special in store for\nyou two.\pFor now, though, I'll be busy logging my\nrecent findings.", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(5, beaston_lab_cokbern_headToDesk)
+    waitmovement(5)
+    msgbox("Suppose I should take care of these as\nwell.", MSGBOX_AUTOCLOSE)
+    if(var(VAR_STARTER_MON) == 1)
+    {
+        applymovement(5, beaston_lab_cokbern_grabLeft)
+        waitmovement(5)
+        removeobject(4)
+        setflag(FLAG_UNUSED_0x027)
+        playse(SE_BALL)
+        waitse
+        applymovement(5, beaston_lab_cokbern_grabLeft)
+        waitmovement(5)
+        removeobject(2)
+        setflag(FLAG_UNUSED_0x026)
+        playse(SE_BALL)
+        waitse
+        applymovement(5, beaston_lab_cokbern_finish_center)
+        waitmovement(5)
+    }
+    if(var(VAR_STARTER_MON) == 2)
+    {
+        applymovement(5, beaston_lab_cokbern_grabLeft)
+        waitmovement(5)
+        removeobject(4)
+        setflag(FLAG_UNUSED_0x027)
+        playse(SE_BALL)
+        waitse
+        applymovement(5, beaston_lab_cokbern_grabTwoLeft)
+        waitmovement(5)
+        removeobject(3)
+        setflag(FLAG_UNUSED_0x025)
+        playse(SE_BALL)
+        waitse
+        applymovement(5, beaston_lab_cokbern_finish_left)
+        waitmovement(5)
+    }
+    if(var(VAR_STARTER_MON) == 3)
+    {
+        applymovement(5, beaston_lab_cokbern_grabTwoLeft)
+        waitmovement(5)
+        removeobject(2)
+        setflag(FLAG_UNUSED_0x026)
+        playse(SE_BALL)
+        waitse
+        applymovement(5, beaston_lab_cokbern_grabLeft)
+        waitmovement(5)
+        removeobject(3)
+        setflag(FLAG_UNUSED_0x025)
+        playse(SE_BALL)
+        waitse
+        applymovement(5, beaston_lab_cokbern_finish_left)
+        waitmovement(5)
+    }
+    removeobject(5)
+    setflag(FLAG_UNUSED_0x024)
+    addobject(6)
+    clearflag(FLAG_UNUSED_0x02A)
+    releaseall
+}
+
+movement beaston_lab_cokbern_headToDesk{
+    walk_right * 2
+    walk_up * 4
+    walk_in_place_left
+}
+
+script beaston_lab_cokbern_idle{
+    lockall
+    msgbox("go on kid pick a mon any mon", MSGBOX_NPC)
+    applymovement(5, look_up)
+    releaseall
+}
+movement look_up{
+    face_up
+}
+
+script beaston_lab_cokbern_busy{
+    msgbox("He seems too busy writing things down\nto talk…", MSGBOX_SIGN)
+}
+movement beaston_lab_cokbern_grabLeft{
+    walk_left
+    walk_in_place_down * 2
+}
+movement beaston_lab_cokbern_grabTwoLeft{
+    walk_left * 2
+    walk_in_place_down * 2
+}
+
+movement beaston_lab_cokbern_finish_center{
+    walk_up
+}
+movement beaston_lab_cokbern_finish_left{
+    walk_right
+    walk_up
+}
+
+script beaston_lab_preventExit_middle{
+    lockall
+    applymovement(5, beaston_lab_cokbern_preventExit_surprise)
+    waitmovement(5)
+    msgbox("wait bro don't leave", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement (5, beaston_lab_cokbern_walkDown_middle)
+    waitmovement(5)
+    applymovement(5, beaston_lab_walkUp_middle)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_walkUp_middle)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    releaseall
+}
+
+script beaston_lab_preventExit_left{
+    lockall
+    applymovement(5, beaston_lab_cokbern_preventExit_surprise)
+    waitmovement(5)
+    msgbox("wait bro don't leave", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement (5, beaston_lab_cokbern_walkDown_left)
+    waitmovement(5)
+    applymovement(5, beaston_lab_cokbern_walkUp_left)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkUp_left)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    releaseall
+}
+
+script beaston_lab_preventExit_right{
+    lockall
+    applymovement(5, beaston_lab_cokbern_preventExit_surprise)
+    waitmovement(5)
+    msgbox("wait bro don't leave", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement (5, beaston_lab_cokbern_walkDown_right)
+    waitmovement(5)
+    applymovement(5, beaston_lab_cokbern_walkUp_right)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkUp_right)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    releaseall
+}
+
+
+movement beaston_lab_cokbern_preventExit_surprise{
+    emote_exclamation_mark
+    walk_in_place_down
+}
+
+movement beaston_lab_cokbern_walkDown_middle{
+    walk_down * 3
+}
+movement beaston_lab_cokbern_walkDown_left{
+    walk_left
+    walk_down * 3
+}
+movement beaston_lab_cokbern_walkDown_right{
+    walk_right
+    walk_down * 3
+}
+
+movement beaston_lab_walkUp_middle{
+    walk_up * 3
+}
+movement beaston_lab_cokbern_walkUp_left{
+    walk_up * 2
+    walk_right
+    walk_up
+}
+movement beaston_lab_cokbern_walkUp_right{
+    walk_up * 2
+    walk_left
+    walk_up
+}
+
+movement beaston_lab_player_walkUp_left{
+    walk_up * 3
+    walk_right
+    walk_in_place_up
+}
+movement beaston_lab_player_walkUp_right{
+    walk_up * 3
+    walk_left
+    walk_in_place_up
+}

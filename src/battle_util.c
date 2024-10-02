@@ -6291,6 +6291,7 @@ bool32 CanBeBurned(u32 battler)
 {
     u16 ability = GetBattlerAbility(battler);
     if (IS_BATTLER_OF_TYPE(battler, TYPE_FIRE)
+      || IS_BATTLER_OF_TYPE(battler, TYPE_DRAGON)
       || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
       || gBattleMons[battler].status1 & STATUS1_ANY
       || ability == ABILITY_WATER_VEIL
@@ -6339,6 +6340,7 @@ bool32 CanGetFrostbite(u32 battler)
 {
     u16 ability = GetBattlerAbility(battler);
     if (IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
+      || IS_BATTLER_OF_TYPE(battler, TYPE_FIRE)
       || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
       || ability == ABILITY_MAGMA_ARMOR
       || ability == ABILITY_COMATOSE
@@ -8241,6 +8243,8 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
         return TRUE;
     else if (gProtectStructs[battler].burningBulwarked)
         return TRUE;
+    else if (gProtectStructs[battler].hollowWhirled)
+        return TRUE;
     else if ((gProtectStructs[battler].obstructed || gProtectStructs[battler].silkTrapped) && !IS_MOVE_STATUS(move))
         return TRUE;
     else if (gProtectStructs[battler].spikyShielded)
@@ -9140,6 +9144,20 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
     {
         atkStat = gBattleMons[battlerAtk].defense;
         atkStage = gBattleMons[battlerAtk].statStages[STAT_DEF];
+    }
+    else if (gMovesInfo[move].effect == EFFECT_NEWTON_TACKLE)
+    {
+        atkStat = gBattleMons[battlerAtk].speed;
+        atkStage = gBattleMons[battlerAtk].statStages[STAT_SPEED];
+    }
+     else if (gMovesInfo[move].effect == EFFECT_DEBATE)
+    {
+        atkStat = (255 - gBattleMons[battlerDef].spAttack);
+        if (atkStat < 10)
+        {
+            atkStat = 10;
+        }
+        atkStage = gBattleMons[battlerAtk].statStages[STAT_SPATK];
     }
     else
     {

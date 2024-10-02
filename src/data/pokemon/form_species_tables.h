@@ -1895,3 +1895,10 @@ static const u16 sTerapagosFormSpeciesIdTable[] = {
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_TERAPAGOS
+
+static const u16 sChodentFormSpeciesIdTable[] = {
+    SPECIES_CHODENT,
+    SPECIES_CHODENT_COMMON,
+    SPECIES_CHODENT_EPIC,
+    FORM_SPECIES_END,
+};

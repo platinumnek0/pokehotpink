@@ -1,0 +1,201 @@
+raw`
+Beaston_MapScripts::
+    map_script MAP_SCRIPT_ON_FRAME_TABLE, beaston_onWarp
+	.byte 0
+
+beaston_onWarp::
+    map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, beaston_checkVar
+    .2byte 0
+`
+script beastonSign{
+    msgbox("this beaston bitch", MSGBOX_SIGN)
+}
+
+script playersHouseSign{
+    msgbox("{PLAYER}'s house", MSGBOX_SIGN)
+}
+
+script quigleysHouseSign{
+    msgbox("quigley's house", MSGBOX_SIGN)
+}
+
+script beastonLabSign{
+    msgbox("beaston research lab", MSGBOX_SIGN)
+}
+
+script beaston_checkVar{
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 3)
+    goto(beaston_quigleyAsk)
+}
+
+script beaston_quigleyAsk{
+    lockall
+    applymovement(1, playerSurprise)
+    waitmovement(1)
+    applymovement(1, playersHouse_dadLookRight)
+    waitmovement(1)
+    msgbox("so u ready", MSGBOX_YESNO)
+    goto_if_eq(VAR_RESULT, NO, beaston_sendYouBack)
+    goto(beaston_labEscort)
+}
+
+script beaston_sendYouBack{
+    msgbox ("yeah thought so\pget ur stuff and come back")
+    waitmessage
+    opendoor(26, 24)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_playerWalkBack)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    warp(MAP_BEASTON_PLAYERS_HOUSE_FLOOR1, 2, 10)
+    releaseall
+}
+
+script beaston_labEscort{
+    msgbox("sweet c'mon", MSGBOX_AUTOCLOSE)
+    waitmessage
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 3)
+    setflag(FLAG_UNUSED_0x024)
+    setflag(FLAG_UNUSED_0x02A)
+    applymovement(1, beaston_quigleyEscort1)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_playerFollowQuigley1)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    msgbox("right so\pmy dad needed someone to help with his\nresearch\pidk what he's doing but he heard stella\ntalk abt u\pso i guess he thought you'd be good\nhelp", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(1, beaston_quigleyEscort2)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_playerFollowQuigley2)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    msgbox("idk why he didn't pick me but\pguess that doesn't really matter now\pc'mon", MSGBOX_AUTOCLOSE)
+    waitmessage
+    opendoor(10, 16)
+    applymovement(1, beaston_playerWalkBack)
+    waitmovement(1)
+    removeobject(1)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_playerWalkBack)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_playerWalkBack)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    warp(MAP_BEASTON_POKEMON_LAB, 15, 17)
+    releaseall
+}
+
+movement beaston_playerWalkBack{
+    walk_up
+}
+movement beaston_quigleyEscort1{
+    walk_left * 4
+    walk_up * 4
+    walk_left * 1
+    walk_in_place_right
+}
+movement beaston_playerFollowQuigley1{
+    walk_left * 5
+    walk_up * 4
+    walk_in_place_left
+}
+movement beaston_quigleyEscort2{
+    walk_left * 10
+    walk_up * 4
+    walk_in_place_down
+}
+movement beaston_playerFollowQuigley2{
+    walk_left * 11
+    walk_up * 3
+}
+
+script beaston_rivalBattleLoss_setup{
+    lockall
+    clearflag(FLAG_UNUSED_0x02B)
+    addobject(2)
+}
+
+script beaston_rivalBattleLoss_text{
+    applymovement(OBJ_EVENT_ID_PLAYER, look_left)
+    msgbox("{PLAYER}! There you are!\pI'm glad you're alright, seems things\ndidn't quite go to plan…\pRegardless, I've something to ask of\nyou.\pMy niece, Stella, lives in the next town\nover. I'm sure you two are familiar\lwith each other.\pI'd like for you to bring her back to my\nlab, I've got something special for\lyou two.\pI'll be logging my recent findings, if\nyou need me.", MSGBOX_AUTOCLOSE)
+    setflag(FLAG_UNUSED_0x024)
+    setflag(FLAG_UNUSED_0x028)
+    clearflag(FLAG_UNUSED_0x02A)
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 7)
+    if(var(VAR_STARTER_MON) == 1)
+    {
+        setflag(FLAG_UNUSED_0x026)
+        setflag(FLAG_UNUSED_0x027)
+    }
+    elif(var(VAR_STARTER_MON) == 2)
+    {
+        setflag(FLAG_UNUSED_0x025)
+        setflag(FLAG_UNUSED_0x027)
+    }
+    elif(var(VAR_STARTER_MON) == 3)
+    {
+        setflag(FLAG_UNUSED_0x025)
+        setflag(FLAG_UNUSED_0x026)
+    }
+}
+
+script beaston_rivalBattleLoss_left{
+    call(beaston_rivalBattleLoss_setup)
+    applymovement(2, beaston_cokbern_rivalBattleLoss_left_enter)
+    waitmovement(2)
+    call(beaston_rivalBattleLoss_text)
+    waitmessage
+    applymovement(2, beaston_cokbern_rivalBattleLoss_left_leave)
+    waitmovement(2)
+    removeobject(2)
+    setflag(FLAG_UNUSED_0x02B)
+    releaseall
+}
+movement beaston_cokbern_rivalBattleLoss_left_enter{
+    walk_right * 5
+    walk_down * 4
+    walk_right * 2
+}
+movement beaston_cokbern_rivalBattleLoss_left_leave{
+    walk_left * 2
+    walk_up * 4
+    walk_left * 5
+}
+
+script beaston_rivalBattleLoss_down{
+    call(beaston_rivalBattleLoss_setup)
+    applymovement(2, beaston_cokbern_rivalBattleLoss_down_enter)
+    waitmovement(2)
+    call(beaston_rivalBattleLoss_text)
+    waitmessage
+    applymovement(2, beaston_cokbern_rivalBattleLoss_down_leave)
+    waitmovement(2)
+    removeobject(2)
+    setflag(FLAG_UNUSED_0x02B)
+    releaseall
+}
+movement beaston_cokbern_rivalBattleLoss_down_enter{
+    walk_right * 5
+    walk_down * 5
+    walk_right * 3
+}
+movement beaston_cokbern_rivalBattleLoss_down_leave{
+    walk_left * 3
+    walk_up * 5
+    walk_left * 5
+}
+
+script beaston_rivalBattleLoss_right{
+    call(beaston_rivalBattleLoss_setup)
+    applymovement(2, beaston_cokbern_rivalBattleLoss_right_enter)
+    waitmovement(2)
+    call(beaston_rivalBattleLoss_text)
+    waitmessage
+    applymovement(2, beaston_cokbern_rivalBattleLoss_right_leave)
+    waitmovement(2)
+    removeobject(2)
+    setflag(FLAG_UNUSED_0x02B)
+    releaseall
+}
+movement beaston_cokbern_rivalBattleLoss_right_enter{
+    walk_right * 5
+    walk_down * 4
+    walk_right * 4
+}
+movement beaston_cokbern_rivalBattleLoss_right_leave{
+    walk_left * 4
+    walk_up * 4
+    walk_left * 5
+}

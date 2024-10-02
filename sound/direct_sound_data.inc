@@ -6155,6 +6155,47 @@ Cry_Pecharunt::
 .endif @ P_FAMILY_PECHARUNT
 
 	.align 2
+Cry_Croconut::
+	.incbin "sound/direct_sound_samples/cries/croconut.bin"
+	.align 2
+Cry_Tropidile::
+	.incbin "sound/direct_sound_samples/cries/bulbasaur.bin"
+	.align 2
+Cry_Oiligator::
+	.incbin "sound/direct_sound_samples/cries/bulbasaur.bin"
+
+	.align 2
+Cry_Skrappup::
+	.incbin "sound/direct_sound_samples/cries/skrappup.bin"
+	.align 2
+Cry_Hotweiler::
+	.incbin "sound/direct_sound_samples/cries/bulbasaur.bin"
+	.align 2
+Cry_Cerberawl::
+	.incbin "sound/direct_sound_samples/cries/bulbasaur.bin"
+
+	.align 2
+Cry_Kitfisk::
+	.incbin "sound/direct_sound_samples/cries/kitfisk.bin"
+	.align 2
+Cry_Ampurr::
+	.incbin "sound/direct_sound_samples/cries/bulbasaur.bin"
+	.align 2
+Cry_Panthunder::
+	.incbin "sound/direct_sound_samples/cries/bulbasaur.bin"
+
+	.align 2
+Cry_Cixno::
+	.incbin "sound/direct_sound_samples/cries/cixno.bin"
+
+	.align 2
+Cry_Parasoul::
+	.incbin "sound/direct_sound_samples/cries/parasoul.bin"
+	.align 2
+Cry_Horrohorra::
+	.incbin "sound/direct_sound_samples/cries/horrohorra.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

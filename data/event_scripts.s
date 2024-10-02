@@ -1071,3 +1071,11 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+
+	.include "data/maps/Beaston/scripts.inc"
+
+	.include "data/maps/beaston_playersHouse_floor1/scripts.inc"
+
+	.include "data/maps/beaston_pokemonLab/scripts.inc"
+
+	.include "data/maps/Asterra/scripts.inc"

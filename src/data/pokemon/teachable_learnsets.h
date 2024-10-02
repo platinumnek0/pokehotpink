@@ -35838,3 +35838,22 @@ static const u16 sPecharuntTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 #endif //P_FAMILY_PECHARUNT
+
+static const u16 sCroconutTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+static const u16 sSkrappupTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+static const u16 sKitfiskTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+static const u16 sRoderectTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+static const u16 sEggroleTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+static const u16 sSqweeklingTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};

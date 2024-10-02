@@ -1,0 +1,158 @@
+raw`
+beaston_playersHouse_floor1_MapScripts::
+    map_script MAP_SCRIPT_ON_FRAME_TABLE, beaston_playersHouse_floor1_onWarp
+    map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_2F_OnTransition
+    .byte 0
+
+beaston_playersHouse_floor1_onWarp::
+    map_script_2 VAR_LITTLEROOT_INTRO_STATE, 3, playersHouse_resetIntroVar
+    .2byte 0
+`
+script playersHouse_resetIntroVar{
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
+}
+
+script playerWalkOverToLivingRoomTop{
+    lockall
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
+    applymovement(OBJ_EVENT_ID_PLAYER, playerSurprise)
+    goto(dadCallLivingRoomTop)
+}
+
+script dadCallLivingRoomTop{
+    msgbox("over here", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverTop)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    goto(quigleyIntro)
+}
+
+script playerWalkOverToLivingRoomMid{
+    lockall
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
+    applymovement(OBJ_EVENT_ID_PLAYER, playerSurprise)
+    goto(dadCallLivingRoomMid)
+}
+
+script dadCallLivingRoomMid{
+    msgbox("over here", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverMid)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    goto(quigleyIntro)
+}
+
+script playerWalkOverToLivingRoomBottom{
+    lockall
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
+    applymovement(OBJ_EVENT_ID_PLAYER, playerSurprise)
+    goto(dadCallLivingRoomBottom)
+}
+
+script dadCallLivingRoomBottom{
+    msgbox("over here", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverBottom)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    goto(quigleyIntro)
+}
+
+script quigleyIntro{
+    addobject(2)
+    setflag(FLAG_UNUSED_0x02B)
+    playse(SE_DOOR)
+    applymovement(2, playersHouse_dadEnter)
+    waitmovement(2)
+    addobject(1)
+    applymovement(2, playersHouse_dadWalkUp)
+    applymovement (1, playersHouse_quigleyWalkUp)
+    waitmovement (1)
+    msgbox("{PLAYER} this is quigley")
+    waitmessage
+    msgbox ("ayo whaddup i'm quigley\pmy dad's like the professor\phe told me to come get u so c'mon\pi'll be outside when ur ready", MSGBOX_AUTOCLOSE)
+    applymovement(1, playersHouse_quigleyLeave)
+    waitmovement(1)
+    removeobject(1)
+    applymovement(2, playersHouse_dadLookRight)
+    waitmovement(2)
+    msgbox("well go get ur stuff kid i'll be down\nhere watching old man shows", MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(2, playersHouse_dadSettle)
+    waitmovement(2)
+    removeobject(2)
+    setflag(FLAG_UNUSED_0x022)
+    addobject(3)
+    clearflag(FLAG_UNUSED_0x021)
+    releaseall
+}
+
+movement playersHouse_playerWalkOverTop{
+    walk_left * 10
+    delay_4
+    face_down
+}
+movement playersHouse_playerWalkOverMid{
+    walk_left * 3
+    walk_up
+    walk_left * 7
+    delay_4
+    face_down
+}
+movement playersHouse_playerWalkOverBottom{
+    walk_left * 4
+    walk_up * 2
+    walk_left * 6
+    delay_4
+    face_down
+}
+movement playersHouse_dadEnter{
+    walk_up * 2
+}
+movement playersHouse_dadWalkUp{
+    walk_up * 2
+    walk_in_place_down
+}
+movement playersHouse_quigleyWalkUp{
+    walk_up * 4
+    walk_right
+    walk_in_place_up
+}
+movement playersHouse_quigleyLeave{
+    walk_left
+    walk_down * 3
+}
+movement playersHouse_playerLeave{
+    walk_down
+    walk_left
+    walk_down * 2
+}
+movement playersHouse_playerStepDown{
+    walk_down
+}
+movement playerSurprise{
+    emote_exclamation_mark
+}
+movement playersHouse_dadSettle{
+    walk_up
+    walk_right
+    walk_up
+}
+movement playersHouse_dadLookRight{
+    walk_in_place_right
+}
+
+script playersHouse_fridge{
+    msgbox("fritch", MSGBOX_SIGN)
+}
+script playersHouse_sink{
+    msgbox("the sink bro", MSGBOX_SIGN)
+}
+script playersHouse_shelves{
+    msgbox("shelves full of stuff", MSGBOX_SIGN)
+}
+script playersHouse_cabinet{
+    msgbox("dishes in tha cabinet", MSGBOX_SIGN)
+}
+script playersHouse_TV{
+    msgbox("old man shows are on", MSGBOX_SIGN)
+}

@@ -707,8 +707,11 @@
 #define STRINGID_BIZARREARENACREATED                  705
 #define STRINGID_BIZARREAREACREATED                   706
 #define STRINGID_TIDYINGUPCOMPLETE                    707
+#define STRINGID_MOLTEDNOSTATUS                       708
+#define STRINGID_MOLTED                               709
+#define STRINGID_HOLLOWWHIRLTRAPPED                   710
 
-#define BATTLESTRINGS_COUNT                           708
+#define BATTLESTRINGS_COUNT                           711
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -995,7 +998,8 @@
 #define B_MSG_WRAPPED_INFESTATION  7
 #define B_MSG_WRAPPED_SNAP_TRAP    8
 #define B_MSG_WRAPPED_THUNDER_CAGE 9
-#define NUM_TRAPPING_MOVES         10
+#define B_MSG_WRAPPED_HOLLOW_WHIRL 10
+#define NUM_TRAPPING_MOVES         11
 
 // z effects
 #define B_MSG_Z_RESET_STATS   0
@@ -1019,6 +1023,7 @@
 #define B_MSG_CAUGHT_IN_VORTEX    1
 #define B_MSG_SURROUNDED_BY_FIRE  2
 #define B_MSG_SURROUNDED_BY_ROCKS 3
+#define B_MSG_HOLLOW_WHIRL        4
 
 // gDamageNonTypesDmgStringIds
 #define B_MSG_HURT_BY_VINES  0
