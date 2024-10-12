@@ -588,6 +588,8 @@ static bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
             encounterRate /= 2;
         else if (ability == ABILITY_INFILTRATOR && OW_INFILTRATOR == GEN_8)
             encounterRate /= 2;
+        else if (ability == ABILITY_APATHY)
+            encounterRate /=2;
         else if (ability == ABILITY_NO_GUARD)
             encounterRate *= 2;
     }

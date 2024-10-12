@@ -104,7 +104,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
             if (aiMoveEffect == EFFECT_REFLECT || aiMoveEffect == EFFECT_LIGHT_SCREEN
             || aiMoveEffect == EFFECT_SPIKES || aiMoveEffect == EFFECT_TOXIC_SPIKES || aiMoveEffect == EFFECT_STEALTH_ROCK || aiMoveEffect == EFFECT_STICKY_WEB || aiMoveEffect == EFFECT_LEECH_SEED
             || aiMoveEffect == EFFECT_EXPLOSION
-            || aiMoveEffect == EFFECT_SLEEP || aiMoveEffect == EFFECT_YAWN || aiMoveEffect == EFFECT_TOXIC || aiMoveEffect == EFFECT_WILL_O_WISP || aiMoveEffect == EFFECT_PARALYZE
+            || aiMoveEffect == EFFECT_SLEEP || aiMoveEffect == EFFECT_YAWN || aiMoveEffect == EFFECT_TOXIC || aiMoveEffect == EFFECT_WILL_O_WISP || aiMoveEffect == EFFECT_PARALYZE || aiMoveEffect == EFFECT_FLASH_FREEZE
             || aiMoveEffect == EFFECT_TRICK || aiMoveEffect == EFFECT_TRICK_ROOM || aiMoveEffect== EFFECT_WONDER_ROOM || aiMoveEffect ==  EFFECT_PSYCHO_SHIFT || aiMoveEffect == EFFECT_FIRST_TURN_ONLY
             )
             {
@@ -175,7 +175,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
     if (((getsOneShot && gBattleMons[opposingBattler].speed > gBattleMons[battler].speed) // If the player OHKOs and outspeeds OR OHKOs, doesn't outspeed but isn't 2HKO'd
             || (getsOneShot && gBattleMons[opposingBattler].speed <= gBattleMons[battler].speed && maxDamageDealt < gBattleMons[opposingBattler].hp / 2))
         && (gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 2 // And the current mon has at least 1/2 their HP, or 1/4 HP and Regenerator
-            || (aiAbility == ABILITY_REGENERATOR
+            || ( (aiAbility == ABILITY_REGENERATOR || aiAbility == ABILITY_RENEW)
             && gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 4)))
     {
         // 50% chance to stay in regardless
@@ -194,7 +194,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
 	{
 		if (!hasSuperEffectiveMove // If the AI doesn't have a super effective move
 		&& (gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 2 // And the current mon has at least 1/2 their HP, or 1/4 HP and Regenerator
-            || (aiAbility == ABILITY_REGENERATOR
+            || ( (aiAbility == ABILITY_REGENERATOR || aiAbility == ABILITY_RENEW)
             && gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 4)))
 		{
             // Then check if they have an important status move, which is worth using even in a bad matchup
@@ -496,6 +496,7 @@ static bool32 ShouldSwitchIfGameStatePrompt(u32 battler, bool32 emitResult)
             //Checks to see if active Pokemon can do something against sleep
             if ((monAbility == ABILITY_NATURAL_CURE
                 || monAbility == ABILITY_SHED_SKIN
+                || monAbility == ABILITY_RENEW
                 || monAbility == ABILITY_EARLY_BIRD)
                 || holdEffect == (HOLD_EFFECT_CURE_SLP | HOLD_EFFECT_CURE_STATUS)
                 || HasMove(battler, MOVE_SLEEP_TALK)
@@ -615,6 +616,7 @@ static bool32 ShouldSwitchIfAbilityBenefit(u32 battler, bool32 emitResult)
             return FALSE;
 
         case ABILITY_REGENERATOR:
+        case ABILITY_RENEW:
             moduloChance = 2; //50%
             //Don't switch if ailment
             if (gBattleMons[battler].status1 & STATUS1_ANY)
@@ -793,7 +795,7 @@ static bool32 CanMonSurviveHazardSwitchin(u32 battler)
     s32 firstId, lastId, i, j;
     struct Pokemon *party;
 
-    if (ability == ABILITY_REGENERATOR)
+    if (ability == ABILITY_REGENERATOR || ability == ABILITY_RENEW)
         battlerHp = (battlerHp * 133) / 100; // Account for Regenerator healing
 
     hazardDamage = GetSwitchinHazardsDamage(battler, &gBattleMons[battler]);
@@ -1560,7 +1562,7 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler)
                 {
                     singleUseItemHeal = holdEffectParam;
                 }
-                else if (opposingAbility != ABILITY_UNNERVE && heldItemEffect == HOLD_EFFECT_RESTORE_HP)
+                else if (heldItemEffect == HOLD_EFFECT_RESTORE_HP)
                 {
                     // By default, this should only encompass Oran Berry and Sitrus Berry.
                     singleUseItemHeal = holdEffectParam;
@@ -1569,7 +1571,6 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler)
                 }
             }
             else if (currentHP < maxHP / CONFUSE_BERRY_HP_FRACTION
-                && opposingAbility != ABILITY_UNNERVE
                 && (item == ITEM_AGUAV_BERRY || item == ITEM_FIGY_BERRY || item == ITEM_IAPAPA_BERRY || item == ITEM_MAGO_BERRY || item == ITEM_WIKI_BERRY))
             {
                 singleUseItemHeal = maxHP / CONFUSE_BERRY_HEAL_FRACTION;

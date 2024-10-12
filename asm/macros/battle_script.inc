@@ -1632,6 +1632,11 @@
 	.4byte \jumpInstr
 	.endm
 
+	.macro tryboostallybeststat, battler:req
+	callnative BS_TryBoostAllyBestStat
+	.byte \battler
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -2376,14 +2381,12 @@
 	.endm
 
 	.macro jumpifflowerveil jumpInstr:req
-	jumpifnottype BS_TARGET, TYPE_GRASS, 1f
-	jumpifability BS_TARGET_SIDE, ABILITY_FLOWER_VEIL, \jumpInstr
+	jumpifability BS_TARGET_SIDE, ABILITY_DEFENDANT, \jumpInstr
 	1:
 	.endm
 
 	.macro jumpifflowerveilattacker jumpInstr:req
-	jumpifnottype BS_ATTACKER, TYPE_GRASS, 1f
-	jumpifability BS_ATTACKER_SIDE, ABILITY_FLOWER_VEIL, \jumpInstr
+	jumpifability BS_ATTACKER_SIDE, ABILITY_DEFENDANT, \jumpInstr
 	1:
 	.endm
 

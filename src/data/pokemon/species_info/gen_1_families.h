@@ -1680,7 +1680,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .levelUpLearnset = sRattataLevelUpLearnset,
         .teachableLearnset = sRattataTeachableLearnset,
         .formSpeciesIdTable = sRattataFormSpeciesIdTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_RATICATE}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_RATTATA_ALOLAN}),
     },
 
     [SPECIES_RATICATE] =

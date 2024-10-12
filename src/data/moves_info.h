@@ -1144,6 +1144,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 20,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_ATK_UP_1 },
         .magicCoatAffected = TRUE,
@@ -1609,6 +1610,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SP_ATK_MINUS_1,
@@ -2686,6 +2688,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_EVSN_UP_1 },
         .magicCoatAffected = TRUE,
@@ -2708,6 +2711,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_SPATK_UP_1 },
         .magicCoatAffected = TRUE,
@@ -3393,6 +3397,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_SPDEF_UP_1 },
         .magicCoatAffected = TRUE,
@@ -3662,6 +3667,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_ACC_MINUS_1,
@@ -4522,6 +4528,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_SPD_UP_1 },
         .magicCoatAffected = TRUE,
@@ -5016,10 +5023,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Rollout"),
         .description = COMPOUND_STRING(
-            "An attack lasting 5 turns\n"
-            "with rising intensity."),
+            "A rolling attack that gets\n"
+            "stronger with each hit."),
         .effect = EFFECT_ROLLOUT,
-        .power = 30,
+        .power = 40,
         .type = TYPE_ROCK,
         .accuracy = 90,
         .pp = 20,
@@ -5130,18 +5137,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Fury Cutter"),
         .description = COMPOUND_STRING(
-            "An attack that intensifies\n"
-            "on each successive hit."),
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .power = 40,
-        #elif B_UPDATED_MOVE_DATA >= GEN_5
-            .power = 20,
-        #else
-            .power = 10,
-        #endif
+            "A frantic slash. Gets\n"
+            "stronger with each hit."),
+        .power = 40,
         .effect = EFFECT_FURY_CUTTER,
         .type = TYPE_BUG,
-        .accuracy = 95,
+        .accuracy = 90,
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -5193,6 +5194,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 5,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_SPDEF_UP_1 },
         .ignoresProtect = (B_UPDATED_MOVE_FLAGS >= GEN_6) || (B_UPDATED_MOVE_FLAGS <= GEN_3),
@@ -5933,7 +5935,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .power = 1,
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
-        .pp = 20,
+        .pp = 15,
         .target = MOVE_TARGET_DEPENDS,
         .priority = -5,
         .category = DAMAGE_CATEGORY_SPECIAL,
@@ -7323,10 +7325,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Ice Ball"),
         .description = COMPOUND_STRING(
-            "A 5-turn attack that gains\n"
-            "power on successive hits."),
+            "A rolling attack that gets\n"
+            "stronger with each hit."),
         .effect = EFFECT_ROLLOUT,
-        .power = 30,
+        .power = 40,
         .type = TYPE_ICE,
         .accuracy = 90,
         .pp = 20,
@@ -9843,6 +9845,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_ACC_MINUS_1,
@@ -10343,6 +10346,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_ACC_MINUS_1,
@@ -10367,6 +10371,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_ACC_MINUS_1,
@@ -14455,6 +14460,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 15,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SP_ATK_MINUS_1,
@@ -14536,6 +14542,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .accuracy = 100,
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
+        .lightMove = TRUE,
         .priority = 1,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
@@ -16055,10 +16062,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Mind Blown"),
         .description = COMPOUND_STRING(
-            "It explodes the user's head\n"
-            "to damage everything around."),
+            "Explodes the user's head and\n"
+            "damages everyone in battle."),
         .effect = EFFECT_MIND_BLOWN,
-        .power = 150,
+        .power = 120,
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 5,
@@ -16543,19 +16550,18 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Lowers the foe's Speed and\n"
             "makes it weak to Fire."),
-        .effect = EFFECT_TAR_SHOT,
-        .power = 0,
+        .effect = EFFECT_HIT,
+        .power = 50,
         .type = TYPE_ROCK,
         .accuracy = 100,
         .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .category = DAMAGE_CATEGORY_STATUS,
+        .category = DAMAGE_CATEGORY_SPECIAL,
         .magicCoatAffected = TRUE,
-        .contestEffect = CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS,
-        .contestCategory = CONTEST_CATEGORY_BEAUTY,
-        .contestComboStarterId = 0,
-        .contestComboMoves = {0}
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_TAR_SHOT,
+        }),
     },
 
     [MOVE_MAGIC_POWDER] =
@@ -18838,7 +18844,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SP_ATK_PLUS_1,
             .self = TRUE,
-            .chance = 100,
+            .chance = 30,
         }),
     },
 
@@ -20003,6 +20009,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_ACC_MINUS_1,
@@ -20040,6 +20047,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_SPECIAL,
     },
 
@@ -20081,7 +20089,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_SLOW_SLOW_BEAM] =
     {
-        .name = COMPOUND_STRING("SlowSlowBeam"),
+        .name = COMPOUND_STRING("Slow Slow Beam"),
         .description = COMPOUND_STRING(
             "Lowers the foe's speed\n"
             "each turn for 3 turns."),
@@ -20114,6 +20122,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_STATUS,
     },
 
@@ -20265,6 +20274,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+        .lightMove = TRUE,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_PARALYSIS,
@@ -20383,6 +20393,174 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .magicCoatAffected = TRUE,
+    },
+
+    [MOVE_SILK_SNARE] = 
+    {
+        .name = COMPOUND_STRING("Silk Snare"),
+        .description = COMPOUND_STRING(
+            "Traps the foe with a web.\n"
+            "Strong on Bug-types."),
+        .effect = EFFECT_SILK_SNARE,
+        .power = 80,
+        .type = TYPE_BUG,
+        .accuracy = 90,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PREVENT_ESCAPE,
+        }),
+    },
+
+    [MOVE_METAL_GNAW] =
+    {
+        .name = COMPOUND_STRING("Metal Gnaw"),
+        .description = COMPOUND_STRING(
+            "Heals half the damage dealt.\n"
+            "Hits airborne foes."),
+        .effect = EFFECT_ABSORB,
+        .power = 85,
+        .type = TYPE_GROUND,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .bitingMove = TRUE,
+        .ignoreTypeIfFlyingAndUngrounded = TRUE,
+        .healingMove = B_HEAL_BLOCKING >= GEN_6,
+    },
+
+    [MOVE_SUSHI_ROLL] =
+    {
+        .name = COMPOUND_STRING("Sushi Roll"),
+        .description = COMPOUND_STRING(
+            "A rolling attack that gets\n"
+            "stronger with each hit."),
+        .effect = EFFECT_ROLLOUT,
+        .power = 40,
+        .type = TYPE_WATER,
+        .accuracy = 90,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .instructBanned = TRUE,
+        .parentalBondBanned = TRUE,
+    },
+
+    [MOVE_BURNING_RUBBER] =
+    {
+        .name = COMPOUND_STRING("Burnin' Rubber"),
+        .description = COMPOUND_STRING(
+            "Gets stronger each hit. May\n"
+            "burn the foe."),
+        .effect = EFFECT_ROLLOUT,
+        .power = 40,
+        .type = TYPE_RUBBER,
+        .accuracy = 90,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .instructBanned = TRUE,
+        .parentalBondBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BURN,
+            .chance = 30,
+        }),
+    },
+
+    [MOVE_MAGNET_PULSE] = 
+    {
+        .name = COMPOUND_STRING("Magnet Pulse"),
+        .description = COMPOUND_STRING(
+            "A burst of magnetic energy.\n"
+            "Strong on Steel-types."),
+        .effect = EFFECT_MAGNET_PULSE,
+        .power = 80,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .pulseMove = TRUE,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_GUM_BARRAGE] =
+    {
+        .name = COMPOUND_STRING("Gum Barrage"),
+        .description = COMPOUND_STRING(
+            "A barrage of punches that\n"
+            "hits 2 to 5 times."),
+        .effect = EFFECT_MULTI_HIT,
+        .power = 30,
+        .type = TYPE_RUBBER,
+        .accuracy = 90,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .punchingMove = TRUE,
+    },
+
+    [MOVE_COSMIC_ONSLAUGHT] =
+    {
+        .name = COMPOUND_STRING("Cosmic Onslaught"),
+        .description = COMPOUND_STRING(
+            "Physical or special,\n"
+            "based on user's stats."),
+        .effect = EFFECT_SHELL_SIDE_ARM,
+        .power = 90,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_NUTBOLT] = 
+    {
+        .name = COMPOUND_STRING("Nutbolt"),
+        .description = COMPOUND_STRING(
+            "A rusty metal blast that\n"
+            "can poison immune foes."),
+        .effect = EFFECT_NUTBOLT,
+        .power = 90,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_POISON,
+            .chance = 30,
+        }),
+    },
+
+    [MOVE_FLASH_FREEZE] =
+    {
+        .name = COMPOUND_STRING("Flash-Freeze"),
+        .description = COMPOUND_STRING(
+            "Inflicts frostbite on the foe\n"
+            "with ice-cold air."),
+        .effect = EFFECT_FLASH_FREEZE,
+        .power = 0,
+        .type = TYPE_ICE,
+        .accuracy = 80,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
     },
 
     // Z-Moves

@@ -834,6 +834,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 case EFFECT_WILL_O_WISP:
                 case EFFECT_TOXIC:
                 case EFFECT_LEECH_SEED:
+                case EFFECT_FLASH_FREEZE:
                     ADJUST_SCORE(-5);
                     break;
                 case EFFECT_CURSE:
@@ -883,7 +884,9 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 break;
             case ABILITY_CLEAR_BODY:
             case ABILITY_FULL_METAL_BODY:
+            case ABILITY_APATHY:
             case ABILITY_WHITE_SMOKE:
+            case ABILITY_DEFENDANT:
                 if (IsStatLoweringEffect(moveEffect))
                     RETURN_SCORE_MINUS(10);
                 break;
@@ -1451,7 +1454,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_SUBSTITUTE:
-            if (gBattleMons[battlerAtk].status2 & STATUS2_SUBSTITUTE || aiData->abilities[battlerDef] == ABILITY_INFILTRATOR)
+            if (gBattleMons[battlerAtk].status2 & STATUS2_SUBSTITUTE || aiData->abilities[battlerDef] == ABILITY_INFILTRATOR || aiData->abilities[battlerDef] == ABILITY_APATHY)
                 ADJUST_SCORE(-8);
             else if (aiData->hpPercents[battlerAtk] <= 25)
                 ADJUST_SCORE(-10);
@@ -1712,6 +1715,10 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             break;
         case EFFECT_WILL_O_WISP:
             if (!AI_CanBurn(battlerAtk, battlerDef, aiData->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, aiData->partnerMove))
+                ADJUST_SCORE(-10);
+            break;
+        case EFFECT_FLASH_FREEZE:
+            if (!AI_CanGiveFrostbite(battlerAtk, battlerDef, aiData->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, aiData->partnerMove))
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_MEMENTO:
@@ -3424,6 +3431,7 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
               || HasMoveEffect(EFFECT_SLEEP_TALK, battlerAtk)
               || HasMoveEffect(EFFECT_SNORE, battlerAtk)
               || aiData->abilities[battlerAtk] == ABILITY_SHED_SKIN
+              || aiData->abilities[battlerAtk] == ABILITY_RENEW
               || aiData->abilities[battlerAtk] == ABILITY_EARLY_BIRD
               || (AI_GetWeather(aiData) & B_WEATHER_RAIN && gWishFutureKnock.weatherDuration != 1 && aiData->abilities[battlerAtk] == ABILITY_HYDRATION && aiData->holdEffects[battlerAtk] != HOLD_EFFECT_UTILITY_UMBRELLA))
                 ADJUST_SCORE(GOOD_EFFECT);
@@ -3462,6 +3470,7 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
           || HasMoveEffect(battlerDef, EFFECT_POISON)
           || HasMoveEffect(battlerDef, EFFECT_PARALYZE)
           || HasMoveEffect(battlerDef, EFFECT_WILL_O_WISP)
+          || HasMoveEffect(battlerDef, EFFECT_FLASH_FREEZE)
           || HasMoveEffect(battlerDef, EFFECT_CONFUSE)
           || HasMoveEffect(battlerDef, EFFECT_LEECH_SEED))
             ADJUST_SCORE(GOOD_EFFECT);
@@ -3840,6 +3849,9 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
         break;
     case EFFECT_WILL_O_WISP:
         IncreaseBurnScore(battlerAtk, battlerDef, move, &score);
+        break;
+     case EFFECT_FLASH_FREEZE:
+        IncreaseFrostbiteScore(battlerAtk, battlerDef, move, &score);
         break;
     case EFFECT_FOLLOW_ME:
         if (isDoubleBattle
@@ -4693,6 +4705,7 @@ static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_TORMENT:
     case EFFECT_FLATTER:
     case EFFECT_WILL_O_WISP:
+    case EFFECT_FLASH_FREEZE:
     case EFFECT_INGRAIN:
     case EFFECT_IMPRISON:
     case EFFECT_TICKLE:

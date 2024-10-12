@@ -13168,6 +13168,22 @@ const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mar
     const u32 gMonShinyPalette_Marrantula[] = INCBIN_U32("graphics/pokemon/marrantula/shiny.gbapal.lz");
     const u8 gMonIcon_Marrantula[] = INCBIN_U8("graphics/pokemon/marrantula/icon.4bpp");
 
+    const u32 gMonFrontPic_Caonine[] = INCBIN_U32("graphics/pokemon/caonine/anim_front.4bpp.lz");
+    const u32 gMonPalette_Caonine[] = INCBIN_U32("graphics/pokemon/caonine/normal.gbapal.lz");
+    const u32 gMonBackPic_Caonine[] = INCBIN_U32("graphics/pokemon/caonine/back.4bpp.lz");
+    const u32 gMonShinyPalette_Caonine[] = INCBIN_U32("graphics/pokemon/caonine/shiny.gbapal.lz");
+    const u8 gMonIcon_Caonine[] = INCBIN_U8("graphics/pokemon/caonine/icon.4bpp");
+    const u32 gMonFrontPic_Lupensa[] = INCBIN_U32("graphics/pokemon/lupensa/anim_front.4bpp.lz");
+    const u32 gMonPalette_Lupensa[] = INCBIN_U32("graphics/pokemon/lupensa/normal.gbapal.lz");
+    const u32 gMonBackPic_Lupensa[] = INCBIN_U32("graphics/pokemon/lupensa/back.4bpp.lz");
+    const u32 gMonShinyPalette_Lupensa[] = INCBIN_U32("graphics/pokemon/lupensa/shiny.gbapal.lz");
+    const u8 gMonIcon_Lupensa[] = INCBIN_U8("graphics/pokemon/lupensa/icon.4bpp");
+    const u32 gMonFrontPic_Apathound[] = INCBIN_U32("graphics/pokemon/apathound/anim_front.4bpp.lz");
+    const u32 gMonPalette_Apathound[] = INCBIN_U32("graphics/pokemon/apathound/normal.gbapal.lz");
+    const u32 gMonBackPic_Apathound[] = INCBIN_U32("graphics/pokemon/apathound/back.4bpp.lz");
+    const u32 gMonShinyPalette_Apathound[] = INCBIN_U32("graphics/pokemon/apathound/shiny.gbapal.lz");
+    const u8 gMonIcon_Apathound[] = INCBIN_U8("graphics/pokemon/apathound/icon.4bpp");
+
     const u32 gMonFrontPic_Cixno[] = INCBIN_U32("graphics/pokemon/cixno/anim_front.4bpp.lz");
     const u32 gMonPalette_Cixno[] = INCBIN_U32("graphics/pokemon/cixno/normal.gbapal.lz");
     const u32 gMonBackPic_Cixno[] = INCBIN_U32("graphics/pokemon/cixno/back.4bpp.lz");
@@ -13207,6 +13223,18 @@ const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mar
     const u32 gMonBackPic_Arrengai[] = INCBIN_U32("graphics/pokemon/arrengai/back.4bpp.lz");
     const u32 gMonShinyPalette_Arrengai[] = INCBIN_U32("graphics/pokemon/arrengai/shiny.gbapal.lz");
     const u8 gMonIcon_Arrengai[] = INCBIN_U8("graphics/pokemon/arrengai/icon.4bpp");
+
+    const u32 gMonPalette_Oroboring[] = INCBIN_U32("graphics/pokemon/oroboring/normal.gbapal.lz");
+    const u32 gMonShinyPalette_Oroboring[] = INCBIN_U32("graphics/pokemon/oroboring/shiny.gbapal.lz");
+    const u32 gMonFrontPic_OroboringHoop[] = INCBIN_U32("graphics/pokemon/oroboring/hoop/anim_front.4bpp.lz");
+    const u32 gMonBackPic_OroboringHoop[] = INCBIN_U32("graphics/pokemon/oroboring/hoop/back.4bpp.lz");
+    const u8 gMonIcon_OroboringHoop[] = INCBIN_U8("graphics/pokemon/oroboring/hoop/icon.4bpp");
+    const u32 gMonFrontPic_OroboringWheel[] = INCBIN_U32("graphics/pokemon/oroboring/wheel/anim_front.4bpp.lz");
+    const u32 gMonBackPic_OroboringWheel[] = INCBIN_U32("graphics/pokemon/oroboring/wheel/back.4bpp.lz");
+    const u8 gMonIcon_OroboringWheel[] = INCBIN_U8("graphics/pokemon/oroboring/wheel/icon.4bpp");
+    const u32 gMonFrontPic_OroboringMobius[] = INCBIN_U32("graphics/pokemon/oroboring/mobius/anim_front.4bpp.lz");
+    const u32 gMonBackPic_OroboringMobius[] = INCBIN_U32("graphics/pokemon/oroboring/mobius/back.4bpp.lz");
+    const u8 gMonIcon_OroboringMobius[] = INCBIN_U8("graphics/pokemon/oroboring/mobius/icon.4bpp");
 
     const u32 gMonFrontPic_Egg[] = INCBIN_U32("graphics/pokemon/egg/anim_front.4bpp.lz");
     const u32 gMonPalette_Egg[] = INCBIN_U32("graphics/pokemon/egg/normal.gbapal.lz");

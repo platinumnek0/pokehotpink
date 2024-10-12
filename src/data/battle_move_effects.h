@@ -879,6 +879,13 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
+     [EFFECT_FLASH_FREEZE] =
+    {
+        .battleScript = BattleScript_EffectFlashFreeze,
+        .battleTvScore = 5,
+        .encourageEncore = TRUE,
+    },
+
     [EFFECT_MEMENTO] =
     {
         .battleScript = BattleScript_EffectMemento,
@@ -2248,4 +2255,23 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
     },
+
+    [EFFECT_SILK_SNARE] = 
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_MAGNET_PULSE] = 
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+     [EFFECT_NUTBOLT] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
 };

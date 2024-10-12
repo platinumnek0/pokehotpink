@@ -480,8 +480,8 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
         switch (gMovesInfo[move].effect)
         {
         case EFFECT_ROLLOUT:
-            n = gDisableStructs[battlerAtk].rolloutTimer - 1;
-            fixedBasePower = CalcRolloutBasePower(battlerAtk, gMovesInfo[move].power, n < 0 ? 5 : n);
+            n = gDisableStructs[battlerAtk].rolloutTimer + 1;
+            fixedBasePower = CalcRolloutBasePower(battlerAtk, gMovesInfo[move].power, min(n, 5));
             break;
         case EFFECT_FURY_CUTTER:
             fixedBasePower = CalcFuryCutterBasePower(gMovesInfo[move].power, min(gDisableStructs[battlerAtk].furyCutterCounter + 1, 5));
@@ -1199,6 +1199,7 @@ bool32 IsNonVolatileStatusMoveEffect(u32 moveEffect)
     case EFFECT_POISON:
     case EFFECT_PARALYZE:
     case EFFECT_WILL_O_WISP:
+    case EFFECT_FLASH_FREEZE:
     case EFFECT_YAWN:
         return TRUE;
     default:
@@ -1488,7 +1489,9 @@ bool32 ShouldLowerStat(u32 battler, u32 battlerAbility, u32 stat)
         if (AI_DATA->holdEffects[battler] == HOLD_EFFECT_CLEAR_AMULET
          || battlerAbility == ABILITY_CLEAR_BODY
          || battlerAbility == ABILITY_WHITE_SMOKE
-         || battlerAbility == ABILITY_FULL_METAL_BODY)
+         || battlerAbility == ABILITY_FULL_METAL_BODY
+         || battlerAbility == ABILITY_APATHY
+         || battlerAbility == ABILITY_DEFENDANT)
             return FALSE;
 
         switch (stat)
@@ -1514,7 +1517,7 @@ bool32 ShouldLowerStat(u32 battler, u32 battlerAbility, u32 stat)
 bool32 BattlerStatCanRise(u32 battler, u32 battlerAbility, u32 stat)
 {
     if ((gBattleMons[battler].statStages[stat] < MAX_STAT_STAGE && battlerAbility != ABILITY_CONTRARY)
-      || (battlerAbility == ABILITY_CONTRARY && gBattleMons[battler].statStages[stat] > MIN_STAT_STAGE))
+      || (battlerAbility == ABILITY_CONTRARY && gBattleMons[battler].statStages[stat] > MIN_STAT_STAGE) || battlerAbility != ABILITY_APATHY)
         return TRUE;
     return FALSE;
 }
@@ -1577,6 +1580,7 @@ bool32 ShouldLowerAttack(u32 battlerAtk, u32 battlerDef, u32 defAbility)
       && HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL)
       && defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
+      && defAbility != ABILITY_APATHY
       && defAbility != ABILITY_WHITE_SMOKE
       && defAbility != ABILITY_FULL_METAL_BODY
       && defAbility != ABILITY_HYPER_CUTTER
@@ -1596,6 +1600,7 @@ bool32 ShouldLowerDefense(u32 battlerAtk, u32 battlerDef, u32 defAbility)
       && HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL)
       && defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
+      && defAbility != ABILITY_APATHY
       && defAbility != ABILITY_WHITE_SMOKE
       && defAbility != ABILITY_FULL_METAL_BODY
       && defAbility != ABILITY_BIG_PECKS
@@ -1614,6 +1619,7 @@ bool32 ShouldLowerSpeed(u32 battlerAtk, u32 battlerDef, u32 defAbility)
     if (!AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered)
       && defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
+      && defAbility != ABILITY_APATHY
       && defAbility != ABILITY_FULL_METAL_BODY
       && defAbility != ABILITY_WHITE_SMOKE
       && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
@@ -1632,6 +1638,7 @@ bool32 ShouldLowerSpAtk(u32 battlerAtk, u32 battlerDef, u32 defAbility)
       && HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL)
       && defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
+      && defAbility != ABILITY_APATHY
       && defAbility != ABILITY_FULL_METAL_BODY
       && defAbility != ABILITY_WHITE_SMOKE
       && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
@@ -1650,6 +1657,7 @@ bool32 ShouldLowerSpDef(u32 battlerAtk, u32 battlerDef, u32 defAbility)
       && HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_SPECIAL)
       && defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
+      && defAbility != ABILITY_APATHY
       && defAbility != ABILITY_FULL_METAL_BODY
       && defAbility != ABILITY_WHITE_SMOKE
       && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
@@ -1666,6 +1674,7 @@ bool32 ShouldLowerAccuracy(u32 battlerAtk, u32 battlerDef, u32 defAbility)
 
     if (defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
+      && defAbility != ABILITY_APATHY
       && defAbility != ABILITY_WHITE_SMOKE
       && defAbility != ABILITY_FULL_METAL_BODY
       && defAbility != ABILITY_KEEN_EYE
@@ -1686,6 +1695,7 @@ bool32 ShouldLowerEvasion(u32 battlerAtk, u32 battlerDef, u32 defAbility)
     if (gBattleMons[battlerDef].statStages[STAT_EVASION] > DEFAULT_STAT_STAGE
       && defAbility != ABILITY_CONTRARY
       && defAbility != ABILITY_CLEAR_BODY
+      && defAbility != ABILITY_APATHY
       && defAbility != ABILITY_FULL_METAL_BODY
       && defAbility != ABILITY_WHITE_SMOKE
       && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
@@ -2683,6 +2693,7 @@ bool32 AI_CanBeConfused(u32 battlerAtk, u32 battlerDef, u32 move, u32 ability)
 {
     if ((gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
      || (ability == ABILITY_OWN_TEMPO && !DoesBattlerIgnoreAbilityChecks(AI_DATA->abilities[battlerAtk], move))
+     || (ability == ABILITY_OBLIVIOUS && !DoesBattlerIgnoreAbilityChecks(AI_DATA->abilities[battlerAtk], move))
      || (IsBattlerGrounded(battlerDef) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
      || gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD
      || DoesSubstituteBlockMove(battlerAtk, battlerDef, move))
@@ -2772,8 +2783,7 @@ bool32 AI_CanBeInfatuated(u32 battlerAtk, u32 battlerDef, u32 defAbility)
 {
     if ((gBattleMons[battlerDef].status2 & STATUS2_INFATUATION)
       || AI_DATA->effectiveness[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex] == AI_EFFECTIVENESS_x0
-      || defAbility == ABILITY_OBLIVIOUS
-      || !AreBattlersOfOppositeGender(battlerAtk, battlerDef)
+      || defAbility == ABILITY_OBLIVIOUS || defAbility == ABILITY_OWN_TEMPO
       || AI_IsAbilityOnSide(battlerDef, ABILITY_AROMA_VEIL))
         return FALSE;
     return TRUE;
@@ -2781,7 +2791,7 @@ bool32 AI_CanBeInfatuated(u32 battlerAtk, u32 battlerDef, u32 defAbility)
 
 u32 ShouldTryToFlinch(u32 battlerAtk, u32 battlerDef, u32 atkAbility, u32 defAbility, u32 move)
 {
-    if (((!IsMoldBreakerTypeAbility(AI_DATA->abilities[battlerAtk]) && (defAbility == ABILITY_SHIELD_DUST || defAbility == ABILITY_INNER_FOCUS))
+    if (((!IsMoldBreakerTypeAbility(AI_DATA->abilities[battlerAtk]) && (defAbility == ABILITY_SHIELD_DUST || defAbility == ABILITY_INNER_FOCUS || defAbility == ABILITY_OBLIVIOUS))
       || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_COVERT_CLOAK
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER)) // Opponent goes first
@@ -2825,7 +2835,7 @@ bool32 ShouldFakeOut(u32 battlerAtk, u32 battlerDef, u32 move)
     || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_COVERT_CLOAK
     || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
     || (!IsMoldBreakerTypeAbility(AI_DATA->abilities[battlerAtk])
-    && (AI_DATA->abilities[battlerDef] == ABILITY_SHIELD_DUST || AI_DATA->abilities[battlerDef] == ABILITY_INNER_FOCUS)))
+    && (AI_DATA->abilities[battlerDef] == ABILITY_SHIELD_DUST || AI_DATA->abilities[battlerDef] == ABILITY_INNER_FOCUS || AI_DATA->abilities[battlerDef] == ABILITY_OBLIVIOUS)))
         return FALSE;
 
     return TRUE;
@@ -3047,6 +3057,7 @@ bool32 PartnerMoveEffectIsStatusSameTarget(u32 battlerAtkPartner, u32 battlerDef
        || gMovesInfo[partnerMove].effect == EFFECT_TOXIC
        || gMovesInfo[partnerMove].effect == EFFECT_PARALYZE
        || gMovesInfo[partnerMove].effect == EFFECT_WILL_O_WISP
+       || gMovesInfo[partnerMove].effect == EFFECT_FLASH_FREEZE
        || gMovesInfo[partnerMove].effect == EFFECT_YAWN))
         return TRUE;
     return FALSE;

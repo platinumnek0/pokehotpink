@@ -1107,5 +1107,11 @@ static const struct FormChange sTerapagosFormChangeTable[] = {
 };
 #endif //P_FAMILY_TERAPAGOS
 
+static const struct FormChange sOroboringWheelFormChangeTable[] =
+{
+    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_OROBORING_MOBIUS},
+    {FORM_CHANGE_TERMINATOR},
+};
+
 #undef WHEN_LEARNED
 #undef WHEN_FORGOTTEN

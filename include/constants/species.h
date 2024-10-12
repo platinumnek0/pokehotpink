@@ -1837,7 +1837,8 @@
 #define SPECIES_WAXTARDLY                               1741
 #define SPECIES_WAXTERMIND                              1742
 #define SPECIES_SMHAUG                                  1743
-#define SPECIES_OROBORING                               1744
+#define SPECIES_OROBORING                               SPECIES_OROBORING_HOOP
+#define SPECIES_OROBORING_HOOP                          1744
 #define SPECIES_ROSWHELP                                1745
 #define SPECIES_VIENHANHA                               1746
 #define SPECIES_JIBJAB                                  1747
@@ -1916,8 +1917,10 @@
 #define SPECIES_GOTTUGA_DUD                             1817
 #define SPECIES_DROMEGERRY_HALVED_HORSES                1818
 #define SPECIES_GLAZZLE_INFINITY                        1819
+#define SPECIES_OROBORING_WHEEL                         1820
+#define SPECIES_OROBORING_MOBIUS                        1821
 
-#define SPECIES_EGG SPECIES_GLAZZLE_INFINITY + 1
+#define SPECIES_EGG SPECIES_OROBORING_MOBIUS + 1
 
 #define NUM_SPECIES SPECIES_EGG
 

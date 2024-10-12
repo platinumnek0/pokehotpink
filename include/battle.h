@@ -70,7 +70,7 @@ struct ResourceFlags
 #define RESOURCE_FLAG_FLASH_FIRE        0x1
 #define RESOURCE_FLAG_ROOST             0x2
 #define RESOURCE_FLAG_UNBURDEN          0x4
-#define RESOURCE_FLAG_UNUSED            0x8
+#define RESOURCE_FLAG_BOOSTING_ABILITY  0x8
 #define RESOURCE_FLAG_TRACED            0x10
 #define RESOURCE_FLAG_EMERGENCY_EXIT    0x20
 #define RESOURCE_FLAG_NEUTRALIZING_GAS  0x40
@@ -94,8 +94,8 @@ struct DisableStruct
     u8 encoreTimer:4;
     u8 perishSongTimer:4;
     u8 furyCutterCounter;
-    u8 rolloutTimer:4;
-    u8 rolloutTimerStartValue:4;
+    u8 rolloutTimer;
+    u8 rolloutTimerStartValue;
     u8 chargeTimer:4;
     u8 tauntTimer:4;
     u8 battlerPreventingEscape;
@@ -1094,6 +1094,7 @@ extern u8 gBattlerAbility;
 extern u16 gPartnerSpriteId;
 extern struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT];
 extern const struct BattleMoveEffect gBattleMoveEffects[];
+extern u8 gBattleMoveTypeSpriteId;
 
 extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);

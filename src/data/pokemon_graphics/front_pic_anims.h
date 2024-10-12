@@ -10232,6 +10232,31 @@ static const union AnimCmd sAnim_Marrantula_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_Caonine_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 45),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Lupensa_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Apathound_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 45),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END,
+};
 
 static const union AnimCmd sAnim_Cixno_1[] =
 {
@@ -12969,6 +12994,9 @@ SINGLE_ANIMATION(Weevillain);
 SINGLE_ANIMATION(Weevicious);
 SINGLE_ANIMATION(Spidirt);
 SINGLE_ANIMATION(Marrantula);
+SINGLE_ANIMATION(Caonine);
+SINGLE_ANIMATION(Lupensa);
+SINGLE_ANIMATION(Apathound);
 SINGLE_ANIMATION(Cixno);
 SINGLE_ANIMATION(Terufai);
 SINGLE_ANIMATION(Parasoul);

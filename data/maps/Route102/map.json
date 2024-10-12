@@ -23,12 +23,46 @@
 
   ],
   "warp_events": [
-
+    {
+      "x": 8,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE102",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 9,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE102",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 10,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE102",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 11,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE102",
+      "dest_warp_id": "0"
+    }
   ],
   "coord_events": [
 
   ],
   "bg_events": [
-
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 45,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "NULL"
+    }
   ]
 }

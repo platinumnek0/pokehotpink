@@ -2670,10 +2670,26 @@ void DisplayPartyMenuStdMessage(u32 stringId)
 
         if (stringId == PARTY_MSG_CHOOSE_MON)
         {
+            u8 enemyNextMonID = *(gBattleStruct->monToSwitchIntoId + B_SIDE_OPPONENT);
+            u16 species = GetMonData(&gEnemyParty[enemyNextMonID], MON_DATA_SPECIES);
+            
             if (sPartyMenuInternal->chooseHalf)
                 stringId = PARTY_MSG_CHOOSE_MON_AND_CONFIRM;
             else if (!ShouldUseChooseMonText())
                 stringId = PARTY_MSG_CHOOSE_MON_OR_CANCEL;
+            else if (gMain.inBattle){
+                // Checks if the opponent is sending out a new pokemon.
+                if (species >= NUM_SPECIES ||  species == SPECIES_NONE){
+                    species = gBattleMons[B_SIDE_OPPONENT].species;
+                    // Now tries to check if there's any opposing pokemon on the field
+                    if (species >= NUM_SPECIES ||  species == SPECIES_NONE || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                       stringId = PARTY_MSG_CHOOSE_MON_2;  // No species on the other side, show the default text.
+                }
+                if (stringId == PARTY_MSG_CHOOSE_MON)
+                    StringCopy(gStringVar2, GetSpeciesName(species));
+            }
+            else
+               stringId = PARTY_MSG_CHOOSE_MON_2;
         }
         DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, 0x4F, 13);
         StringExpandPlaceholders(gStringVar4, sActionStringTable[stringId]);
@@ -2805,7 +2821,6 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
-    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_NICKNAME);
 
     // Add field moves to action list
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -2824,6 +2839,8 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     {
         if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SWITCH);
+        
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_NICKNAME);
         if (GetNumberOfRelearnableMoves(&mons[slotId]) != 0) {
 			AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_MOVES);
 		}
@@ -2833,7 +2850,6 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         else
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_ITEM);
     }
-    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_CANCEL1);
 }
 
 static u8 GetPartyMenuActionsType(struct Pokemon *mon)
@@ -2960,7 +2976,7 @@ static void Task_HandleSelectionMenuInput(u8 taskId)
             if (sPartyMenuInternal->actions[sPartyMenuInternal->numActions - 1] >= MENU_FIELD_MOVES)
                 CursorCb_FieldMove(taskId);
             else
-                sCursorOptions[sPartyMenuInternal->actions[sPartyMenuInternal->numActions - 1]].func(taskId);
+                CursorCb_Cancel1(taskId);
             break;
         default:
             PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[2]);

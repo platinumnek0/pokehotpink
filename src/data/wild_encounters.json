@@ -78,72 +78,7 @@
       "encounters": [
         {
           "map": "MAP_ROUTE101",
-          "base_label": "gRoute101",
-          "land_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_ARRENGAI"
-              },
-              {
-                "min_level": 39,
-                "max_level": 43,
-                "species": "SPECIES_ARRENGAI"
-              },
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_ARRENGAI"
-              },
-              {
-                "min_level": 42,
-                "max_level": 43,
-                "species": "SPECIES_ARRENGAI"
-              },
-              {
-                "min_level": 41,
-                "max_level": 42,
-                "species": "SPECIES_ARRENGAI"
-              },
-              {
-                "min_level": 42,
-                "max_level": 44,
-                "species": "SPECIES_ARRENGAI"
-              },
-              {
-                "min_level": 41,
-                "max_level": 43,
-                "species": "SPECIES_ARRENGAI"
-              },
-              {
-                "min_level": 40,
-                "max_level": 43,
-                "species": "SPECIES_ARRENGAI"
-              },
-              {
-                "min_level": 44,
-                "max_level": 46,
-                "species": "SPECIES_ARRENGAI"
-              },
-              {
-                "min_level": 41,
-                "max_level": 45,
-                "species": "SPECIES_ARRENGAI"
-              },
-              {
-                "min_level": 42,
-                "max_level": 45,
-                "species": "SPECIES_ARRENGAI"
-              },
-              {
-                "min_level": 46,
-                "max_level": 46,
-                "species": "SPECIES_ARRENGAI"
-              }
-            ]
-          }
+          "base_label": "gRoute101"
         },
         {
           "map": "MAP_ROUTE102",

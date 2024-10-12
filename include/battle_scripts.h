@@ -496,6 +496,8 @@ extern const u8 BattleScript_ItemRestoreHP_Party[];
 extern const u8 BattleScript_EffectPsychicNoise[];
 extern const u8 BattleScript_AromaVeilProtectsRet[];
 extern const u8 BattleScript_MoltNoStatus[];
+extern const u8 BattleScript_FoeTrapped[];
+extern const u8 BattleScript_RenewActivates[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
@@ -826,5 +828,18 @@ extern const u8 BattleScript_EffectShedTail[];
 extern const u8 BattleScript_EffectUpperHand[];
 extern const u8 BattleScript_EffectTidyUp[];
 extern const u8 BattleScript_EffectMolt[];
+extern const u8 BattleScript_UnnerveActivates[];
+extern const u8 BattleScript_OvergrowActivates[];
+extern const u8 BattleScript_BlazeActivates[];
+extern const u8 BattleScript_TorrentActivates[];
+extern const u8 BattleScript_SwarmActivates[];
+extern const u8 BattleScript_UserAndAllyStatBoost[];
+extern const u8 BattleScript_boostAllyAttack[];
+extern const u8 BattleScript_boostAllyDefense[];
+extern const u8 BattleScript_boostAllySpAtk[];
+extern const u8 BattleScript_boostAllySpDef[];
+extern const u8 BattleScript_boostAllySpeed[];
+extern const u8 BattleScript_ApathyStatChange[];
+extern const u8 BattleScript_EffectFlashFreeze[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

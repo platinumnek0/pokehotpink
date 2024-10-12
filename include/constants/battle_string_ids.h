@@ -710,8 +710,16 @@
 #define STRINGID_MOLTEDNOSTATUS                       708
 #define STRINGID_MOLTED                               709
 #define STRINGID_HOLLOWWHIRLTRAPPED                   710
+#define STRINGID_PKMNCUTSSPATKWITH                    711
+#define STRINGID_OVERGROWACTIVATED                    712
+#define STRINGID_BLAZEACTIVATED                       713
+#define STRINGID_TORRENTACTIVATED                     714
+#define STRINGID_SWARMACTIVATED                       715
+#define STRINGID_ANGERPOINTSPATK                      716
+#define STRINGID_APATHYDONTCARE                       717
+#define STRINGID_RENEWFORMCHANGE                      718
 
-#define BATTLESTRINGS_COUNT                           711
+#define BATTLESTRINGS_COUNT                           719
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

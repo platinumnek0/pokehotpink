@@ -4829,6 +4829,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
 {
     u16 species, heldItem;
     u8 holdEffect;
+    s8 mod;
 
     if (ShouldSkipFriendshipChange())
         return;
@@ -4866,23 +4867,41 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
         if ((event != FRIENDSHIP_EVENT_WALKING || !(Random() & 1))
          && (event != FRIENDSHIP_EVENT_LEAGUE_BATTLE || IS_LEAGUE_BATTLE(opponentTrainerClass)))
         {
-            s8 mod = sFriendshipEventModifiers[event][friendshipLevel];
-            if (mod > 0 && holdEffect == HOLD_EFFECT_FRIENDSHIP_UP)
-                mod = (150 * mod) / 100;
-            friendship += mod;
-            if (mod > 0)
-            {
-                if (GetMonData(mon, MON_DATA_POKEBALL, 0) == ITEM_LUXURY_BALL)
-                    friendship++;
-                if (GetMonData(mon, MON_DATA_MET_LOCATION, 0) == GetCurrentRegionMapSectionId())
-                    friendship++;
-            }
-            if (friendship < 0)
-                friendship = 0;
-            if (friendship > MAX_FRIENDSHIP)
-                friendship = MAX_FRIENDSHIP;
-            SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
+            // 50% chance every 128 steps
+            if (Random() & 1)
+                return;
         }
+        if (event == FRIENDSHIP_EVENT_LEAGUE_BATTLE)
+        {
+            // Only if it's a trainer battle with league progression significance
+            if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+                return;
+            if (!(gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_LEADER
+                || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR
+                || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION))
+                return;
+        }
+
+        mod = sFriendshipEventModifiers[event][friendshipLevel];
+        if (mod > 0 && holdEffect == HOLD_EFFECT_FRIENDSHIP_UP)
+            // 50% increase, rounding down
+            mod = (150 * mod) / 100;
+
+        friendship += mod;
+        if (mod > 0)
+        {
+            if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == ITEM_LUXURY_BALL)
+                friendship++;
+            if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
+                friendship++;
+        }
+
+        if (friendship < 0)
+            friendship = 0;
+        if (friendship > MAX_FRIENDSHIP)
+            friendship = MAX_FRIENDSHIP;
+
+        SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
     }
 }
 
@@ -5012,14 +5031,10 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
 
         do
         {
-            do
-            {
-                rnd = Random() % PARTY_SIZE;
-                mon = &party[rnd];
-            }
-            while (!GetMonData(mon, MON_DATA_SPECIES, 0));
+            rnd = Random() % PARTY_SIZE;
+            mon = &party[rnd];
         }
-        while (GetMonData(mon, MON_DATA_IS_EGG, 0));
+        while (!GetMonData(mon, MON_DATA_SPECIES, 0) || GetMonData(mon, MON_DATA_IS_EGG, 0));
 
         if (!(CheckPartyHasHadPokerus(party, gBitTable[rnd])))
         {

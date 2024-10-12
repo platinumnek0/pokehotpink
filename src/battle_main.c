@@ -36,6 +36,7 @@
 #include "pokeball.h"
 #include "pokedex.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
 #include "random.h"
 #include "recorded_battle.h"
 #include "roamer.h"
@@ -230,6 +231,7 @@ EWRAM_DATA u16 gBallToDisplay = 0;
 EWRAM_DATA bool8 gLastUsedBallMenuPresent = FALSE;
 EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
 EWRAM_DATA static u8 sTriedEvolving = 0;
+EWRAM_DATA u8 gBattleMoveTypeSpriteId = 0;
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
@@ -3667,7 +3669,7 @@ const u8* FaintClearSetData(u32 battler)
 
                 // If the released mon can be confused, do so.
                 // Don't use CanBeConfused here, since it can cause issues in edge cases.
-                if (!(GetBattlerAbility(otherSkyDropper) == ABILITY_OWN_TEMPO
+                if ( (!(GetBattlerAbility(otherSkyDropper) == ABILITY_OWN_TEMPO && !(GetBattlerAbility(otherSkyDropper) == ABILITY_OBLIVIOUS))
                     || gBattleMons[otherSkyDropper].status2 & STATUS2_CONFUSION
                     || IsBattlerTerrainAffected(otherSkyDropper, STATUS_FIELD_MISTY_TERRAIN)))
                 {
@@ -4283,6 +4285,12 @@ u8 IsRunningFromBattleImpossible(u32 battler)
 {
     u32 holdEffect, i;
 
+    if (FlagGet(FLAG_DISABLE_RUNNING))
+    {
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
+        return BATTLE_RUN_FORBIDDEN;
+    }
+
     if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
         holdEffect = gEnigmaBerries[battler].holdEffect;
     else
@@ -4324,6 +4332,7 @@ u8 IsRunningFromBattleImpossible(u32 battler)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
         return BATTLE_RUN_FORBIDDEN;
     }
+
     return BATTLE_RUN_SUCCESS;
 }
 
@@ -4682,6 +4691,7 @@ static void HandleTurnActionSelectionState(void)
                         }
                         else if (TrySetCantSelectMoveBattleScript(battler))
                         {
+                            DestroyTypeIcon();
                             RecordedBattle_ClearBattlerAction(battler, 1);
                             gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
                             *(gBattleStruct->selectionScriptFinished + battler) = FALSE;
@@ -4691,6 +4701,7 @@ static void HandleTurnActionSelectionState(void)
                         }
                         else
                         {
+                            DestroyTypeIcon();
                             if (!(gBattleTypeFlags & BATTLE_TYPE_PALACE))
                             {
                                 RecordedBattle_SetBattlerAction(battler, gBattleResources->bufferB[battler][2]);
@@ -4966,8 +4977,8 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
         speed = (speed * 150) / 100;
     else if (ability == ABILITY_SURGE_SURFER && gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
         speed *= 2;
-    else if (ability == ABILITY_SLOW_START && gDisableStructs[battler].slowStartTimer != 0)
-        speed /= 2;
+    else if (ability == ABILITY_SLOW_START && gDisableStructs[battler].slowStartTimer == 0)
+        speed *= 2;
     else if (ability == ABILITY_PROTOSYNTHESIS && gBattleWeather & B_WEATHER_SUN && highestStat == STAT_SPEED)
         speed = (speed * 150) / 100;
     else if (ability == ABILITY_QUARK_DRIVE && gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && highestStat == STAT_SPEED)
@@ -5940,6 +5951,37 @@ void RunBattleScriptCommands(void)
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
 }
 
+static void SetTypeIconSpriteInvisibility(u8 spriteId, bool8 invisible)
+{
+    gSprites[spriteId].invisible = invisible;
+}
+void SetTypeIconPal(u8 typeId, u8 spriteId)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[spriteId];
+    StartSpriteAnim(sprite, typeId);
+    sprite->oam.paletteNum = gTypesInfo[typeId].palette;
+    SetTypeIconSpriteInvisibility(spriteId, FALSE);
+}
+void LoadTypeIcon(u8 type)
+{
+    if (gBattleMoveTypeSpriteId == MAX_SPRITES)
+    {
+        LoadCompressedSpriteSheet(&gSpriteSheet_MoveTypes);
+        gBattleMoveTypeSpriteId = CreateSprite(&gSpriteTemplate_MoveTypes, 216, 128, 0);
+        gSprites[gBattleMoveTypeSpriteId].oam.priority = 0;
+        SetTypeIconPal(type, gBattleMoveTypeSpriteId);
+    }
+}
+void DestroyTypeIcon(void)
+{
+    if (gBattleMoveTypeSpriteId != MAX_SPRITES)
+    {
+        DestroySpriteAndFreeResources(&gSprites[gBattleMoveTypeSpriteId]);
+        gBattleMoveTypeSpriteId = MAX_SPRITES;
+    }
+}
+
 void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
 {
     u32 moveType, ateType, attackerAbility;
@@ -6063,6 +6105,10 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
     else if (gMovesInfo[move].soundMove && attackerAbility == ABILITY_LIQUID_VOICE)
     {
         gBattleStruct->dynamicMoveType = TYPE_WATER | F_DYNAMIC_TYPE_SET;
+    }
+    else if (gMovesInfo[move].soundMove && attackerAbility == ABILITY_BROADCAST)
+    {
+        gBattleStruct->dynamicMoveType = TYPE_ELECTRIC | F_DYNAMIC_TYPE_SET;
     }
     else if (gMovesInfo[move].effect == EFFECT_AURA_WHEEL && gBattleMons[battlerAtk].species == SPECIES_MORPEKO_HANGRY)
     {
