@@ -54,7 +54,7 @@
 #define FLAG_UNUSED_0x029    0x29 // hides quigley in beaston
 #define FLAG_UNUSED_0x02A    0x2A // hides post-rival-battle cokbern in the lab
 #define FLAG_UNUSED_0x02B    0x2B // hides cokbern in beaston
-#define FLAG_UNUSED_0x02C    0x2C // Unused Flag
+#define FLAG_UNUSED_0x02C    0x2C // hides the egg man in subflora
 #define FLAG_DISABLE_RUNNING 0x2D // disables running when set
 #define FLAG_UNUSED_0x02E    0x2E // Unused Flag
 #define FLAG_UNUSED_0x02F    0x2F // Unused Flag

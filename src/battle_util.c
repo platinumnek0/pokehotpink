@@ -3208,7 +3208,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
                 else
                 {
                     u8 toSub;
-                    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_EARLY_BIRD)
+                    if ((GetBattlerAbility(gBattlerAttacker) == ABILITY_EARLY_BIRD) || (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_NORMAL)))
                         toSub = 2;
                     else
                         toSub = 1;
@@ -3238,21 +3238,17 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_FROZEN: // check being frozen
-            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE && !(gMovesInfo[gCurrentMove].thawsUser))
+            if (!gBattleStruct->isAtkCancelerForCalledMove && (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE))
             {
-                if (!RandomPercentage(RNG_FROZEN, 20))
+                if(RandomPercentage(RNG_FROZEN, 50) && !gMovesInfo[gCurrentMove].thawsUser)
                 {
+                    gProtectStructs[gBattlerAttacker].prlzImmobility = TRUE;
+                    // This is removed in FRLG and Emerald for some reason
+                    //CancelMultiTurnMoves(gBattlerAttacker);
                     gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
-                    gHitMarker |= HITMARKER_NO_ATTACKSTRING;
+                    gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+                    effect = 2;
                 }
-                else // unfreeze
-                {
-                    gBattleMons[gBattlerAttacker].status1 &= ~STATUS1_FREEZE;
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED;
-                }
-                effect = 2;
             }
             gBattleStruct->atkCancellerTracker++;
             break;
@@ -3445,7 +3441,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_THAW: // move thawing
-            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE)
+            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE && gMovesInfo[gCurrentMove].thawsUser)
             {
                 if (!(MoveHasAdditionalEffectSelfArg(gCurrentMove, MOVE_EFFECT_REMOVE_ARG_TYPE, TYPE_FIRE) && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
                 {
@@ -5262,34 +5258,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
-        case ABILITY_OVERGROW:
-            if (gBattleMons[battler].hp <= (gBattleMons[battler].maxHP / 3) && (!(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_BOOSTING_ABILITY)))
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_OvergrowActivates;
-                gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_BOOSTING_ABILITY;
-                effect++;
-            break;
-        case ABILITY_BLAZE:
-            if (gBattleMons[battler].hp <= (gBattleMons[battler].maxHP / 3) && (!(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_BOOSTING_ABILITY)))
-                gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_BOOSTING_ABILITY;
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_BlazeActivates;
-                effect++;
-            break;
-        case ABILITY_TORRENT:
-            if (gBattleMons[battler].hp <= (gBattleMons[battler].maxHP / 3) && (!(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_BOOSTING_ABILITY)))
-                gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_BOOSTING_ABILITY;
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_TorrentActivates;
-                effect++;
-            break;
-        case ABILITY_SWARM:
-            if (gBattleMons[battler].hp <= (gBattleMons[battler].maxHP / 3) && (!(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_BOOSTING_ABILITY)))
-                gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_BOOSTING_ABILITY;
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_SwarmActivates;
-                effect++;
-            break;
         case ABILITY_CURSED_BODY:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && TARGET_TURN_DAMAGED
@@ -5562,7 +5530,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && gBattleMons[gBattlerTarget].hp != 0
              && RandomWeighted(RNG_CUTE_CHARM, 2, 1)
              && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION)
-             && AreBattlersOfOppositeGender(gBattlerAttacker, gBattlerTarget)
              && GetBattlerAbility(gBattlerAttacker) != ABILITY_OBLIVIOUS
              && IsMoveMakingContact(move, gBattlerAttacker)
              && !IsAbilityOnSide(gBattlerAttacker, ABILITY_AROMA_VEIL))
@@ -5976,17 +5943,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
                     effect = 1;
                 }
-                break;
-            case ABILITY_OBLIVIOUS:
-                if (gBattleMons[battler].status2 & STATUS2_CONFUSION)
-                {
-                    StringCopy(gBattleTextBuff1, gStatusConditionString_ConfusionJpn);
-                    effect = 2;
-                }
-                else if (gBattleMons[battler].status2 & STATUS2_INFATUATION)
-                    effect = 3;
-                else if (gDisableStructs[battler].tauntTimer != 0)
-                    effect = 4;
                 break;
             }
 
@@ -6520,7 +6476,6 @@ bool32 CanGetFrostbite(u32 battler)
 bool32 CanBeConfused(u32 battler)
 {
     if (GetBattlerAbility(battler) == ABILITY_OWN_TEMPO
-      || GetBattlerAbility(battler) == ABILITY_OBLIVIOUS
       || gBattleMons[battler].status2 & STATUS2_CONFUSION
       || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
         return FALSE;
@@ -9014,6 +8969,8 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
     if (moveType == TYPE_FIRE && ((gFieldStatuses & STATUS_FIELD_WATERSPORT)
     || AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_WATER_SPORT, 0)))
         modifier = uq4_12_multiply(modifier, UQ_4_12(B_SPORT_DMG_REDUCTION >= GEN_5 ? 0.23 : 0.5));
+    if ( (moveType == TYPE_FIRE || MoveHasAdditionalEffect(gCurrentMove, MOVE_EFFECT_BURN)) && gBattleMons[gBattlerTarget].status1 & STATUS1_FREEZE)
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
 
     // attacker's abilities
     switch (atkAbility)
@@ -9353,15 +9310,6 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
         atkStat = gBattleMons[battlerAtk].speed;
         atkStage = gBattleMons[battlerAtk].statStages[STAT_SPEED];
     }
-     else if (gMovesInfo[move].effect == EFFECT_DEBATE)
-    {
-        atkStat = (255 - gBattleMons[battlerDef].spAttack);
-        if (atkStat < 10)
-        {
-            atkStat = 10;
-        }
-        atkStage = gBattleMons[battlerAtk].statStages[STAT_SPATK];
-    }
     else
     {
         if (IS_MOVE_PHYSICAL(move))
@@ -9594,6 +9542,12 @@ static inline u32 CalcDefenseStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 
         defStat = spDef;
         defStage = gBattleMons[battlerDef].statStages[STAT_SPDEF];
         usesDefStat = FALSE;
+    }
+
+    if (gMovesInfo[move].effect == EFFECT_DEBATE)
+    {
+        defStat = (gBattleMons[battlerDef].spAttack);
+        defStage = gBattleMons[battlerDef].statStages[STAT_SPATK];
     }
 
     // Self-destruct / Explosion cut defense in half
@@ -11284,7 +11238,6 @@ void RemoveConfusionStatus(u32 battler)
 static bool32 CanBeInfinitelyConfused(u32 battler)
 {
     if  (gBattleMons[battler].ability == ABILITY_OWN_TEMPO
-         || gBattleMons[battler].ability == ABILITY_OBLIVIOUS
          || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN)
          || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD)
     {

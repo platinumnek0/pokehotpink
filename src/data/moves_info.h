@@ -4268,8 +4268,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Snore"),
         .description = COMPOUND_STRING(
-            "A loud attack that can be\n"
-            "used only while asleep."),
+            "A loud noise that's stronger\n"
+            "if used while asleep."),
         .effect = EFFECT_SNORE,
         .power = 50,
         .type = TYPE_NORMAL,
@@ -15215,13 +15215,13 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Gear Up"),
         .description = COMPOUND_STRING(
-            "Changes gear to boost Sp. Atk.\n"
-            ""),
-        .effect = EFFECT_SPECIAL_ATTACK_UP,
+            "Changes gear to swap Attack\n"
+            "and Special Attack."),
+        .effect = EFFECT_GEAR_UP,
         .power = 0,
         .type = TYPE_STEEL,
         .accuracy = 0,
-        .pp = 20,
+        .pp = 10,
         .target = MOVE_TARGET_USER,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
@@ -15898,12 +15898,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_SPECTRAL_THIEF] =
     {
-        .name = HANDLE_EXPANDED_MOVE_NAME("SpectrlThief", "Spectral Thief"),
+        .name = COMPOUND_STRING("Shadow Thief"),
         .description = COMPOUND_STRING(
-            "Steals the target's stat\n"
-            "boosts, then attacks."),
+            "Attacks the foe's shadow &\n"
+            "steals its stat boosts."),
         .effect = EFFECT_HIT,
-        .power = 90,
+        .power = 70,
         .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 10,
@@ -15912,7 +15912,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .ignoresSubstitute = TRUE,
         .makesContact = TRUE,
-        .metronomeBanned = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SPECTRAL_THIEF,
         }),
@@ -20551,8 +20550,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Flash-Freeze"),
         .description = COMPOUND_STRING(
-            "Inflicts frostbite on the foe\n"
-            "with ice-cold air."),
+            "Inflicts frostbite on the\n"
+            "foe with ice-cold air."),
         .effect = EFFECT_FLASH_FREEZE,
         .power = 0,
         .type = TYPE_ICE,
@@ -20561,6 +20560,43 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
+    },
+
+    [MOVE_LUXBURST] =
+    {
+        .name = COMPOUND_STRING("Luxburst"),
+        .description = COMPOUND_STRING(
+            "A strong burst of light.\n"
+            "May cut Accuracy."),
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .lightMove = TRUE,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ACC_MINUS_1,
+            .chance = 20,
+        }),
+    },
+
+    [MOVE_SONIC_STRIKE] =
+    {
+        .name = COMPOUND_STRING("Sonic Strike"),
+        .description = COMPOUND_STRING(
+            "Attacks faster than sound.\n"
+            "Always goes first."),
+        .effect = EFFECT_HIT,
+        .power = 110,
+        .type = TYPE_NORMAL,
+        .accuracy = 90,
+        .pp = 5,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 3,
+        .category = DAMAGE_CATEGORY_SPECIAL,
     },
 
     // Z-Moves

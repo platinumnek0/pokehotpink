@@ -536,7 +536,7 @@
       "name": "LittlerootTown_BrendansHouse_1F_Layout",
       "width": 11,
       "height": 9,
-      "primary_tileset": "gTileset_Building",
+      "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_BrendansMaysHouse",
       "border_filepath": "data/layouts/LittlerootTown_BrendansHouse_1F/border.bin",
       "blockdata_filepath": "data/layouts/LittlerootTown_BrendansHouse_1F/map.bin"
@@ -1344,7 +1344,7 @@
     {
       "id": "LAYOUT_PETALBURG_WOODS",
       "name": "PetalburgWoods_Layout",
-      "width": 82,
+      "width": 90,
       "height": 60,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
@@ -4436,7 +4436,7 @@
       "name": "beaston_pokemonLab_Layout",
       "width": 29,
       "height": 18,
-      "primary_tileset": "gTileset_Building",
+      "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Lab",
       "border_filepath": "data/layouts/beaston_pokemonLab/border.bin",
       "blockdata_filepath": "data/layouts/beaston_pokemonLab/map.bin"
@@ -4450,6 +4450,16 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Asterra/border.bin",
       "blockdata_filepath": "data/layouts/Asterra/map.bin"
+    },
+    {
+      "id": "LAYOUT_SUBFLORA_EGG_ROOM",
+      "name": "subfloraEggRoom_Layout",
+      "width": 24,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/subfloraEggRoom/border.bin",
+      "blockdata_filepath": "data/layouts/subfloraEggRoom/map.bin"
     }
   ]
 }

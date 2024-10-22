@@ -2452,6 +2452,17 @@ BattleScript_EffectGuardSwap::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectSwapAttackStats::
+	attackcanceler
+	attackstring
+	ppreduce
+	swapattackspatk BS_ATTACKER
+	attackanimation
+	waitanimation
+	printstring STRINGID_SWAPPEDATTACKSTATS
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectSpeedSwap::
 	attackcanceler
 	attackstring

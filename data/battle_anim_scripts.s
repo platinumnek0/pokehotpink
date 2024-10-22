@@ -13139,8 +13139,17 @@ SpectralThiefSteal:
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET @black color
 	loadspritegfx ANIM_TAG_ORBS @mimic
 	loadspritegfx ANIM_TAG_FOCUS_ENERGY @focus energy
+	loadspritegfx ANIM_TAG_IMPACT
 	setalpha 11, 5
 	splitbgprio_all
+	fadetobg BG_DARK
+	waitbgfadein
+	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 6, 4
+	delay 6
+	playsewithpan SE_M_VITAL_THROW, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, ANIM_TARGET, 2
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 8, 1
+	waitforvisualfinish
 	panse SE_M_MINIMIZE, SOUND_PAN_TARGET, SOUND_PAN_ATTACKER, 0xfd, 0x0
 	delay 0xf
 	createsprite gSpectralThiefBlackOrbsTemplate, ANIM_TARGET, 2, 0xfff4, 0x18
@@ -13150,12 +13159,13 @@ SpectralThiefSteal:
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
 	call SpectralThiefBuffUp
 	delay 0x8
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
 	call SpectralThiefBuffUp
 	delay 0x8
 	call SpectralThiefBuffUp
 	waitforvisualfinish
 	blendoff
+	restorebg
+	waitbgfadein
 	end
 SpectralThiefBuffUp:
 	createsprite gSpectralThiefBlackBuffTemplate, ANIM_ATTACKER, 2, 0x0, 0xffe8, 0x1a, 0x2
@@ -35764,8 +35774,46 @@ Move_COSMIC_ONSLAUGHT:
 	end
 
 Move_LUXBURST:
+	playsewithpan SE_M_LEER, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_Flash, 2
+	delay 16
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 10, 0
+    createvisualtask AnimTask_ShakeMon, 2, ANIM_DEF_PARTNER, 5, 0, 10, 0
+    waitforvisualfinish
+	end
 
 Move_SONIC_STRIKE:
+	loadspritegfx ANIM_TAG_SPEED_DUST
+	loadspritegfx ANIM_TAG_SLASH
+	call SetHighSpeedBg
+	createvisualtask AnimTask_AttackerStretchAndDisappear, 2
+	loopsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_ATTACKER, 8, 3
+	waitforvisualfinish
+	delay 1
+	createvisualtask AnimTask_SetAttackerInvisibleWaitForSignal, 2
+	monbg ANIM_DEF_PARTNER
+	setalpha 12, 8
+	delay 10
+	playsewithpan SE_M_CUT, SOUND_PAN_TARGET
+	createsprite gSlashSliceSpriteTemplate, ANIM_TARGET, 2, 1, -8, 0
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSlashSliceSpriteTemplate, ANIM_TARGET, 2, 1, 8, 0
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 18, 1
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_SpeedDust, 2
+	delay 10
+	createvisualtask AnimTask_ExtremeSpeedMonReappear, 2
+	loopsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER, 8, 4
+	waitforvisualfinish
+	call UnsetHighSpeedBg
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	delay 1
+	setarg 7, 0x1000
+	delay 1
+	end
 
 Move_BATTLECRY:
 
@@ -35860,6 +35908,19 @@ Move_PONDER:
 Move_SUBZERO_SLAM:
 
 Move_FLASH_FREEZE:
+	loadspritegfx ANIM_TAG_ICE_CRYSTALS
+	loadspritegfx ANIM_TAG_ICE_SPIKES
+	monbg ANIM_DEF_PARTNER
+	call IceSpikesEffectLong
+	waitforvisualfinish
+	loadspritegfx ANIM_TAG_ICE_CUBE
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	waitplaysewithpan SE_M_HAIL, SOUND_PAN_TARGET, 17
+	createvisualtask AnimTask_FrozenIceCube, 2
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	end
 
 Move_HYDRA_STRIKE:
 

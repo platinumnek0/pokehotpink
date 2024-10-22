@@ -3669,7 +3669,7 @@ const u8* FaintClearSetData(u32 battler)
 
                 // If the released mon can be confused, do so.
                 // Don't use CanBeConfused here, since it can cause issues in edge cases.
-                if ( (!(GetBattlerAbility(otherSkyDropper) == ABILITY_OWN_TEMPO && !(GetBattlerAbility(otherSkyDropper) == ABILITY_OBLIVIOUS))
+                if ( (!(GetBattlerAbility(otherSkyDropper) == ABILITY_OWN_TEMPO)
                     || gBattleMons[otherSkyDropper].status2 & STATUS2_CONFUSION
                     || IsBattlerTerrainAffected(otherSkyDropper, STATUS_FIELD_MISTY_TERRAIN)))
                 {
@@ -5015,6 +5015,9 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
     // paralysis drop
     if (gBattleMons[battler].status1 & STATUS1_PARALYSIS && ability != ABILITY_QUICK_FEET)
         speed /= B_PARALYSIS_SPEED >= GEN_7 ? 2 : 4;
+    //freeze drop
+    if (gBattleMons[battler].status1 & STATUS1_FREEZE && ability != ABILITY_QUICK_FEET)
+        speed /= 4;
 
     if (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SWAMP)
         speed /= 4;

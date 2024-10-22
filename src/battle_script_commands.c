@@ -12474,12 +12474,6 @@ static void Cmd_tryinfatuating(void)
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
-    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_OWN_TEMPO)
-    {
-        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
-        gLastUsedAbility = ABILITY_OWN_TEMPO;
-        RecordAbilityBattle(gBattlerTarget, ABILITY_OWN_TEMPO);
-    }
     else
     {
         if (gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATION)
@@ -16947,4 +16941,18 @@ void BS_TryBoostAllyBestStat(void)
         gBattlescriptCurrInstr = BattleScript_boostAllySpeed;
     }
     return;
+}
+
+void BS_swapAttackingStats(void)
+{
+    NATIVE_ARGS(u8 battler);
+
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    u16 atkStat = *(u16 *)((&gBattleMons[battler].attack));
+    u16 spAtkStat = *(u16 *)((&gBattleMons[battler].spAttack));
+
+    *(u16 *)((&gBattleMons[battler].attack)) = spAtkStat;
+    *(u16 *)((&gBattleMons[battler].spAttack)) = atkStat;
+    
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }

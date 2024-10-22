@@ -2693,7 +2693,6 @@ bool32 AI_CanBeConfused(u32 battlerAtk, u32 battlerDef, u32 move, u32 ability)
 {
     if ((gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
      || (ability == ABILITY_OWN_TEMPO && !DoesBattlerIgnoreAbilityChecks(AI_DATA->abilities[battlerAtk], move))
-     || (ability == ABILITY_OBLIVIOUS && !DoesBattlerIgnoreAbilityChecks(AI_DATA->abilities[battlerAtk], move))
      || (IsBattlerGrounded(battlerDef) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
      || gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD
      || DoesSubstituteBlockMove(battlerAtk, battlerDef, move))
@@ -2783,7 +2782,7 @@ bool32 AI_CanBeInfatuated(u32 battlerAtk, u32 battlerDef, u32 defAbility)
 {
     if ((gBattleMons[battlerDef].status2 & STATUS2_INFATUATION)
       || AI_DATA->effectiveness[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex] == AI_EFFECTIVENESS_x0
-      || defAbility == ABILITY_OBLIVIOUS || defAbility == ABILITY_OWN_TEMPO
+      || defAbility == ABILITY_OBLIVIOUS
       || AI_IsAbilityOnSide(battlerDef, ABILITY_AROMA_VEIL))
         return FALSE;
     return TRUE;

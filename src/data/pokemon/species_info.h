@@ -1890,6 +1890,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     .levelUpLearnset = sNoneLevelUpLearnset,
     .teachableLearnset = sBulbasaurTeachableLearnset,
     .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_OROBORING_WHEEL}),
+    .formSpeciesIdTable = sOroboringFormSpeciesIdTable,
    },
 
    [SPECIES_OROBORING_WHEEL] = 
@@ -1943,6 +1944,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     FOOTPRINT(Croconut)
     .levelUpLearnset = sNoneLevelUpLearnset,
     .teachableLearnset = sBulbasaurTeachableLearnset,
+    .formSpeciesIdTable = sOroboringFormSpeciesIdTable,
     .formChangeTable = sOroboringWheelFormChangeTable,
    },
 
@@ -1997,6 +1999,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     FOOTPRINT(Croconut)
     .levelUpLearnset = sNoneLevelUpLearnset,
     .teachableLearnset = sBulbasaurTeachableLearnset,
+    .formSpeciesIdTable = sOroboringFormSpeciesIdTable,
     .formChangeTable = sOroboringWheelFormChangeTable,
    },
 

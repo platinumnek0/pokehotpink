@@ -1079,3 +1079,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/beaston_pokemonLab/scripts.inc"
 
 	.include "data/maps/Asterra/scripts.inc"
+
+	.include "data/maps/subfloraEggRoom/scripts.inc"

@@ -107,9 +107,9 @@ static const u8 sText_PkmnBurnedBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_S
 static const u8 sText_PkmnHurtByBurn[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby its burn!");
 static const u8 sText_PkmnHurtByFrostbite[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby its frostbite!");
 static const u8 sText_PkmnAlreadyHasBurn[] = _("{B_DEF_NAME_WITH_PREFIX} already\nhas a burn.");
-static const u8 sText_PkmnWasFrozen[] = _("{B_EFF_NAME_WITH_PREFIX} was\nfrozen solid!");
+static const u8 sText_PkmnWasFrozen[] = _("{B_EFF_NAME_WITH_PREFIX} was frozen!\nIt may be unable to move!");
 static const u8 sText_PkmnFrozenBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nfroze {B_EFF_NAME_WITH_PREFIX} solid!");
-static const u8 sText_PkmnIsFrozen[] = _("{B_ATK_NAME_WITH_PREFIX} is\nfrozen solid!");
+static const u8 sText_PkmnIsFrozen[] = _("{B_ATK_NAME_WITH_PREFIX} is\ntoo cold to move!");
 static const u8 sText_PkmnWasDefrosted[] = _("{B_DEF_NAME_WITH_PREFIX} was\ndefrosted!");
 static const u8 sText_PkmnWasDefrosted2[] = _("{B_ATK_NAME_WITH_PREFIX} was\ndefrosted!");
 static const u8 sText_PkmnWasDefrostedBy[] = _("{B_ATK_NAME_WITH_PREFIX} was\ndefrosted by {B_CURRENT_MOVE}!");
@@ -855,9 +855,11 @@ static const u8 sText_SwarmActivated[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s Bu
 static const u8 sText_AngerPointSpAtk[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nraised its Sp.Atk!");
 static const u8 sText_ApathyDontCare[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} doesn't care…");
 static const u8 sText_RenewFormChange[] = _("{B_ATK_NAME_WITH_PREFIX} was born anew…");
+static const u8 sText_SwappedAttackingStats[] = _("{B_ATK_NAME_WITH_PREFIX} swapped its\nAttack and Sp.Atk!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_SWAPPEDATTACKSTATS - BATTLESTRINGS_TABLE_START] = sText_SwappedAttackingStats,
     [STRINGID_RENEWFORMCHANGE - BATTLESTRINGS_TABLE_START] = sText_RenewFormChange,
     [STRINGID_APATHYDONTCARE - BATTLESTRINGS_TABLE_START] = sText_ApathyDontCare,
     [STRINGID_ANGERPOINTSPATK - BATTLESTRINGS_TABLE_START] = sText_AngerPointSpAtk,
