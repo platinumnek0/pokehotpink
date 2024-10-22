@@ -1527,7 +1527,6 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler)
     u16 maxHP = AI_DATA->switchinCandidate.battleMon.maxHP, item = AI_DATA->switchinCandidate.battleMon.item, heldItemEffect = gItemsInfo[AI_DATA->switchinCandidate.battleMon.item].holdEffect;
     u8 weatherDuration = gWishFutureKnock.weatherDuration, holdEffectParam = gItemsInfo[AI_DATA->switchinCandidate.battleMon.item].holdEffectParam;
     u32 opposingBattler = GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerPosition(battler)));
-    u32 opposingAbility = gBattleMons[opposingBattler].ability;
     bool32 usedSingleUseHealingItem = FALSE;
     s32 currentHP = startingHP;
 

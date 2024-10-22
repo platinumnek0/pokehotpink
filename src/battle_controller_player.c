@@ -1735,10 +1735,7 @@ static void MoveSelectionDisplayPpNumber(u32 battler)
 
 static void MoveSelectionDisplayMoveType(u32 battler)
 {
-    u8 *txtPtr;
     u8 type;
-    u32 speciesId;
-    struct Pokemon *mon;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
     if (gBattleMoveTypeSpriteId == MAX_SPRITES)

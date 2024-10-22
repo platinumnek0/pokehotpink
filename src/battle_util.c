@@ -56,7 +56,6 @@ functions instead of at the top of the file with the other declarations.
 */
 
 static bool32 TryRemoveScreens(u32 battler);
-static bool32 IsUnnerveAbilityOnOpposingSide(u32 battler);
 static u32 GetFlingPowerFromItemId(u32 itemId);
 static void SetRandomMultiHitCounter();
 static u32 GetBattlerItemHoldEffectParam(u32 battler, u32 item);
@@ -10849,15 +10848,6 @@ static bool32 TryRemoveScreens(u32 battler)
     }
 
     return removed;
-}
-
-static bool32 IsUnnerveAbilityOnOpposingSide(u32 battler)
-{
-    if (IsAbilityOnOpposingSide(battler, ABILITY_UNNERVE)
-      || IsAbilityOnOpposingSide(battler, ABILITY_AS_ONE_ICE_RIDER)
-      || IsAbilityOnOpposingSide(battler, ABILITY_AS_ONE_SHADOW_RIDER))
-        return TRUE;
-    return FALSE;
 }
 
 // Photon geyser & light that burns the sky
