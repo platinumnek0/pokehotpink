@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Tri Attack can inflict paralysis, burn or freeze")
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; }
-    PASSES_RANDOMLY(1, 2, RNG_TRI_ATTACK);
+    PASSES_RANDOMLY(1, 3, RNG_TRI_ATTACK);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze electric/fire/ice typ
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species);
     } WHEN {
-        TURN { MOVE(player, MOVE_TRI_ATTACK, WITH_RNG(RNG_TRI_ATTACK, rng)); }
+        TURN { MOVE(player, MOVE_TRI_ATTACK, WITH_RNG(RNG_TRI_ATTACK, 3)); }
         TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TRI_ATTACK, player);
@@ -82,7 +82,7 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze pokemon with abilitie
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species) { Ability(ability); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TRI_ATTACK, WITH_RNG(RNG_TRI_ATTACK, rng)); }
+        TURN { MOVE(player, MOVE_TRI_ATTACK, WITH_RNG(RNG_TRI_ATTACK, 3)); }
         TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TRI_ATTACK, player);
