@@ -842,5 +842,9 @@ extern const u8 BattleScript_boostAllySpeed[];
 extern const u8 BattleScript_ApathyStatChange[];
 extern const u8 BattleScript_EffectFlashFreeze[];
 extern const u8 BattleScript_EffectSwapAttackStats[];
+extern const u8 BattleScript_EffectCurlUp[];
+extern const u8 BattleScript_EffectTransferStatus[];
+extern const u8 BattleScript_EffectGrimDice[];
+extern const u8 BattleScript_DemolitionistActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

@@ -41,8 +41,8 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze electric/fire/ice typ
     #if B_PARALYZE_ELECTRIC >= GEN_6
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = MOVE_EFFECT_PARALYSIS; species = SPECIES_RAICHU; }
     #endif // B_PARALYZE_ELECTRIC
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = MOVE_EFFECT_BURN; species = SPECIES_ARCANINE; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; rng = MOVE_EFFECT_FREEZE; species = SPECIES_GLALIE; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = MOVE_EFFECT_BURN; species = SPECIES_ARCANINE; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species);
@@ -72,11 +72,11 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze pokemon with abilitie
     u32 rng;
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = MOVE_EFFECT_PARALYSIS; species = SPECIES_PERSIAN; ability = ABILITY_LIMBER; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = MOVE_EFFECT_PARALYSIS; species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; rng = MOVE_EFFECT_FREEZE; species = SPECIES_CAMERUPT; ability = ABILITY_MAGMA_ARMOR; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; rng = MOVE_EFFECT_FREEZE; species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = MOVE_EFFECT_BURN; species = SPECIES_DEWPIDER; ability = ABILITY_WATER_BUBBLE; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = MOVE_EFFECT_BURN; species = SPECIES_SEAKING; ability = ABILITY_WATER_VEIL; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = MOVE_EFFECT_BURN; species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; rng = MOVE_EFFECT_FREEZE; species = SPECIES_CAMERUPT; ability = ABILITY_MAGMA_ARMOR; }
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; rng = MOVE_EFFECT_FREEZE; species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

@@ -1081,3 +1081,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/Asterra/scripts.inc"
 
 	.include "data/maps/subfloraEggRoom/scripts.inc"
+
+	.include "data/maps/testZone/scripts.inc"

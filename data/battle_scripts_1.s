@@ -821,6 +821,39 @@ BattleScript_TryTarShot:
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectTransferStatus::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstatus BS_ATTACKER, STATUS1_POISON | STATUS1_TOXIC_POISON, BattleScript_SpreadPoison
+	jumpifstatus BS_ATTACKER, STATUS1_SLEEP, BattleScript_SpreadSleep
+	jumpifstatus BS_ATTACKER, STATUS1_PARALYSIS, BattleScript_SpreadParalysis
+	jumpifstatus BS_ATTACKER, STATUS1_BURN, BattleScript_SpreadBurn
+	jumpifstatus BS_ATTACKER, STATUS1_FROSTBITE, BattleScript_SpreadFrostbite
+BattleScript_SpreadStatusEnd:
+	goto BattleScript_MoveEnd
+
+BattleScript_SpreadParalysis:
+	seteffectsecondary MOVE_EFFECT_PARALYSIS
+	goto BattleScript_SpreadStatusEnd
+
+BattleScript_SpreadBurn:
+	seteffectsecondary MOVE_EFFECT_BURN
+	goto BattleScript_SpreadStatusEnd
+
+BattleScript_SpreadPoison:
+	seteffectsecondary MOVE_EFFECT_POISON
+	goto BattleScript_SpreadStatusEnd
+
+BattleScript_SpreadFrostbite:
+	seteffectsecondary MOVE_EFFECT_FROSTBITE
+	goto BattleScript_SpreadStatusEnd
+
+BattleScript_SpreadSleep:
+	seteffectsecondary MOVE_EFFECT_SLEEP
+	goto BattleScript_SpreadStatusEnd
+
+
 BattleScript_EffectNoRetreat::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
@@ -4427,6 +4460,17 @@ BattleScript_EffectMagnitudeTarget:
 	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
 	goto BattleScript_HitFromCritCalc
 
+BattleScript_EffectGrimDice::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	grimdicedamagecalculation
+	adjustdamage
+	printstring STRINGID_GRIMDICEROLL
+	waitmessage B_WAIT_TIME_SHORTEST
+	goto BattleScript_HitFromAtkAnimation
+
 BattleScript_EffectBatonPass::
 	attackcanceler
 	attackstring
@@ -4692,6 +4736,19 @@ BattleScript_EffectDefenseCurl::
 	attackanimation
 	waitanimation
 BattleScript_DefenseCurlDoStatUpAnim::
+	goto BattleScript_StatUpDoAnim
+
+BattleScript_EffectCurlUp::
+	attackcanceler
+	attackstring
+	ppreduce
+	setdefensecurlbit
+	setstatchanger STAT_DEF, 2, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_CurlUpDoStatUpAnim
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_StatUpPrintString
+	attackanimation
+	waitanimation
+BattleScript_CurlUpDoStatUpAnim::
 	goto BattleScript_StatUpDoAnim
 
 BattleScript_EffectSoftboiled::
@@ -8181,6 +8238,13 @@ BattleScript_DampStopsExplosion::
 	moveendto MOVEEND_NEXT_TARGET
 	moveendcase MOVEEND_CLEAR_BITS
 	end
+
+BattleScript_DemolitionistActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNPROTECTEDBY
+	pause B_WAIT_TIME_LONG
+	return
 
 BattleScript_MoveHPDrain_PPLoss::
 	ppreduce

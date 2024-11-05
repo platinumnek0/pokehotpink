@@ -1637,6 +1637,10 @@
 	.byte \battler
 	.endm
 
+	.macro grimdicedamagecalculation
+	callnative BS_GrimDiceDamageCalculation
+	.endm
+
 	.macro swapattackspatk, battler:req
 	callnative BS_swapAttackingStats
 	.byte \battler

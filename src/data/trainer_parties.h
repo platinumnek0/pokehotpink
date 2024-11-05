@@ -1,8 +1,21 @@
 static const struct TrainerMon sParty_Sawyer1[] = {
     {
-    .lvl = 21,
-    .species = SPECIES_GEODUDE,
-    }
+    .lvl = 40,
+    .species = SPECIES_MARRANTULA,
+    .moves = {MOVE_LEECH_LIFE, MOVE_STICKY_WEB, MOVE_ROCK_CLIMB, MOVE_DIG},
+    .ability = ABILITY_TINTED_LENS,
+    },
+    {
+    .lvl = 41,
+    .species = SPECIES_DEMOLIZARD,
+    .moves = {MOVE_NASTY_PLOT, MOVE_SEARING_SHOT, MOVE_SUNNY_DAY, MOVE_SHADOW_BALL},
+    .ability = ABILITY_ARTILLERY,
+    },
+    {
+    .lvl = 42,
+    .species = SPECIES_WIRLYDOO,
+    .moves = {MOVE_IRON_DEFENSE, MOVE_FLASH_CANNON, MOVE_AIR_SLASH, MOVE_THUNDER_WAVE}
+    },
 };
 
 static const struct TrainerMon sParty_GruntAquaHideout1[] = {

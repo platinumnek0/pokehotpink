@@ -1640,7 +1640,6 @@
 #define SPECIES_AMPURR                                  1531
 #define SPECIES_PANTHUNDER                              1532
 #define SPECIES_RODERECT                                1533
-#define SPECIES_CHODENT                                 SPECIES_CHODENT_COMMON
 #define SPECIES_CHODENT_COMMON                          1534
 #define SPECIES_EGGROLE                                 1535
 #define SPECIES_ACTERN                                  1536
@@ -1656,9 +1655,9 @@
 #define SPECIES_LUPENSA                                 1546
 #define SPECIES_APATHOUND                               1547
 #define SPECIES_DENKOMORI                               1548
-#define SPECIES_PORKID                                  1549
-#define SPECIES_PIGOT                                   1550
-#define SPECIES_HOGEST                                  1551
+#define SPECIES_OINKLET                                 1549
+#define SPECIES_SPIGHOG                                 1550
+#define SPECIES_MATROFFLE                               1551
 #define SPECIES_HAMFISTON                               1552
 #define SPECIES_SNAAM                                   1553
 #define SPECIES_FRAAMOTH                                1554
@@ -1702,8 +1701,8 @@
 #define SPECIES_WILLYWOO                                1590
 #define SPECIES_WIRLYDOO                                1591
 #define SPECIES_CHOCLI                                  1592
-#define SPECIES_CAKELSTACK                              1593
-#define SPECIES_GINGENACL                               1594
+#define SPECIES_CHOCLSTACK                              1593
+#define SPECIES_GINGEHCHOCL                             1594
 #define SPECIES_BUNBBLE                                 1595
 #define SPECIES_USLUGGI                                 1596
 #define SPECIES_GASTRABBOD                              1597
@@ -1892,33 +1891,36 @@
 #define SPECIES_GLAZZLE_BERRY                           1793
 #define SPECIES_ELUCYON                                 1794
 #define SPECIES_I0NO                                    1795
-#define SPECIES_CROCONUT_EVO                            1796
-#define SPECIES_TROPIDILE_EVO                           1797
-#define SPECIES_OILIGATOR_EVO                           1798
-#define SPECIES_SKRAPPUP_EVO                            1799
-#define SPECIES_HOTWEILER_EVO                           1800
-#define SPECIES_CERBERAWL_EVO                           1801
-#define SPECIES_KITFISK_EVO                             1802
-#define SPECIES_AMPURR_EVO                              1803
-#define SPECIES_PANTHUNDER_EVO                          1804
-#define SPECIES_AZZALIEN_EVO                            1805
-#define SPECIES_WEEVILLAIN_EVO                          1806
-#define SPECIES_WEEVICIOUS_EVO                          1807
-#define SPECIES_SHELLITE_EVO                            1808
-#define SPECIES_SHELLOSSAL_EVO                          1809
-#define SPECIES_DENKOMORI_EVO                           1810
-#define SPECIES_MELODEEDEE_EVO                          1811
-#define SPECIES_MEKANIS_EVO                             1812
-#define SPECIES_MEKAMAJIG_EVO                           1813
-#define SPECIES_MEKAMABOB_EVO                           1814
-#define SPECIES_BADABANG_EVO                            1815
+#define SPECIES_TRPADOLLAR                              1796
+#define SPECIES_FIVEFISH                                1797
+//evo forms
+#define SPECIES_CROCONUT_EVO                            1798
+#define SPECIES_TROPIDILE_EVO                           1799
+#define SPECIES_OILIGATOR_EVO                           1800
+#define SPECIES_SKRAPPUP_EVO                            1801
+#define SPECIES_HOTWEILER_EVO                           1802
+#define SPECIES_CERBERAWL_EVO                           1803
+#define SPECIES_KITFISK_EVO                             1804
+#define SPECIES_AMPURR_EVO                              1805
+#define SPECIES_PANTHUNDER_EVO                          1806
+#define SPECIES_AZZALIEN_EVO                            1807
+#define SPECIES_WEEVILLAIN_EVO                          1808
+#define SPECIES_WEEVICIOUS_EVO                          1809
+#define SPECIES_SHELLITE_EVO                            1810
+#define SPECIES_SHELLOSSAL_EVO                          1811
+#define SPECIES_DENKOMORI_EVO                           1812
+#define SPECIES_MELODEEDEE_EVO                          1813
+#define SPECIES_MEKANIS_EVO                             1814
+#define SPECIES_MEKAMAJIG_EVO                           1815
+#define SPECIES_MEKAMABOB_EVO                           1816
+#define SPECIES_BADABANG_EVO                            1817
 //alt forms
-#define SPECIES_CHODENT_EPIC                            1816
-#define SPECIES_GOTTUGA_DUD                             1817
-#define SPECIES_DROMEGERRY_HALVED_HORSES                1818
-#define SPECIES_GLAZZLE_INFINITY                        1819
-#define SPECIES_OROBORING_WHEEL                         1820
-#define SPECIES_OROBORING_MOBIUS                        1821
+#define SPECIES_CHODENT_EPIC                            1818
+#define SPECIES_GOTTUGA_DUD                             1819
+#define SPECIES_DROMEGERRY_HALVED_HORSES                1820
+#define SPECIES_GLAZZLE_INFINITY                        1821
+#define SPECIES_OROBORING_WHEEL                         1822
+#define SPECIES_OROBORING_MOBIUS                        1823
 
 #define SPECIES_EGG SPECIES_OROBORING_MOBIUS + 1
 

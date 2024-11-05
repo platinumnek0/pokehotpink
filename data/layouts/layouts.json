@@ -4460,6 +4460,16 @@
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/subfloraEggRoom/border.bin",
       "blockdata_filepath": "data/layouts/subfloraEggRoom/map.bin"
+    },
+    {
+      "id": "LAYOUT_TEST_ZONE",
+      "name": "testZone_Layout",
+      "width": 32,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/testZone/border.bin",
+      "blockdata_filepath": "data/layouts/testZone/map.bin"
     }
   ]
 }

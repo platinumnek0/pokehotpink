@@ -250,9 +250,9 @@ static const u8 sText_EVO_LEVEL_RECOIL_DAMAGE_FEMALE[] = _("{LV}{UP_ARROW} with 
 static const u8 sText_EVO_UNKNOWN[] = _("Method unknown");
 static const u8 sText_EVO_NONE[] = _("{STR_VAR_1} has no evolution.");
 
-static const u8 sText_FORMS_Buttons_PE[] = _("{A_BUTTON}FORM MODE  {START_BUTTON}EVOs");
+static const u8 sText_FORMS_Buttons_PE[] = _("{A_BUTTON}Select Form");
 static const u8 sText_FORMS_Buttons_Decapped_PE[] = _("{START_BUTTON}Evos");
-static const u8 sText_FORMS_Buttons_Submenu_PE[] = _("{DPAD_NONE}FORMs {A_BUTTON}CHECK {START_BUTTON}EVOs");
+static const u8 sText_FORMS_Buttons_Submenu_PE[] = _("{DPAD_NONE}Select Form {A_BUTTON}Info");
 static const u8 sText_FORMS_Buttons_Submenu_Decapped_PE[] = _("{START_BUTTON}Evos");
 static const u8 sText_FORMS_NONE[] = _("{STR_VAR_1} has no alternate forms.");
 static const u8 sText_PlusSymbol[] = _("+");
@@ -295,7 +295,7 @@ static const u32 sPokedexPlusHGSS_ScreenSearchNational_Tilemap[] = INCBIN_U32("g
 #define SCROLLING_MON_X 146
 #define HGSS_DECAPPED FALSE
 #define HGSS_DARK_MODE FALSE
-#define HGSS_HIDE_UNSEEN_EVOLUTION_NAMES FALSE
+#define HGSS_HIDE_UNSEEN_EVOLUTION_NAMES TRUE
 
 // For scrolling search parameter
 #define MAX_SEARCH_PARAM_ON_SCREEN   6
@@ -4064,8 +4064,9 @@ static void Task_SwitchScreensFromAreaScreen(u8 taskId)
             if (!sPokedexListItem->owned)
                 PlaySE(SE_FAILURE);
             else
-                gTasks[taskId].func = Task_LoadStatsScreen;
-            break;
+                sPokedexView->selectedScreen = FORMS_SCREEN;
+                gTasks[taskId].func = Task_LoadFormsScreen;
+                break;
         }
     }
 }
@@ -4470,7 +4471,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         description = GetSpeciesPokedexDescription(species);
     else
         description = sExpandedPlaceholder_PokedexDescription;
-    PrintInfoScreenText(description, GetStringCenterAlignXOffset(FONT_NORMAL, description, 0xF0), 93);
+    PrintInfoScreenTextSmall(description, GetStringCenterAlignXOffset(FONT_SMALL, description, 0xF0), 93);
 
     //Type Icon(s)
     if (owned)
@@ -5956,15 +5957,7 @@ static void EvoFormsPage_PrintNavigationButtons(void)
     u8 y = 0;
 
     FillWindowPixelBuffer(WIN_NAVIGATION_BUTTONS, PIXEL_FILL(0));
-
-        if (sPokedexView->selectedScreen == EVO_SCREEN)
-        {
-            if (!HGSS_DECAPPED)
-                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x+9, y, sStatsPageNavigationTextColor, 0, sText_EVO_Buttons_PE);
-            else
-                AddTextPrinterParameterized3(WIN_NAVIGATION_BUTTONS, 0, x+9, y, sStatsPageNavigationTextColor, 0, sText_EVO_Buttons_Decapped_PE);
-        }
-        else if (sPokedexView->selectedScreen == FORMS_SCREEN)
+    if (sPokedexView->selectedScreen == FORMS_SCREEN)
         {
             if (sPokedexView->sFormScreenData.inSubmenu)
             {
@@ -6839,11 +6832,20 @@ static void Task_HandleFormsScreenInput(u8 taskId)
             EvoFormsPage_PrintNavigationButtons();
         }
 
-        if (JOY_NEW(START_BUTTON))
+        if ((JOY_NEW(DPAD_LEFT) || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)))
         {
-            sPokedexView->selectedScreen = EVO_SCREEN;
+            sPokedexView->selectedScreen = INFO_SCREEN;
             BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
-            sPokedexView->screenSwitchState = 1;
+            sPokedexView->screenSwitchState = 2;
+            gTasks[taskId].func = Task_SwitchScreensFromFormsScreen;
+            PlaySE(SE_PIN);
+        }
+
+        if (JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+        {
+            sPokedexView->selectedScreen = CRY_SCREEN;
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
+            sPokedexView->screenSwitchState = 3;
             gTasks[taskId].func = Task_SwitchScreensFromFormsScreen;
             PlaySE(SE_PIN);
         }
@@ -6984,6 +6986,15 @@ static void Task_SwitchScreensFromFormsScreen(u8 taskId)
         {
         case 1:
             gTasks[taskId].func = Task_LoadEvolutionScreen;
+            break;
+        case 2:
+            FreeAllWindowBuffers();
+            InitWindows(sInfoScreen_WindowTemplates);
+            DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_1_Gfx, 0x2000, 0, 0);
+            gTasks[taskId].func = Task_LoadAreaScreen;
+            break;
+        case 3:
+            gTasks[taskId].func = Task_LoadCryScreen;
             break;
         default:
             gTasks[taskId].func = Task_LoadInfoScreen;
@@ -7156,6 +7167,7 @@ static void Task_HandleCryScreenInput(u8 taskId)
         if (JOY_NEW(DPAD_LEFT)
          || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
+            sPokedexView->selectedScreen = FORMS_SCREEN;
             BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 0, 0x10, RGB_BLACK);
             m4aMPlayContinue(&gMPlayInfo_BGM);
             sPokedexView->screenSwitchState = 2;
@@ -7196,7 +7208,7 @@ static void Task_SwitchScreensFromCryScreen(u8 taskId)
             gTasks[taskId].func = Task_LoadInfoScreen;
             break;
         case 2:
-            gTasks[taskId].func = Task_LoadEvolutionScreen;
+            gTasks[taskId].func = Task_LoadFormsScreen;
             break;
         case 3:
             gTasks[taskId].func = Task_LoadSizeScreen;

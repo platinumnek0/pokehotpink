@@ -317,7 +317,7 @@ static const s32 sExperienceScalingFactors[] =
 
 static const u16 sTrappingMoves[NUM_TRAPPING_MOVES] =
 {
-    MOVE_BIND, MOVE_WRAP, MOVE_FIRE_SPIN, MOVE_CLAMP, MOVE_WHIRLPOOL, MOVE_SAND_TOMB, MOVE_MAGMA_STORM, MOVE_INFESTATION, MOVE_SNAP_TRAP, MOVE_HOLLOW_WHIRL,
+    MOVE_BIND, MOVE_WRAP, MOVE_FIRE_SPIN, MOVE_CLAMP, MOVE_WHIRLPOOL, MOVE_SAND_TOMB, MOVE_MAGMA_STORM, MOVE_INFESTATION, MOVE_SNAP_TRAP, MOVE_THUNDER_CAGE, MOVE_HOLLOW_WHIRL, MOVE_MAKE_IT_PLAGUE,
 };
 
 static const u16 sBadgeFlags[8] = {
@@ -3231,7 +3231,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 {
                     u16 payday = gPaydayMoney;
                     u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
-                    gPaydayMoney += (gBattleMovePower * 5);
+                    gPaydayMoney += ((gBattleMovePower * gBattleMons[gBattlerAttacker].level)/2);
                     if (payday > gPaydayMoney)
                         gPaydayMoney = 0xFFFF;
 
@@ -3713,6 +3713,10 @@ void SetMoveEffect(bool32 primary, bool32 certain)
             case MOVE_EFFECT_TAR_SHOT:
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_EffectTarShot;
+                break;
+            case MOVE_EFFECT_SPREAD_USER_STATUS:
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectTransferStatus;
                 break;
             case MOVE_EFFECT_DIRE_CLAW:
                 if (!gBattleMons[gEffectBattler].status1)
@@ -11016,6 +11020,7 @@ static void Cmd_tryexplosion(void)
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp;
         BtlController_EmitHealthBarUpdate(gBattlerAttacker, BUFFER_A, INSTANT_HP_BAR_DROP);
     }
+
     MarkBattlerForControllerExec(gBattlerAttacker);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -11571,6 +11576,16 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
     else if (battlerAbility == ABILITY_SIMPLE)
     {
         statValue = (SET_STAT_BUFF_VALUE(GET_STAT_BUFF_VALUE(statValue) * 2)) | ((statValue <= -1) ? STAT_BUFF_NEGATIVE : 0);
+    }
+
+    if( (battlerAbility == ABILITY_MAXIMOUS || (BATTLE_TYPE_DOUBLE && GetBattlerAbility(BATTLE_PARTNER(battler)) == ABILITY_MAXIMOUS) ) && statValue > 0)
+    {
+        statValue = (SET_STAT_BUFF_VALUE(GET_STAT_BUFF_VALUE(statValue) * 2));
+    }
+
+    if( (GetBattlerAbility(gBattlerAttacker) == ABILITY_MITIMOUS || (BATTLE_TYPE_DOUBLE && GetBattlerAbility(BATTLE_PARTNER(gBattlerAttacker)) == ABILITY_MITIMOUS) ) && STAT_BUFF_NEGATIVE)
+    {
+        statValue = (SET_STAT_BUFF_VALUE(GET_STAT_BUFF_VALUE(statValue) * 2)) | STAT_BUFF_NEGATIVE;
     }
 
     PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
@@ -12437,6 +12452,7 @@ static void Cmd_weatherdamage(void)
                 && ability != ABILITY_SNOW_CLOAK
                 && ability != ABILITY_OVERCOAT
                 && ability != ABILITY_ICE_BODY
+                && ability != ABILITY_FROSTY_CHEER
                 && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
                 && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOGGLES)
             {
@@ -16954,5 +16970,84 @@ void BS_swapAttackingStats(void)
     *(u16 *)((&gBattleMons[battler].attack)) = spAtkStat;
     *(u16 *)((&gBattleMons[battler].spAttack)) = atkStat;
     
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_GrimDiceDamageCalculation(void)
+{
+    NATIVE_ARGS(u8 battler);
+
+    u32 roll = Random() % 100;
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    u32 holdEffectAtk = GetBattlerHoldEffect(battler, TRUE);
+
+    if(holdEffectAtk == HOLD_EFFECT_LOADED_DICE)
+    {
+       if (roll < 15)
+        {
+            gBattleMoveDamage = 80;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_SNAKEEYES);
+        }
+        else if (roll < 40)
+        {
+            gBattleMoveDamage = 60;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_SIX);
+        }
+        else if (roll < 65)
+        {
+            gBattleMoveDamage = 120;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_EIGHT);
+        }
+        else if (roll < 85)
+        {
+            gBattleMoveDamage = 100;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_TEN);
+        }
+        else
+        {
+            gBattleMoveDamage = 90;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_TWELVE);
+        }
+    }
+    else
+    {
+        if (roll < 15)
+        {
+            gBattleMoveDamage = 60;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_SNAKEEYES);
+        }
+        else if (roll < 40)
+        {
+            gBattleMoveDamage = 80;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_SIX);
+        }
+        else if (roll < 65)
+        {
+            gBattleMoveDamage = 90;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_EIGHT);
+        }
+        else if (roll < 85)
+        {
+            gBattleMoveDamage = 100;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_TEN);
+        }
+        else
+        {
+            gBattleMoveDamage = 120;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_TWELVE);
+        }
+    }
+    roll = Random()%2;
+    switch(roll)
+    {
+        case(0):
+        default:
+            gBattleStruct->swapDamageCategory = FALSE;
+            break;
+        case(1):
+            gBattleStruct->swapDamageCategory = TRUE;
+            break;
+    }
+
     gBattlescriptCurrInstr = cmd->nextInstr;
 }

@@ -2172,3 +2172,11 @@
 	.2byte \status1
 	.2byte \slot
 	.endm
+
+	.macro checkcutmoves
+	callnative Script_checkCutMoves
+	.endm
+
+	.macro checkstrengthmoves
+	callnative Script_checkStrengthMoves
+	.endm

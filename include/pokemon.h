@@ -500,6 +500,9 @@ struct MoveInfo
     u32 forcePressure:1;
     u32 cantUseTwice:1;
     u32 lightMove:1;
+    u32 curlBoosted:1;
+    u32 canFellTrees:1;
+    u32 canMoveBoulders:1;
 
     // Ban flags
     u32 gravityBanned:1;

@@ -514,9 +514,7 @@ MtChimney_EventScript_Grunt1::
 	end
 
 MtChimney_EventScript_Sawyer::
-	trainerbattle_single TRAINER_SAWYER_1, MtChimney_Text_SawyerIntro, MtChimney_Text_SawyerDefeat, MtChimney_EventScript_SawyerDefeated
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, MtChimney_EventScript_SawyerRematch
+	trainerbattle_double TRAINER_SAWYER_1, MtChimney_Text_SawyerIntro, MtChimney_Text_SawyerDefeat, SSTidalRooms_Text_JedNotEnoughMons
 	msgbox MtChimney_Text_SawyerPostBattle, MSGBOX_DEFAULT
 	release
 	end

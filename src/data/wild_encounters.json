@@ -11426,6 +11426,130 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_TEST_ZONE",
+          "base_label": "gtestZone0",
+          "land_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_ARRENGAI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_ARRENGAI"
+              },
+              {
+                "min_level": 37,
+                "max_level": 41,
+                "species": "SPECIES_ARRENGAI"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_ARRENGAI"
+              },
+              {
+                "min_level": 37,
+                "max_level": 40,
+                "species": "SPECIES_ARRENGAI"
+              },
+              {
+                "min_level": 39,
+                "max_level": 42,
+                "species": "SPECIES_ARRENGAI"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_ARRENGAI"
+              },
+              {
+                "min_level": 39,
+                "max_level": 43,
+                "species": "SPECIES_ARRENGAI"
+              },
+              {
+                "min_level": 40,
+                "max_level": 40,
+                "species": "SPECIES_ARRENGAI"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_ARRENGAI"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_ARRENGAI"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_ARRENGAI"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 100,
+                "max_level": 100,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 100,
+                "max_level": 100,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 100,
+                "max_level": 100,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 100,
+                "max_level": 100,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 100,
+                "max_level": 100,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 100,
+                "max_level": 100,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 100,
+                "max_level": 100,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 100,
+                "max_level": 100,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 100,
+                "max_level": 100,
+                "species": "SPECIES_CHANSEY"
+              },
+              {
+                "min_level": 100,
+                "max_level": 100,
+                "species": "SPECIES_CHANSEY"
+              }
+            ]
+          }
         }
       ]
     },

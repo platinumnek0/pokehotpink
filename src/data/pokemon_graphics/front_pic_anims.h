@@ -10258,6 +10258,40 @@ static const union AnimCmd sAnim_Apathound_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_Denkomori_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Snaam_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Fraamoth_1[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_Cixno_1[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -10265,6 +10299,32 @@ static const union AnimCmd sAnim_Cixno_1[] =
     ANIMCMD_FRAME(0, 45),
     ANIMCMD_FRAME(1, 30),
     ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Willywoo_1[] =
+{
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Wirlydoo_1[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
 
@@ -10299,6 +10359,24 @@ static const union AnimCmd sAnim_Horrohorra_1[] =
     ANIMCMD_FRAME(1, 60),
     ANIMCMD_FRAME(1, 5),
     ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_Jonfyrkend_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 55),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_Jakikendi_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
@@ -12997,9 +13075,16 @@ SINGLE_ANIMATION(Marrantula);
 SINGLE_ANIMATION(Caonine);
 SINGLE_ANIMATION(Lupensa);
 SINGLE_ANIMATION(Apathound);
+SINGLE_ANIMATION(Denkomori);
+SINGLE_ANIMATION(Snaam);
+SINGLE_ANIMATION(Fraamoth);
+SINGLE_ANIMATION(Willywoo);
+SINGLE_ANIMATION(Wirlydoo);
 SINGLE_ANIMATION(Cixno);
 SINGLE_ANIMATION(Terufai);
 SINGLE_ANIMATION(Parasoul);
 SINGLE_ANIMATION(Horrohorra);
+SINGLE_ANIMATION(Jonfyrkend);
+SINGLE_ANIMATION(Jakikendi);
 SINGLE_ANIMATION(Arrengai);
 SINGLE_ANIMATION(Egg);

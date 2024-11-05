@@ -2750,6 +2750,7 @@ void AnimTask_GetTrappedMoveAnimId(u8 taskId)
         gBattleAnimArgs[0] = TRAP_ANIM_MAGMA_STORM;
         break;
     case MOVE_INFESTATION:
+    case MOVE_MAKE_IT_PLAGUE:
         gBattleAnimArgs[0] = TRAP_ANIM_INFESTATION;
         break;
     case MOVE_SNAP_TRAP:

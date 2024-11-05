@@ -2433,9 +2433,12 @@ gCryTable::
 	cry Cry_Kitfisk
 	cry Cry_Ampurr
 	cry Cry_Panthunder
+	cry Cry_Willywoo
+	cry Cry_Wirlydoo
 	cry Cry_Cixno
 	cry Cry_Parasoul
 	cry Cry_Horrohorra
+	cry Cry_Jonfyrkend
 
 	.align 2
 gCryTable_Reverse::
@@ -4872,6 +4875,9 @@ gCryTable_Reverse::
 	cry_reverse Cry_Kitfisk
 	cry_reverse Cry_Ampurr
 	cry_reverse Cry_Panthunder
+	cry_reverse Cry_Willywoo
+	cry_reverse Cry_Wirlydoo
 	cry_reverse Cry_Cixno
 	cry_reverse Cry_Parasoul
 	cry_reverse Cry_Horrohorra
+	cry_reverse Cry_Jonfyrkend

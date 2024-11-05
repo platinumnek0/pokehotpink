@@ -2256,22 +2256,29 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
-    [EFFECT_SILK_SNARE] = 
-    {
-        .battleScript = BattleScript_EffectHit,
-        .battleTvScore = 0, // TODO: Assign points
-    },
-
-    [EFFECT_MAGNET_PULSE] = 
-    {
-        .battleScript = BattleScript_EffectHit,
-        .battleTvScore = 0, // TODO: Assign points
-    },
-
      [EFFECT_NUTBOLT] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_BACKSTAB] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 1,
+    },
+
+    [EFFECT_CURL_UP] =
+    {
+        .battleScript = BattleScript_EffectCurlUp,
+        .battleTvScore = 1,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_GRIM_DICE] =
+    {
+        .battleScript = BattleScript_EffectGrimDice,
+        .battleTvScore = 1,
     },
 
 };

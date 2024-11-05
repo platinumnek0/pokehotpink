@@ -518,3 +518,55 @@ void Script_SetStatus1(struct ScriptContext *ctx)
         SetMonData(&gPlayerParty[slot], MON_DATA_STATUS, &status1);
     }
 }
+
+bool8 Script_checkCutMoves(struct ScriptContext *ctx)
+{
+    u8 i;
+
+    gSpecialVar_Result = PARTY_SIZE;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        u16 move1 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1);
+        u16 move2 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE2);
+        u16 move3 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE3);
+        u16 move4 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE4);
+        if (!species)
+            break;
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && (gMovesInfo[move1].canFellTrees == TRUE
+        || gMovesInfo[move2].canFellTrees == TRUE || gMovesInfo[move3].canFellTrees == TRUE || gMovesInfo[move4].canFellTrees == TRUE
+        || GetMonAbility(&gPlayerParty[i]) == ABILITY_SHARPNESS))
+        {
+            gSpecialVar_Result = i;
+            gSpecialVar_0x8004 = species;
+            break;
+        }
+    }
+    return FALSE;
+}
+
+bool8 Script_checkStrengthMoves(struct ScriptContext *ctx)
+{
+    u8 i;
+
+    gSpecialVar_Result = PARTY_SIZE;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        u16 move1 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1);
+        u16 move2 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE2);
+        u16 move3 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE3);
+        u16 move4 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE4);
+        if (!species)
+            break;
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && (gMovesInfo[move1].canMoveBoulders == TRUE
+        || gMovesInfo[move2].canMoveBoulders == TRUE || gMovesInfo[move3].canMoveBoulders == TRUE || gMovesInfo[move4].canMoveBoulders == TRUE
+        || GetMonAbility(&gPlayerParty[i]) == ABILITY_HUGE_POWER))
+        {
+            gSpecialVar_Result = i;
+            gSpecialVar_0x8004 = species;
+            break;
+        }
+    }
+    return FALSE;
+}

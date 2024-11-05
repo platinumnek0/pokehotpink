@@ -2647,7 +2647,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_ARTILLERY] =
     {
         .name = _("Artillery"),
-        .description = COMPOUND_STRING("Boosts the power of ballistic\nmoves."),
+        .description = COMPOUND_STRING("Boosts the power of ball\nand bomb moves."),
         .aiRating = 6,
     },
 
@@ -2709,7 +2709,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_DEMOLITIONIST] =
     {
         .name = _("Demolitionist"),
-        .description = COMPOUND_STRING("Survives exploding when done\nabove half HP."),
+        .description = COMPOUND_STRING("Survives exploding, if done\nabove half HP."),
         .aiRating = 6,
     },
 
@@ -2767,5 +2767,21 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSuppressed = TRUE,
         .cantBeOverwritten = TRUE,
         .failsOnImposter = TRUE,
+    },
+
+    [ABILITY_MAXIMOUS] =
+    {
+        .name = _("Maximous"),
+        .description = COMPOUND_STRING("Doubles user's and allies'\nstat boosts."),
+        .aiRating = 8,
+        .breakable = TRUE,
+    },
+
+    [ABILITY_MITIMOUS] =
+    {
+        .name = _("Mitimous"),
+        .description = COMPOUND_STRING("Doubles foes' stat drops."),
+        .aiRating = 8,
+        .breakable = TRUE,
     },
 };

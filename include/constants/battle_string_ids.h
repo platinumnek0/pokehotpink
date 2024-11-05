@@ -719,8 +719,14 @@
 #define STRINGID_APATHYDONTCARE                       717
 #define STRINGID_RENEWFORMCHANGE                      718
 #define STRINGID_SWAPPEDATTACKSTATS                   719
+#define STRINGID_GRIMDICEROLL                         720
+#define STRINGID_GRIMDICE_SNAKEEYES                   721
+#define STRINGID_GRIMDICE_SIX                         722
+#define STRINGID_GRIMDICE_EIGHT                       723
+#define STRINGID_GRIMDICE_TEN                         724
+#define STRINGID_GRIMDICE_TWELVE                      725
 
-#define BATTLESTRINGS_COUNT                           720
+#define BATTLESTRINGS_COUNT                           726
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -1008,7 +1014,8 @@
 #define B_MSG_WRAPPED_SNAP_TRAP    8
 #define B_MSG_WRAPPED_THUNDER_CAGE 9
 #define B_MSG_WRAPPED_HOLLOW_WHIRL 10
-#define NUM_TRAPPING_MOVES         11
+#define B_MSG_WRAPPED_MAKE_IT_PLAGUE 11
+#define NUM_TRAPPING_MOVES         12
 
 // z effects
 #define B_MSG_Z_RESET_STATS   0
@@ -1032,7 +1039,6 @@
 #define B_MSG_CAUGHT_IN_VORTEX    1
 #define B_MSG_SURROUNDED_BY_FIRE  2
 #define B_MSG_SURROUNDED_BY_ROCKS 3
-#define B_MSG_HOLLOW_WHIRL        4
 
 // gDamageNonTypesDmgStringIds
 #define B_MSG_HURT_BY_VINES  0

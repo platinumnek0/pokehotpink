@@ -6185,6 +6185,13 @@ Cry_Panthunder::
 	.incbin "sound/direct_sound_samples/cries/bulbasaur.bin"
 
 	.align 2
+Cry_Willywoo::
+	.incbin "sound/direct_sound_samples/cries/willywoo.bin"
+	.align 2
+Cry_Wirlydoo::
+	.incbin "sound/direct_sound_samples/cries/wirlydoo.bin"
+
+	.align 2
 Cry_Cixno::
 	.incbin "sound/direct_sound_samples/cries/cixno.bin"
 
@@ -6194,6 +6201,10 @@ Cry_Parasoul::
 	.align 2
 Cry_Horrohorra::
 	.incbin "sound/direct_sound_samples/cries/horrohorra.bin"
+
+	.align 2
+Cry_Jonfyrkend::
+	.incbin "sound/direct_sound_samples/cries/jonfyrkend.bin"
 
 	.align 2
 DirectSoundWaveData_register_noise::

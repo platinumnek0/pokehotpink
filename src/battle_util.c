@@ -5724,6 +5724,18 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
     case ABILITYEFFECT_MOVE_END_ATTACKER: // Same as above, but for attacker
         switch (gLastUsedAbility)
         {
+        case ABILITY_DEMOLITIONIST:
+            if(IsBattlerAlive(gBattlerAttacker)
+            && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+            && gMovesInfo[move].effect == EFFECT_EXPLOSION)
+            {
+                gBattlerTarget = gBattlerAttacker;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_DemolitionistActivates;
+                effect++;
+            }
+            break;
         case ABILITY_POISON_TOUCH:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerTarget].hp != 0
@@ -8970,6 +8982,8 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         modifier = uq4_12_multiply(modifier, UQ_4_12(B_SPORT_DMG_REDUCTION >= GEN_5 ? 0.23 : 0.5));
     if ( (moveType == TYPE_FIRE || MoveHasAdditionalEffect(gCurrentMove, MOVE_EFFECT_BURN)) && gBattleMons[gBattlerTarget].status1 & STATUS1_FREEZE)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
+    if (gMovesInfo[move].curlBoosted && gBattleMons[gBattlerAttacker].status2 & STATUS2_DEFENSE_CURL)
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
 
     // attacker's abilities
     switch (atkAbility)
@@ -9656,8 +9670,8 @@ static inline u32 CalcDefenseStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 
     // sandstorm sp.def boost for rock types
     if (B_SANDSTORM_SPDEF_BOOST >= GEN_4 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ROCK) && IsBattlerWeatherAffected(battlerDef, B_WEATHER_SANDSTORM) && !usesDefStat)
         modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
-    // snow def boost for ice types
-    if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE) && IsBattlerWeatherAffected(battlerDef, B_WEATHER_SNOW) && usesDefStat)
+    // hail def boost for ice types
+    if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE) && IsBattlerWeatherAffected(battlerDef, B_WEATHER_HAIL) && usesDefStat)
         modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
 
     // The defensive stats of a Player's Pokémon are boosted by x1.1 (+10%) if they have the 5th badge and 7th badges.
@@ -10088,15 +10102,13 @@ static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 move
 
     if (moveType == TYPE_PSYCHIC && defType == TYPE_DARK && gStatuses3[battlerDef] & STATUS3_MIRACLE_EYED && mod == UQ_4_12(0.0))
         mod = UQ_4_12(1.0);
-    if (gMovesInfo[move].effect == EFFECT_FREEZE_DRY && defType == TYPE_WATER)
+    if (gMovesInfo[move].effect == EFFECT_FREEZE_DRY && defType == gMovesInfo[move].argument)
         mod = UQ_4_12(2.0);
     if (moveType == TYPE_GROUND && defType == TYPE_FLYING && IsBattlerGrounded(battlerDef) && mod == UQ_4_12(0.0))
         mod = UQ_4_12(1.0);
     if (moveType == TYPE_FIRE && gDisableStructs[battlerDef].tarShot)
         mod = UQ_4_12(2.0);
-    if (gMovesInfo[move].effect == EFFECT_SILK_SNARE && defType == TYPE_BUG)
-        mod = UQ_4_12(2.0);
-    if (gMovesInfo[move].effect == EFFECT_MAGNET_PULSE && defType == TYPE_STEEL)
+    if (gMovesInfo[move].effect == EFFECT_BACKSTAB && gBattleMons[battlerDef].status2 & STATUS2_INFATUATION)
         mod = UQ_4_12(2.0);
 
     // B_WEATHER_STRONG_WINDS weakens Super Effective moves against Flying-type Pokémon

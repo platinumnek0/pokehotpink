@@ -545,7 +545,7 @@ static const u8 sText_TargetIdentified[] = _("{B_DEF_NAME_WITH_PREFIX} was\niden
 static const u8 sText_TargetWokeUp[] = _("{B_DEF_NAME_WITH_PREFIX} woke up!");
 static const u8 sText_PkmnStoleAndAteItem[] = _("{B_ATK_NAME_WITH_PREFIX} stole and\nate {B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!");
 static const u8 sText_TailWindBlew[] = _("The tailwind blew from\nbehind {B_ATK_TEAM2} team!");
-static const u8 sText_PkmnWentBack[] = _("{B_ATK_NAME_WITH_PREFIX} went back\nto {B_ATK_TRAINER_CLASS} {B_ATK_TRAINER_NAME}");
+static const u8 sText_PkmnWentBack[] = _("{B_ATK_NAME_WITH_PREFIX} went back\nto {B_ATK_TRAINER_CLASS} {B_ATK_TRAINER_NAME}!");
 static const u8 sText_PkmnCantUseItemsAnymore[] = _("{B_DEF_NAME_WITH_PREFIX} can't use\nitems anymore!");
 static const u8 sText_PkmnFlung[] = _("{B_ATK_NAME_WITH_PREFIX} flung its\n{B_LAST_ITEM}!");
 static const u8 sText_PkmnPreventedFromHealing[] = _("{B_DEF_NAME_WITH_PREFIX} was prevented\nfrom healing!");
@@ -668,9 +668,9 @@ static const u8 sText_FerventWishReached[] = _("{B_ATK_TRAINER_NAME}'s fervent w
 static const u8 sText_MegaEvoEvolved[] = _("{B_ATK_NAME_WITH_PREFIX} has Mega Evolved into\nMega {B_BUFF1}!");
 static const u8 sText_drastically[] = _("drastically ");
 static const u8 sText_severely[] = _("severely ");
-static const u8 sText_Infestation[] = _("{B_DEF_NAME_WITH_PREFIX} has been afflicted\nwith an infestation by {B_ATK_NAME_WITH_PREFIX}!");
+static const u8 sText_Infestation[] = _("{B_DEF_NAME_WITH_PREFIX} was infested by\n{B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_NoEffectOnTarget[] = _("It had no effect\non {B_DEF_NAME_WITH_PREFIX}!");
-static const u8 sText_BurstingFlames[] = _("The bursting flames\nhit {B_SCR_ACTIVE_NAME_WITH_PREFIX}!");
+static const u8 sText_BurstingFlames[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} was hurt\nby the blast!");
 static const u8 sText_BestowItemGiving[] = _("{B_DEF_NAME_WITH_PREFIX} received {B_LAST_ITEM}\nfrom {B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_ThirdTypeAdded[] = _("{B_BUFF1} type was added to\n{B_DEF_NAME_WITH_PREFIX}!");
 static const u8 sText_FellForFeint[] = _("{B_DEF_NAME_WITH_PREFIX} fell for\nthe feint!");
@@ -856,9 +856,21 @@ static const u8 sText_AngerPointSpAtk[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_A
 static const u8 sText_ApathyDontCare[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} doesn't care…");
 static const u8 sText_RenewFormChange[] = _("{B_ATK_NAME_WITH_PREFIX} was born anew…");
 static const u8 sText_SwappedAttackingStats[] = _("{B_ATK_NAME_WITH_PREFIX} swapped its\nAttack and Sp.Atk!");
+static const u8 sText_GrimDiceRoll[] = _("{B_ATK_NAME_WITH_PREFIX} rolled\n{B_BUFF1}!");
+static const u8 sText_GrimDice_SnakeEyes[] = _("snake eyes");
+static const u8 sText_GrimDice_Six[] = _("a 6");
+static const u8 sText_GrimDice_Eight[] = _("an 8");
+static const u8 sText_GrimDice_Ten[] = _("a 10");
+static const u8 sText_GrimDice_Twelve[] = _("a 12");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_GRIMDICE_TWELVE - BATTLESTRINGS_TABLE_START] = sText_GrimDice_Twelve,
+    [STRINGID_GRIMDICE_TEN - BATTLESTRINGS_TABLE_START] = sText_GrimDice_Ten,
+    [STRINGID_GRIMDICE_EIGHT - BATTLESTRINGS_TABLE_START] = sText_GrimDice_Eight,
+    [STRINGID_GRIMDICE_SIX - BATTLESTRINGS_TABLE_START] = sText_GrimDice_Six,
+    [STRINGID_GRIMDICE_SNAKEEYES - BATTLESTRINGS_TABLE_START] = sText_GrimDice_SnakeEyes,
+    [STRINGID_GRIMDICEROLL - BATTLESTRINGS_TABLE_START] = sText_GrimDiceRoll,
     [STRINGID_SWAPPEDATTACKSTATS - BATTLESTRINGS_TABLE_START] = sText_SwappedAttackingStats,
     [STRINGID_RENEWFORMCHANGE - BATTLESTRINGS_TABLE_START] = sText_RenewFormChange,
     [STRINGID_APATHYDONTCARE - BATTLESTRINGS_TABLE_START] = sText_ApathyDontCare,
@@ -1817,8 +1829,9 @@ const u16 gWrappedStringIds[NUM_TRAPPING_MOVES] =
     [B_MSG_WRAPPED_MAGMA_STORM] = STRINGID_TRAPPEDBYSWIRLINGMAGMA, // MOVE_MAGMA_STORM
     [B_MSG_WRAPPED_INFESTATION] = STRINGID_INFESTATION,            // MOVE_INFESTATION
     [B_MSG_WRAPPED_SNAP_TRAP]   = STRINGID_PKMNINSNAPTRAP,         // MOVE_SNAP_TRAP
-    [B_MSG_WRAPPED_THUNDER_CAGE]= STRINGID_THUNDERCAGETRAPPED,     // MOVE_THUNDER_CAGE
-    [B_MSG_WRAPPED_HOLLOW_WHIRL]= STRINGID_HOLLOWWHIRLTRAPPED,     // MOVE_HOLLOW_WHIRL
+    [B_MSG_WRAPPED_THUNDER_CAGE] = STRINGID_THUNDERCAGETRAPPED,    // MOVE_THUNDER_CAGE
+    [B_MSG_WRAPPED_HOLLOW_WHIRL] = STRINGID_HOLLOWWHIRLTRAPPED,    // MOVE_HOLLOW_WHIRL
+    [B_MSG_WRAPPED_MAKE_IT_PLAGUE] = STRINGID_INFESTATION,         // MOVE_MAKE_IT_PLAGUE
 };
 
 const u16 gMistUsedStringIds[] =
@@ -2060,7 +2073,6 @@ const u16 gDamageNonTypesStartStringIds[] =
     [B_MSG_CAUGHT_IN_VORTEX]    = STRINGID_TEAMCAUGHTINVORTEX,
     [B_MSG_SURROUNDED_BY_FIRE]  = STRINGID_TEAMSURROUNDEDBYFIRE,
     [B_MSG_SURROUNDED_BY_ROCKS] = STRINGID_TEAMSURROUNDEDBYROCKS,
-    [B_MSG_HOLLOW_WHIRL]        = STRINGID_HOLLOWWHIRLTRAPPED,
 };
 
 const u16 gDamageNonTypesDmgStringIds[] =

@@ -2,10 +2,8 @@
 EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
-	checkpartymove MOVE_CUT
+	checkcutmoves
 	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CutBuffer_Cut
-	checkpartymove MOVE_POUND
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CutBuffer_Pound
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
 	end
 
@@ -14,7 +12,7 @@ EventScript_CutTree_Part2::
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	msgbox Text_WantToCut, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
-	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
+	msgbox Text_CutTree, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
@@ -24,12 +22,6 @@ EventScript_CutTree_Part2::
 @ Load "cut" into the move name
 EventScript_CutBuffer_Cut::
 	buffermovename STR_VAR_2, MOVE_CUT
-	goto EventScript_CutTree_Part2
-	end
-
-@ Load "pound" into the move name
-EventScript_CutBuffer_Pound::
-	buffermovename STR_VAR_2, MOVE_POUND
 	goto EventScript_CutTree_Part2
 	end
 
@@ -64,15 +56,18 @@ EventScript_CancelCut::
 
 Text_WantToCut:
 	.string "This tree looks like it can be\n"
-	.string "CUT down!\p"
-	.string "Would you like to CUT it?$"
+	.string "cut down!\p"
+	.string "Would you like to cut it?$"
 
 Text_MonUsedFieldMove:
 	.string "{STR_VAR_1} used {STR_VAR_2}!$"
 
+Text_CutTree:
+	.string"{STR_VAR_1} cut down the tree!$"
+
 Text_CantCut:
-	.string "This tree looks like it can be\n"
-	.string "CUT down!$"
+	.string "This tree looks like it could be\n"
+	.string "cut down…$"
 
 @ Interact with smashable rock
 EventScript_RockSmash::
@@ -142,7 +137,7 @@ EventScript_StrengthBoulder::
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
-	checkpartymove MOVE_STRENGTH
+	checkstrengthmoves
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToStrength, MSGBOX_YESNO
