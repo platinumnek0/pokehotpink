@@ -4305,7 +4305,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
         .soundMove = TRUE,
-        .metronomeBanned = B_UPDATED_MOVE_FLAGS >= GEN_5,
         .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
         .contestCategory = CONTEST_CATEGORY_CUTE,
         .contestComboStarterId = 0,
@@ -20743,6 +20742,813 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .makesContact = TRUE,
         .category = DAMAGE_CATEGORY_PHYSICAL,
+    },
+
+    [MOVE_BATTLECRY] =
+    {
+        .name = COMPOUND_STRING("Battlecry"),
+        .description = COMPOUND_STRING(
+            "A primal shout that may\n"
+            "boost Sp.Atk."),
+        .effect = EFFECT_HIT,
+        .power = 50,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .soundMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SP_ATK_PLUS_1,
+            .self = TRUE,
+            .chance = 50,
+        }),
+    },
+
+    [MOVE_NINJUTSU] =
+    {
+        .name = COMPOUND_STRING("Ninjutsu"),
+        .description = COMPOUND_STRING(
+            "A honed chi attack with a\n"
+            "high critical-hit chance."),
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .criticalHitStage = 1,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .makesContact = TRUE,
+    },
+
+    [MOVE_CHI_STRIKE] =
+    {
+        .name = COMPOUND_STRING("Chi Strike"),
+        .description = COMPOUND_STRING(
+            "Channels fighting spirit,\n"
+            "may boost Sp.Atk."),
+        .effect = EFFECT_HIT,
+        .power = 75,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SP_ATK_PLUS_1,
+            .self = TRUE,
+            .chance = 20,
+        }),
+    },
+
+    [MOVE_HAMFIST] =
+    {
+        .name = COMPOUND_STRING("Hamfist"),
+        .description = COMPOUND_STRING(
+            "Hams the foe with a ham fist."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .punchingMove = TRUE,
+        .canMoveBoulders = TRUE,
+    },
+
+    [MOVE_AURA_BLADE] =
+    {
+        .name = COMPOUND_STRING("Aura Blade"),
+        .description = COMPOUND_STRING(
+            "Slices with energy blades.\n"
+            "High critical-hit chance."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .criticalHitStage = 1,
+        .slicingMove = TRUE,
+        .canFellTrees = TRUE,
+    },
+
+    [MOVE_FEATHER_WIND] =
+    {
+        .name = COMPOUND_STRING("Feather Wind"),
+        .description = COMPOUND_STRING(
+            "A gust of downy wind. May\n"
+            "lower Attack."),
+        .effect = EFFECT_HIT,
+        .power = 55,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .windMove = TRUE,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ATK_MINUS_1,
+            .chance = 30,
+        }),
+    },
+
+    [MOVE_SONIC_JUTSU] =
+    {
+        .name = COMPOUND_STRING("Sonic Jutsu"),
+        .description = COMPOUND_STRING(
+            "Strikes with martial speed.\n"
+            "High critical-hit chance."),
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_FLYING,
+        .accuracy = 90,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .criticalHitStage = 1,
+    },
+
+    [MOVE_DIVEBOMB] =
+    {
+        .name = COMPOUND_STRING("Divebomb"),
+        .description = COMPOUND_STRING(
+            "A two-turn attack.\n"
+            "Can travel out of battle."),
+        .effect = EFFECT_SEMI_INVULNERABLE,
+        .power = 90,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .gravityBanned = TRUE,
+        .sleepTalkBanned = TRUE,
+        .instructBanned = TRUE,
+        .assistBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNFLEWHIGH, COMPRESS_BITS(STATUS3_ON_AIR)),
+    },
+
+    [MOVE_BREAK_WIND] =
+    {
+        .name = COMPOUND_STRING("Break Wind"),
+        .description = COMPOUND_STRING(
+            "A noxious gas attack that\n"
+            "may make foes flinch."),
+        .effect = EFFECT_HIT,
+        .power = 55,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .windMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_FLINCH,
+            .chance = 30,
+        }),
+    },
+
+    [MOVE_SHROOM_DOOM] =
+    {
+        .name = COMPOUND_STRING("Shroom Doom"),
+        .description = COMPOUND_STRING(
+            "A barrage of mold and spores.\n"
+            "Badly poisons."),
+        .effect = EFFECT_HIT,
+        .power = 120,
+        .type = TYPE_POISON,
+        .accuracy = 50,
+        .pp = 5,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_TOXIC,
+        }),
+    },
+
+    [MOVE_BURROW] =
+    {
+        .name = COMPOUND_STRING("Burrow"),
+        .description = COMPOUND_STRING(
+            "A two-turn digging attack."),
+        .effect = EFFECT_SEMI_INVULNERABLE,
+        .power = 55,
+        .type = TYPE_GROUND,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .sleepTalkBanned = TRUE,
+        .instructBanned = TRUE,
+        .assistBanned = TRUE,
+        .skyBattleBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNDUGHOLE, COMPRESS_BITS(STATUS3_UNDERGROUND)),
+    },
+
+    [MOVE_SANDBLAST] =
+    {
+        .name = COMPOUND_STRING("Sandblast"),
+        .description = COMPOUND_STRING(
+            "Blasts the foe with sand.\n"
+            "Can lower accuracy."),
+        .effect = EFFECT_HIT,
+        .power = 55,
+        .type = TYPE_GROUND,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ACC_MINUS_1,
+            .chance = 20,
+        }),
+    },
+
+    [MOVE_QUICKSAND] =
+    {
+        .name = COMPOUND_STRING("Quicksand"),
+        .description = COMPOUND_STRING(
+            "Traps the foe in quicksand.\n"
+            "It can't escape."),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_GROUND,
+        .accuracy = 90,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PREVENT_ESCAPE,
+        }),
+    },
+
+    [MOVE_DUST_DEVIL] =
+    {
+        .name = COMPOUND_STRING("Dust Devil"),
+        .description = COMPOUND_STRING(
+            "A gust of sandy wind. Hits\n"
+            "flying foes."),
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .type = TYPE_GROUND,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .ignoreTypeIfFlyingAndUngrounded = TRUE,
+        .windMove = TRUE,
+    },
+
+    [MOVE_RELIC_PULSE] =
+    {
+        .name = COMPOUND_STRING("Relic Pulse"),
+        .description = COMPOUND_STRING(
+            "Blasts ancient energy at the\n"
+            "foe."),
+        .effect = EFFECT_HIT,
+        .power = 50,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .pulseMove = TRUE,
+    },
+
+    [MOVE_GEM_GLEAM] =
+    {
+        .name = COMPOUND_STRING("Gem Gleam"),
+        .description = COMPOUND_STRING(
+            "A beam of light that can drop\n"
+            "Accuracy."),
+        .effect = EFFECT_HIT,
+        .power = 65,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .lightMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ACC_MINUS_1,
+            .chance = 15,
+        }),
+    },
+
+    [MOVE_ANCIENT_AURA] =
+    {
+        .name = COMPOUND_STRING("Ancient Aura"),
+        .description = COMPOUND_STRING(
+            "Attacks with primal energy.\n"
+            "Can boost Sp.Def."),
+        .effect = EFFECT_HIT,
+        .power = 75,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .pulseMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SP_DEF_PLUS_1,
+            .self = TRUE,
+            .chance = 20,
+        }),
+    },
+
+    [MOVE_FOSSILIZE] =
+    {
+        .name = COMPOUND_STRING("Fossilize"),
+        .description = COMPOUND_STRING(
+            "A wave of ancient energy that\n"
+            "prevents healing."),
+        .effect = EFFECT_HIT,
+        .power = 75,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .pulseMove = TRUE,
+        .ignoresSubstitute = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PSYCHIC_NOISE,
+            .chance = 100,
+        }),
+    },
+
+    [MOVE_TAR_SEEP] =
+    {
+        .name = COMPOUND_STRING("Tar Seep"),
+        .description = COMPOUND_STRING(
+            "A wave of asphalt. May lower\n"
+            "Speed."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SPD_MINUS_1,
+            .chance = 30,
+        }),
+    },
+
+    [MOVE_PRIMAL_PULSE] =
+    {
+        .name = COMPOUND_STRING("Primal Pulse"),
+        .description = COMPOUND_STRING(
+            "Attacks with an ancient\n"
+            "pulse. Can cut Sp.Def."),
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .pulseMove =TRUE,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SP_DEF_MINUS_1,
+            .chance = 20,
+        }),
+    },
+
+    [MOVE_VOLCALITH] =
+    {
+        .name = COMPOUND_STRING("Volcalith"),
+        .description = COMPOUND_STRING(
+            "A molten rock attack that\n"
+            "may burn."),
+        .effect = EFFECT_HIT,
+        .power = 90,
+        .type = TYPE_ROCK,
+        .accuracy = 90,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BURN,
+            .chance = 35,
+        }),
+    },
+
+    [MOVE_PESTER] =
+    {
+        .name = COMPOUND_STRING("Pester"),
+        .description = COMPOUND_STRING(
+            "An annoying buzz that may\n"
+            "confuse the foe."),
+        .effect = EFFECT_HIT,
+        .power = 45,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .soundMove = TRUE,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_CONFUSION,
+            .chance = 20,
+        }),
+    },
+
+    [MOVE_FRIGHTEN] =
+    {
+        .name = COMPOUND_STRING("Frighten"),
+        .description = COMPOUND_STRING(
+            "Lurches at the foe, hits\n"
+            "first."),
+        .effect = EFFECT_HIT,
+        .power = 50,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 1,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+    },
+
+    [MOVE_DRONE] =
+    {
+        .name = COMPOUND_STRING("Drone"),
+        .description = COMPOUND_STRING(
+            "Effective on sleeping foes,\n"
+            "but wakes them up."),
+        .effect = EFFECT_DOUBLE_POWER_ON_ARG_STATUS,
+        .power = 55,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = STATUS1_SLEEP,
+        .soundMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_REMOVE_STATUS,
+        })
+    },
+
+    [MOVE_SLIME_BALL] =
+    {
+        .name = COMPOUND_STRING("Slime Ball"),
+        .description = COMPOUND_STRING(
+            "A ball of mucus that may\n"
+            "lower Speed."),
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SPD_MINUS_1,
+            .chance = 30,
+        }),
+    },
+
+    [MOVE_BEFUDDLE] =
+    {
+        .name = COMPOUND_STRING("Befuddle"),
+        .description = COMPOUND_STRING(
+            "Flitters and strikes. May\n"
+            "lower foe's Sp.Atk."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SP_ATK_MINUS_1,
+            .chance = 30,
+        }),
+    },
+
+    [MOVE_DOZEN_HANDS] =
+    {
+        .name = COMPOUND_STRING("Dozen Hands"),
+        .description = COMPOUND_STRING(
+            "Smacks with both hands, up to\n"
+            "6 times."),
+        .effect = EFFECT_DOZEN_HANDS,
+        .power = 20,
+        .type = TYPE_GHOST,
+        .accuracy = 85,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .strikeCount = 6,
+    },
+
+    [MOVE_REAP] =
+    {
+        .name = COMPOUND_STRING("Reap"),
+        .description = COMPOUND_STRING(
+            "Holds back and leaves foe\n"
+            "with 1 HP."),
+        .effect = EFFECT_FALSE_SWIPE,
+        .power = 40,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 40,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .slicingMove = TRUE,
+    },
+
+    [MOVE_TERROR_WAVE] =
+    {
+        .name = COMPOUND_STRING("Terror Wave"),
+        .description = COMPOUND_STRING(
+            "Hits with a wave of pure\n"
+            "fear. May paralyze."),
+        .effect = EFFECT_HIT,
+        .power = 100,
+        .type = TYPE_GHOST,
+        .accuracy = 90,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .pulseMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PARALYSIS,
+            .chance = 30,
+        }),
+    },
+    
+    [MOVE_SCRAP_SHOT] =
+    {
+        .name = COMPOUND_STRING("Scrap Shot"),
+        .description = COMPOUND_STRING(
+            "Scrap metal hites the foe\n"
+            "2 to 5 times."),
+        .effect = EFFECT_MULTI_HIT,
+        .power = 20,
+        .type = TYPE_STEEL,
+        .accuracy = 90,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+    },
+
+    [MOVE_STEELSURGE] =
+    {
+        .name = COMPOUND_STRING("Steelsurge"),
+        .description = COMPOUND_STRING(
+            "Blasts a wave of liquid metal\n"
+            "to attack."),
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+    
+    [MOVE_MELTDOWN] =
+    {
+        .name = COMPOUND_STRING("Meltdown"),
+        .description = COMPOUND_STRING(
+            "A wave of molten metal that\n"
+            "hurts the user."),
+        .effect = EFFECT_HIT,
+        .power = 120,
+        .type = TYPE_STEEL,
+        .accuracy = 90,
+        .recoil = 33,
+        .pp = 5,
+        .target = MOVE_TARGET_FOES_AND_ALLY,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_BRAND] =
+    {
+        .name = COMPOUND_STRING("Brand"),
+        .description = COMPOUND_STRING(
+            "A scorching attack that\n"
+            "leaves the foe burned."),
+        .effect = EFFECT_HIT,
+        .power = 30,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BURN,
+        }),
+    },
+
+    [MOVE_SEARING_SLAM] =
+    {
+        .name = COMPOUND_STRING("Searing Slam"),
+        .description = COMPOUND_STRING(
+            "Slams the foe with a\n"
+            "superheated limb."),
+        .effect = EFFECT_HIT,
+        .power = 90,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+    },
+    
+    [MOVE_LINE_CAST] =
+    {
+        .name = COMPOUND_STRING("Line Cast"),
+        .description = COMPOUND_STRING(
+            "Snags foe and drags it out of\n"
+            "battle."),
+        .effect = EFFECT_HIT_SWITCH_TARGET,
+        .power = 60,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+    },
+
+    [MOVE_TORPEDO_RUSH] =
+    {
+        .name = COMPOUND_STRING("Torpedo Rush"),
+        .description = COMPOUND_STRING(
+            "Attacks with a burst of\n"
+            "speed. May raise Speed."),
+        .effect = EFFECT_HIT,
+        .power = 75,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SPD_PLUS_1,
+            .self = TRUE,
+            .chance = 30,
+        }),
+    },
+
+    [MOVE_UNDERTOW] =
+    {
+        .name = COMPOUND_STRING("Undertow"),
+        .description = COMPOUND_STRING(
+            "A two-turn attack. Can travel\n"
+            "underwater out of battle."),
+        .effect = EFFECT_SEMI_INVULNERABLE,
+        .power = 90,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .sleepTalkBanned = TRUE,
+        .instructBanned = TRUE,
+        .assistBanned = TRUE,
+        .skyBattleBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNHIDUNDERWATER, COMPRESS_BITS(STATUS3_UNDERWATER)),
+    },
+
+    [MOVE_SAP_BOMB] =
+    {
+        .name = COMPOUND_STRING("Sap Bomb"),
+        .description = COMPOUND_STRING(
+            "Hurls a glob of sap that may\n"
+            "lower Speed."),
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .type = TYPE_GRASS,
+        .accuracy = 90,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .ballisticMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SPD_MINUS_1,
+            .chance = 30,
+        }),
+    },
+
+    [MOVE_JUMP_START] =
+    {
+        .name = COMPOUND_STRING("Jump-Start"),
+        .description = COMPOUND_STRING(
+            "A quick elelctric tackle that\n"
+            "goes first."),
+        .effect = EFFECT_HIT,
+        .power = 50,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 1,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .makesContact = TRUE,
+    },
+
+    [MOVE_10K_VOLTS] =
+    {
+        .name = COMPOUND_STRING("10K Volts"),
+        .description = COMPOUND_STRING(
+            "Hits the foe with all its\n"
+            "charge. This hurts the user."),
+        .effect = EFFECT_HIT,
+        .power = 120,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 90,
+        .recoil = 25,
+        .pp = 5,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_PIG_DREAMS] =
+    {
+        .name = COMPOUND_STRING("Pig Dreams"),
+        .description = COMPOUND_STRING(
+            "A psychic attack that's\n"
+            "stronger when asleep."),
+        .effect = EFFECT_SNORE,
+        .power = 55,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_WARP_STRIKE] =
+    {
+        .name = COMPOUND_STRING("Warp Strike"),
+        .description = COMPOUND_STRING(
+            "The user teleports behind the\n"
+            "foe to attack. Never misses."),
+        .effect = EFFECT_HIT,
+        .power = 75,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 0,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
     },
 
     // Z-Moves
