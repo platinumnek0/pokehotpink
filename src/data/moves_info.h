@@ -20728,6 +20728,23 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
     },
 
+    [MOVE_SKYSTRIKE] =
+    {
+        .name = COMPOUND_STRING("Skystrike"),
+        .description = COMPOUND_STRING(
+            "A leaping strike, hurts\n"
+            "airborne foes more."),
+        .effect = EFFECT_SKYSTRIKE,
+        .power = 75,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .makesContact = TRUE,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

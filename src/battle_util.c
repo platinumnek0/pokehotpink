@@ -8983,7 +8983,9 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
     if ( (moveType == TYPE_FIRE || MoveHasAdditionalEffect(gCurrentMove, MOVE_EFFECT_BURN)) && gBattleMons[gBattlerTarget].status1 & STATUS1_FREEZE)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
     if (gMovesInfo[move].curlBoosted && gBattleMons[gBattlerAttacker].status2 & STATUS2_DEFENSE_CURL)
-           modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+    if(gMovesInfo[move].effect == EFFECT_SKYSTRIKE && (IsBattlerGrounded(battlerDef) == FALSE))
+        {modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));}
 
     // attacker's abilities
     switch (atkAbility)
