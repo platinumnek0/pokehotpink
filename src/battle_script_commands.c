@@ -16975,77 +16975,84 @@ void BS_swapAttackingStats(void)
 
 void BS_GrimDiceDamageCalculation(void)
 {
-    NATIVE_ARGS(u8 battler);
+    NATIVE_ARGS();
 
     u32 roll = Random() % 100;
-    u8 battler = GetBattlerForBattleScript(cmd->battler);
-    u32 holdEffectAtk = GetBattlerHoldEffect(battler, TRUE);
+    u32 holdEffectAtk = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
 
     if(holdEffectAtk == HOLD_EFFECT_LOADED_DICE)
     {
-       if (roll < 15)
+        if (roll < 15)
         {
-            gBattleMoveDamage = 80;
-            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_SNAKEEYES);
+            gBattleStruct->grimDiceBasePower = 80;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_SIX);
         }
         else if (roll < 40)
         {
-            gBattleMoveDamage = 60;
-            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_SIX);
+            gBattleStruct->grimDiceBasePower = 60;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_SNAKEEYES);
         }
         else if (roll < 65)
         {
-            gBattleMoveDamage = 120;
-            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_EIGHT);
+            gBattleStruct->grimDiceBasePower = 120;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_TWELVE);
         }
         else if (roll < 85)
         {
-            gBattleMoveDamage = 100;
+            gBattleStruct->grimDiceBasePower = 100;
             PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_TEN);
         }
         else
         {
-            gBattleMoveDamage = 90;
-            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_TWELVE);
+            gBattleStruct->grimDiceBasePower = 90;
+            PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_EIGHT);
         }
     }
     else
     {
         if (roll < 15)
         {
-            gBattleMoveDamage = 60;
+            gBattleStruct->grimDiceBasePower = 60;
             PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_SNAKEEYES);
         }
         else if (roll < 40)
         {
-            gBattleMoveDamage = 80;
+            gBattleStruct->grimDiceBasePower = 80;
             PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_SIX);
         }
         else if (roll < 65)
         {
-            gBattleMoveDamage = 90;
+            gBattleStruct->grimDiceBasePower = 90;
             PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_EIGHT);
         }
         else if (roll < 85)
         {
-            gBattleMoveDamage = 100;
+            gBattleStruct->grimDiceBasePower = 100;
             PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_TEN);
         }
         else
         {
-            gBattleMoveDamage = 120;
+            gBattleStruct->grimDiceBasePower = 120;
             PREPARE_STRING_BUFFER(gBattleTextBuff1, STRINGID_GRIMDICE_TWELVE);
         }
     }
-    roll = Random()%2;
-    switch(roll)
+
+    roll = Random() % 2;
+
+    if(roll == 1)
     {
-        case(0):
-        default:
-            gBattleStruct->swapDamageCategory = FALSE;
-            break;
-        case(1):
-            gBattleStruct->swapDamageCategory = TRUE;
+        gBattleStruct->swapDamageCategory = TRUE;
+    }
+    else
+    {
+        gBattleStruct->swapDamageCategory = FALSE;
+    }
+
+    for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
+    {
+        if (gBattlerTarget == gBattlerAttacker)
+            continue;
+        if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget])) // A valid target was found.
             break;
     }
 

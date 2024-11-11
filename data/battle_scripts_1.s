@@ -4461,15 +4461,19 @@ BattleScript_EffectMagnitudeTarget:
 	goto BattleScript_HitFromCritCalc
 
 BattleScript_EffectGrimDice::
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING | HITMARKER_NO_PPDEDUCT, BattleScript_EffectGrimDiceTarget
 	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
 	grimdicedamagecalculation
-	adjustdamage
+	pause B_WAIT_TIME_SHORT
+	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
 	printstring STRINGID_GRIMDICEROLL
-	waitmessage B_WAIT_TIME_SHORTEST
-	goto BattleScript_HitFromAtkAnimation
+	waitmessage B_WAIT_TIME_SHORT
+	goto BattleScript_HitFromCritCalc
+BattleScript_EffectGrimDiceTarget:
+	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
+	goto BattleScript_HitFromCritCalc
 
 BattleScript_EffectBatonPass::
 	attackcanceler

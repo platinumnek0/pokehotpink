@@ -8696,6 +8696,9 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
     case EFFECT_MAGNITUDE:
         basePower = gBattleStruct->magnitudeBasePower;
         break;
+    case EFFECT_GRIM_DICE:
+        basePower = gBattleStruct->grimDiceBasePower;
+        break;
     case EFFECT_PRESENT:
         basePower = gBattleStruct->presentBasePower;
         break;
