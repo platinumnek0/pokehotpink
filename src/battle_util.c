@@ -10206,9 +10206,14 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(u32 move, u32 mov
         || (gBattleMons[battlerDef].type1 == TYPE_ROCK || gBattleMons[battlerDef].type2 == TYPE_ROCK || gBattleMons[battlerDef].type3 == TYPE_ROCK)
         || (gBattleMons[battlerDef].type1 == TYPE_STEEL || gBattleMons[battlerDef].type2 == TYPE_STEEL || gBattleMons[battlerDef].type3 == TYPE_STEEL)
         || (gBattleMons[battlerDef].type1 == TYPE_FIRE || gBattleMons[battlerDef].type2 == TYPE_FIRE || gBattleMons[battlerDef].type3 == TYPE_FIRE)
-        || (gBattleMons[battlerDef].type1 == TYPE_ELECTRIC || gBattleMons[battlerDef].type2 == TYPE_ELECTRIC || gBattleMons[battlerDef].type3 == TYPE_ELECTRIC))
+        || (gBattleMons[battlerDef].type1 == TYPE_ELECTRIC || gBattleMons[battlerDef].type2 == TYPE_ELECTRIC || gBattleMons[battlerDef].type3 == TYPE_ELECTRIC) )
         {
             modifier = UQ_4_12(2.0);
+        }
+        else if( (gBattleMons[battlerDef].type1 == TYPE_BUG || gBattleMons[battlerDef].type2 == TYPE_BUG || gBattleMons[battlerDef].type3 == TYPE_BUG)
+        || (gBattleMons[battlerDef].type1 == TYPE_GRASS || gBattleMons[battlerDef].type2 == TYPE_GRASS || gBattleMons[battlerDef].type3 == TYPE_GRASS) )
+        {
+            modifier = UQ_4_12(0.5);
         }
         else
         {
@@ -11288,6 +11293,28 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
         secondaryEffectChance *= 2;
     if (hasRainbow && additionalEffect->moveEffect != MOVE_EFFECT_SECRET_POWER)
         secondaryEffectChance *= 2;
+    if ( additionalEffect->moveEffect == MOVE_EFFECT_BURN )
+    {
+        if (gBattleWeather & B_WEATHER_SUN)
+        {
+            secondaryEffectChance *= 1.5;
+        }
+        if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_RAIN))
+        {
+            secondaryEffectChance *= 0.5;
+        }
+    }
+    if ( additionalEffect->moveEffect == (MOVE_EFFECT_FREEZE || MOVE_EFFECT_FROSTBITE) )
+    {
+        if (gBattleWeather & B_WEATHER_SUN)
+        {
+            secondaryEffectChance *= 0.5;
+        }
+        if (gBattleWeather & B_WEATHER_HAIL)
+        {
+            secondaryEffectChance *= 1.5;
+        }
+    }
 
     return secondaryEffectChance;
 }

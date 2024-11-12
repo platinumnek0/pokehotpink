@@ -5357,11 +5357,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Frustration"),
         .description = COMPOUND_STRING(
-            "An attack that is stronger\n"
-            "if the Trainer is disliked."),
-        .effect = EFFECT_FRUSTRATION,
-        .power = 1,
-        .type = TYPE_NORMAL,
+            "A furious attack, stronger if\n"
+            "the user's last move failed."),
+        .effect = EFFECT_STOMPING_TANTRUM,
+        .power = 75,
+        .type = TYPE_DRAGON,
         .accuracy = 100,
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
@@ -21084,8 +21084,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Fossilize"),
         .description = COMPOUND_STRING(
-            "A wave of ancient energy that\n"
-            "prevents healing."),
+            "A wave of ancient energy\n"
+            "that prevents healing."),
         .effect = EFFECT_HIT,
         .power = 75,
         .type = TYPE_ROCK,

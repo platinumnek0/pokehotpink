@@ -3854,7 +3854,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 else if (!(gStatuses3[gEffectBattler] & STATUS3_HEAL_BLOCK))
                 {
                     gStatuses3[gEffectBattler] |= STATUS3_HEAL_BLOCK;
-                    gDisableStructs[gEffectBattler].healBlockTimer = 2;
+                    gDisableStructs[gEffectBattler].healBlockTimer = 3;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_EffectPsychicNoise;
                 }
@@ -5821,7 +5821,7 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_UPDATE_LAST_MOVES:
-            if (gMoveResultFlags & (MOVE_RESULT_FAILED | MOVE_RESULT_DOESNT_AFFECT_FOE))
+            if (gMoveResultFlags & (MOVE_RESULT_FAILED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_MISSED))
                 gBattleStruct->lastMoveFailed |= gBitTable[gBattlerAttacker];
             else
                 gBattleStruct->lastMoveFailed &= ~(gBitTable[gBattlerAttacker]);
