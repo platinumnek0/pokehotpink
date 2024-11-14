@@ -56,7 +56,7 @@
 #define FLAG_UNUSED_0x02B    0x2B // hides cokbern in beaston
 #define FLAG_UNUSED_0x02C    0x2C // hides the egg man in subflora
 #define FLAG_DISABLE_RUNNING 0x2D // disables running when set
-#define FLAG_UNUSED_0x02E    0x2E // Unused Flag
+#define FLAG_UNUSED_0x02E    0x2E // exp share flag
 #define FLAG_UNUSED_0x02F    0x2F // Unused Flag
 #define FLAG_UNUSED_0x030    0x30 // Unused Flag
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag

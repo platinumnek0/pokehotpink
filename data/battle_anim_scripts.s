@@ -1002,6 +1002,8 @@ gBattleAnims_Moves::
 	.4byte Move_GRIM_DICE
 	.4byte Move_FUNNY_FACE
 	.4byte Move_PLIA_BALL
+	.4byte Move_SMITE
+	.4byte Move_SIPHON
 
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
@@ -36051,6 +36053,59 @@ Move_GRIM_DICE:
 Move_FUNNY_FACE:
 
 Move_PLIA_BALL:
+	end
+
+Move_SMITE:
+	loadspritegfx ANIM_TAG_SLASH
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	createvisualtask AnimTask_DuckDownHop, 5, ANIM_ATTACKER, 28, -8, 10, 14, 10, 18
+	waitforvisualfinish
+	createsprite gSlashSliceSpriteTemplate, ANIM_TARGET, 2, 1, -8, 0
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSlashSliceSpriteTemplate, ANIM_TARGET, 2, 1, 8, 0
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 18, 1
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 7
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
+
+Move_SIPHON:
+	loadspritegfx ANIM_TAG_NEEDLE
+	loadspritegfx ANIM_TAG_ORBS
+	delay 1
+	loadspritegfx ANIM_TAG_BLUE_STAR
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_SWEAT_BEAD
+	monbg ANIM_DEF_PARTNER
+	splitbgprio_foes ANIM_TARGET
+	setalpha 12, 8
+	delay 1
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 1, 0, 7, RGB_BLACK
+	delay 4
+	createsprite gLinearStingerSpriteTemplate, ANIM_TARGET, 2, 20, 0, -8, 0, 20
+	waitforvisualfinish
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, ANIM_TARGET, 2
+	playsewithpan SE_M_ABSORB, SOUND_PAN_TARGET
+	delay 2
+	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 0, 1
+	playsewithpan SE_M_SKETCH, SOUND_PAN_TARGET
+	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 1, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_StretchTargetUp, 3
+	waitforvisualfinish
+	call AbsorbEffect
+	waitforvisualfinish
+	delay 15
+	call HealingEffect
+	waitforvisualfinish
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 1, 7, 0, RGB_BLACK
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
 	end
 
 @@@ DYNAMAX AND MAX RAIDS

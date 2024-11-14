@@ -10470,8 +10470,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Trick Room"),
         .description = COMPOUND_STRING(
-            "Slower Pokémon get to move\n"
-            "first for 5 turns."),
+            "Reverses the order everyone\n"
+            "attacks for 5 turns."),
         .effect = EFFECT_TRICK_ROOM,
         .power = 0,
         .type = TYPE_PSYCHIC,
@@ -21549,6 +21549,43 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+    },
+
+    [MOVE_SMITE] =
+    {
+        .name = COMPOUND_STRING("Smite"),
+        .description = COMPOUND_STRING(
+            "It doth more damage, the\n"
+            "taller the adversary beeth."),
+        .effect = EFFECT_SMITE,
+        .power = 1,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .slicingMove = TRUE,
+        .canFellTrees = TRUE,
+    },
+
+    [MOVE_SIPHON] =
+    {
+        .name = COMPOUND_STRING("Siphon"),
+        .description = COMPOUND_STRING(
+            "Drains HP. Super-effective\n"
+            "on Grass-types."),
+        .effect = EFFECT_SIPHON,
+        .power = 75,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .healingMove = TRUE,
     },
 
     // Z-Moves

@@ -1000,11 +1000,18 @@
 
 #define ITEM_AMIIBO 828
 #define ITEM_ODD_ONION 829
+#define ITEM_HORN_FOSSIL 830
+#define ITEM_SHARD_FOSSIL 831
+#define ITEM_RAD_AMBER 832
+#define ITEM_TORN_PAGE 833
+#define ITEM_BERRY_BAIT 834
+#define ITEM_MASTER_BAIT 835
+#define ITEM_EXCALIBUR 836
 
 // HOPO BERRY
 // LEGEND PLATE
 
-#define ITEMS_COUNT 830
+#define ITEMS_COUNT 837
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

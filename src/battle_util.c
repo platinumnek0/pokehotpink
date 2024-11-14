@@ -7339,6 +7339,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 if (B_BERRIES_INSTANT >= GEN_4)
                     effect = ItemHealHp(battler, gLastUsedItem, TRUE, TRUE);
                 break;
+            case HOLD_EFFECT_FLOAT_STONE:
             case HOLD_EFFECT_AIR_BALLOON:
                 effect = ITEM_EFFECT_OTHER;
                 gBattleScripting.battler = battler;
@@ -8413,6 +8414,8 @@ static bool32 IsBattlerGrounded2(u32 battler, bool32 considerInverse)
         return FALSE;
     if (holdEffect == HOLD_EFFECT_AIR_BALLOON)
         return FALSE;
+    if (holdEffect == HOLD_EFFECT_FLOAT_STONE)
+        return FALSE;
     if (GetBattlerAbility(battler) == ABILITY_LEVITATE)
         return FALSE;
     if (IS_BATTLER_OF_TYPE(battler, TYPE_FLYING) && (!considerInverse || !FlagGet(B_FLAG_INVERSE_BATTLE)))
@@ -8483,6 +8486,16 @@ u32 GetBattlerWeight(u32 battler)
     return weight;
 }
 
+u32 GetBattlerHeight(u32 battler)
+{
+    u32 height = GetSpeciesHeight(gBattleMons[battler].species);
+    
+    if (height == 0)
+        height = 1;
+
+    return height;
+}
+
 u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc)
 {
     u32 i;
@@ -8542,6 +8555,17 @@ static const u16 sWeightToDamageTable[] =
     500, 60,
     1000, 80,
     2000, 100,
+    0xFFFF, 0xFFFF
+};
+
+// decimeters, base power
+static const u16 sHeightToDamageTable[] =
+{
+    5, 20,
+    10, 40,
+    15, 60,
+    20, 80,
+    30, 100,
     0xFFFF, 0xFFFF
 };
 
@@ -8655,7 +8679,7 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
 {
     u32 i;
     u32 basePower = gMovesInfo[move].power;
-    u32 weight, hpFraction, speed;
+    u32 weight, hpFraction, speed, height;
 
     if (gBattleStruct->zmove.active)
         return GetZMovePower(gBattleStruct->zmove.baseMoves[battlerAtk]);
@@ -8766,6 +8790,18 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         }
         if (sWeightToDamageTable[i] != 0xFFFF)
             basePower = sWeightToDamageTable[i + 1];
+        else
+            basePower = 120;
+        break;
+    case EFFECT_SMITE:
+        height = GetBattlerHeight(battlerDef);
+        for (i = 0; sHeightToDamageTable[i] != 0xFFFF; i += 2)
+        {
+            if (sHeightToDamageTable[i] > height)
+                break;
+        }
+        if (sHeightToDamageTable[i] != 0xFFFF)
+            basePower = sHeightToDamageTable[i + 1];
         else
             basePower = 120;
         break;
@@ -9151,7 +9187,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         break;
     case ABILITY_SHARPNESS:
         if (gMovesInfo[move].slicingMove)
-           modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_SUPREME_OVERLORD:
         modifier = uq4_12_multiply(modifier, GetSupremeOverlordModifier(battlerAtk));
@@ -9291,6 +9327,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
     case HOLD_EFFECT_PUNCHING_GLOVE:
         if (gMovesInfo[move].punchingMove)
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.1));
+        break;
+    case HOLD_EFFECT_EXCALIBUR:
+        if (gMovesInfo[move].slicingMove)
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
         break;
     }
     return uq4_12_multiply_by_int_half_down(modifier, basePower);
@@ -9654,6 +9694,10 @@ static inline u32 CalcDefenseStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 
     case HOLD_EFFECT_METAL_POWDER:
         if (gBattleMons[battlerDef].species == SPECIES_DITTO && usesDefStat && !(gBattleMons[battlerDef].status2 & STATUS2_TRANSFORMED))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
+        break;
+    case HOLD_EFFECT_EXCALIBUR:
+        if ((gBattleMons[battlerDef].species == SPECIES_LARCHAIE || gBattleMons[battlerDef].species == SPECIES_LHEROIQUE) && usesDefStat)
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.2));
         break;
     case HOLD_EFFECT_EVIOLITE:
         if (CanEvolve(gBattleMons[battlerDef].species))
@@ -10108,6 +10152,8 @@ static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 move
     if (moveType == TYPE_PSYCHIC && defType == TYPE_DARK && gStatuses3[battlerDef] & STATUS3_MIRACLE_EYED && mod == UQ_4_12(0.0))
         mod = UQ_4_12(1.0);
     if (gMovesInfo[move].effect == EFFECT_FREEZE_DRY && defType == gMovesInfo[move].argument)
+        mod = UQ_4_12(2.0);
+    if (gMovesInfo[move].effect == EFFECT_SIPHON && defType == TYPE_GRASS)
         mod = UQ_4_12(2.0);
     if (moveType == TYPE_GROUND && defType == TYPE_FLYING && IsBattlerGrounded(battlerDef) && mod == UQ_4_12(0.0))
         mod = UQ_4_12(1.0);

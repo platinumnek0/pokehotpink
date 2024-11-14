@@ -875,6 +875,13 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_POKESHI_DOLL] = {gItemIcon_PokeshiDoll, gItemIconPalette_PokeshiDoll},
     [ITEM_AMIIBO] = {gItemIcon_Amiibo, gItemIconPalette_Amiibo},
     [ITEM_ODD_ONION] = {gItemIcon_OddOnion, gItemIconPalette_OddOnion},
+    [ITEM_HORN_FOSSIL] = {gItemIcon_HornFossil, gItemIconPalette_HotPinkFossils},
+    [ITEM_SHARD_FOSSIL] = {gItemIcon_ShardFossil, gItemIconPalette_HotPinkFossils},
+    [ITEM_RAD_AMBER] = {gItemIcon_RadAmber, gItemIconPalette_OldAmber},
+    [ITEM_TORN_PAGE] = {gItemIcon_TornPage, gItemIconPalette_TornPage},
+    [ITEM_BERRY_BAIT] = {gItemIcon_BerryBait, gItemIconPalette_BerryBait},
+    [ITEM_MASTER_BAIT] = {gItemIcon_MasterBait, gItemIconPalette_MasterBait},
+    [ITEM_EXCALIBUR] = {gItemIcon_Excalibur, gItemIconPalette_Excalibur},
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };

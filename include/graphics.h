@@ -1736,6 +1736,18 @@ extern const u32 gItemIcon_Amiibo[];
 extern const u32 gItemIconPalette_Amiibo[];
 extern const u32 gItemIcon_OddOnion[];
 extern const u32 gItemIconPalette_OddOnion[];
+extern const u32 gItemIcon_HornFossil[];
+extern const u32 gItemIcon_ShardFossil[];
+extern const u32 gItemIconPalette_HotPinkFossils[];
+extern const u32 gItemIcon_RadAmber[];
+extern const u32 gItemIcon_TornPage[];
+extern const u32 gItemIconPalette_TornPage[];
+extern const u32 gItemIcon_BerryBait[];
+extern const u32 gItemIconPalette_BerryBait[];
+extern const u32 gItemIcon_MasterBait[];
+extern const u32 gItemIconPalette_MasterBait[];
+extern const u32 gItemIcon_Excalibur[];
+extern const u32 gItemIconPalette_Excalibur[];
 
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];

@@ -1603,8 +1603,8 @@ const u32 gItemIconPalette_WatmelBerry[] = INCBIN_U32("graphics/items/icon_palet
 const u32 gItemIcon_DurinBerry[] = INCBIN_U32("graphics/items/icons/durin_berry.4bpp.lz");
 const u32 gItemIconPalette_DurinBerry[] = INCBIN_U32("graphics/items/icon_palettes/durin_berry.gbapal.lz");
 
-const u32 gItemIcon_BelueBerry[] = INCBIN_U32("graphics/items/icons/belue_berry.4bpp.lz");
-const u32 gItemIconPalette_BelueBerry[] = INCBIN_U32("graphics/items/icon_palettes/belue_berry.gbapal.lz");
+const u32 gItemIcon_BelueBerry[] = INCBIN_U32("graphics/items/icons/gugum_berry.4bpp.lz");
+const u32 gItemIconPalette_BelueBerry[] = INCBIN_U32("graphics/items/icon_palettes/gugum_berry.gbapal.lz");
 
 const u32 gItemIcon_ChilanBerry[] = INCBIN_U32("graphics/items/icons/chilan_berry.4bpp.lz");
 const u32 gItemIconPalette_ChilanBerry[] = INCBIN_U32("graphics/items/icon_palettes/chilan_berry.gbapal.lz");
@@ -2099,3 +2099,20 @@ const u32 gItemIconPalette_Amiibo[] = INCBIN_U32("graphics/items/icon_palettes/a
 
 const u32 gItemIcon_OddOnion[] = INCBIN_U32("graphics/items/icons/odd_onion.4bpp.lz");
 const u32 gItemIconPalette_OddOnion[] = INCBIN_U32("graphics/items/icon_palettes/odd_onion.gbapal.lz");
+
+const u32 gItemIcon_HornFossil[] = INCBIN_U32("graphics/items/icons/horn_fossil.4bpp.lz");
+const u32 gItemIcon_ShardFossil[] = INCBIN_U32("graphics/items/icons/shard_fossil.4bpp.lz");
+const u32 gItemIconPalette_HotPinkFossils[] = INCBIN_U32("graphics/items/icon_palettes/hot_pink_fossils.gbapal.lz");
+
+const u32 gItemIcon_RadAmber[] = INCBIN_U32("graphics/items/icons/rad_amber.4bpp.lz");
+
+const u32 gItemIcon_TornPage[] = INCBIN_U32("graphics/items/icons/torn_page.4bpp.lz");
+const u32 gItemIconPalette_TornPage[] = INCBIN_U32("graphics/items/icon_palettes/torn_page.gbapal.lz");
+
+const u32 gItemIcon_BerryBait[] = INCBIN_U32("graphics/items/icons/bait.4bpp.lz");
+const u32 gItemIconPalette_BerryBait[] = INCBIN_U32("graphics/items/icon_palettes/bait.gbapal.lz");
+const u32 gItemIcon_MasterBait[] = INCBIN_U32("graphics/items/icons/master_bait.4bpp.lz");
+const u32 gItemIconPalette_MasterBait[] = INCBIN_U32("graphics/items/icon_palettes/master_bait.gbapal.lz");
+
+const u32 gItemIcon_Excalibur[] = INCBIN_U32("graphics/items/icons/excalibur.4bpp.lz");
+const u32 gItemIconPalette_Excalibur[] = INCBIN_U32("graphics/items/icon_palettes/excalibur.gbapal.lz");

@@ -1248,7 +1248,7 @@ static bool32 IsMonGrounded(u16 heldItemEffect, u32 ability, u8 type1, u8 type2)
 {
     // List that makes mon not grounded
     if (type1 == TYPE_FLYING || type2 == TYPE_FLYING || ability == ABILITY_LEVITATE
-         || (heldItemEffect == HOLD_EFFECT_AIR_BALLOON && ability != ABILITY_KLUTZ))
+         || (heldItemEffect == (HOLD_EFFECT_AIR_BALLOON || HOLD_EFFECT_FLOAT_STONE) && ability != ABILITY_KLUTZ))
     {
         // List that overrides being off the ground
         if ((heldItemEffect == HOLD_EFFECT_IRON_BALL && ability != ABILITY_KLUTZ) || (gFieldStatuses & STATUS_FIELD_GRAVITY) || (gFieldStatuses & STATUS_FIELD_MAGIC_ROOM))

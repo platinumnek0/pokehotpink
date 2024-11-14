@@ -1128,7 +1128,7 @@ bool32 AI_IsBattlerGrounded(u32 battlerId)
         return FALSE;
     else if (gStatuses3[battlerId] & STATUS3_MAGNET_RISE)
         return FALSE;
-    else if (holdEffect == HOLD_EFFECT_AIR_BALLOON)
+    else if (holdEffect == (HOLD_EFFECT_AIR_BALLOON || HOLD_EFFECT_FLOAT_STONE))
         return FALSE;
     else if (AI_DATA->abilities[battlerId] == ABILITY_LEVITATE)
         return FALSE;
@@ -2368,7 +2368,7 @@ static bool32 PartyBattlerShouldAvoidHazards(u32 currBattler, u32 switchBattler)
         hazardDamage += GetStealthHazardDamageByTypesAndHP(gMovesInfo[MOVE_STEALTH_ROCK].type, type1, type2, maxHp);
 
     if (flags & SIDE_STATUS_SPIKES && ((type1 != TYPE_FLYING && type2 != TYPE_FLYING
-        && ability != ABILITY_LEVITATE && holdEffect != HOLD_EFFECT_AIR_BALLOON)
+        && ability != ABILITY_LEVITATE && holdEffect != (HOLD_EFFECT_AIR_BALLOON || HOLD_EFFECT_FLOAT_STONE))
         || holdEffect == HOLD_EFFECT_IRON_BALL || gFieldStatuses & STATUS_FIELD_GRAVITY))
     {
         s32 spikesDmg = maxHp / ((5 - gSideTimers[GetBattlerSide(currBattler)].spikesAmount) * 2);
