@@ -130,6 +130,7 @@ struct DisableStruct
     u8 weatherAbilityDone:1;
     u8 terrainAbilityDone:1;
     u8 usedProteanLibero:1;
+    u8 recursionCounter;
 };
 
 struct ProtectStruct
@@ -185,6 +186,7 @@ struct ProtectStruct
     u8 physicalBattlerId;
     u8 specialBattlerId;
     u16 hollowWhirled;
+    u16 usedSoundMove:1;
 };
 
 struct SpecialStatus
@@ -227,6 +229,7 @@ struct SpecialStatus
     u8 emergencyExited:1;
     u8 afterYou:1;
     u8 preventLifeOrbDamage:1; // So that Life Orb doesn't activate various effects.
+    u8 flytrapRedirected:1;
 };
 
 struct SideTimer

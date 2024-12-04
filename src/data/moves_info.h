@@ -677,6 +677,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .minimizeDoubleDamage = TRUE,
         .skyBattleBanned = TRUE,
+        .gravityBoosted = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_FLINCH,
             .chance = 30,
@@ -938,6 +939,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .minimizeDoubleDamage = B_UPDATED_MOVE_FLAGS >= GEN_6,
         .skyBattleBanned = TRUE,
+        .gravityBoosted = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_PARALYSIS,
             .chance = 30,
@@ -1124,7 +1126,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .power = 25,
         .type = TYPE_BUG,
         .accuracy = 100,
-        .pp = 20,
+        .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
@@ -1487,6 +1489,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .damagesUnderwater = TRUE,
         .skyBattleBanned = TRUE,
+        .canFerry = TRUE,
         .contestEffect = CONTEST_EFFECT_AFFECTED_BY_PREV_APPEAL,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = COMBO_STARTER_SURF,
@@ -1727,6 +1730,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+        .gravityBoosted = TRUE,
         .contestEffect = CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON,
         .contestCategory = CONTEST_CATEGORY_TOUGH,
         .contestComboStarterId = 0,
@@ -3897,6 +3901,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
+        .gravityBoosted = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_FLINCH,
             .chance = 30,
@@ -5061,6 +5066,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .parentalBondBanned = TRUE,
         .curlBoosted = TRUE,
+        .gravityBoosted = TRUE,
         .contestEffect = CONTEST_EFFECT_DONT_EXCITE_AUDIENCE,
         .contestCategory = CONTEST_CATEGORY_TOUGH,
         .contestComboStarterId = 0,
@@ -5499,14 +5505,15 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             "A brutal ramming attack\n"
             "using out-thrust horns."),
         .effect = EFFECT_HIT,
-        .power = 120,
+        .power = 150,
         .type = TYPE_BUG,
         .accuracy = 85,
-        .pp = 10,
+        .pp = 5,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+        .canFellTrees = TRUE,
         .contestEffect = CONTEST_EFFECT_BETTER_IF_SAME_TYPE,
         .contestCategory = CONTEST_CATEGORY_COOL,
         .contestComboStarterId = 0,
@@ -5666,13 +5673,13 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Iron Tail"),
         .description = COMPOUND_STRING(
-            "Attacks with a rock-hard\n"
+            "Attacks with a steel-hard\n"
             "tail. May lower Defense."),
         .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_STEEL,
-        .accuracy = 75,
-        .pp = 15,
+        .accuracy = 90,
+        .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
@@ -5696,8 +5703,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .effect = EFFECT_HIT,
         .power = 50,
         .type = TYPE_STEEL,
-        .accuracy = 95,
-        .pp = 35,
+        .accuracy = 100,
+        .pp = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
@@ -6143,6 +6150,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .damagesUnderwater = TRUE,
+        .canFerry = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_WRAP,
         }),
@@ -6566,8 +6574,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Charge"),
         .description = COMPOUND_STRING(
-            "Charges power to boost the\n"
-            "electric move used next."),
+            "Charges power to boost the next\n"
+            "Electric move used. Stacks up to\n"
+            "3 times."),
         .effect = EFFECT_CHARGE,
         .power = 0,
         .type = TYPE_ELECTRIC,
@@ -7369,6 +7378,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .parentalBondBanned = TRUE,
         .curlBoosted = TRUE,
+        .gravityBoosted = TRUE,
         .contestEffect = CONTEST_EFFECT_DONT_EXCITE_AUDIENCE,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = 0,
@@ -7758,6 +7768,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
+        .gravityBoosted = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SPD_MINUS_1,
             .chance = 100,
@@ -8076,10 +8087,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             "Shoots 2 to 5 seeds in a row\n"
             "to strike the foe."),
         .effect = EFFECT_MULTI_HIT,
-        .power = B_UPDATED_MOVE_DATA >= GEN_5 ? 25 : 10,
+        .power = 25,
         .type = TYPE_GRASS,
         .accuracy = 100,
-        .pp = 20,
+        .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
@@ -8120,10 +8131,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             "Attacks the foe by firing\n"
             "2 to 5 icicles in a row."),
         .effect = EFFECT_MULTI_HIT,
-        .power = B_UPDATED_MOVE_DATA >= GEN_5 ? 25 : 10,
+        .power = 25,
         .type = TYPE_ICE,
         .accuracy = 100,
-        .pp = 20,
+        .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
@@ -8667,8 +8678,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Gravity"),
         .description = COMPOUND_STRING(
-            "Gravity is intensified\n"
-            "negating levitation."),
+            "Grounds all battlers for\n"
+            "5 turns."),
         .effect = EFFECT_GRAVITY,
         .power = 0,
         .type = TYPE_PSYCHIC,
@@ -8751,6 +8762,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .punchingMove = TRUE,
+        .gravityBoosted = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SPD_MINUS_1,
             .self = TRUE,
@@ -8776,7 +8788,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        .ballisticMove = TRUE,
+        .curlBoosted = TRUE,
+        .gravityBoosted = TRUE,
         .contestEffect = CONTEST_EFFECT_BETTER_IF_LAST,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = 0,
@@ -10138,6 +10151,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = -4,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+        .gravityBoosted = TRUE,
         .contestEffect = CONTEST_EFFECT_NEXT_APPEAL_LATER,
         .contestCategory = CONTEST_CATEGORY_COOL,
         .contestComboStarterId = 0,
@@ -10813,6 +10827,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .makesContact = TRUE,
         .skyBattleBanned = TRUE,
+        .gravityBoosted = TRUE,
         .contestEffect = CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON,
         .contestCategory = CONTEST_CATEGORY_SMART,
         .contestComboStarterId = 0,
@@ -11634,6 +11649,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_FOES_AND_ALLY,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
+        .canFerry = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_POISON,
             .chance = 20,
@@ -11787,7 +11803,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             "Defense and Accuracy."),
         .effect = EFFECT_COIL,
         .power = 0,
-        .type = TYPE_POISON,
+        .type = TYPE_DRAGON,
         .accuracy = 0,
         .pp = 20,
         .target = MOVE_TARGET_USER,
@@ -11818,6 +11834,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+        .gravityBoosted = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SPD_MINUS_1,
             .chance = 100,
@@ -13343,6 +13360,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
+        .gravityBoosted = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_FLINCH,
             .chance = 30,
@@ -15058,6 +15076,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .punchingMove = TRUE,
+        .gravityBoosted = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_DEF_MINUS_1,
             .chance = 20,
@@ -16801,6 +16820,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
+        .gravityBoosted = TRUE,
         .skyBattleBanned = B_EXTRAPOLATED_MOVE_FLAGS,
         .contestEffect = CONTEST_EFFECT_BETTER_IF_SAME_TYPE,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
@@ -17354,17 +17374,16 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Scale Shot"),
         .description = COMPOUND_STRING(
-            "Shoots scales 2 to 5 times.\n"
-            "Ups Speed, lowers defense."),
+            "Fires off scales at the foe,\n"
+            "hitting 2 to 5 times."),
         .effect = EFFECT_MULTI_HIT,
         .power = 25,
         .type = TYPE_DRAGON,
-        .accuracy = 90,
-        .pp = 20,
+        .accuracy = 100,
+        .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .argument = MOVE_EFFECT_SCALE_SHOT,
         .contestEffect = CONTEST_EFFECT_NEXT_APPEAL_EARLIER,
         .contestCategory = CONTEST_CATEGORY_COOL,
         .contestComboStarterId = 0,
@@ -18156,6 +18175,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .skyBattleBanned = B_EXTRAPOLATED_MOVE_FLAGS,
+        .canFerry = TRUE,
     },
 
     [MOVE_CHLOROBLAST] =
@@ -18684,9 +18704,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Ice Spinner"),
         .description = COMPOUND_STRING(
-            "Spins with ice-covered feet\n"
-            "and hits the foe."),
-        .effect = EFFECT_HIT,
+            "Twirls and slams into the\n"
+            "foe, destroying any terrain."),
+        .effect = EFFECT_HIT_SET_REMOVE_TERRAIN,
         .power = 80,
         .type = TYPE_ICE,
         .accuracy = 100,
@@ -18696,6 +18716,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .skyBattleBanned = B_EXTRAPOLATED_MOVE_FLAGS,
+        .argument = ARG_TRY_REMOVE_TERRAIN_HIT,
     },
 
     [MOVE_GLAIVE_RUSH] =
@@ -19942,6 +19963,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
+        .canFerry = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SPD_MINUS_1,
             .chance = 30,
@@ -20468,8 +20490,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Metal Gnaw"),
         .description = COMPOUND_STRING(
-            "Heals half the damage dealt.\n"
-            "Hits airborne foes."),
+            "The user gnaws on the foe,\n"
+            "healing half the damage dealt\n"
+            "and hitting flying foes."),
         .effect = EFFECT_ABSORB,
         .power = 80,
         .type = TYPE_GROUND,
@@ -20502,6 +20525,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .parentalBondBanned = TRUE,
         .curlBoosted = TRUE,
+        .gravityBoosted = TRUE,
     },
 
     [MOVE_BURNING_RUBBER] =
@@ -20522,6 +20546,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .parentalBondBanned = TRUE,
         .curlBoosted = TRUE,
+        .gravityBoosted = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_BURN,
             .chance = 30,
@@ -20568,8 +20593,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Cosmic Onslaught"),
         .description = COMPOUND_STRING(
-            "Physical or special,\n"
-            "based on user's stats."),
+            "Deals physical or special\n"
+            "damage- whichever would be\n"
+            "most effective."),
         .effect = EFFECT_SHELL_SIDE_ARM,
         .power = 90,
         .type = TYPE_DRAGON,
@@ -20584,8 +20610,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Nutbolt"),
         .description = COMPOUND_STRING(
-            "A rusty metal blast that\n"
-            "can poison immune foes."),
+            "The user blasts rusty metal\n"
+            "at the foe and may poison it,\n"
+            "even Poison- & Steel-types."),
         .effect = EFFECT_NUTBOLT,
         .power = 90,
         .type = TYPE_STEEL,
@@ -20658,7 +20685,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Backstab"),
         .description = COMPOUND_STRING(
-            "Deals more damage if the foe\n"
+            "Super effective if the foe\n"
             "is infatuated."),
         .effect = EFFECT_BACKSTAB,
         .power = 60,
@@ -20676,8 +20703,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .name = COMPOUND_STRING("Snot Rocket"),
         .description = COMPOUND_STRING(
             "Spits mucus and spreads any\n"
-            "status problem to the foe."
-        ),
+            "status problem to the foe."),
         .effect = EFFECT_HIT,
         .power = 55,
         .type = TYPE_POISON,
@@ -20696,7 +20722,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Make It Plague"),
         .description = COMPOUND_STRING(
-            "Traps foes in a swarm for\n"
+            "The user scatters amber,\n"
+            "trapping foes in a swarm for\n"
             ""BINDING_TURNS" turns."),
         .effect = EFFECT_HIT,
         .power = 100,
@@ -20742,6 +20769,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .makesContact = TRUE,
         .category = DAMAGE_CATEGORY_PHYSICAL,
+        .gravityBanned = TRUE,
     },
 
     [MOVE_BATTLECRY] =
@@ -21326,8 +21354,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .effect = EFFECT_MULTI_HIT,
         .power = 20,
         .type = TYPE_STEEL,
-        .accuracy = 90,
-        .pp = 15,
+        .accuracy = 100,
+        .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
@@ -21401,6 +21429,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+        .gravityBoosted = TRUE,
     },
     
     [MOVE_LINE_CAST] =
@@ -21434,6 +21463,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+        .canFerry = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SPD_PLUS_1,
             .self = TRUE,
@@ -21719,6 +21749,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
+        .gravityBoosted = TRUE,
+        .canFerry = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_PAYDAY,
         }),
@@ -22211,11 +22243,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         }),
     },
 
+
     [MOVE_FUNNY_FACE] =
     {
         .name = COMPOUND_STRING("Funny Face"),
         .description = COMPOUND_STRING(
-            "Makes the foe laugh to lower\n"
+            "Makes the foes laugh to lower\n"
             "Attack."),
         .effect = EFFECT_ATTACK_DOWN,
         .power = 0,
@@ -22263,6 +22296,83 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_STATUS,
         .argument = TYPE_RUBBER,
         .magicCoatAffected = TRUE,
+    },
+
+    [MOVE_REVERBERATE] =
+    {
+        .name = COMPOUND_STRING("Reverberate"),
+        .description = COMPOUND_STRING(
+            "Stronger if used in the same\n"
+            "turn as another sound move."),
+        .effect = EFFECT_REVERBERATE,
+        .power = 80,
+        .type = TYPE_RUBBER,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .soundMove = TRUE,
+        .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
+    },
+
+    
+    [MOVE_SCRUB_CLEAN] =
+    {
+        .name = COMPOUND_STRING("Scrub Clean"),
+        .description = COMPOUND_STRING(
+            "Clears stat changes.\n"
+            "Restores an ally's HP."),
+        .effect = EFFECT_HIT_ENEMY_HEAL_ALLY,
+        .power = 50,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_CLEAR_SMOG,
+        }),
+    },
+
+    [MOVE_TRANSMUTE] =
+    {
+        .name = COMPOUND_STRING("Transmute"),
+        .description = COMPOUND_STRING(
+            "Makes the foe weak to the\n"
+            "user's last attack."),
+        .effect = EFFECT_TRANSMUTE,
+        .power = 0,
+        .type = TYPE_DRAGON,
+        .accuracy = 0,
+        .pp = 5,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .ignoresProtect = TRUE,
+        .ignoresSubstitute = TRUE,
+        .mirrorMoveBanned = TRUE,
+    },
+
+    [MOVE_WARM_WELCOME] =
+    {
+        .name = COMPOUND_STRING("Warm Welcome"),
+        .description = COMPOUND_STRING(
+            "The user greets foes, then sets up\n"
+            "harsh sunlight and switches out."),
+        .effect = EFFECT_WARM_WELCOME,
+        .power = 0,
+        .type = TYPE_FIRE,
+        .accuracy = 0,
+        .pp = 10,
+        .target = MOVE_TARGET_ALL_BATTLERS,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_SPD_UP_1 },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .metronomeBanned = TRUE,
     },
 
     // Z-Moves

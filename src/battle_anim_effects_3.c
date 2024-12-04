@@ -3651,6 +3651,18 @@ void AnimSmokeBallEscapeCloud(struct Sprite *sprite)
     sprite->callback = DestroyAnimSpriteAfterTimer;
 }
 
+void ScrubCleanCloudParticles(struct Sprite *sprite)
+{
+    sprite->data[0] = gBattleAnimArgs[3];
+    StartSpriteAffineAnim(sprite, gBattleAnimArgs[0]);
+    if (GetBattlerSide(gBattleAnimTarget) != B_SIDE_PLAYER)
+        gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[1];
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[2];
+    sprite->callback = DestroyAnimSpriteAfterTimer;
+}
+
 static void AnimTask_SlideMonForFocusBand_Step2(u8 taskId)
 {
     u16 var0 = 0;

@@ -245,7 +245,7 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 	HOENN_TO_NATIONAL(CHAMEDIAN),
 	HOENN_TO_NATIONAL(FUNGWALL),
 	HOENN_TO_NATIONAL(PALMELISK),
-	HOENN_TO_NATIONAL(GRUBDENT),
+	HOENN_TO_NATIONAL(GLIRUB),
 	HOENN_TO_NATIONAL(COLEOX),
 	HOENN_TO_NATIONAL(DOZENCULUS),
 	HOENN_TO_NATIONAL(CAPRALEO),
@@ -314,8 +314,8 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 	HOENN_TO_NATIONAL(BINGBANG),
 	HOENN_TO_NATIONAL(SALAMANCER),
 	HOENN_TO_NATIONAL(ALCHEMANDER),
-	HOENN_TO_NATIONAL(CREACHSIR),
-	HOENN_TO_NATIONAL(BEASTER),
+	HOENN_TO_NATIONAL(EIGHT_BITE),
+	HOENN_TO_NATIONAL(SIXTY_FOUR_BITE),
 	HOENN_TO_NATIONAL(VICTOREX),
 	HOENN_TO_NATIONAL(BAOBABY),
 	HOENN_TO_NATIONAL(BAOBABOON),
@@ -4207,6 +4207,13 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     consumeItem = TRUE;
                 }
                 break;
+            case EVO_LEVEL_ITEM:
+                if (level >= 36 && heldItem == evolutions[i].param)
+                {
+                    targetSpecies = evolutions[i].targetSpecies;
+                    consumeItem = TRUE;
+                }
+                break;
             case EVO_LEVEL_DUSK:
                 if (GetTimeOfDay() == TIME_EVENING && evolutions[i].param <= level)
                     targetSpecies = evolutions[i].targetSpecies;
@@ -4300,16 +4307,6 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     }
                 }
                 break;
-            case EVO_SPECIFIC_MON_IN_PARTY:
-                for (j = 0; j < PARTY_SIZE; j++)
-                {
-                    if (GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL) == evolutions[i].param)
-                    {
-                        targetSpecies = evolutions[i].targetSpecies;
-                        break;
-                    }
-                }
-                break;
             case EVO_LEVEL_DARK_TYPE_MON_IN_PARTY:
                 if (evolutions[i].param <= level)
                 {
@@ -4323,6 +4320,18 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                             break;
                         }
                     }
+                }
+                break;
+            case EVO_LEVEL_PARTY_OF_FOUR:
+                if (evolutions[i].param <= level && (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES, NULL) != SPECIES_NONE))
+                {
+                    targetSpecies = evolutions[i].targetSpecies;
+                }
+                break;
+            case EVO_LEVEL_FULL_PARTY:
+                if (evolutions[i].param <= level && (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES, NULL) != SPECIES_NONE))
+                {
+                    targetSpecies = evolutions[i].targetSpecies;
                 }
                 break;
             case EVO_LEVEL_RAIN:
@@ -4513,6 +4522,38 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             case EVO_WATER_SCROLL:
                 if (evolutionItem == EVO_WATER_SCROLL)
                     targetSpecies = evolutions[i].targetSpecies;
+                break;
+            }
+        }
+        break;
+    case EVO_MODE_CANT_STOP:
+        level = GetMonData(mon, MON_DATA_LEVEL, 0);
+        friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
+
+        for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
+        {
+            if (SanitizeSpeciesId(evolutions[i].targetSpecies) == SPECIES_NONE)
+                continue;
+
+            switch (evolutions[i].method)
+            {
+            case EVO_SPECIFIC_MON_IN_PARTY:
+                if(level >= 32)
+                {
+                for (j = 0; j < PARTY_SIZE; j++)
+                {
+                    if (GetMonData(mon, MON_DATA_IS_SHINY) == FALSE && GetMonData(&gPlayerParty[j], MON_DATA_IS_SHINY))
+                    {
+                        break;
+                    }
+                    else if (GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL) == evolutions[i].param)
+                    {
+                        ZeroMonData(&gPlayerParty[j]);
+                        targetSpecies = evolutions[i].targetSpecies;
+
+                    }
+                }
+                }
                 break;
             }
         }

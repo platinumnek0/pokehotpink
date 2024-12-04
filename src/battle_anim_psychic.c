@@ -862,6 +862,27 @@ static void AnimTask_Teleport_Step(u8 taskId)
     }
 }
 
+void AnimTask_TransmuteOrbs(u8 taskId)
+{
+    u16 var0, var1;
+
+    struct Task *task = &gTasks[taskId];
+
+    task->data[3] = 16;
+    task->data[4] = 0;
+    task->data[13] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    task->data[14] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+
+    var0 = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_WIDTH) / 3;
+    var1 = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT) / 3;
+    task->data[12] = var0 > var1 ? var0 : var1;
+
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
+
+    task->func = AnimTask_ImprisonOrbs_Step;
+}
+
 void AnimTask_ImprisonOrbs(u8 taskId)
 {
     u16 var0, var1;

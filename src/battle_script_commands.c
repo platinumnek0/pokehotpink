@@ -1455,6 +1455,14 @@ static void Cmd_attackcanceler(void)
         gBattlescriptCurrInstr = BattleScript_TookAttack;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
+    else if (gSpecialStatuses[gBattlerTarget].flytrapRedirected)
+    {
+        gSpecialStatuses[gBattlerTarget].flytrapRedirected = FALSE;
+        gLastUsedAbility = ABILITY_FLYTRAP;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_TookAttack;
+        RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
+    }
     else if (IsBattlerProtected(gBattlerTarget, gCurrentMove)
      && (gCurrentMove != MOVE_CURSE || IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
      && (!gBattleMoveEffects[gMovesInfo[gCurrentMove].effect].twoTurnEffect || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
@@ -7135,7 +7143,8 @@ static void Cmd_switchineffects(void)
         && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SPIKES)
         && GetBattlerAbility(battler) != ABILITY_MAGIC_GUARD
         && IsBattlerAffectedByHazards(battler, FALSE)
-        && IsBattlerGrounded(battler))
+        && IsBattlerGrounded(battler)
+        && !(IS_BATTLER_OF_TYPE(battler, TYPE_BUG)))
     {
         u8 spikesDmg = (5 - gSideTimers[GetBattlerSide(battler)].spikesAmount) * 2;
         gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (spikesDmg);
@@ -7148,7 +7157,8 @@ static void Cmd_switchineffects(void)
     else if (!(gDisableStructs[battler].stealthRockDone)
         && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_STEALTH_ROCK)
         && IsBattlerAffectedByHazards(battler, FALSE)
-        && GetBattlerAbility(battler) != ABILITY_MAGIC_GUARD)
+        && GetBattlerAbility(battler) != ABILITY_MAGIC_GUARD
+        && !(IS_BATTLER_OF_TYPE(battler, TYPE_BUG)))
     {
         gDisableStructs[battler].stealthRockDone = TRUE;
         gBattleMoveDamage = GetStealthHazardDamage(gMovesInfo[MOVE_STEALTH_ROCK].type, battler);
@@ -7158,7 +7168,8 @@ static void Cmd_switchineffects(void)
     }
     else if (!(gDisableStructs[battler].toxicSpikesDone)
         && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_TOXIC_SPIKES)
-        && IsBattlerGrounded(battler))
+        && IsBattlerGrounded(battler)
+        && !(IS_BATTLER_OF_TYPE(battler, TYPE_BUG)))
     {
         gDisableStructs[battler].toxicSpikesDone = TRUE;
         if (IS_BATTLER_OF_TYPE(battler, TYPE_POISON)) // Absorb the toxic spikes.
@@ -13991,7 +14002,14 @@ static void Cmd_setcharge(void)
 
     u8 battler = GetBattlerForBattleScript(cmd->battler);
     gStatuses3[battler] |= STATUS3_CHARGED_UP;
-    gDisableStructs[battler].chargeTimer = 2;
+    if (gDisableStructs[battler].chargeTimer == 3)
+    {
+        gDisableStructs[battler].chargeTimer = 4;
+    }
+    if(gDisableStructs[battler].chargeTimer < 3)
+    {
+        gDisableStructs[battler].chargeTimer += 2;
+    }
     gBattlescriptCurrInstr++;
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -17057,4 +17075,64 @@ void BS_GrimDiceDamageCalculation(void)
     }
 
     gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_setFoeTypeToRandomWeakness(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    if (gLastMoves[gBattlerAttacker] == MOVE_NONE
+     || gLastMoves[gBattlerAttacker] == MOVE_UNAVAILABLE
+     || gMovesInfo[gLastMoves[gBattlerAttacker]].category == DAMAGE_CATEGORY_STATUS)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else if (gBattleMoveEffects[gMovesInfo[gLastMoves[gBattlerAttacker]].effect].twoTurnEffect
+            && gBattleMons[gLastMoves[gBattlerAttacker]].status2 & STATUS2_MULTIPLETURNS)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else if (gMovesInfo[gLastMoves[gBattlerAttacker]].type == TYPE_NORMAL)
+    {
+        SET_BATTLER_TYPE(gBattlerTarget, TYPE_NORMAL);
+        PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_NORMAL);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return; 
+    }
+    else
+    {
+        u32 i, resistTypes = 0;
+        u32 hitByType = gMovesInfo[gLastMoves[gBattlerAttacker]].type;
+
+        for (i = 0; i < NUMBER_OF_MON_TYPES; i++) // Find all types that are weak to this type.
+        {
+            switch (GetTypeModifier(hitByType, i))
+            {
+            case UQ_4_12(2.0):
+                resistTypes |= gBitTable[i];
+                break;
+            }
+        }
+
+        while (resistTypes != 0)
+        {
+            i = Random() % NUMBER_OF_MON_TYPES;
+            if (resistTypes & gBitTable[i])
+            {
+                if (IS_BATTLER_OF_TYPE(gBattlerTarget, i))
+                {
+                    resistTypes &= ~(gBitTable[i]); // Type is weak to the last move, but the user is already of this type.
+                }
+                else
+                {
+                    SET_BATTLER_TYPE(gBattlerTarget, i);
+                    PREPARE_TYPE_BUFFER(gBattleTextBuff1, i);
+                    gBattlescriptCurrInstr = cmd->nextInstr;
+                    return;
+                }
+            }
+        }
+
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
 }

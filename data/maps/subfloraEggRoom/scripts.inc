@@ -3,6 +3,7 @@ subfloraEggRoom_MapScripts::
 
 subfloraEggRoom_man::
 	lockall
+	setspeaker: speakername subfloraEggRoomManName
 	msgbox subfloraEggYesNo, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, subfloraEggRoom_no
@@ -19,5 +20,9 @@ subfloraEggRoom_gift::
 	releaseall
 	end
 
+subfloraEggRoomManName::
+	.string "Man$"
+
 subfloraEggYesNo::
 	.string "There is a man here.\pDo you accept his offer?$"
+

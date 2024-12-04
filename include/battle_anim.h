@@ -333,6 +333,7 @@ extern const union AnimCmd *const gEclipsingOrbAnimTable[];
 extern const union AffineAnimCmd *const gSpotlightAffineAnimTable[];
 extern const union AffineAnimCmd *const gSmokeBallEscapeCloudAffineAnimTable[];
 extern void AnimSmokeBallEscapeCloud(struct Sprite *sprite);
+extern void ScrubCleanCloudParticles(struct Sprite *sprite);
 extern const union AffineAnimCmd *const gKnockOffStrikeAffineAnimTable[];
 extern const union AnimCmd *const gKnockOffStrikeAnimTable[];
 

@@ -498,6 +498,7 @@ extern const u8 BattleScript_AromaVeilProtectsRet[];
 extern const u8 BattleScript_MoltNoStatus[];
 extern const u8 BattleScript_FoeTrapped[];
 extern const u8 BattleScript_RenewActivates[];
+extern const u8 BattleScript_QuantumShiftSwitchIn[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
@@ -846,5 +847,7 @@ extern const u8 BattleScript_EffectCurlUp[];
 extern const u8 BattleScript_EffectTransferStatus[];
 extern const u8 BattleScript_EffectGrimDice[];
 extern const u8 BattleScript_DemolitionistActivates[];
+extern const u8 BattleScript_EffectTransmute[];
+extern const u8 BattleScript_EffectWarmWelcome[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

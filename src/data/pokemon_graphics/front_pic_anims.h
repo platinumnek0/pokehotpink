@@ -10300,6 +10300,34 @@ static const union AnimCmd sAnim_Skungus_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_Skungrowth_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Salivolt_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 45),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Mastidic_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_Cixno_1[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -10385,6 +10413,24 @@ static const union AnimCmd sAnim_Jakikendi_1[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(1, 15),
     ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_Salamancer_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 45),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_Alchemandr_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 15),
     ANIMCMD_END
 };
 
@@ -13087,6 +13133,9 @@ SINGLE_ANIMATION(Denkomori);
 SINGLE_ANIMATION(Snaam);
 SINGLE_ANIMATION(Fraamoth);
 SINGLE_ANIMATION(Skungus);
+SINGLE_ANIMATION(Skungrowth);
+SINGLE_ANIMATION(Salivolt);
+SINGLE_ANIMATION(Mastidic);
 SINGLE_ANIMATION(Willywoo);
 SINGLE_ANIMATION(Wirlydoo);
 SINGLE_ANIMATION(Cixno);
@@ -13095,5 +13144,7 @@ SINGLE_ANIMATION(Parasoul);
 SINGLE_ANIMATION(Horrohorra);
 SINGLE_ANIMATION(Jonfyrkend);
 SINGLE_ANIMATION(Jakikendi);
+SINGLE_ANIMATION(Salamancer);
+SINGLE_ANIMATION(Alchemandr);
 SINGLE_ANIMATION(Arrengai);
 SINGLE_ANIMATION(Egg);

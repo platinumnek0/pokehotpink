@@ -4333,6 +4333,16 @@ const struct SpriteTemplate gSpriteTemplate_CorrosiveGasSmoke = {
     .callback = AnimSmokeBallEscapeCloud
 };
 
+const struct SpriteTemplate gSpriteTemplate_ScrubCleanSoapBubbles = {
+    .tileTag = ANIM_TAG_PINK_CLOUD,
+    .paletteTag = ANIM_TAG_PINK_CLOUD,
+    .oam = &gOamData_AffineDouble_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSmokeBallEscapeCloudAffineAnimTable,
+    .callback = ScrubCleanCloudParticles
+};
+
 // flip turn
 const struct SpriteTemplate gSpriteTemplate_FlipTurnThere = {
     .tileTag = ANIM_TAG_HYDRO_PUMP,

@@ -195,13 +195,38 @@ static void Task_BeginEvolutionScene(u8 taskId)
     }
 }
 
+s16 CompactParty(void)
+{
+    s16 retVal = -1;
+    u16 i, last;
+
+    for (i = 0, last = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+        if (species != SPECIES_NONE)
+        {
+            if (i != last)
+                gPlayerParty[last] = gPlayerParty[i];
+            last++;
+        }
+        else if (retVal == -1)
+        {
+            retVal = i;
+        }
+    }
+    for (; last < PARTY_SIZE; last++)
+        ZeroMonData(&gPlayerParty[last]);
+
+    return retVal;
+}
+
 void BeginEvolutionScene(struct Pokemon *mon, u16 postEvoSpecies, bool8 canStopEvo, u8 partyId)
 {
     u8 taskId = CreateTask(Task_BeginEvolutionScene, 0);
     gTasks[taskId].tState = 0;
     gTasks[taskId].tPostEvoSpecies = postEvoSpecies;
     gTasks[taskId].tCanStop = canStopEvo;
-    gTasks[taskId].tPartyId = partyId;
+    gTasks[taskId].tPartyId = partyId;  
     SetMainCallback2(CB2_BeginEvolutionScene);
 }
 
@@ -830,6 +855,7 @@ static void Task_EvolutionScene(u8 taskId)
             FREE_AND_SET_NULL(sEvoStructPtr);
             FreeAllWindowBuffers();
             SetMainCallback2(gCB2_AfterEvolution);
+            CompactParty();
         }
         break;
     case EVOSTATE_CANCEL:

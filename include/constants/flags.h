@@ -57,7 +57,7 @@
 #define FLAG_UNUSED_0x02C    0x2C // hides the egg man in subflora
 #define FLAG_DISABLE_RUNNING 0x2D // disables running when set
 #define FLAG_UNUSED_0x02E    0x2E // exp share flag
-#define FLAG_UNUSED_0x02F    0x2F // Unused Flag
+#define FLAG_SHOW_SPEAKER_NAME 0x2F // shows the speaker's nameplate in textboxes
 #define FLAG_UNUSED_0x030    0x30 // Unused Flag
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag

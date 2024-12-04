@@ -405,6 +405,7 @@
 #define ANIM_TAG_SYRUP_SHELL_YELLOW         (ANIM_SPRITES_START + 391)
 #define ANIM_TAG_SYRUP_SPLAT_RED            (ANIM_SPRITES_START + 392)
 #define ANIM_TAG_SYRUP_SPLAT_YELLOW         (ANIM_SPRITES_START + 393)
+#define ANIM_TAG_SCALE                      (ANIM_SPRITES_START + 394)
 
 // battlers
 #define ANIM_ATTACKER         0
@@ -567,6 +568,7 @@
 #define B_ANIM_WONDER_ROOM              46
 #define B_ANIM_MAGIC_ROOM               47
 #define B_ANIM_TAILWIND                 48
+#define B_ANIM_GRAVITY                  49
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

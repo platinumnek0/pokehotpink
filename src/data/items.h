@@ -2713,17 +2713,11 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Old Amber"),
         .description = COMPOUND_STRING(
-            "A stone containing\n"
-            "the genes of an\n"
-            "ancient Pokémon."),
-        #if I_KEY_FOSSILS >= GEN_4
-            .price = 1000,
-            .pocket = POCKET_ITEMS,
-        #else
-            .price = 0,
-            .importance = 1,
-            .pocket = POCKET_KEY_ITEMS,
-        #endif
+            "Hardened sap,\n"
+            "containing ancient\n"
+            "bug Pokémon DNA."),
+        .price = 0,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 100,

@@ -685,7 +685,7 @@ static const struct WindowTemplate sPageMovesTemplate[] = // This is used for bo
         .tilemapLeft = 10,
         .tilemapTop = 15,
         .width = 20,
-        .height = 4,
+        .height = 5,
         .paletteNum = 6,
         .baseBlock = 619,
     },
@@ -2816,6 +2816,14 @@ static void PrintTextOnWindowSmall(u8 windowId, const u8 *string, u8 x, u8 y, u8
         AddTextPrinterParameterized4(windowId, FONT_SMALL, x, y, 0, lineSpacing, sTextColors[colorId], 0, string);
 }
 
+static void PrintTextOnWindowNarrow(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId)
+{
+    if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_SUMMARY)
+        AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, 0, lineSpacing, sTextColors[colorId], 0, MirrorPtr(string));
+    else
+        AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, 0, lineSpacing, sTextColors[colorId], 0, string);
+}
+
 static void PrintMonInfo(void)
 {
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER, PIXEL_FILL(0));
@@ -3634,7 +3642,7 @@ static void PrintMoveNameAndPP(u8 moveIndex)
     if (move != 0)
     {
         pp = CalculatePPWithBonus(move, summary->ppBonuses, moveIndex);
-        PrintTextOnWindow(moveNameWindowId, GetMoveName(move), 0, moveIndex * 16 + 1, 0, 1);
+        PrintTextOnWindowNarrow(moveNameWindowId, GetMoveName(move), 0, moveIndex * 16 + 1, 0, 1);
         ConvertIntToDecimalStringN(gStringVar1, summary->pp[moveIndex], STR_CONV_MODE_RIGHT_ALIGN, 2);
         ConvertIntToDecimalStringN(gStringVar2, pp, STR_CONV_MODE_RIGHT_ALIGN, 2);
         DynamicPlaceholderTextUtil_Reset();
@@ -3770,13 +3778,13 @@ static void PrintMoveDetails(u16 move)
             PrintMovePowerAndAccuracy(move);
 
             if (moveEffect != EFFECT_PLACEHOLDER)
-                PrintTextOnWindow(windowId, gMovesInfo[move].description, 6, 1, 0, 0);
+                PrintTextOnWindowSmall(windowId, gMovesInfo[move].description, 6, 1, 0, 0);
             else
                 PrintTextOnWindow(windowId, gNotDoneYetDescription, 6, 1, 0, 0);
         }
         else
         {
-            PrintTextOnWindow(windowId, gContestEffectDescriptionPointers[gMovesInfo[move].contestEffect], 6, 1, 0, 0);
+            PrintTextOnWindowSmall(windowId, gContestEffectDescriptionPointers[gMovesInfo[move].contestEffect], 6, 1, 0, 0);
         }
         PutWindowTilemap(windowId);
     }
@@ -3795,16 +3803,16 @@ static void PrintNewMoveDetailsOrCancelText(void)
 
     if (sMonSummaryScreen->newMove == MOVE_NONE)
     {
-        PrintTextOnWindow(windowId1, gText_Cancel, 0, 65, 0, 1);
+        PrintTextOnWindowNarrow(windowId1, gText_Cancel, 0, 65, 0, 1);
     }
     else
     {
         u16 move = sMonSummaryScreen->newMove;
 
         if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
-            PrintTextOnWindow(windowId1, GetMoveName(move), 0, 65, 0, 6);
+            PrintTextOnWindowNarrow(windowId1, GetMoveName(move), 0, 65, 0, 6);
         else
-            PrintTextOnWindow(windowId1, GetMoveName(move), 0, 65, 0, 5);
+            PrintTextOnWindowNarrow(windowId1, GetMoveName(move), 0, 65, 0, 5);
 
         ConvertIntToDecimalStringN(gStringVar1, gMovesInfo[move].pp, STR_CONV_MODE_RIGHT_ALIGN, 2);
         DynamicPlaceholderTextUtil_Reset();

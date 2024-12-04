@@ -298,6 +298,9 @@
 #define EVO_LEVEL_COMMON                  50     // evolves into common chodent
 #define EVO_LEVEL_EPIC                    51     // evolves into epic chodent by personality randomness
 #define EVO_ABILITY_EPIC                  52     // evolves into epic chodent via ability being gooey
+#define EVO_LEVEL_ITEM                    53     // evolves at level 36, when holding the given item
+#define EVO_LEVEL_PARTY_OF_FOUR           54     // evolves at a given level, when the party has 4 or more pokemon
+#define EVO_LEVEL_FULL_PARTY              55     // evolves at a given level, when the party is full
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0
@@ -306,6 +309,7 @@
 #define EVO_MODE_ITEM_CHECK        3 // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
 #define EVO_MODE_BATTLE_SPECIAL    4
 #define EVO_MODE_OVERWORLD_SPECIAL 5
+#define EVO_MODE_CANT_STOP         6
 
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64

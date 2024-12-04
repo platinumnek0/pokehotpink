@@ -2603,7 +2603,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_FLYTRAP] =
     {
         .name = _("Flytrap"),
-        .description = COMPOUND_STRING("Bug attacks heal HP."),
+        .description = COMPOUND_STRING("Draws in Bug attacks to heal\nHP."),
         .aiRating = 7,
         .breakable = TRUE,
     },
@@ -2729,7 +2729,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_MOMENTUM] =
     {
-        .name = _("Momentum"),
+        .name = _("Recursion"),
         .description = COMPOUND_STRING("Moves used repeatedly get\nstronger."),
         .aiRating = 10,
     },
@@ -2783,5 +2783,19 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Doubles foes' stat drops."),
         .aiRating = 8,
         .breakable = TRUE,
+    },
+
+    [ABILITY_QUANTUM_SHIFT] =
+    {
+        .name = _("Quantum Shift"),
+        .description = COMPOUND_STRING("Strengthens gravity for 5\nturns."),
+        .aiRating = 9,
+    },
+
+    [ABILITY_MOLDY] =
+    {
+        .name = _("Moldy"),
+        .description = COMPOUND_STRING("Poisons the attacker if\nbitten."),
+        .aiRating = 4,
     },
 };

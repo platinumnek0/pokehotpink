@@ -36,7 +36,7 @@ else
 EXE :=
 endif
 
-TITLE        := Pkmn HotPink
+TITLE        := Hot Pink
 GAME_CODE    := BPEE
 MAKER_CODE   := 01
 REVISION     := 0

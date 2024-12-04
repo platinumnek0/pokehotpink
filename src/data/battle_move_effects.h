@@ -2305,4 +2305,22 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 4,
     },
 
+    [EFFECT_REVERBERATE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 1,
+    },
+
+    [EFFECT_TRANSMUTE] =
+    {
+        .battleScript = BattleScript_EffectTransmute,
+        .battleTvScore = 4,
+    },
+
+    [EFFECT_WARM_WELCOME] =
+    {
+        .battleScript = BattleScript_EffectWarmWelcome,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
 };

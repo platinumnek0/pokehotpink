@@ -54,7 +54,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Bulbasaur)
         .levelUpLearnset = sBulbasaurLevelUpLearnset,
         .teachableLearnset = sBulbasaurTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_IVYSAUR}),
+        .evolutions = EVOLUTION({EVO_LEVEL_PARTY_OF_FOUR, 16, SPECIES_IVYSAUR}),
     },
 
     [SPECIES_IVYSAUR] =
@@ -108,7 +108,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Ivysaur)
         .levelUpLearnset = sIvysaurLevelUpLearnset,
         .teachableLearnset = sIvysaurTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_VENUSAUR}),
+        .evolutions = EVOLUTION({EVO_LEVEL_FULL_PARTY, 17, SPECIES_VENUSAUR}),
     },
 
     [SPECIES_VENUSAUR] =
@@ -3993,7 +3993,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = 140,
         .growthRate = GROWTH_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_CUTE_CHARM, ABILITY_MAGIC_GUARD, ABILITY_UNAWARE },
+        .abilities = { ABILITY_QUANTUM_SHIFT, ABILITY_NONE, ABILITY_UNAWARE },
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = TRUE,
         .speciesName = _("Clefable"),

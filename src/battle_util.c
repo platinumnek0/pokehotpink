@@ -224,7 +224,8 @@ void HandleAction_UseMove(void)
            && gSideTimers[side].followmeTimer == 0
            && (gMovesInfo[gCurrentMove].power != 0 || (moveTarget != MOVE_TARGET_USER && moveTarget != MOVE_TARGET_ALL_BATTLERS))
            && ((GetBattlerAbility(*(gBattleStruct->moveTarget + gBattlerAttacker)) != ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
-            || (GetBattlerAbility(*(gBattleStruct->moveTarget + gBattlerAttacker)) != ABILITY_STORM_DRAIN && moveType == TYPE_WATER)))
+            || (GetBattlerAbility(*(gBattleStruct->moveTarget + gBattlerAttacker)) != ABILITY_STORM_DRAIN && moveType == TYPE_WATER)
+            || (GetBattlerAbility(*(gBattleStruct->moveTarget + gBattlerAttacker)) != ABILITY_FLYTRAP && moveType == TYPE_BUG)))
     {
         side = GetBattlerSide(gBattlerAttacker);
         for (battler = 0; battler < gBattlersCount; battler++)
@@ -232,7 +233,8 @@ void HandleAction_UseMove(void)
             if (side != GetBattlerSide(battler)
                 && *(gBattleStruct->moveTarget + gBattlerAttacker) != battler
                 && ((GetBattlerAbility(battler) == ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
-                 || (GetBattlerAbility(battler) == ABILITY_STORM_DRAIN && moveType == TYPE_WATER))
+                 || (GetBattlerAbility(battler) == ABILITY_STORM_DRAIN && moveType == TYPE_WATER)
+                 || (GetBattlerAbility(battler) == ABILITY_FLYTRAP && moveType == TYPE_BUG))
                 && GetBattlerTurnOrderNum(battler) < var
                 && gMovesInfo[gCurrentMove].effect != EFFECT_SNIPE_SHOT
                 && gMovesInfo[gCurrentMove].effect != EFFECT_PLEDGE
@@ -301,6 +303,8 @@ void HandleAction_UseMove(void)
                 gSpecialStatuses[battler].lightningRodRedirected = TRUE;
             else if (battlerAbility == ABILITY_STORM_DRAIN)
                 gSpecialStatuses[battler].stormDrainRedirected = TRUE;
+            else if (battlerAbility == ABILITY_FLYTRAP)
+                gSpecialStatuses[battler].flytrapRedirected = TRUE;
             gBattlerTarget = battler;
         }
     }
@@ -401,6 +405,12 @@ void HandleAction_UseMove(void)
     {
         gBattleStruct->hpBefore[i] = gBattleMons[i].hp;
         gSpecialStatuses[i].emergencyExited = FALSE;
+    }
+
+    //set the sound move flag if a sound move was chosen
+    if (gMovesInfo[gChosenMove].soundMove && gMovesInfo[gChosenMove].effect != EFFECT_REVERBERATE)
+    {
+        gProtectStructs[gBattlerAttacker].usedSoundMove = TRUE;
     }
 
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
@@ -1247,9 +1257,11 @@ void BattleScriptPop(void)
         gBattlescriptCurrInstr = gBattleResources->battleScriptsStack->ptr[--gBattleResources->battleScriptsStack->size];
 }
 
-static bool32 IsGravityPreventingMove(u32 move)
+static bool32 IsGravityPreventingMove(u32 battler, u32 move)
 {
     if (!(gFieldStatuses & STATUS_FIELD_GRAVITY))
+        return FALSE;
+    if(GetBattlerAbility(battler) == ABILITY_QUANTUM_SHIFT)
         return FALSE;
 
     return gMovesInfo[move].gravityBanned;
@@ -1361,7 +1373,7 @@ u32 TrySetCantSelectMoveBattleScript(u32 battler)
         }
     }
 
-    if (DYNAMAX_BYPASS_CHECK && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && IsGravityPreventingMove(move))
+    if (DYNAMAX_BYPASS_CHECK && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && IsGravityPreventingMove(gBattlerAttacker, move))
     {
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
@@ -1562,7 +1574,7 @@ u8 CheckMoveLimitations(u32 battler, u8 unusableMoves, u16 check)
         else if (check & MOVE_LIMITATION_ASSAULT_VEST && holdEffect == HOLD_EFFECT_ASSAULT_VEST && IS_MOVE_STATUS(move) && gMovesInfo[move].effect != EFFECT_ME_FIRST)
             unusableMoves |= gBitTable[i];
         // Gravity
-        else if (check & MOVE_LIMITATION_GRAVITY && IsGravityPreventingMove(move))
+        else if (check & MOVE_LIMITATION_GRAVITY && IsGravityPreventingMove(battler, move))
             unusableMoves |= gBitTable[i];
         // Heal Block
         else if (check & MOVE_LIMITATION_HEAL_BLOCK && IsHealBlockPreventingMove(battler, move))
@@ -2736,7 +2748,11 @@ u8 DoBattlerEndTurnEffects(void)
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_CHARGE:  // charge
-            if (gDisableStructs[battler].chargeTimer && --gDisableStructs[battler].chargeTimer == 0)
+            if (gDisableStructs[battler].chargeTimer > 0)
+            {
+                gDisableStructs[battler].chargeTimer -= 1;
+            }
+            if (gDisableStructs[battler].chargeTimer == 0)
                 gStatuses3[battler] &= ~STATUS3_CHARGED_UP;
             gBattleStruct->turnEffectsTracker++;
             break;
@@ -3312,7 +3328,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_GRAVITY:
-            if (gFieldStatuses & STATUS_FIELD_GRAVITY && IsGravityPreventingMove(gCurrentMove))
+            if (gFieldStatuses & STATUS_FIELD_GRAVITY && IsGravityPreventingMove(gBattlerAttacker, gCurrentMove))
             {
                 gProtectStructs[gBattlerAttacker].usedGravityPreventedMove = TRUE;
                 gBattleScripting.battler = gBattlerAttacker;
@@ -3967,6 +3983,17 @@ static inline uq4_12_t GetSupremeOverlordModifier(u32 battler)
     return UQ_4_12(1.0) + (UQ_4_12(0.1) * gBattleStruct->supremeOverlordCounter[battler]);
 }
 
+// recursion boosts consecutively-hitting moves by 20% for each hit
+static inline uq4_12_t GetRecursionModifier(u32 battler)
+{
+    return UQ_4_12(1.0) + (UQ_4_12(0.2) * gDisableStructs[battler].recursionCounter);
+}
+
+static inline uq4_12_t GetChargeModifier(u32 battler)
+{
+    return UQ_4_12(1.5) + (UQ_4_12(1.0) * gDisableStructs[battler].chargeTimer);
+}
+
 static inline bool32 HadMoreThanHalfHpNowHasLess(u32 battler)
 {
     u32 cutoff = gBattleMons[battler].maxHP / 2;
@@ -4544,6 +4571,19 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_QUANTUM_SHIFT:
+            if(!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                if (!(gFieldStatuses & STATUS_FIELD_GRAVITY))
+                {
+                    gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                    gFieldStatuses |= STATUS_FIELD_GRAVITY;
+                    gFieldTimers.gravityTimer = 5;
+                    BattleScriptPushCursorAndCallback(BattleScript_QuantumShiftSwitchIn);
+                    effect++;
+                }
+            }
+            break;
         case ABILITY_SUPERSWEET_SYRUP:
             if (!gSpecialStatuses[battler].switchInAbilityDone
                     && !(gBattleStruct->supersweetSyrup[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]]))
@@ -4600,17 +4640,18 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             break;
         case ABILITY_COSMIC_AURA:
             i = GetHighestStatId(battler);
-             if (!gSpecialStatuses[battler].switchInAbilityDone
-            && CompareStat(battler, i, MAX_STAT_STAGE, CMP_LESS_THAN))
+            if (!gSpecialStatuses[battler].switchInAbilityDone
+            && CompareStat(battler, i, MAX_STAT_STAGE, CMP_LESS_THAN)
+            && !(gBattleStruct->intrepidSwordBoost[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]]))
             {
                 gBattleScripting.savedBattler = gBattlerAttacker;
                 gBattlerAttacker = battler;
+                gBattleStruct->intrepidSwordBoost[GetBattlerSide(battler)] |= gBitTable[gBattlerPartyIndexes[battler]];
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(i, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_UserAndAllyStatBoost);
                 effect++;
             }
-            break;
             break;
         case ABILITY_DAUNTLESS_SHIELD:
             if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, STAT_DEF, MAX_STAT_STAGE, CMP_LESS_THAN)
@@ -5094,7 +5135,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     effect = 1;
                 break;
             case ABILITY_FLYTRAP:
-                if (moveType == TYPE_BUG)
+                if (moveType == TYPE_BUG && gMovesInfo[move].target != MOVE_TARGET_ALL_BATTLERS)
                     effect = 1;
                 break;
             }
@@ -5505,13 +5546,28 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_MOLDY:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && gBattleMons[gBattlerAttacker].hp != 0
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && gMovesInfo[move].bitingMove
+             && TARGET_TURN_DAMAGED
+             && CanBePoisoned(gBattlerTarget, gBattlerAttacker))
+            {
+                gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_POISON;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
+                gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
+                effect++;
+            }
+            break;
         case ABILITY_NEGATIVE:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerAttacker].hp != 0
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && (IsMoveMakingContact(move, gBattlerAttacker))
              && TARGET_TURN_DAMAGED
-             && CanBeBurned(gBattlerAttacker)
              && (Random() % 5) == 0)
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_ATK_MINUS_1;
@@ -5847,6 +5903,18 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_MOMENTUM:
+            if(!(gMoveResultFlags & (MOVE_RESULT_FAILED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_MISSED)) && move == gLastMoves[battler])
+            {
+                if(gDisableStructs[gBattlerAttacker].recursionCounter < 5)
+                {
+                    gDisableStructs[gBattlerAttacker].recursionCounter++;
+                }
+            }
+            else
+            {
+                gDisableStructs[gBattlerAttacker].recursionCounter = 0;
+            }
         }
         break;
     case ABILITYEFFECT_MOVE_END_OTHER: // Abilities that activate on *another* battler's moveend: Dancer, Soul-Heart, Receiver, Symbiosis
@@ -8100,6 +8168,14 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
                 RecordAbilityBattle(targetBattler, gBattleMons[targetBattler].ability);
                 gSpecialStatuses[targetBattler].stormDrainRedirected = TRUE;
             }
+            else if (gMovesInfo[move].type == TYPE_BUG
+                && IsAbilityOnOpposingSide(gBattlerAttacker, ABILITY_FLYTRAP)
+                && GetBattlerAbility(targetBattler) != ABILITY_FLYTRAP)
+            {
+                targetBattler ^= BIT_FLANK;
+                RecordAbilityBattle(targetBattler, gBattleMons[targetBattler].ability);
+                gSpecialStatuses[targetBattler].flytrapRedirected = TRUE;
+            }
         }
         break;
     case MOVE_TARGET_DEPENDS:
@@ -8840,6 +8916,19 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
                 basePower = 200;
         }
         break;
+    case EFFECT_REVERBERATE:
+        if (IsDoubleBattle())
+        {
+            if(gProtectStructs[BATTLE_PARTNER(gBattlerAttacker)].usedSoundMove || gProtectStructs[BATTLE_PARTNER(gBattlerTarget)].usedSoundMove)
+            {
+                basePower *= 3/2;
+            }
+        }
+        if(gProtectStructs[gBattlerTarget].usedSoundMove)
+        {
+            basePower *= 3/2;
+        }
+
     case EFFECT_PAYBACK:
         if (GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef)
             && (B_PAYBACK_SWITCH_BOOST < GEN_5 || gDisableStructs[battlerDef].isFirstTurn != 2))
@@ -9002,7 +9091,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
     if (gSpecialStatuses[battlerAtk].gemBoost)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.0) + sPercentToModifier[gSpecialStatuses[battlerAtk].gemParam]);
     if (gStatuses3[battlerAtk] & STATUS3_CHARGED_UP && moveType == TYPE_ELECTRIC)
-        modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
+        {
+        modifier = uq4_12_multiply(modifier, GetChargeModifier(battlerAtk));
+        gDisableStructs[battlerAtk].chargeTimer = 0;
+        }
     if (gStatuses3[battlerAtk] & STATUS3_ME_FIRST)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
     if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_GRASSY_TERRAIN) && moveType == TYPE_GRASS)
@@ -9025,6 +9117,8 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
     if(gMovesInfo[move].effect == EFFECT_SKYSTRIKE && (IsBattlerGrounded(battlerDef) == FALSE))
         {modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));}
+    if (gMovesInfo[move].gravityBoosted && (gFieldStatuses & STATUS_FIELD_GRAVITY))
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
 
     // attacker's abilities
     switch (atkAbility)
@@ -9192,6 +9286,8 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
     case ABILITY_SUPREME_OVERLORD:
         modifier = uq4_12_multiply(modifier, GetSupremeOverlordModifier(battlerAtk));
         break;
+    case ABILITY_MOMENTUM:
+        modifier = uq4_12_multiply(modifier, GetRecursionModifier(battlerAtk));
     }
 
     // field abilities
@@ -10383,7 +10479,7 @@ s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 ma
             dmg = 1;
         break;
     case UQ_4_12(4.0):
-        dmg = maxHp / 2;
+        dmg = maxHp / 4;
         if (dmg == 0)
             dmg = 1;
         break;

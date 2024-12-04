@@ -1775,7 +1775,7 @@
 #define SPECIES_CHAMEDIAN                               1663
 #define SPECIES_FUNGWALL                                1664
 #define SPECIES_PALMELISK                               1665
-#define SPECIES_GRUBDENT                                1666
+#define SPECIES_GLIRUB                                  1666
 #define SPECIES_COLEOX                                  1667
 #define SPECIES_DOZENCULUS                              1668
 #define SPECIES_CAPRALEO                                1669
@@ -1848,8 +1848,8 @@
 #define SPECIES_BINGBANG                                1752
 #define SPECIES_SALAMANCER                              1753
 #define SPECIES_ALCHEMANDER                             1754
-#define SPECIES_CREACHSIR                               1755
-#define SPECIES_BEASTER                                 1756
+#define SPECIES_EIGHT_BITE                              1755
+#define SPECIES_SIXTY_FOUR_BITE                         1756
 #define SPECIES_VICTOREX                                1757
 #define SPECIES_BAOBABY                                 1758
 #define SPECIES_BAOBABOON                               1759

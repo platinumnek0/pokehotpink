@@ -437,6 +437,17 @@ const struct SpriteTemplate gBulletSeedSpriteTemplate =
     .callback = AnimBulletSeed,
 };
 
+// scale shot
+const struct SpriteTemplate gSpriteTemplate_ScaleShotScaleButGood = {
+    .tileTag = ANIM_TAG_SCALE,
+    .paletteTag = ANIM_TAG_SHELL_RIGHT,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gBulletSeedAffineAnimTable,
+    .callback = AnimBulletSeed,
+};
+
 const union AffineAnimCmd gRazorWindTornadoAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x100, 0, 0),

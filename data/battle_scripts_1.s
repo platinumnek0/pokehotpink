@@ -185,6 +185,41 @@ BattleScript_EffectChillyReceptionTrySwitchWeatherFailed:
 	call BattleScript_EffectChillyReceptionPlayAnimation
 	return
 
+BattleScript_EffectWarmWelcome::
+	printstring STRINGID_WARMWELCOME
+	waitmessage B_WAIT_TIME_LONG
+	attackcanceler
+	ppreduce
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_EffectWarmWelcomeBlockedByPrimalSun
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_EffectWarmWelcomeBlockedByPrimalRain
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_EffectWarmWelcomeBlockedByStrongWinds
+	call BattleScript_EffectWarmWelcomePlayAnimation
+	setsunny
+	call BattleScript_MoveWeatherChangeRet
+	goto BattleScript_MoveSwitch
+BattleScript_EffectWarmWelcomePlayAnimation:
+	attackstring
+	attackanimation
+	waitanimation
+	return
+BattleScript_EffectWarmWelcomeBlockedByPrimalSun:
+	call BattleScript_EffectWarmWelcomeTrySwitchWeatherFailed
+	call BattleScript_ExtremelyHarshSunlightWasNotLessenedRet
+	goto BattleScript_MoveSwitch
+BattleScript_EffectWarmWelcomeBlockedByPrimalRain:
+	call BattleScript_EffectWarmWelcomeTrySwitchWeatherFailed
+	call BattleScript_NoReliefFromHeavyRainRet
+	goto BattleScript_MoveSwitch
+BattleScript_EffectWarmWelcomeBlockedByStrongWinds:
+	call BattleScript_EffectWarmWelcomeTrySwitchWeatherFailed
+	call BattleScript_MysteriousAirCurrentBlowsOnRet
+	goto BattleScript_MoveSwitch
+BattleScript_EffectWarmWelcomeTrySwitchWeatherFailed:
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_FailedFromAtkString
+	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_FailedFromAtkString
+	call BattleScript_EffectWarmWelcomePlayAnimation
+	return
+
 BattleScript_CheckPrimalWeather:
 	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_ExtremelyHarshSunlightWasNotLessened
 	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRain
@@ -2709,6 +2744,28 @@ BattleScript_GravityLoopEnd:
 	moveendto MOVEEND_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_GravityLoop
 	end
+
+BattleScript_QuantumShiftSwitchIn::
+	call BattleScript_AbilityPopUp
+	playanimation BS_BATTLER_0, B_ANIM_GRAVITY
+	waitanimation
+	printstring STRINGID_GRAVITYINTENSIFIED
+	waitmessage B_WAIT_TIME_LONG
+	selectfirstvalidtarget
+	goto BattleScript_QuantumShiftLoop
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_QuantumShiftLoop:
+	movevaluescleanup
+	jumpifstatus3 BS_TARGET, STATUS3_ON_AIR | STATUS3_MAGNET_RISE | STATUS3_TELEKINESIS, BattleScript_QuantumShiftLoopDrop
+	goto BattleScript_QuamtumShiftLoopEnd
+BattleScript_QuantumShiftLoopDrop:
+	bringdownairbornebattler BS_TARGET
+	printstring STRINGID_GRAVITYGROUNDING
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_QuamtumShiftLoopEnd:
+	moveendto MOVEEND_NEXT_TARGET
+	jumpifnexttargetvalid BattleScript_QuantumShiftLoop
+	end3
 
 BattleScript_EffectRoost::
 	attackcanceler
@@ -10192,5 +10249,16 @@ BattleScript_MoltNoStatus::
 	attackanimation
 	waitanimation
 	printstring STRINGID_MOLTED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectTransmute::
+	attackcanceler
+	attackstring
+	ppreduce
+	settypetorandomweakness BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_TARGETCHANGEDTYPE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd

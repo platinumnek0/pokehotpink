@@ -5592,6 +5592,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     s16 *arrayPtr = ptr->data;
     u16 *itemPtr = &gSpecialVar_ItemId;
     bool8 cannotUseEffect;
+    bool8 evoModeNormal = TRUE;
     u8 holdEffectParam = ItemId_GetHoldEffectParam(*itemPtr);
 
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
@@ -5616,13 +5617,19 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
 
         if (holdEffectParam == 0)
             targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL);
+            
+        if (targetSpecies == SPECIES_NONE)
+            {
+                targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_CANT_STOP, ITEM_NONE, NULL);
+                evoModeNormal = FALSE;
+            }
 
         if (targetSpecies != SPECIES_NONE)
         {
             RemoveBagItem(gSpecialVar_ItemId, 1);
             FreePartyPointers();
             gCB2_AfterEvolution = gPartyMenu.exitCallback;
-            BeginEvolutionScene(mon, targetSpecies, TRUE, gPartyMenu.slotId);
+            BeginEvolutionScene(mon, targetSpecies, evoModeNormal, gPartyMenu.slotId);
             DestroyTask(taskId);
         }
         else
@@ -5797,10 +5804,17 @@ static void PartyMenuTryEvolution(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL);
+    bool8 evoModeNormal = TRUE;
 
     // Resets values to 0 so other means of teaching moves doesn't overwrite levels
     sInitialLevel = 0;
     sFinalLevel = 0;
+
+    if(targetSpecies == SPECIES_NONE)
+    {
+        targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_CANT_STOP, ITEM_NONE, NULL);
+        evoModeNormal = FALSE;
+    }
 
     if (targetSpecies != SPECIES_NONE)
     {
@@ -5809,7 +5823,7 @@ static void PartyMenuTryEvolution(u8 taskId)
             gCB2_AfterEvolution = CB2_ReturnToPartyMenuUsingRareCandy;
         else
             gCB2_AfterEvolution = gPartyMenu.exitCallback;
-        BeginEvolutionScene(mon, targetSpecies, TRUE, gPartyMenu.slotId);
+        BeginEvolutionScene(mon, targetSpecies, evoModeNormal, gPartyMenu.slotId);
         DestroyTask(taskId);
     }
     else
