@@ -121,506 +121,499 @@ beaston_lab_Intro::
 # 66 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 1
 # 67 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_Intro_Text_0, MSGBOX_AUTOCLOSE
+	speakername beaston_lab_Intro_Text_0
 # 68 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
+	msgbox beaston_lab_Intro_Text_1, MSGBOX_AUTOCLOSE
 # 69 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_standAround
+	waitmessage
 # 70 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
+	speakername NULL
 # 71 "data/maps/beaston_pokemonLab/scripts.pory"
-	release
+	applymovement 1, beaston_lab_quigley_standAround
 # 72 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 73 "data/maps/beaston_pokemonLab/scripts.pory"
+	release
+# 74 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 
-# 75 "data/maps/beaston_pokemonLab/scripts.pory"
+# 77 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_player_walkUp:
-# 76 "data/maps/beaston_pokemonLab/scripts.pory"
+# 78 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 76 "data/maps/beaston_pokemonLab/scripts.pory"
+# 78 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 76 "data/maps/beaston_pokemonLab/scripts.pory"
+# 78 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 76 "data/maps/beaston_pokemonLab/scripts.pory"
+# 78 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
 	step_end
 
-# 79 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_quigley_lookAround:
-# 80 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_right
 # 81 "data/maps/beaston_pokemonLab/scripts.pory"
-	delay_4
+beaston_lab_quigley_lookAround:
 # 82 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_down
+	walk_in_place_right
 # 83 "data/maps/beaston_pokemonLab/scripts.pory"
 	delay_4
 # 84 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_up
+	walk_in_place_down
 # 85 "data/maps/beaston_pokemonLab/scripts.pory"
 	delay_4
 # 86 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_left
+	walk_in_place_up
 # 87 "data/maps/beaston_pokemonLab/scripts.pory"
-	delay_8
+	delay_4
 # 88 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_in_place_left
+# 89 "data/maps/beaston_pokemonLab/scripts.pory"
+	delay_8
+# 90 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_down
 	step_end
 
-# 90 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_quigley_standAround:
-# 91 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 91 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
 # 92 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_quigley_standAround:
+# 93 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 93 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 94 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_down
 	step_end
 
 beaston_lab_quigley_dialogue::
-# 96 "data/maps/beaston_pokemonLab/scripts.pory"
+# 98 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_Intro_Text_0
+# 99 "data/maps/beaston_pokemonLab/scripts.pory"
 	compare VAR_LITTLEROOT_INTRO_STATE, 5
-	goto_if_eq beaston_lab_quigley_dialogue_1
-# 104 "data/maps/beaston_pokemonLab/scripts.pory"
+	goto_if_eq beaston_lab_quigley_dialogue_2
+# 107 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_quigley_dialogue_Text_1, MSGBOX_NPC
+beaston_lab_quigley_dialogue_1:
+# 109 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
 	return
 
-beaston_lab_quigley_dialogue_1:
-# 98 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_quigley_dialogue_2:
+# 101 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_quigley_dialogue_Text_0, MSGBOX_NPC
-# 99 "data/maps/beaston_pokemonLab/scripts.pory"
+# 102 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 100 "data/maps/beaston_pokemonLab/scripts.pory"
+# 103 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 1, lookDown
-	return
+	goto beaston_lab_quigley_dialogue_1
 
 
 beaston_lab_quigley_stopExit_left::
-# 109 "data/maps/beaston_pokemonLab/scripts.pory"
-	lockall
-# 110 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, playerSurprise
-# 111 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_quigley_stopExit_left_Text_0, MSGBOX_AUTOCLOSE
-# 112 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
 # 113 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_grab_left
+	lockall
 # 114 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
+	applymovement 1, playerSurprise
 # 115 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_quigley_stopExit_left_Text_1, MSGBOX_AUTOCLOSE
+	speakername beaston_lab_Intro_Text_0
 # 116 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
+	msgbox beaston_lab_quigley_stopExit_left_Text_0, MSGBOX_AUTOCLOSE
 # 117 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_walkBack_left
+	waitmessage
 # 118 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround
+	applymovement 1, beaston_lab_quigley_grab_left
 # 119 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 1
 # 120 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_quigley_stopExit_left_Text_1, MSGBOX_AUTOCLOSE
+# 121 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 122 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_walkBack_left
+# 123 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround
+# 124 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 125 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 126 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 
 beaston_lab_quigley_stopExit_middle::
-# 123 "data/maps/beaston_pokemonLab/scripts.pory"
-	lockall
-# 124 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, playerSurprise
-# 125 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_quigley_stopExit_left_Text_0, MSGBOX_AUTOCLOSE
-# 126 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
-# 127 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_grab_middle
-# 128 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
 # 129 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_quigley_stopExit_left_Text_1, MSGBOX_AUTOCLOSE
+	lockall
 # 130 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
+	applymovement 1, playerSurprise
 # 131 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_walkBack_middle
+	speakername beaston_lab_Intro_Text_0
 # 132 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround
+	msgbox beaston_lab_quigley_stopExit_left_Text_0, MSGBOX_AUTOCLOSE
 # 133 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
+	waitmessage
 # 134 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_grab_middle
+# 135 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 136 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_quigley_stopExit_left_Text_1, MSGBOX_AUTOCLOSE
+# 137 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 138 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_walkBack_middle
+# 139 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround
+# 140 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 141 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 142 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 
 beaston_lab_quigley_stopExit_right::
-# 137 "data/maps/beaston_pokemonLab/scripts.pory"
-	lockall
-# 138 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, playerSurprise
-# 139 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_quigley_stopExit_left_Text_0, MSGBOX_AUTOCLOSE
-# 140 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
-# 141 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_grab_right
-# 142 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
-# 143 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_quigley_stopExit_left_Text_1, MSGBOX_AUTOCLOSE
-# 144 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
 # 145 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_walkBack_right
+	lockall
 # 146 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround
+	applymovement 1, playerSurprise
 # 147 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
+	speakername beaston_lab_Intro_Text_0
 # 148 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_quigley_stopExit_left_Text_0, MSGBOX_AUTOCLOSE
+# 149 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 150 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_grab_right
+# 151 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 152 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_quigley_stopExit_left_Text_1, MSGBOX_AUTOCLOSE
+# 153 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 154 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_walkBack_right
+# 155 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround
+# 156 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 157 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 158 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 
-# 150 "data/maps/beaston_pokemonLab/scripts.pory"
+# 160 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_quigley_grab_left:
-# 151 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 151 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 151 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 151 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-	step_end
-
-# 153 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_quigley_grab_middle:
-# 154 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
-# 155 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 155 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 155 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 155 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-	step_end
-
-# 157 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_quigley_grab_right:
-# 158 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
-# 158 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
-# 159 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 159 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 159 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 159 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-	step_end
-
 # 161 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_quigley_walkBack_left:
-# 162 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 162 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 162 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 162 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
+	walk_down
+# 161 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 161 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 161 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+	step_end
+
 # 163 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_down
-	step_end
-
+beaston_lab_quigley_grab_middle:
+# 164 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_right
 # 165 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_quigley_walkBack_middle:
-# 166 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 166 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 166 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 166 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 167 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_left
-# 168 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_down
+	walk_down
+# 165 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 165 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 165 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
 	step_end
 
-# 170 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_quigley_walkBack_right:
+# 167 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_quigley_grab_right:
+# 168 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_right
+# 168 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_right
+# 169 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 169 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 169 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 169 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+	step_end
+
 # 171 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 171 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 171 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 171 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_quigley_walkBack_left:
+# 172 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
 # 172 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_left
+	walk_up
 # 172 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_left
+	walk_up
+# 172 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
 # 173 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_down
 	step_end
 
-beaston_lab_pokeballs_left::
+# 175 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_quigley_walkBack_middle:
+# 176 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 176 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 176 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 176 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
 # 177 "data/maps/beaston_pokemonLab/scripts.pory"
-	lockall
+	walk_left
 # 178 "data/maps/beaston_pokemonLab/scripts.pory"
-	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, beaston_lab_croconut
-# 179 "data/maps/beaston_pokemonLab/scripts.pory"
-	call beaston_lab_professor_appear
+	walk_in_place_down
+	step_end
+
 # 180 "data/maps/beaston_pokemonLab/scripts.pory"
-	call_if_eq VAR_FACING, DIR_EAST, beaston_lab_player_comeAround_left_side
+beaston_lab_quigley_walkBack_right:
 # 181 "data/maps/beaston_pokemonLab/scripts.pory"
-	call_if_eq VAR_FACING, DIR_SOUTH, beaston_lab_player_comeAround_left_top
+	walk_up
+# 181 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 181 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 181 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
 # 182 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_left
+# 182 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_left
+# 183 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_in_place_down
+	step_end
+
+beaston_lab_pokeballs_left::
+# 187 "data/maps/beaston_pokemonLab/scripts.pory"
+	lockall
+# 188 "data/maps/beaston_pokemonLab/scripts.pory"
+	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, beaston_lab_croconut
+# 189 "data/maps/beaston_pokemonLab/scripts.pory"
+	call beaston_lab_professor_appear
+# 190 "data/maps/beaston_pokemonLab/scripts.pory"
+	call_if_eq VAR_FACING, DIR_EAST, beaston_lab_player_comeAround_left_side
+# 191 "data/maps/beaston_pokemonLab/scripts.pory"
+	call_if_eq VAR_FACING, DIR_SOUTH, beaston_lab_player_comeAround_left_top
+# 192 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto beaston_lab_professor_intro
 	return
 
 
 beaston_lab_pokeballs_middle::
-# 185 "data/maps/beaston_pokemonLab/scripts.pory"
+# 195 "data/maps/beaston_pokemonLab/scripts.pory"
 	lockall
-# 186 "data/maps/beaston_pokemonLab/scripts.pory"
+# 196 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, beaston_lab_skrappup
-# 187 "data/maps/beaston_pokemonLab/scripts.pory"
+# 197 "data/maps/beaston_pokemonLab/scripts.pory"
 	call beaston_lab_professor_appear
-# 188 "data/maps/beaston_pokemonLab/scripts.pory"
+# 198 "data/maps/beaston_pokemonLab/scripts.pory"
 	call_if_eq VAR_FACING, DIR_NORTH, beaston_lab_player_comeAround_middle_bottom
-# 189 "data/maps/beaston_pokemonLab/scripts.pory"
+# 199 "data/maps/beaston_pokemonLab/scripts.pory"
 	call_if_eq VAR_FACING, DIR_SOUTH, beaston_lab_player_comeAround_middle_top
-# 190 "data/maps/beaston_pokemonLab/scripts.pory"
+# 200 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto beaston_lab_professor_intro
 	return
 
 
 beaston_lab_pokeballs_right::
-# 193 "data/maps/beaston_pokemonLab/scripts.pory"
+# 203 "data/maps/beaston_pokemonLab/scripts.pory"
 	lockall
-# 194 "data/maps/beaston_pokemonLab/scripts.pory"
+# 204 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 5, beaston_lab_kitfisk
-# 195 "data/maps/beaston_pokemonLab/scripts.pory"
+# 205 "data/maps/beaston_pokemonLab/scripts.pory"
 	call beaston_lab_professor_appear
-# 196 "data/maps/beaston_pokemonLab/scripts.pory"
+# 206 "data/maps/beaston_pokemonLab/scripts.pory"
 	call_if_eq VAR_FACING, DIR_NORTH, beaston_lab_player_comeAround_right_bottom
-# 197 "data/maps/beaston_pokemonLab/scripts.pory"
+# 207 "data/maps/beaston_pokemonLab/scripts.pory"
 	call_if_eq VAR_FACING, DIR_WEST, beaston_lab_player_comeAround_right_side
-# 198 "data/maps/beaston_pokemonLab/scripts.pory"
+# 208 "data/maps/beaston_pokemonLab/scripts.pory"
 	call_if_eq VAR_FACING, DIR_SOUTH, beaston_lab_player_comeAround_right_top
-# 199 "data/maps/beaston_pokemonLab/scripts.pory"
+# 209 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto beaston_lab_professor_intro
 	return
 
 
 beaston_lab_professor_intro::
-# 203 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_professor_intro_Text_0, MSGBOX_YESNO
-# 204 "data/maps/beaston_pokemonLab/scripts.pory"
+# 213 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 214 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_professor_intro_Text_1, MSGBOX_YESNO
+# 215 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto_if_eq VAR_RESULT, NO, beaston_lab_professor_help_no
-# 205 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_professor_intro_Text_1
-# 206 "data/maps/beaston_pokemonLab/scripts.pory"
+# 216 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_professor_intro_Text_2
+# 217 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto beaston_lab_professor_starter_choice
 	return
 
 
 beaston_lab_professor_help_no::
-# 209 "data/maps/beaston_pokemonLab/scripts.pory"
+# 220 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_professor_help_no_Text_0, MSGBOX_AUTOCLOSE
-# 210 "data/maps/beaston_pokemonLab/scripts.pory"
+# 221 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 211 "data/maps/beaston_pokemonLab/scripts.pory"
+# 222 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto beaston_lab_professor_starter_choice
 	return
 
 
 beaston_lab_professor_starter_choice::
-# 214 "data/maps/beaston_pokemonLab/scripts.pory"
+# 225 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_professor_starter_choice_Text_0
-# 215 "data/maps/beaston_pokemonLab/scripts.pory"
+# 226 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 1, beaston_lab_quigley_moveAway
-# 216 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_professor_starter_choice_Text_1
-# 217 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
-# 218 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 5, beaston_lab_professor_shuffle
-# 219 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_professor_starter_choice_Text_2, MSGBOX_AUTOCLOSE
-# 220 "data/maps/beaston_pokemonLab/scripts.pory"
+# 227 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 221 "data/maps/beaston_pokemonLab/scripts.pory"
+# 228 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_Intro_Text_0
+# 229 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_professor_starter_choice_Text_1
+# 230 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 231 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 5, beaston_lab_professor_shuffle
+# 232 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 233 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 234 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_professor_starter_choice_Text_2, MSGBOX_AUTOCLOSE
+# 235 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 236 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 237 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 
-# 223 "data/maps/beaston_pokemonLab/scripts.pory"
+# 239 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_quigley_moveAway:
-# 224 "data/maps/beaston_pokemonLab/scripts.pory"
+# 240 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
-# 224 "data/maps/beaston_pokemonLab/scripts.pory"
+# 240 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
-# 225 "data/maps/beaston_pokemonLab/scripts.pory"
+# 241 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 226 "data/maps/beaston_pokemonLab/scripts.pory"
+# 242 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_down
 	step_end
 
-# 228 "data/maps/beaston_pokemonLab/scripts.pory"
+# 244 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_professor_shuffle:
-# 229 "data/maps/beaston_pokemonLab/scripts.pory"
+# 245 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_up
-# 229 "data/maps/beaston_pokemonLab/scripts.pory"
+# 245 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_up
 	step_end
 
 beaston_lab_professor_appear::
-# 233 "data/maps/beaston_pokemonLab/scripts.pory"
-	clearflag FLAG_UNUSED_0x024
-# 234 "data/maps/beaston_pokemonLab/scripts.pory"
-	setvar VAR_LITTLEROOT_INTRO_STATE, 5
-# 235 "data/maps/beaston_pokemonLab/scripts.pory"
-	addobject 5
-# 236 "data/maps/beaston_pokemonLab/scripts.pory"
-	playse SE_DOOR
-# 237 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 5, beaston_lab_professor_walkUp
-# 238 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 5
-# 239 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_faceDown
-# 240 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_professor_appear_Text_0, MSGBOX_AUTOCLOSE
-# 241 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
-# 242 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 5, beaston_lab_professor_frantic
-# 243 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 5
-# 244 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_professor_appear_Text_1, MSGBOX_AUTOCLOSE
-# 245 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
-	return
-
-
-# 247 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_professor_walkUp:
-# 248 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 248 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 248 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 248 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 248 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
 # 249 "data/maps/beaston_pokemonLab/scripts.pory"
-	delay_4
+	clearflag FLAG_UNUSED_0x024
 # 250 "data/maps/beaston_pokemonLab/scripts.pory"
-	emote_exclamation_mark
-	step_end
-
+	setvar VAR_LITTLEROOT_INTRO_STATE, 5
+# 251 "data/maps/beaston_pokemonLab/scripts.pory"
+	addobject 5
 # 252 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_professor_frantic:
+	playse SE_DOOR
 # 253 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_left
+	applymovement 5, beaston_lab_professor_walkUp
 # 254 "data/maps/beaston_pokemonLab/scripts.pory"
-	delay_4
+	waitmovement 5
 # 255 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_right
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_faceDown
 # 256 "data/maps/beaston_pokemonLab/scripts.pory"
-	delay_4
+	speakername beaston_lab_professor_appear_Text_0
 # 257 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_up
-	step_end
-
-beaston_lab_player_comeAround_left_side::
+	msgbox beaston_lab_professor_appear_Text_1, MSGBOX_AUTOCLOSE
+# 258 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 259 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 5, beaston_lab_professor_frantic
+# 260 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 5
 # 261 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_left_side
+	msgbox beaston_lab_professor_appear_Text_2, MSGBOX_AUTOCLOSE
 # 262 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement OBJ_EVENT_ID_PLAYER
+	waitmessage
 	return
 
 
 # 264 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_player_walkDown_left_side:
+beaston_lab_professor_walkUp:
 # 265 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
+	walk_up
 # 265 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
+	walk_up
+# 265 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 265 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 265 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
 # 266 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
-# 266 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
+	delay_4
 # 267 "data/maps/beaston_pokemonLab/scripts.pory"
+	emote_exclamation_mark
+	step_end
+
+# 269 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_professor_frantic:
+# 270 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_in_place_left
+# 271 "data/maps/beaston_pokemonLab/scripts.pory"
+	delay_4
+# 272 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_in_place_right
+# 273 "data/maps/beaston_pokemonLab/scripts.pory"
+	delay_4
+# 274 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_in_place_up
+	step_end
+
+beaston_lab_player_comeAround_left_side::
+# 278 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_left_side
+# 279 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+	return
+
+
+# 281 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_player_walkDown_left_side:
+# 282 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 282 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 283 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_right
+# 283 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_right
+# 284 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_down
 	step_end
 
 beaston_lab_player_comeAround_left_top::
-# 270 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_left_top
-# 271 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement OBJ_EVENT_ID_PLAYER
-	return
-
-
-# 273 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_player_walkDown_left_top:
-# 274 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_left
-# 275 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 275 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 275 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 276 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
-# 276 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
-# 277 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_down
-	step_end
-
-beaston_lab_player_comeAround_middle_bottom::
-# 280 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_middle_bottom
-# 281 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement OBJ_EVENT_ID_PLAYER
-	return
-
-
-# 283 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_player_walkDown_middle_bottom:
-# 284 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-	step_end
-
-beaston_lab_player_comeAround_middle_top::
 # 287 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_middle_top
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_left_top
 # 288 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
 	return
 
 
 # 290 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_player_walkDown_middle_top:
+beaston_lab_player_walkDown_left_top:
 # 291 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
-# 291 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
+	walk_left
 # 292 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
 # 292 "data/maps/beaston_pokemonLab/scripts.pory"
@@ -628,39 +621,45 @@ beaston_lab_player_walkDown_middle_top:
 # 292 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
 # 293 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_left
+	walk_right
 # 293 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_left
+	walk_right
 # 294 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_down
 	step_end
 
-beaston_lab_player_comeAround_right_bottom::
+beaston_lab_player_comeAround_middle_bottom::
 # 297 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_right_bottom
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_middle_bottom
 # 298 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
 	return
 
 
 # 300 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_player_walkDown_right_bottom:
+beaston_lab_player_walkDown_middle_bottom:
 # 301 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_left
-# 302 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
 	step_end
 
-beaston_lab_player_comeAround_right_side::
+beaston_lab_player_comeAround_middle_top::
+# 304 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_middle_top
 # 305 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_right_side
-# 306 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
 	return
 
 
+# 307 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_player_walkDown_middle_top:
 # 308 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_player_walkDown_right_side:
+	walk_right
+# 308 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_right
+# 309 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 309 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
 # 309 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
 # 310 "data/maps/beaston_pokemonLab/scripts.pory"
@@ -668,954 +667,1036 @@ beaston_lab_player_walkDown_right_side:
 # 310 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
 # 311 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
+	walk_in_place_down
 	step_end
 
-beaston_lab_player_comeAround_right_top::
+beaston_lab_player_comeAround_right_bottom::
 # 314 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_right_top
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_right_bottom
 # 315 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
 	return
 
 
 # 317 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_player_walkDown_right_top:
+beaston_lab_player_walkDown_right_bottom:
 # 318 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
-# 319 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 319 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_down
-# 320 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
-# 320 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_left
-# 321 "data/maps/beaston_pokemonLab/scripts.pory"
+# 319 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
 	step_end
 
+beaston_lab_player_comeAround_right_side::
+# 322 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_right_side
 # 323 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+	return
+
+
+# 325 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_player_walkDown_right_side:
+# 326 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 327 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_left
+# 327 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_left
+# 328 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+	step_end
+
+beaston_lab_player_comeAround_right_top::
+# 331 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkDown_right_top
+# 332 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+	return
+
+
+# 334 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_player_walkDown_right_top:
+# 335 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_right
+# 336 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 336 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+# 337 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_left
+# 337 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_left
+# 338 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_down
+	step_end
+
+# 340 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_player_faceDown:
-# 324 "data/maps/beaston_pokemonLab/scripts.pory"
+# 341 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_down
 	step_end
 
 beaston_lab_croconut::
-# 328 "data/maps/beaston_pokemonLab/scripts.pory"
+# 345 "data/maps/beaston_pokemonLab/scripts.pory"
 	lockall
-# 329 "data/maps/beaston_pokemonLab/scripts.pory"
+# 346 "data/maps/beaston_pokemonLab/scripts.pory"
 	showmonpic SPECIES_CROCONUT, 10, 3
-# 330 "data/maps/beaston_pokemonLab/scripts.pory"
+# 347 "data/maps/beaston_pokemonLab/scripts.pory"
 	playmoncry SPECIES_CROCONUT, CRY_MODE_NORMAL
-# 331 "data/maps/beaston_pokemonLab/scripts.pory"
+# 348 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 349 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_croconut_Text_0
-# 332 "data/maps/beaston_pokemonLab/scripts.pory"
+# 350 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_croconut_Text_1, MSGBOX_YESNO
-# 333 "data/maps/beaston_pokemonLab/scripts.pory"
+# 351 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto_if_eq VAR_RESULT, YES, beaston_lab_chose_croconut
-# 334 "data/maps/beaston_pokemonLab/scripts.pory"
+# 352 "data/maps/beaston_pokemonLab/scripts.pory"
 	hidemonpic
-# 335 "data/maps/beaston_pokemonLab/scripts.pory"
+# 353 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 
 beaston_lab_chose_croconut::
-# 338 "data/maps/beaston_pokemonLab/scripts.pory"
-	hidemonpic
-# 339 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_chose_croconut_Text_0, MSGBOX_AUTOCLOSE
-# 340 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
-# 341 "data/maps/beaston_pokemonLab/scripts.pory"
-	givemon SPECIES_CROCONUT, 5
-# 342 "data/maps/beaston_pokemonLab/scripts.pory"
-	setflag FLAG_SYS_POKEMON_GET
-# 343 "data/maps/beaston_pokemonLab/scripts.pory"
-	setvar VAR_STARTER_MON, 1
-# 344 "data/maps/beaston_pokemonLab/scripts.pory"
-	setflag FLAG_UNUSED_0x025
-# 345 "data/maps/beaston_pokemonLab/scripts.pory"
-	removeobject 3
-# 346 "data/maps/beaston_pokemonLab/scripts.pory"
-	playfanfare MUS_EVOLVED
-# 347 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_chose_croconut_Text_1, MSGBOX_AUTOCLOSE
-# 348 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitfanfare
-# 349 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
-# 350 "data/maps/beaston_pokemonLab/scripts.pory"
-	call_if_eq VAR_FACING, DIR_EAST, beaston_lab_choseCroconut_WalkAroundLeft
-# 351 "data/maps/beaston_pokemonLab/scripts.pory"
-	call_if_eq VAR_FACING, DIR_SOUTH, beaston_lab_choseCroconut_WalkAroundTop
-# 352 "data/maps/beaston_pokemonLab/scripts.pory"
-	call beaston_lab_nicknameStarter
-# 353 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_approach_croconut
-# 354 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, look_left
-# 355 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
 # 356 "data/maps/beaston_pokemonLab/scripts.pory"
-	call beaston_lab_quigleyBattle
+	hidemonpic
 # 357 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_leaveCroconut
+	msgbox beaston_lab_chose_croconut_Text_0, MSGBOX_AUTOCLOSE
 # 358 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
+	waitmessage
 # 359 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 5, look_down
+	givemon SPECIES_CROCONUT, 5
 # 360 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_leave
+	setflag FLAG_SYS_POKEMON_GET
 # 361 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
+	setvar VAR_STARTER_MON, 1
 # 362 "data/maps/beaston_pokemonLab/scripts.pory"
+	setflag FLAG_UNUSED_0x025
+# 363 "data/maps/beaston_pokemonLab/scripts.pory"
+	removeobject 3
+# 364 "data/maps/beaston_pokemonLab/scripts.pory"
+	playfanfare MUS_EVOLVED
+# 365 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 366 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_chose_croconut_Text_1, MSGBOX_AUTOCLOSE
+# 367 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitfanfare
+# 368 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 369 "data/maps/beaston_pokemonLab/scripts.pory"
+	call_if_eq VAR_FACING, DIR_EAST, beaston_lab_choseCroconut_WalkAroundLeft
+# 370 "data/maps/beaston_pokemonLab/scripts.pory"
+	call_if_eq VAR_FACING, DIR_SOUTH, beaston_lab_choseCroconut_WalkAroundTop
+# 371 "data/maps/beaston_pokemonLab/scripts.pory"
+	call beaston_lab_nicknameStarter
+# 372 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_approach_croconut
+# 373 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, look_left
+# 374 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 375 "data/maps/beaston_pokemonLab/scripts.pory"
+	call beaston_lab_quigleyBattle
+# 376 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_leaveCroconut
+# 377 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 378 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 5, look_down
+# 379 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_leave
+# 380 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 381 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto beaston_lab_cokbern_AfterBattle
 	return
 
 
 beaston_lab_skrappup::
-# 365 "data/maps/beaston_pokemonLab/scripts.pory"
+# 384 "data/maps/beaston_pokemonLab/scripts.pory"
 	lockall
-# 366 "data/maps/beaston_pokemonLab/scripts.pory"
+# 385 "data/maps/beaston_pokemonLab/scripts.pory"
 	showmonpic SPECIES_SKRAPPUP, 10, 3
-# 367 "data/maps/beaston_pokemonLab/scripts.pory"
+# 386 "data/maps/beaston_pokemonLab/scripts.pory"
 	playmoncry SPECIES_SKRAPPUP, CRY_MODE_NORMAL
-# 368 "data/maps/beaston_pokemonLab/scripts.pory"
+# 387 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 388 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_skrappup_Text_0
-# 369 "data/maps/beaston_pokemonLab/scripts.pory"
+# 389 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_skrappup_Text_1, MSGBOX_YESNO
-# 370 "data/maps/beaston_pokemonLab/scripts.pory"
+# 390 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto_if_eq VAR_RESULT, YES, beaston_lab_chose_skrappup
-# 371 "data/maps/beaston_pokemonLab/scripts.pory"
+# 391 "data/maps/beaston_pokemonLab/scripts.pory"
 	hidemonpic
-# 372 "data/maps/beaston_pokemonLab/scripts.pory"
+# 392 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 
 beaston_lab_chose_skrappup::
-# 375 "data/maps/beaston_pokemonLab/scripts.pory"
-	hidemonpic
-# 376 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_chose_skrappup_Text_0, MSGBOX_AUTOCLOSE
-# 377 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
-# 378 "data/maps/beaston_pokemonLab/scripts.pory"
-	givemon SPECIES_SKRAPPUP, 5
-# 379 "data/maps/beaston_pokemonLab/scripts.pory"
-	setflag FLAG_SYS_POKEMON_GET
-# 380 "data/maps/beaston_pokemonLab/scripts.pory"
-	setvar VAR_STARTER_MON, 2
-# 381 "data/maps/beaston_pokemonLab/scripts.pory"
-	setflag FLAG_UNUSED_0x026
-# 382 "data/maps/beaston_pokemonLab/scripts.pory"
-	removeobject 2
-# 383 "data/maps/beaston_pokemonLab/scripts.pory"
-	playfanfare MUS_EVOLVED
-# 384 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_chose_skrappup_Text_1, MSGBOX_AUTOCLOSE
-# 385 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitfanfare
-# 386 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
-# 387 "data/maps/beaston_pokemonLab/scripts.pory"
-	call_if_eq VAR_FACING, DIR_SOUTH, beaston_lab_choseSkrappup_WalkAroundTop
-# 388 "data/maps/beaston_pokemonLab/scripts.pory"
-	call beaston_lab_nicknameStarter
-# 389 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_approach_skrappup
-# 390 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, look_left
-# 391 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
-# 392 "data/maps/beaston_pokemonLab/scripts.pory"
-	call beaston_lab_quigleyBattle
-# 393 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_leaveSkrappup
-# 394 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
 # 395 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 5, look_down
+	hidemonpic
 # 396 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_leave
+	msgbox beaston_lab_chose_skrappup_Text_0, MSGBOX_AUTOCLOSE
 # 397 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
+	waitmessage
 # 398 "data/maps/beaston_pokemonLab/scripts.pory"
+	givemon SPECIES_SKRAPPUP, 5
+# 399 "data/maps/beaston_pokemonLab/scripts.pory"
+	setflag FLAG_SYS_POKEMON_GET
+# 400 "data/maps/beaston_pokemonLab/scripts.pory"
+	setvar VAR_STARTER_MON, 2
+# 401 "data/maps/beaston_pokemonLab/scripts.pory"
+	setflag FLAG_UNUSED_0x026
+# 402 "data/maps/beaston_pokemonLab/scripts.pory"
+	removeobject 2
+# 403 "data/maps/beaston_pokemonLab/scripts.pory"
+	playfanfare MUS_EVOLVED
+# 404 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 405 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_chose_skrappup_Text_1, MSGBOX_AUTOCLOSE
+# 406 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitfanfare
+# 407 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 408 "data/maps/beaston_pokemonLab/scripts.pory"
+	call_if_eq VAR_FACING, DIR_SOUTH, beaston_lab_choseSkrappup_WalkAroundTop
+# 409 "data/maps/beaston_pokemonLab/scripts.pory"
+	call beaston_lab_nicknameStarter
+# 410 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_approach_skrappup
+# 411 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, look_left
+# 412 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 413 "data/maps/beaston_pokemonLab/scripts.pory"
+	call beaston_lab_quigleyBattle
+# 414 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_leaveSkrappup
+# 415 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 416 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 5, look_down
+# 417 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_leave
+# 418 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 419 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto beaston_lab_cokbern_AfterBattle
 	return
 
 
 beaston_lab_kitfisk::
-# 401 "data/maps/beaston_pokemonLab/scripts.pory"
+# 422 "data/maps/beaston_pokemonLab/scripts.pory"
 	lockall
-# 402 "data/maps/beaston_pokemonLab/scripts.pory"
+# 423 "data/maps/beaston_pokemonLab/scripts.pory"
 	showmonpic SPECIES_KITFISK, 10, 3
-# 403 "data/maps/beaston_pokemonLab/scripts.pory"
+# 424 "data/maps/beaston_pokemonLab/scripts.pory"
 	playmoncry SPECIES_KITFISK, CRY_MODE_NORMAL
-# 404 "data/maps/beaston_pokemonLab/scripts.pory"
+# 425 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 426 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_kitfisk_Text_0
-# 405 "data/maps/beaston_pokemonLab/scripts.pory"
+# 427 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_kitfisk_Text_1, MSGBOX_YESNO
-# 406 "data/maps/beaston_pokemonLab/scripts.pory"
+# 428 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto_if_eq VAR_RESULT, YES, beaston_lab_chose_kitfisk
-# 407 "data/maps/beaston_pokemonLab/scripts.pory"
+# 429 "data/maps/beaston_pokemonLab/scripts.pory"
 	hidemonpic
-# 408 "data/maps/beaston_pokemonLab/scripts.pory"
+# 430 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 
 beaston_lab_chose_kitfisk::
-# 411 "data/maps/beaston_pokemonLab/scripts.pory"
-	hidemonpic
-# 412 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_chose_kitfisk_Text_0, MSGBOX_AUTOCLOSE
-# 413 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
-# 414 "data/maps/beaston_pokemonLab/scripts.pory"
-	givemon SPECIES_KITFISK, 5
-# 415 "data/maps/beaston_pokemonLab/scripts.pory"
-	setflag FLAG_SYS_POKEMON_GET
-# 416 "data/maps/beaston_pokemonLab/scripts.pory"
-	setvar VAR_STARTER_MON, 3
-# 417 "data/maps/beaston_pokemonLab/scripts.pory"
-	setflag FLAG_UNUSED_0x027
-# 418 "data/maps/beaston_pokemonLab/scripts.pory"
-	removeobject 4
-# 419 "data/maps/beaston_pokemonLab/scripts.pory"
-	playfanfare MUS_EVOLVED
-# 420 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_chose_kitfisk_Text_1, MSGBOX_AUTOCLOSE
-# 421 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitfanfare
-# 422 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmessage
-# 423 "data/maps/beaston_pokemonLab/scripts.pory"
-	call_if_eq VAR_FACING, DIR_WEST, beaston_lab_choseKitfisk_WalkAroundRight
-# 424 "data/maps/beaston_pokemonLab/scripts.pory"
-	call_if_eq VAR_FACING, DIR_SOUTH, beaston_lab_choseKitfisk_WalkAroundTop
-# 425 "data/maps/beaston_pokemonLab/scripts.pory"
-	call beaston_lab_nicknameStarter
-# 426 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_approach_kitfisk
-# 427 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, look_left
-# 428 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
-# 429 "data/maps/beaston_pokemonLab/scripts.pory"
-	call beaston_lab_quigleyBattle
-# 430 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_leaveKitfisk
-# 431 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
-# 432 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 5, look_down
 # 433 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 1, beaston_lab_quigley_leave
+	hidemonpic
 # 434 "data/maps/beaston_pokemonLab/scripts.pory"
-	waitmovement 1
+	msgbox beaston_lab_chose_kitfisk_Text_0, MSGBOX_AUTOCLOSE
 # 435 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 436 "data/maps/beaston_pokemonLab/scripts.pory"
+	givemon SPECIES_KITFISK, 5
+# 437 "data/maps/beaston_pokemonLab/scripts.pory"
+	setflag FLAG_SYS_POKEMON_GET
+# 438 "data/maps/beaston_pokemonLab/scripts.pory"
+	setvar VAR_STARTER_MON, 3
+# 439 "data/maps/beaston_pokemonLab/scripts.pory"
+	setflag FLAG_UNUSED_0x027
+# 440 "data/maps/beaston_pokemonLab/scripts.pory"
+	removeobject 4
+# 441 "data/maps/beaston_pokemonLab/scripts.pory"
+	playfanfare MUS_EVOLVED
+# 442 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 443 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_chose_kitfisk_Text_1, MSGBOX_AUTOCLOSE
+# 444 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitfanfare
+# 445 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 446 "data/maps/beaston_pokemonLab/scripts.pory"
+	call_if_eq VAR_FACING, DIR_WEST, beaston_lab_choseKitfisk_WalkAroundRight
+# 447 "data/maps/beaston_pokemonLab/scripts.pory"
+	call_if_eq VAR_FACING, DIR_SOUTH, beaston_lab_choseKitfisk_WalkAroundTop
+# 448 "data/maps/beaston_pokemonLab/scripts.pory"
+	call beaston_lab_nicknameStarter
+# 449 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_approach_kitfisk
+# 450 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, look_left
+# 451 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 452 "data/maps/beaston_pokemonLab/scripts.pory"
+	call beaston_lab_quigleyBattle
+# 453 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_leaveKitfisk
+# 454 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 455 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 5, look_down
+# 456 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 1, beaston_lab_quigley_leave
+# 457 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmovement 1
+# 458 "data/maps/beaston_pokemonLab/scripts.pory"
 	goto beaston_lab_cokbern_AfterBattle
 	return
 
 
-# 438 "data/maps/beaston_pokemonLab/scripts.pory"
+# 461 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_choseCroconut_facingRight:
-# 439 "data/maps/beaston_pokemonLab/scripts.pory"
+# 462 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 439 "data/maps/beaston_pokemonLab/scripts.pory"
+# 462 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 440 "data/maps/beaston_pokemonLab/scripts.pory"
+# 463 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
 	step_end
 
-# 442 "data/maps/beaston_pokemonLab/scripts.pory"
+# 465 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_choseCroconut_facingDown:
-# 443 "data/maps/beaston_pokemonLab/scripts.pory"
+# 466 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
-# 444 "data/maps/beaston_pokemonLab/scripts.pory"
+# 467 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 444 "data/maps/beaston_pokemonLab/scripts.pory"
+# 467 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 445 "data/maps/beaston_pokemonLab/scripts.pory"
+# 468 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
 	step_end
 
-# 447 "data/maps/beaston_pokemonLab/scripts.pory"
+# 470 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_choseSkrappup_facingDown:
-# 448 "data/maps/beaston_pokemonLab/scripts.pory"
+# 471 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
-# 448 "data/maps/beaston_pokemonLab/scripts.pory"
+# 471 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
-# 449 "data/maps/beaston_pokemonLab/scripts.pory"
+# 472 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 449 "data/maps/beaston_pokemonLab/scripts.pory"
+# 472 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 450 "data/maps/beaston_pokemonLab/scripts.pory"
+# 473 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
-# 450 "data/maps/beaston_pokemonLab/scripts.pory"
+# 473 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
 	step_end
 
-# 452 "data/maps/beaston_pokemonLab/scripts.pory"
+# 475 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_choseKitfisk_facingLeft:
-# 453 "data/maps/beaston_pokemonLab/scripts.pory"
+# 476 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 453 "data/maps/beaston_pokemonLab/scripts.pory"
+# 476 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 454 "data/maps/beaston_pokemonLab/scripts.pory"
+# 477 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
 	step_end
 
-# 456 "data/maps/beaston_pokemonLab/scripts.pory"
+# 479 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_choseKitfisk_facingDown:
-# 457 "data/maps/beaston_pokemonLab/scripts.pory"
+# 480 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
-# 458 "data/maps/beaston_pokemonLab/scripts.pory"
+# 481 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 458 "data/maps/beaston_pokemonLab/scripts.pory"
+# 481 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 459 "data/maps/beaston_pokemonLab/scripts.pory"
+# 482 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
 	step_end
 
 beaston_lab_choseCroconut_WalkAroundLeft::
-# 463 "data/maps/beaston_pokemonLab/scripts.pory"
+# 486 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_choseCroconut_facingRight
-# 464 "data/maps/beaston_pokemonLab/scripts.pory"
+# 487 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
 	return
 
 
 beaston_lab_choseCroconut_WalkAroundTop::
-# 467 "data/maps/beaston_pokemonLab/scripts.pory"
+# 490 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_choseCroconut_facingDown
-# 468 "data/maps/beaston_pokemonLab/scripts.pory"
+# 491 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
 	return
 
 
 beaston_lab_choseSkrappup_WalkAroundTop::
-# 471 "data/maps/beaston_pokemonLab/scripts.pory"
+# 494 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_choseSkrappup_facingDown
-# 472 "data/maps/beaston_pokemonLab/scripts.pory"
+# 495 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
 	return
 
 
 beaston_lab_choseKitfisk_WalkAroundRight::
-# 475 "data/maps/beaston_pokemonLab/scripts.pory"
+# 498 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_choseKitfisk_facingLeft
-# 476 "data/maps/beaston_pokemonLab/scripts.pory"
+# 499 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
 	return
 
 
 beaston_lab_choseKitfisk_WalkAroundTop::
-# 479 "data/maps/beaston_pokemonLab/scripts.pory"
+# 502 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_choseKitfisk_facingDown
-# 480 "data/maps/beaston_pokemonLab/scripts.pory"
+# 503 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
 	return
 
 
 beaston_lab_nicknameStarter::
-# 484 "data/maps/beaston_pokemonLab/scripts.pory"
+# 507 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 508 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, lookDown
-# 485 "data/maps/beaston_pokemonLab/scripts.pory"
+# 509 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_nicknameStarter_Text_0, MSGBOX_YESNO
-# 486 "data/maps/beaston_pokemonLab/scripts.pory"
+# 510 "data/maps/beaston_pokemonLab/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq beaston_lab_nicknameStarter_2
-# 491 "data/maps/beaston_pokemonLab/scripts.pory"
+# 515 "data/maps/beaston_pokemonLab/scripts.pory"
 	compare VAR_RESULT, NO
 	goto_if_eq beaston_lab_nicknameStarter_3
 beaston_lab_nicknameStarter_1:
-# 495 "data/maps/beaston_pokemonLab/scripts.pory"
+# 519 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
-# 496 "data/maps/beaston_pokemonLab/scripts.pory"
+# 520 "data/maps/beaston_pokemonLab/scripts.pory"
 	call beaston_lab_battleSetup
 	return
 
 beaston_lab_nicknameStarter_2:
-# 488 "data/maps/beaston_pokemonLab/scripts.pory"
+# 512 "data/maps/beaston_pokemonLab/scripts.pory"
 	call Common_EventScript_GetGiftMonPartySlot
-# 489 "data/maps/beaston_pokemonLab/scripts.pory"
+# 513 "data/maps/beaston_pokemonLab/scripts.pory"
 	call Common_EventScript_NameReceivedPartyMon
 	goto beaston_lab_nicknameStarter_1
 
 beaston_lab_nicknameStarter_3:
-# 493 "data/maps/beaston_pokemonLab/scripts.pory"
+# 517 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_nicknameStarter_Text_1, MSGBOX_AUTOCLOSE
 	goto beaston_lab_nicknameStarter_1
 
 
-# 499 "data/maps/beaston_pokemonLab/scripts.pory"
+# 523 "data/maps/beaston_pokemonLab/scripts.pory"
 lookDown:
-# 500 "data/maps/beaston_pokemonLab/scripts.pory"
+# 524 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_down
 	step_end
 
 beaston_lab_battleSetup::
-# 504 "data/maps/beaston_pokemonLab/scripts.pory"
+# 528 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_battleSetup_Text_0, MSGBOX_AUTOCLOSE
-# 505 "data/maps/beaston_pokemonLab/scripts.pory"
+# 529 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_professor_frantic
-# 506 "data/maps/beaston_pokemonLab/scripts.pory"
+# 530 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 507 "data/maps/beaston_pokemonLab/scripts.pory"
+# 531 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, playerSurprise
-# 508 "data/maps/beaston_pokemonLab/scripts.pory"
+# 532 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_battleSetup_Text_1, MSGBOX_AUTOCLOSE
-# 509 "data/maps/beaston_pokemonLab/scripts.pory"
+# 533 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 510 "data/maps/beaston_pokemonLab/scripts.pory"
+# 534 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 1, beaston_lab_quigley_shuffle
-# 511 "data/maps/beaston_pokemonLab/scripts.pory"
+# 535 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_Intro_Text_0
+# 536 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_battleSetup_Text_2, MSGBOX_AUTOCLOSE
-# 512 "data/maps/beaston_pokemonLab/scripts.pory"
+# 537 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 513 "data/maps/beaston_pokemonLab/scripts.pory"
+# 538 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_professor_shuffle
-# 514 "data/maps/beaston_pokemonLab/scripts.pory"
+# 539 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 540 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_battleSetup_Text_3
-# 515 "data/maps/beaston_pokemonLab/scripts.pory"
+# 541 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 516 "data/maps/beaston_pokemonLab/scripts.pory"
+# 542 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 1, beaston_lab_quigley_shuffle
-# 517 "data/maps/beaston_pokemonLab/scripts.pory"
+# 543 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_Intro_Text_0
+# 544 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_battleSetup_Text_4
 	return
 
 
-# 520 "data/maps/beaston_pokemonLab/scripts.pory"
+# 547 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_quigley_shuffle:
-# 521 "data/maps/beaston_pokemonLab/scripts.pory"
+# 548 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_down
-# 521 "data/maps/beaston_pokemonLab/scripts.pory"
+# 548 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_down
 	step_end
 
-# 524 "data/maps/beaston_pokemonLab/scripts.pory"
+# 551 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_quigley_approach_croconut:
-# 525 "data/maps/beaston_pokemonLab/scripts.pory"
+# 552 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 526 "data/maps/beaston_pokemonLab/scripts.pory"
+# 553 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
 	step_end
 
-# 528 "data/maps/beaston_pokemonLab/scripts.pory"
+# 555 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_quigley_approach_skrappup:
-# 529 "data/maps/beaston_pokemonLab/scripts.pory"
+# 556 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 530 "data/maps/beaston_pokemonLab/scripts.pory"
+# 557 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
-# 530 "data/maps/beaston_pokemonLab/scripts.pory"
+# 557 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
 	step_end
 
-# 532 "data/maps/beaston_pokemonLab/scripts.pory"
+# 559 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_quigley_approach_kitfisk:
-# 533 "data/maps/beaston_pokemonLab/scripts.pory"
+# 560 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 534 "data/maps/beaston_pokemonLab/scripts.pory"
+# 561 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
-# 534 "data/maps/beaston_pokemonLab/scripts.pory"
+# 561 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
-# 534 "data/maps/beaston_pokemonLab/scripts.pory"
+# 561 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
 	step_end
 
-# 537 "data/maps/beaston_pokemonLab/scripts.pory"
+# 564 "data/maps/beaston_pokemonLab/scripts.pory"
 look_left:
-# 538 "data/maps/beaston_pokemonLab/scripts.pory"
+# 565 "data/maps/beaston_pokemonLab/scripts.pory"
 	face_left
 	step_end
 
-# 540 "data/maps/beaston_pokemonLab/scripts.pory"
+# 567 "data/maps/beaston_pokemonLab/scripts.pory"
 look_down:
-# 541 "data/maps/beaston_pokemonLab/scripts.pory"
+# 568 "data/maps/beaston_pokemonLab/scripts.pory"
 	face_down
 	step_end
 
-# 543 "data/maps/beaston_pokemonLab/scripts.pory"
+# 570 "data/maps/beaston_pokemonLab/scripts.pory"
 look_right:
-# 544 "data/maps/beaston_pokemonLab/scripts.pory"
+# 571 "data/maps/beaston_pokemonLab/scripts.pory"
 	face_right
 	step_end
 
 beaston_lab_quigleyBattle::
-# 548 "data/maps/beaston_pokemonLab/scripts.pory"
+# 575 "data/maps/beaston_pokemonLab/scripts.pory"
 	setvar VAR_LITTLEROOT_INTRO_STATE, 6
-# 549 "data/maps/beaston_pokemonLab/scripts.pory"
+# 576 "data/maps/beaston_pokemonLab/scripts.pory"
 	trainerbattle_single TRAINER_BRENDAN_ROUTE_103_MUDKIP, beaston_lab_quigleyBattle_Text_0, beaston_lab_quigleyBattle_Text_1, beaston_lab_PostQuigleyBattle
 	return
 
 
 beaston_lab_PostQuigleyBattle::
-# 552 "data/maps/beaston_pokemonLab/scripts.pory"
+# 579 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_professor_shuffle
-# 553 "data/maps/beaston_pokemonLab/scripts.pory"
+# 580 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, look_down
-# 554 "data/maps/beaston_pokemonLab/scripts.pory"
+# 581 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 582 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_PostQuigleyBattle_Text_0, MSGBOX_AUTOCLOSE
-# 555 "data/maps/beaston_pokemonLab/scripts.pory"
+# 583 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 556 "data/maps/beaston_pokemonLab/scripts.pory"
+# 584 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 1, beaston_lab_quigley_shuffle
-# 557 "data/maps/beaston_pokemonLab/scripts.pory"
+# 585 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_Intro_Text_0
+# 586 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_PostQuigleyBattle_Text_1, MSGBOX_AUTOCLOSE
-# 558 "data/maps/beaston_pokemonLab/scripts.pory"
+# 587 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
 	return
 
 
-# 561 "data/maps/beaston_pokemonLab/scripts.pory"
+# 590 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_quigley_leaveCroconut:
-# 562 "data/maps/beaston_pokemonLab/scripts.pory"
+# 591 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 562 "data/maps/beaston_pokemonLab/scripts.pory"
+# 591 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 562 "data/maps/beaston_pokemonLab/scripts.pory"
+# 591 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 563 "data/maps/beaston_pokemonLab/scripts.pory"
+# 592 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
 	step_end
 
-# 565 "data/maps/beaston_pokemonLab/scripts.pory"
+# 594 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_quigley_leaveSkrappup:
-# 566 "data/maps/beaston_pokemonLab/scripts.pory"
+# 595 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 566 "data/maps/beaston_pokemonLab/scripts.pory"
+# 595 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 566 "data/maps/beaston_pokemonLab/scripts.pory"
+# 595 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
 	step_end
 
-# 568 "data/maps/beaston_pokemonLab/scripts.pory"
+# 597 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_quigley_leaveKitfisk:
-# 569 "data/maps/beaston_pokemonLab/scripts.pory"
+# 598 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 570 "data/maps/beaston_pokemonLab/scripts.pory"
+# 599 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
-# 571 "data/maps/beaston_pokemonLab/scripts.pory"
+# 600 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 571 "data/maps/beaston_pokemonLab/scripts.pory"
+# 600 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
 	step_end
 
-# 573 "data/maps/beaston_pokemonLab/scripts.pory"
+# 602 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_quigley_leave:
-# 574 "data/maps/beaston_pokemonLab/scripts.pory"
+# 603 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 574 "data/maps/beaston_pokemonLab/scripts.pory"
+# 603 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 574 "data/maps/beaston_pokemonLab/scripts.pory"
+# 603 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
 	step_end
 
 beaston_lab_cokbern_AfterBattle::
-# 578 "data/maps/beaston_pokemonLab/scripts.pory"
+# 607 "data/maps/beaston_pokemonLab/scripts.pory"
 	setvar VAR_LITTLEROOT_INTRO_STATE, 7
-# 579 "data/maps/beaston_pokemonLab/scripts.pory"
+# 608 "data/maps/beaston_pokemonLab/scripts.pory"
 	removeobject 1
-# 580 "data/maps/beaston_pokemonLab/scripts.pory"
+# 609 "data/maps/beaston_pokemonLab/scripts.pory"
 	setflag FLAG_UNUSED_0x028
-# 581 "data/maps/beaston_pokemonLab/scripts.pory"
+# 610 "data/maps/beaston_pokemonLab/scripts.pory"
 	playse SE_EXIT
-# 582 "data/maps/beaston_pokemonLab/scripts.pory"
+# 611 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 612 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_cokbern_AfterBattle_Text_0, MSGBOX_AUTOCLOSE
-# 583 "data/maps/beaston_pokemonLab/scripts.pory"
+# 613 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 584 "data/maps/beaston_pokemonLab/scripts.pory"
+# 614 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_professor_shuffle
-# 585 "data/maps/beaston_pokemonLab/scripts.pory"
+# 615 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_cokbern_AfterBattle_Text_1, MSGBOX_AUTOCLOSE
-# 586 "data/maps/beaston_pokemonLab/scripts.pory"
+# 616 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 587 "data/maps/beaston_pokemonLab/scripts.pory"
+# 617 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_headToDesk
-# 588 "data/maps/beaston_pokemonLab/scripts.pory"
+# 618 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 589 "data/maps/beaston_pokemonLab/scripts.pory"
+# 619 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_cokbern_AfterBattle_Text_2, MSGBOX_AUTOCLOSE
-# 590 "data/maps/beaston_pokemonLab/scripts.pory"
+# 620 "data/maps/beaston_pokemonLab/scripts.pory"
 	compare VAR_STARTER_MON, 1
 	goto_if_eq beaston_lab_cokbern_AfterBattle_2
 beaston_lab_cokbern_AfterBattle_1:
-# 607 "data/maps/beaston_pokemonLab/scripts.pory"
+# 637 "data/maps/beaston_pokemonLab/scripts.pory"
 	compare VAR_STARTER_MON, 2
 	goto_if_eq beaston_lab_cokbern_AfterBattle_5
 beaston_lab_cokbern_AfterBattle_4:
-# 624 "data/maps/beaston_pokemonLab/scripts.pory"
+# 654 "data/maps/beaston_pokemonLab/scripts.pory"
 	compare VAR_STARTER_MON, 3
 	goto_if_eq beaston_lab_cokbern_AfterBattle_8
 beaston_lab_cokbern_AfterBattle_7:
-# 641 "data/maps/beaston_pokemonLab/scripts.pory"
+# 671 "data/maps/beaston_pokemonLab/scripts.pory"
 	removeobject 5
-# 642 "data/maps/beaston_pokemonLab/scripts.pory"
+# 672 "data/maps/beaston_pokemonLab/scripts.pory"
 	setflag FLAG_UNUSED_0x024
-# 643 "data/maps/beaston_pokemonLab/scripts.pory"
+# 673 "data/maps/beaston_pokemonLab/scripts.pory"
 	addobject 6
-# 644 "data/maps/beaston_pokemonLab/scripts.pory"
+# 674 "data/maps/beaston_pokemonLab/scripts.pory"
 	clearflag FLAG_UNUSED_0x02A
-# 645 "data/maps/beaston_pokemonLab/scripts.pory"
+# 675 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 676 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 beaston_lab_cokbern_AfterBattle_2:
-# 592 "data/maps/beaston_pokemonLab/scripts.pory"
+# 622 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_grabLeft
-# 593 "data/maps/beaston_pokemonLab/scripts.pory"
+# 623 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 594 "data/maps/beaston_pokemonLab/scripts.pory"
+# 624 "data/maps/beaston_pokemonLab/scripts.pory"
 	removeobject 4
-# 595 "data/maps/beaston_pokemonLab/scripts.pory"
+# 625 "data/maps/beaston_pokemonLab/scripts.pory"
 	setflag FLAG_UNUSED_0x027
-# 596 "data/maps/beaston_pokemonLab/scripts.pory"
+# 626 "data/maps/beaston_pokemonLab/scripts.pory"
 	playse SE_BALL
-# 597 "data/maps/beaston_pokemonLab/scripts.pory"
+# 627 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitse
-# 598 "data/maps/beaston_pokemonLab/scripts.pory"
+# 628 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_grabLeft
-# 599 "data/maps/beaston_pokemonLab/scripts.pory"
+# 629 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 600 "data/maps/beaston_pokemonLab/scripts.pory"
+# 630 "data/maps/beaston_pokemonLab/scripts.pory"
 	removeobject 2
-# 601 "data/maps/beaston_pokemonLab/scripts.pory"
+# 631 "data/maps/beaston_pokemonLab/scripts.pory"
 	setflag FLAG_UNUSED_0x026
-# 602 "data/maps/beaston_pokemonLab/scripts.pory"
+# 632 "data/maps/beaston_pokemonLab/scripts.pory"
 	playse SE_BALL
-# 603 "data/maps/beaston_pokemonLab/scripts.pory"
+# 633 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitse
-# 604 "data/maps/beaston_pokemonLab/scripts.pory"
+# 634 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_finish_center
-# 605 "data/maps/beaston_pokemonLab/scripts.pory"
+# 635 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
 	goto beaston_lab_cokbern_AfterBattle_1
 
 beaston_lab_cokbern_AfterBattle_5:
-# 609 "data/maps/beaston_pokemonLab/scripts.pory"
+# 639 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_grabLeft
-# 610 "data/maps/beaston_pokemonLab/scripts.pory"
+# 640 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 611 "data/maps/beaston_pokemonLab/scripts.pory"
+# 641 "data/maps/beaston_pokemonLab/scripts.pory"
 	removeobject 4
-# 612 "data/maps/beaston_pokemonLab/scripts.pory"
+# 642 "data/maps/beaston_pokemonLab/scripts.pory"
 	setflag FLAG_UNUSED_0x027
-# 613 "data/maps/beaston_pokemonLab/scripts.pory"
+# 643 "data/maps/beaston_pokemonLab/scripts.pory"
 	playse SE_BALL
-# 614 "data/maps/beaston_pokemonLab/scripts.pory"
+# 644 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitse
-# 615 "data/maps/beaston_pokemonLab/scripts.pory"
+# 645 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_grabTwoLeft
-# 616 "data/maps/beaston_pokemonLab/scripts.pory"
+# 646 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 617 "data/maps/beaston_pokemonLab/scripts.pory"
+# 647 "data/maps/beaston_pokemonLab/scripts.pory"
 	removeobject 3
-# 618 "data/maps/beaston_pokemonLab/scripts.pory"
+# 648 "data/maps/beaston_pokemonLab/scripts.pory"
 	setflag FLAG_UNUSED_0x025
-# 619 "data/maps/beaston_pokemonLab/scripts.pory"
+# 649 "data/maps/beaston_pokemonLab/scripts.pory"
 	playse SE_BALL
-# 620 "data/maps/beaston_pokemonLab/scripts.pory"
+# 650 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitse
-# 621 "data/maps/beaston_pokemonLab/scripts.pory"
+# 651 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_finish_left
-# 622 "data/maps/beaston_pokemonLab/scripts.pory"
+# 652 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
 	goto beaston_lab_cokbern_AfterBattle_4
 
 beaston_lab_cokbern_AfterBattle_8:
-# 626 "data/maps/beaston_pokemonLab/scripts.pory"
+# 656 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_grabTwoLeft
-# 627 "data/maps/beaston_pokemonLab/scripts.pory"
+# 657 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 628 "data/maps/beaston_pokemonLab/scripts.pory"
+# 658 "data/maps/beaston_pokemonLab/scripts.pory"
 	removeobject 2
-# 629 "data/maps/beaston_pokemonLab/scripts.pory"
+# 659 "data/maps/beaston_pokemonLab/scripts.pory"
 	setflag FLAG_UNUSED_0x026
-# 630 "data/maps/beaston_pokemonLab/scripts.pory"
+# 660 "data/maps/beaston_pokemonLab/scripts.pory"
 	playse SE_BALL
-# 631 "data/maps/beaston_pokemonLab/scripts.pory"
+# 661 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitse
-# 632 "data/maps/beaston_pokemonLab/scripts.pory"
+# 662 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_grabLeft
-# 633 "data/maps/beaston_pokemonLab/scripts.pory"
+# 663 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 634 "data/maps/beaston_pokemonLab/scripts.pory"
+# 664 "data/maps/beaston_pokemonLab/scripts.pory"
 	removeobject 3
-# 635 "data/maps/beaston_pokemonLab/scripts.pory"
+# 665 "data/maps/beaston_pokemonLab/scripts.pory"
 	setflag FLAG_UNUSED_0x025
-# 636 "data/maps/beaston_pokemonLab/scripts.pory"
+# 666 "data/maps/beaston_pokemonLab/scripts.pory"
 	playse SE_BALL
-# 637 "data/maps/beaston_pokemonLab/scripts.pory"
+# 667 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitse
-# 638 "data/maps/beaston_pokemonLab/scripts.pory"
+# 668 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_finish_left
-# 639 "data/maps/beaston_pokemonLab/scripts.pory"
+# 669 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
 	goto beaston_lab_cokbern_AfterBattle_7
 
 
-# 648 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_cokbern_headToDesk:
-# 649 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
-# 649 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_right
-# 650 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 650 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 650 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 650 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-# 651 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_left
-	step_end
-
-beaston_lab_cokbern_idle::
-# 655 "data/maps/beaston_pokemonLab/scripts.pory"
-	lockall
-# 656 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_cokbern_idle_Text_0, MSGBOX_NPC
-# 657 "data/maps/beaston_pokemonLab/scripts.pory"
-	applymovement 5, look_up
-# 658 "data/maps/beaston_pokemonLab/scripts.pory"
-	releaseall
-	return
-
-
-# 660 "data/maps/beaston_pokemonLab/scripts.pory"
-look_up:
-# 661 "data/maps/beaston_pokemonLab/scripts.pory"
-	face_up
-	step_end
-
-beaston_lab_cokbern_busy::
-# 665 "data/maps/beaston_pokemonLab/scripts.pory"
-	msgbox beaston_lab_cokbern_busy_Text_0, MSGBOX_SIGN
-	return
-
-
-# 667 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_cokbern_grabLeft:
-# 668 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_left
-# 669 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_down
-# 669 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_down
-	step_end
-
-# 671 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_cokbern_grabTwoLeft:
-# 672 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_left
-# 672 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_left
-# 673 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_down
-# 673 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_in_place_down
-	step_end
-
-# 676 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_cokbern_finish_center:
-# 677 "data/maps/beaston_pokemonLab/scripts.pory"
-	walk_up
-	step_end
-
 # 679 "data/maps/beaston_pokemonLab/scripts.pory"
-beaston_lab_cokbern_finish_left:
+beaston_lab_cokbern_headToDesk:
+# 680 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_right
 # 680 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
 # 681 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
+# 681 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 681 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 681 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+# 682 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_in_place_left
+	step_end
+
+beaston_lab_cokbern_idle::
+# 686 "data/maps/beaston_pokemonLab/scripts.pory"
+	lockall
+# 687 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 688 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_cokbern_idle_Text_0, MSGBOX_NPC
+# 689 "data/maps/beaston_pokemonLab/scripts.pory"
+	applymovement 5, look_up
+# 690 "data/maps/beaston_pokemonLab/scripts.pory"
+	waitmessage
+# 691 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 692 "data/maps/beaston_pokemonLab/scripts.pory"
+	releaseall
+	return
+
+
+# 694 "data/maps/beaston_pokemonLab/scripts.pory"
+look_up:
+# 695 "data/maps/beaston_pokemonLab/scripts.pory"
+	face_up
+	step_end
+
+beaston_lab_cokbern_busy::
+# 699 "data/maps/beaston_pokemonLab/scripts.pory"
+	msgbox beaston_lab_cokbern_busy_Text_0, MSGBOX_SIGN
+	return
+
+
+# 701 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_cokbern_grabLeft:
+# 702 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_left
+# 703 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_in_place_down
+# 703 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_in_place_down
+	step_end
+
+# 705 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_cokbern_grabTwoLeft:
+# 706 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_left
+# 706 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_left
+# 707 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_in_place_down
+# 707 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_in_place_down
+	step_end
+
+# 710 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_cokbern_finish_center:
+# 711 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
+	step_end
+
+# 713 "data/maps/beaston_pokemonLab/scripts.pory"
+beaston_lab_cokbern_finish_left:
+# 714 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_right
+# 715 "data/maps/beaston_pokemonLab/scripts.pory"
+	walk_up
 	step_end
 
 beaston_lab_preventExit_middle::
-# 685 "data/maps/beaston_pokemonLab/scripts.pory"
+# 719 "data/maps/beaston_pokemonLab/scripts.pory"
 	lockall
-# 686 "data/maps/beaston_pokemonLab/scripts.pory"
+# 720 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_preventExit_surprise
-# 687 "data/maps/beaston_pokemonLab/scripts.pory"
+# 721 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 688 "data/maps/beaston_pokemonLab/scripts.pory"
+# 722 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 723 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_preventExit_middle_Text_0, MSGBOX_AUTOCLOSE
-# 689 "data/maps/beaston_pokemonLab/scripts.pory"
+# 724 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 690 "data/maps/beaston_pokemonLab/scripts.pory"
+# 725 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_walkDown_middle
-# 691 "data/maps/beaston_pokemonLab/scripts.pory"
+# 726 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 692 "data/maps/beaston_pokemonLab/scripts.pory"
+# 727 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_walkUp_middle
-# 693 "data/maps/beaston_pokemonLab/scripts.pory"
+# 728 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_walkUp_middle
-# 694 "data/maps/beaston_pokemonLab/scripts.pory"
+# 729 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
-# 695 "data/maps/beaston_pokemonLab/scripts.pory"
+# 730 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 731 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 
 beaston_lab_preventExit_left::
-# 699 "data/maps/beaston_pokemonLab/scripts.pory"
+# 735 "data/maps/beaston_pokemonLab/scripts.pory"
 	lockall
-# 700 "data/maps/beaston_pokemonLab/scripts.pory"
+# 736 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_preventExit_surprise
-# 701 "data/maps/beaston_pokemonLab/scripts.pory"
+# 737 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 702 "data/maps/beaston_pokemonLab/scripts.pory"
+# 738 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 739 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_preventExit_middle_Text_0, MSGBOX_AUTOCLOSE
-# 703 "data/maps/beaston_pokemonLab/scripts.pory"
+# 740 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 704 "data/maps/beaston_pokemonLab/scripts.pory"
+# 741 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_walkDown_left
-# 705 "data/maps/beaston_pokemonLab/scripts.pory"
+# 742 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 706 "data/maps/beaston_pokemonLab/scripts.pory"
+# 743 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_walkUp_left
-# 707 "data/maps/beaston_pokemonLab/scripts.pory"
+# 744 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkUp_left
-# 708 "data/maps/beaston_pokemonLab/scripts.pory"
+# 745 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
-# 709 "data/maps/beaston_pokemonLab/scripts.pory"
+# 746 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 747 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 
 beaston_lab_preventExit_right::
-# 713 "data/maps/beaston_pokemonLab/scripts.pory"
+# 751 "data/maps/beaston_pokemonLab/scripts.pory"
 	lockall
-# 714 "data/maps/beaston_pokemonLab/scripts.pory"
+# 752 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_preventExit_surprise
-# 715 "data/maps/beaston_pokemonLab/scripts.pory"
+# 753 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 716 "data/maps/beaston_pokemonLab/scripts.pory"
+# 754 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername beaston_lab_professor_intro_Text_0
+# 755 "data/maps/beaston_pokemonLab/scripts.pory"
 	msgbox beaston_lab_preventExit_middle_Text_0, MSGBOX_AUTOCLOSE
-# 717 "data/maps/beaston_pokemonLab/scripts.pory"
+# 756 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmessage
-# 718 "data/maps/beaston_pokemonLab/scripts.pory"
+# 757 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_walkDown_right
-# 719 "data/maps/beaston_pokemonLab/scripts.pory"
+# 758 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement 5
-# 720 "data/maps/beaston_pokemonLab/scripts.pory"
+# 759 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement 5, beaston_lab_cokbern_walkUp_right
-# 721 "data/maps/beaston_pokemonLab/scripts.pory"
+# 760 "data/maps/beaston_pokemonLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkUp_right
-# 722 "data/maps/beaston_pokemonLab/scripts.pory"
+# 761 "data/maps/beaston_pokemonLab/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
-# 723 "data/maps/beaston_pokemonLab/scripts.pory"
+# 762 "data/maps/beaston_pokemonLab/scripts.pory"
+	speakername NULL
+# 763 "data/maps/beaston_pokemonLab/scripts.pory"
 	releaseall
 	return
 
 
-# 727 "data/maps/beaston_pokemonLab/scripts.pory"
+# 767 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_cokbern_preventExit_surprise:
-# 728 "data/maps/beaston_pokemonLab/scripts.pory"
+# 768 "data/maps/beaston_pokemonLab/scripts.pory"
 	emote_exclamation_mark
-# 729 "data/maps/beaston_pokemonLab/scripts.pory"
+# 769 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_down
 	step_end
 
-# 732 "data/maps/beaston_pokemonLab/scripts.pory"
+# 772 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_cokbern_walkDown_middle:
-# 733 "data/maps/beaston_pokemonLab/scripts.pory"
+# 773 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 733 "data/maps/beaston_pokemonLab/scripts.pory"
+# 773 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 733 "data/maps/beaston_pokemonLab/scripts.pory"
+# 773 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
 	step_end
 
-# 735 "data/maps/beaston_pokemonLab/scripts.pory"
+# 775 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_cokbern_walkDown_left:
-# 736 "data/maps/beaston_pokemonLab/scripts.pory"
+# 776 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
-# 737 "data/maps/beaston_pokemonLab/scripts.pory"
+# 777 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 737 "data/maps/beaston_pokemonLab/scripts.pory"
+# 777 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 737 "data/maps/beaston_pokemonLab/scripts.pory"
+# 777 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
 	step_end
 
-# 739 "data/maps/beaston_pokemonLab/scripts.pory"
+# 779 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_cokbern_walkDown_right:
-# 740 "data/maps/beaston_pokemonLab/scripts.pory"
+# 780 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
-# 741 "data/maps/beaston_pokemonLab/scripts.pory"
+# 781 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 741 "data/maps/beaston_pokemonLab/scripts.pory"
+# 781 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
-# 741 "data/maps/beaston_pokemonLab/scripts.pory"
+# 781 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_down
 	step_end
 
-# 744 "data/maps/beaston_pokemonLab/scripts.pory"
+# 784 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_walkUp_middle:
-# 745 "data/maps/beaston_pokemonLab/scripts.pory"
+# 785 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 745 "data/maps/beaston_pokemonLab/scripts.pory"
+# 785 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 745 "data/maps/beaston_pokemonLab/scripts.pory"
+# 785 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
 	step_end
 
-# 747 "data/maps/beaston_pokemonLab/scripts.pory"
+# 787 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_cokbern_walkUp_left:
-# 748 "data/maps/beaston_pokemonLab/scripts.pory"
+# 788 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 748 "data/maps/beaston_pokemonLab/scripts.pory"
+# 788 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 749 "data/maps/beaston_pokemonLab/scripts.pory"
+# 789 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
-# 750 "data/maps/beaston_pokemonLab/scripts.pory"
+# 790 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
 	step_end
 
-# 752 "data/maps/beaston_pokemonLab/scripts.pory"
+# 792 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_cokbern_walkUp_right:
-# 753 "data/maps/beaston_pokemonLab/scripts.pory"
+# 793 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 753 "data/maps/beaston_pokemonLab/scripts.pory"
+# 793 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 754 "data/maps/beaston_pokemonLab/scripts.pory"
+# 794 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
-# 755 "data/maps/beaston_pokemonLab/scripts.pory"
+# 795 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
 	step_end
 
-# 758 "data/maps/beaston_pokemonLab/scripts.pory"
+# 798 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_player_walkUp_left:
-# 759 "data/maps/beaston_pokemonLab/scripts.pory"
+# 799 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 759 "data/maps/beaston_pokemonLab/scripts.pory"
+# 799 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 759 "data/maps/beaston_pokemonLab/scripts.pory"
+# 799 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 760 "data/maps/beaston_pokemonLab/scripts.pory"
+# 800 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_right
-# 761 "data/maps/beaston_pokemonLab/scripts.pory"
+# 801 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_up
 	step_end
 
-# 763 "data/maps/beaston_pokemonLab/scripts.pory"
+# 803 "data/maps/beaston_pokemonLab/scripts.pory"
 beaston_lab_player_walkUp_right:
-# 764 "data/maps/beaston_pokemonLab/scripts.pory"
+# 804 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 764 "data/maps/beaston_pokemonLab/scripts.pory"
+# 804 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 764 "data/maps/beaston_pokemonLab/scripts.pory"
+# 804 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_up
-# 765 "data/maps/beaston_pokemonLab/scripts.pory"
+# 805 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_left
-# 766 "data/maps/beaston_pokemonLab/scripts.pory"
+# 806 "data/maps/beaston_pokemonLab/scripts.pory"
 	walk_in_place_up
 	step_end
 
@@ -1657,168 +1738,180 @@ beaston_lab_notebooks_nullType_Text_0:
 
 beaston_lab_Intro_Text_0:
 # 67 "data/maps/beaston_pokemonLab/scripts.pory"
+	.string "Quigley$"
+
+beaston_lab_Intro_Text_1:
+# 68 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "looks like dad's busy\pi guess just chill til he comes back$"
 
 beaston_lab_quigley_dialogue_Text_0:
-# 98 "data/maps/beaston_pokemonLab/scripts.pory"
+# 101 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "fuck of$"
 
 beaston_lab_quigley_dialogue_Text_1:
-# 104 "data/maps/beaston_pokemonLab/scripts.pory"
+# 107 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "idk when dad's gonna be back so just\ndon't mess with anything$"
 
 beaston_lab_quigley_stopExit_left_Text_0:
-# 111 "data/maps/beaston_pokemonLab/scripts.pory"
+# 116 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "hey dude no$"
 
 beaston_lab_quigley_stopExit_left_Text_1:
-# 115 "data/maps/beaston_pokemonLab/scripts.pory"
+# 120 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "we gotta wait for dad$"
 
 beaston_lab_professor_intro_Text_0:
-# 203 "data/maps/beaston_pokemonLab/scripts.pory"
-	.string "so ur {PLAYER} huh\psweet\pi bet quigley already told u but i've\nheard a lot abt u and i think u would\lmake a good help\pnow i won't force u but i do wanna say\nif u wanna come along u get a partner\lmon as a gift\pi'm studying pokemon genetics and how\nthey're related, it'll be a huge help\lif u can log me info on more mons\pso what do u say$"
+# 213 "data/maps/beaston_pokemonLab/scripts.pory"
+	.string "Prof. Cokbern$"
 
 beaston_lab_professor_intro_Text_1:
-# 205 "data/maps/beaston_pokemonLab/scripts.pory"
+# 214 "data/maps/beaston_pokemonLab/scripts.pory"
+	.string "so ur {PLAYER} huh\psweet\pi bet quigley already told u but i've\nheard a lot abt u and i think u would\lmake a good help\pnow i won't force u but i do wanna say\nif u wanna come along u get a partner\lmon as a gift\pi'm studying pokemon genetics and how\nthey're related, it'll be a huge help\lif u can log me info on more mons\pso what do u say$"
+
+beaston_lab_professor_intro_Text_2:
+# 216 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "freakin sweet lewis$"
 
 beaston_lab_professor_help_no_Text_0:
-# 209 "data/maps/beaston_pokemonLab/scripts.pory"
+# 220 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "aw, well, i'll still let u take a partner mon$"
 
 beaston_lab_professor_starter_choice_Text_0:
-# 214 "data/maps/beaston_pokemonLab/scripts.pory"
+# 225 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "quigley move so {PLAYER} can pick a mon$"
 
 beaston_lab_professor_starter_choice_Text_1:
-# 216 "data/maps/beaston_pokemonLab/scripts.pory"
+# 229 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "fine$"
 
 beaston_lab_professor_starter_choice_Text_2:
-# 219 "data/maps/beaston_pokemonLab/scripts.pory"
+# 234 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "alright kid now pick a mon$"
 
 beaston_lab_professor_appear_Text_0:
-# 240 "data/maps/beaston_pokemonLab/scripts.pory"
-	.string "oh shit i forgot$"
+# 256 "data/maps/beaston_pokemonLab/scripts.pory"
+	.string "???$"
 
 beaston_lab_professor_appear_Text_1:
-# 244 "data/maps/beaston_pokemonLab/scripts.pory"
+# 257 "data/maps/beaston_pokemonLab/scripts.pory"
+	.string "oh shit i forgot$"
+
+beaston_lab_professor_appear_Text_2:
+# 261 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "this place is a mess, sorry\pwhy don't u come on and introduce\nurself$"
 
 beaston_lab_croconut_Text_0:
-# 331 "data/maps/beaston_pokemonLab/scripts.pory"
+# 349 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Ah, the Grass-type Croconut! This\neasygoing Pokémon likes lying in the\lsun.$"
 
 beaston_lab_croconut_Text_1:
-# 332 "data/maps/beaston_pokemonLab/scripts.pory"
+# 350 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Say, is Croconut your choice for your\nPokémon partner?$"
 
 beaston_lab_chose_croconut_Text_0:
-# 339 "data/maps/beaston_pokemonLab/scripts.pory"
+# 357 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Ah, then Croconut it is!$"
 
 beaston_lab_chose_croconut_Text_1:
-# 347 "data/maps/beaston_pokemonLab/scripts.pory"
+# 366 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "{PLAYER} received Croconut!$"
 
 beaston_lab_skrappup_Text_0:
-# 368 "data/maps/beaston_pokemonLab/scripts.pory"
+# 388 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Ah, the Fire-type Skrappup! This high-\nenergy Pokémon is very loyal!$"
 
 beaston_lab_skrappup_Text_1:
-# 369 "data/maps/beaston_pokemonLab/scripts.pory"
+# 389 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Is Skrappup the Pokémon you'd like as\nyour first partner?$"
 
 beaston_lab_chose_skrappup_Text_0:
-# 376 "data/maps/beaston_pokemonLab/scripts.pory"
+# 396 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Ah, then Skrappup it is!$"
 
 beaston_lab_chose_skrappup_Text_1:
-# 384 "data/maps/beaston_pokemonLab/scripts.pory"
+# 405 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "{PLAYER} received Skrappup!$"
 
 beaston_lab_kitfisk_Text_0:
-# 404 "data/maps/beaston_pokemonLab/scripts.pory"
+# 426 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Ah, the Water-type Kitfisk! This sneaky\nPokémon has a keen hunter's instinct!$"
 
 beaston_lab_kitfisk_Text_1:
-# 405 "data/maps/beaston_pokemonLab/scripts.pory"
+# 427 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Would you like to choose Kitfisk as\nyour partner Pokémon?$"
 
 beaston_lab_chose_kitfisk_Text_0:
-# 412 "data/maps/beaston_pokemonLab/scripts.pory"
+# 434 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Ah, then Kitfisk it is!$"
 
 beaston_lab_chose_kitfisk_Text_1:
-# 420 "data/maps/beaston_pokemonLab/scripts.pory"
+# 443 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "{PLAYER} received Kitfisk!$"
 
 beaston_lab_nicknameStarter_Text_0:
-# 485 "data/maps/beaston_pokemonLab/scripts.pory"
+# 509 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Now, would you like to give your new\npartner a nickname?$"
 
 beaston_lab_nicknameStarter_Text_1:
-# 493 "data/maps/beaston_pokemonLab/scripts.pory"
+# 517 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "I see. Well, I suppose you can always\ngive it one later, if you'd like.$"
 
 beaston_lab_battleSetup_Text_0:
-# 504 "data/maps/beaston_pokemonLab/scripts.pory"
+# 528 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Hmm…$"
 
 beaston_lab_battleSetup_Text_1:
-# 508 "data/maps/beaston_pokemonLab/scripts.pory"
+# 532 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Ah!\p{PLAYER}, since you have your own\nPokémon now, how about challenging\lQuigley to a battle?\pI'd offer myself, but, ah…\nI don't seem to have any Pokémon with\lme.$"
 
 beaston_lab_battleSetup_Text_2:
-# 511 "data/maps/beaston_pokemonLab/scripts.pory"
+# 536 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Hey! You never told me I'd be BATTLING\n{PLAYER}!$"
 
 beaston_lab_battleSetup_Text_3:
-# 514 "data/maps/beaston_pokemonLab/scripts.pory"
+# 540 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Now, now, Quigley.\pIt's just one battle so {PLAYER} can\nlearn the ropes. I'm sure you'd want\lthem to do the same if you were in\ltheir shoes.$"
 
 beaston_lab_battleSetup_Text_4:
-# 517 "data/maps/beaston_pokemonLab/scripts.pory"
+# 544 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "…fine.\p{PLAYER}, you're lucky I only have one mon on me.$"
 
 beaston_lab_quigleyBattle_Text_0:
-# 549 "data/maps/beaston_pokemonLab/scripts.pory"
+# 576 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Well… here goes.$"
 
 beaston_lab_quigleyBattle_Text_1:
-# 549 "data/maps/beaston_pokemonLab/scripts.pory"
+# 576 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Sigh… about what I expected.$"
 
 beaston_lab_PostQuigleyBattle_Text_0:
-# 554 "data/maps/beaston_pokemonLab/scripts.pory"
+# 582 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Aha! You're a natural, {PLAYER}!\pNow, what was I going to say…\pAh, right.\pMy niece, Stella, lives in the next town\nover. I'm sure you two are familiar\lwith each other.\pI'd like for you to bring her back\nhere.$"
 
 beaston_lab_PostQuigleyBattle_Text_1:
-# 557 "data/maps/beaston_pokemonLab/scripts.pory"
+# 586 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Ugh… of course you ask {PLAYER} to do\nit.\pWhatever. I'm going home.$"
 
 beaston_lab_cokbern_AfterBattle_Text_0:
-# 582 "data/maps/beaston_pokemonLab/scripts.pory"
+# 612 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Ah, that Quigley…\pHe can be a bit of a handful at times.$"
 
 beaston_lab_cokbern_AfterBattle_Text_1:
-# 585 "data/maps/beaston_pokemonLab/scripts.pory"
+# 615 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "I'll be waiting here for you and Stella,\n{PLAYER}.\pI have something special in store for\nyou two.\pFor now, though, I'll be busy logging my\nrecent findings.$"
 
 beaston_lab_cokbern_AfterBattle_Text_2:
-# 589 "data/maps/beaston_pokemonLab/scripts.pory"
+# 619 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "Suppose I should take care of these as\nwell.$"
 
 beaston_lab_cokbern_idle_Text_0:
-# 656 "data/maps/beaston_pokemonLab/scripts.pory"
+# 688 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "go on kid pick a mon any mon$"
 
 beaston_lab_cokbern_busy_Text_0:
-# 665 "data/maps/beaston_pokemonLab/scripts.pory"
+# 699 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "He seems too busy writing things down\nto talk…$"
 
 beaston_lab_preventExit_middle_Text_0:
-# 688 "data/maps/beaston_pokemonLab/scripts.pory"
+# 723 "data/maps/beaston_pokemonLab/scripts.pory"
 	.string "wait bro don't leave$"

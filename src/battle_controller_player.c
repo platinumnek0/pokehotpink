@@ -1738,9 +1738,65 @@ static void MoveSelectionDisplayMoveType(u32 battler)
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
     if (gBattleMoveTypeSpriteId == MAX_SPRITES)
+    {
+        if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_RAGING_BULL)
+        {
+            if(gBattleMons[battler].type1 != TYPE_MYSTERY)
+            {
+                LoadTypeIcon(gBattleMons[battler].type1);
+            }
+            else if(gBattleMons[battler].type2 != TYPE_MYSTERY)
+            {
+                LoadTypeIcon(gBattleMons[battler].type2);
+            }
+            else if(gBattleMons[battler].type3 != TYPE_MYSTERY)
+            {
+                LoadTypeIcon(gBattleMons[battler].type3);
+            }
+            else
+            {
+                LoadTypeIcon(gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type);
+            }
+        }
+        else if(GetBattlerAbility(battler) == 318 && gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].soundMove == TRUE)
+        {
+            LoadTypeIcon(TYPE_ELECTRIC);
+        }
+        else
+        {
         LoadTypeIcon(gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type);
+        }
+    }
     else
-        SetTypeIconPal(gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type, gBattleMoveTypeSpriteId);
+    {
+        if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_RAGING_BULL)
+        {
+            if(gBattleMons[battler].type1 != TYPE_MYSTERY)
+            {
+                SetTypeIconPal(gBattleMons[battler].type1, gBattleMoveTypeSpriteId);
+            }
+            else if(gBattleMons[battler].type2 != TYPE_MYSTERY)
+            {
+                SetTypeIconPal(gBattleMons[battler].type2, gBattleMoveTypeSpriteId);
+            }
+            else if(gBattleMons[battler].type3 != TYPE_MYSTERY)
+            {
+                SetTypeIconPal(gBattleMons[battler].type3, gBattleMoveTypeSpriteId);
+            }
+            else
+            {
+                SetTypeIconPal(gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type, gBattleMoveTypeSpriteId);
+            }
+        }
+        else if(GetBattlerAbility(battler) == 318 && gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].soundMove == TRUE)
+        {
+             SetTypeIconPal(TYPE_ELECTRIC, gBattleMoveTypeSpriteId);
+        }
+        else
+        {
+            SetTypeIconPal(gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type, gBattleMoveTypeSpriteId);
+        }
+    }
 }
 
 void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)

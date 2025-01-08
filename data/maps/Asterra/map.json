@@ -20,7 +20,7 @@
     },
     {
       "map": "MAP_ROUTE102",
-      "offset": 2,
+      "offset": 12,
       "direction": "up"
     }
   ],
@@ -28,7 +28,41 @@
 
   ],
   "warp_events": [
-
+    {
+      "x": 18,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_ASTERRA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 28,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_ASTERRA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 33,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_ASTERRA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 11,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_ASTERRA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 38,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_ASTERRA",
+      "dest_warp_id": "0"
+    }
   ],
   "coord_events": [
 

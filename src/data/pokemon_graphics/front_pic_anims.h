@@ -10328,6 +10328,40 @@ static const union AnimCmd sAnim_Mastidic_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_Borzy_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Borzyzy_1[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 45),
+    ANIMCMD_FRAME(0,  5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Borzyzyzy_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Pischool_1[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_Cixno_1[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -10361,6 +10395,38 @@ static const union AnimCmd sAnim_Wirlydoo_1[] =
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(1, 20),
     ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Pareccur_1[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 55),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Parereccur_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Icopod_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 55),
+    ANIMCMD_FRAME(0,  5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Icerrate_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
 
@@ -10398,6 +10464,24 @@ static const union AnimCmd sAnim_Horrohorra_1[] =
     ANIMCMD_END
 };
 
+static const union AnimCmd sAnim_Glirub_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0,  5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_Coleox_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 55),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END
+};
+
 static const union AnimCmd sAnim_Jonfyrkend_1[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -10413,6 +10497,22 @@ static const union AnimCmd sAnim_Jakikendi_1[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(1, 15),
     ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_Frightuff_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 55),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_Delicausty_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 45),
+    ANIMCMD_FRAME(0, 10),
     ANIMCMD_END
 };
 
@@ -13136,14 +13236,26 @@ SINGLE_ANIMATION(Skungus);
 SINGLE_ANIMATION(Skungrowth);
 SINGLE_ANIMATION(Salivolt);
 SINGLE_ANIMATION(Mastidic);
+SINGLE_ANIMATION(Borzy);
+SINGLE_ANIMATION(Borzyzy);
+SINGLE_ANIMATION(Borzyzyzy);
+SINGLE_ANIMATION(Pischool);
 SINGLE_ANIMATION(Willywoo);
 SINGLE_ANIMATION(Wirlydoo);
 SINGLE_ANIMATION(Cixno);
+SINGLE_ANIMATION(Pareccur);
+SINGLE_ANIMATION(Parereccur);
+SINGLE_ANIMATION(Icopod);
+SINGLE_ANIMATION(Icerrate);
 SINGLE_ANIMATION(Terufai);
 SINGLE_ANIMATION(Parasoul);
 SINGLE_ANIMATION(Horrohorra);
+SINGLE_ANIMATION(Glirub);
+SINGLE_ANIMATION(Coleox);
 SINGLE_ANIMATION(Jonfyrkend);
 SINGLE_ANIMATION(Jakikendi);
+SINGLE_ANIMATION(Frightuff);
+SINGLE_ANIMATION(Delicausty);
 SINGLE_ANIMATION(Salamancer);
 SINGLE_ANIMATION(Alchemandr);
 SINGLE_ANIMATION(Arrengai);

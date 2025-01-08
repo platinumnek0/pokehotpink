@@ -17,6 +17,11 @@
       "map": "MAP_ROUTE101",
       "offset": 6,
       "direction": "right"
+    },
+    {
+      "map": "MAP_GAGIL_ROUTE4",
+      "offset": 6,
+      "direction": "up"
     }
   ],
   "object_events": [
@@ -104,6 +109,51 @@
       "var": "VAR_LITTLEROOT_INTRO_STATE",
       "var_value": "6",
       "script": "beaston_rivalBattleLoss_right"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "0",
+      "script": "beaston_BlockNorthExit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "0",
+      "script": "beaston_BlockNorthExit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "0",
+      "script": "beaston_BlockNorthExit"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "0",
+      "script": "beaston_BlockNorthExit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "0",
+      "script": "beaston_BlockNorthExit"
     }
   ],
   "bg_events": [

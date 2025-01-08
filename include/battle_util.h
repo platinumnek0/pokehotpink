@@ -253,5 +253,6 @@ bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon);
 bool8 IsMonBannedFromSkyBattles(u16 species);
 void RemoveBattlerType(u32 battler, u8 type);
 void CosmicAuraAllyBoost(u32 battler, u8 statId);
+bool32 IsBattlerAboveOneTenthHP(u32 battler);
 
 #endif // GUARD_BATTLE_UTIL_H

@@ -177,7 +177,7 @@
       "width": 50,
       "height": 54,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_Asterra",
       "border_filepath": "data/layouts/Route102/border.bin",
       "blockdata_filepath": "data/layouts/Route102/map.bin"
     },
@@ -4414,7 +4414,7 @@
     {
       "id": "LAYOUT_BEASTON",
       "name": "Beaston_Layout",
-      "width": 36,
+      "width": 40,
       "height": 34,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
@@ -4436,7 +4436,7 @@
       "name": "beaston_pokemonLab_Layout",
       "width": 29,
       "height": 18,
-      "primary_tileset": "gTileset_General",
+      "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_Lab",
       "border_filepath": "data/layouts/beaston_pokemonLab/border.bin",
       "blockdata_filepath": "data/layouts/beaston_pokemonLab/map.bin"
@@ -4444,10 +4444,10 @@
     {
       "id": "LAYOUT_ASTERRA",
       "name": "Asterra_Layout",
-      "width": 32,
-      "height": 24,
+      "width": 44,
+      "height": 28,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_Asterra",
       "border_filepath": "data/layouts/Asterra/border.bin",
       "blockdata_filepath": "data/layouts/Asterra/map.bin"
     },
@@ -4470,6 +4470,26 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/testZone/border.bin",
       "blockdata_filepath": "data/layouts/testZone/map.bin"
+    },
+    {
+      "id": "LAYOUT_PORKBELLY",
+      "name": "Porkbelly_Layout",
+      "width": 48,
+      "height": 50,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/Porkbelly/border.bin",
+      "blockdata_filepath": "data/layouts/Porkbelly/map.bin"
+    },
+    {
+      "id": "LAYOUT_GAGIL_ROUTE4",
+      "name": "gagilRoute4_Layout",
+      "width": 28,
+      "height": 56,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/gagilRoute4/border.bin",
+      "blockdata_filepath": "data/layouts/gagilRoute4/map.bin"
     }
   ]
 }

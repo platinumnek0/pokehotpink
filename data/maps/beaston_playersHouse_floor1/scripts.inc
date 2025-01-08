@@ -37,364 +37,392 @@ playerWalkOverToLivingRoomTop::
 
 dadCallLivingRoomTop::
 # 23 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	msgbox dadCallLivingRoomTop_Text_0, MSGBOX_AUTOCLOSE
+	speakername dadCallLivingRoomTop_Text_0
 # 24 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmessage
+	msgbox dadCallLivingRoomTop_Text_1, MSGBOX_AUTOCLOSE
 # 25 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverTop
+	waitmessage
 # 26 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmovement OBJ_EVENT_ID_PLAYER
+	speakername NULL
 # 27 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverTop
+# 28 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 29 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	goto quigleyIntro
 	return
 
 
 playerWalkOverToLivingRoomMid::
-# 31 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	lockall
-# 32 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	setvar VAR_LITTLEROOT_INTRO_STATE, 2
 # 33 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, playerSurprise
+	lockall
 # 34 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	setvar VAR_LITTLEROOT_INTRO_STATE, 2
+# 35 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, playerSurprise
+# 36 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	goto dadCallLivingRoomMid
 	return
 
 
 dadCallLivingRoomMid::
-# 38 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	msgbox dadCallLivingRoomTop_Text_0, MSGBOX_AUTOCLOSE
-# 39 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmessage
 # 40 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverMid
+	speakername dadCallLivingRoomTop_Text_0
 # 41 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmovement OBJ_EVENT_ID_PLAYER
+	msgbox dadCallLivingRoomTop_Text_1, MSGBOX_AUTOCLOSE
 # 42 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	waitmessage
+# 43 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	speakername NULL
+# 44 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverMid
+# 45 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 46 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	goto quigleyIntro
 	return
 
 
 playerWalkOverToLivingRoomBottom::
-# 46 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 50 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	lockall
-# 47 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 51 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	setvar VAR_LITTLEROOT_INTRO_STATE, 2
-# 48 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 52 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, playerSurprise
-# 49 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 53 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	goto dadCallLivingRoomBottom
 	return
 
 
 dadCallLivingRoomBottom::
-# 53 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	msgbox dadCallLivingRoomTop_Text_0, MSGBOX_AUTOCLOSE
-# 54 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmessage
-# 55 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverBottom
-# 56 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmovement OBJ_EVENT_ID_PLAYER
 # 57 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	speakername dadCallLivingRoomTop_Text_0
+# 58 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	msgbox dadCallLivingRoomTop_Text_1, MSGBOX_AUTOCLOSE
+# 59 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	waitmessage
+# 60 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	speakername NULL
+# 61 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverBottom
+# 62 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 63 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	goto quigleyIntro
 	return
 
 
 quigleyIntro::
-# 61 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	addobject 2
-# 62 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	setflag FLAG_UNUSED_0x02B
-# 63 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	playse SE_DOOR
-# 64 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	applymovement 2, playersHouse_dadEnter
-# 65 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmovement 2
-# 66 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	addobject 1
 # 67 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	applymovement 2, playersHouse_dadWalkUp
+	addobject 2
 # 68 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	applymovement 1, playersHouse_quigleyWalkUp
+	setflag FLAG_UNUSED_0x02B
 # 69 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmovement 1
+	playse SE_DOOR
 # 70 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	msgbox quigleyIntro_Text_0
+	applymovement 2, playersHouse_dadEnter
 # 71 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmessage
+	waitmovement 2
 # 72 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	msgbox quigleyIntro_Text_1, MSGBOX_AUTOCLOSE
+	addobject 1
 # 73 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	applymovement 1, playersHouse_quigleyLeave
+	applymovement 2, playersHouse_dadWalkUp
 # 74 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmovement 1
+	applymovement 1, playersHouse_quigleyWalkUp
 # 75 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	removeobject 1
+	waitmovement 1
 # 76 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	applymovement 2, playersHouse_dadLookRight
+	speakername dadCallLivingRoomTop_Text_0
 # 77 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmovement 2
+	msgbox quigleyIntro_Text_0
 # 78 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	msgbox quigleyIntro_Text_2, MSGBOX_AUTOCLOSE
-# 79 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	waitmessage
+# 79 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	speakername quigleyIntro_Text_1
 # 80 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	applymovement 2, playersHouse_dadSettle
+	msgbox quigleyIntro_Text_2, MSGBOX_AUTOCLOSE
 # 81 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	waitmovement 2
+	applymovement 1, playersHouse_quigleyLeave
 # 82 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	removeobject 2
+	waitmovement 1
 # 83 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	setflag FLAG_UNUSED_0x022
+	removeobject 1
 # 84 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	addobject 3
+	applymovement 2, playersHouse_dadLookRight
 # 85 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	clearflag FLAG_UNUSED_0x021
+	waitmovement 2
 # 86 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	speakername dadCallLivingRoomTop_Text_0
+# 87 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	msgbox quigleyIntro_Text_3, MSGBOX_AUTOCLOSE
+# 88 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	waitmessage
+# 89 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	speakername NULL
+# 90 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	applymovement 2, playersHouse_dadSettle
+# 91 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	waitmovement 2
+# 92 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	removeobject 2
+# 93 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	setflag FLAG_UNUSED_0x022
+# 94 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	addobject 3
+# 95 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	clearflag FLAG_UNUSED_0x021
+# 96 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	releaseall
 	return
 
 
-# 89 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-playersHouse_playerWalkOverTop:
-# 90 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 90 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 90 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 90 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 90 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 90 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 90 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 90 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 90 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 90 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 91 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	delay_4
-# 92 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	face_down
-	step_end
-
-# 94 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-playersHouse_playerWalkOverMid:
-# 95 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 95 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 95 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 96 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_up
-# 97 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 97 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 97 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 97 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 97 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 97 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 97 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 98 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	delay_4
 # 99 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+playersHouse_playerWalkOverTop:
+# 100 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 100 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 100 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 100 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 100 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 100 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 100 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 100 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 100 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 100 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 101 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	delay_4
+# 102 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	face_down
 	step_end
 
-# 101 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-playersHouse_playerWalkOverBottom:
-# 102 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 102 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 102 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 102 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 103 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_up
-# 103 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_up
 # 104 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 104 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 104 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 104 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 104 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 104 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+playersHouse_playerWalkOverMid:
+# 105 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_left
 # 105 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	delay_4
+	walk_left
+# 105 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
 # 106 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	face_down
-	step_end
-
+	walk_up
+# 107 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 107 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 107 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 107 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 107 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 107 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 107 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
 # 108 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-playersHouse_dadEnter:
+	delay_4
 # 109 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_up
-# 109 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_up
+	face_down
 	step_end
 
 # 111 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-playersHouse_dadWalkUp:
+playersHouse_playerWalkOverBottom:
 # 112 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_up
+	walk_left
 # 112 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 112 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 112 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 113 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_up
 # 113 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_up
+# 114 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 114 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 114 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 114 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 114 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 114 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 115 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	delay_4
+# 116 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	face_down
+	step_end
+
+# 118 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+playersHouse_dadEnter:
+# 119 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_up
+# 119 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_up
+	step_end
+
+# 121 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+playersHouse_dadWalkUp:
+# 122 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_up
+# 122 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_up
+# 123 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_in_place_down
 	step_end
 
-# 115 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 125 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 playersHouse_quigleyWalkUp:
-# 116 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 126 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_up
-# 116 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 126 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_up
-# 116 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 126 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_up
-# 116 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 126 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_up
-# 117 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 127 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_right
-# 118 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 128 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_in_place_up
 	step_end
 
-# 120 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-playersHouse_quigleyLeave:
-# 121 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 122 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_down
-# 122 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_down
-# 122 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_down
-	step_end
-
-# 124 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-playersHouse_playerLeave:
-# 125 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_down
-# 126 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_left
-# 127 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_down
-# 127 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	walk_down
-	step_end
-
-# 129 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-playersHouse_playerStepDown:
 # 130 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+playersHouse_quigleyLeave:
+# 131 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 132 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_down
+# 132 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_down
+# 132 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_down
 	step_end
 
-# 132 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 134 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+playersHouse_playerLeave:
+# 135 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_down
+# 136 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_left
+# 137 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_down
+# 137 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_down
+	step_end
+
+# 139 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+playersHouse_playerStepDown:
+# 140 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	walk_down
+	step_end
+
+# 142 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 playerSurprise:
-# 133 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 143 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	emote_exclamation_mark
 	step_end
 
-# 135 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 145 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 playersHouse_dadSettle:
-# 136 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 146 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_up
-# 137 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 147 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_right
-# 138 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 148 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_up
 	step_end
 
-# 140 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 150 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 playersHouse_dadLookRight:
-# 141 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 151 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	walk_in_place_right
 	step_end
 
 playersHouse_fridge::
-# 145 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 155 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	msgbox playersHouse_fridge_Text_0, MSGBOX_SIGN
 	return
 
 
 playersHouse_sink::
-# 148 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 158 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	msgbox playersHouse_sink_Text_0, MSGBOX_SIGN
 	return
 
 
 playersHouse_shelves::
-# 151 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 161 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	msgbox playersHouse_shelves_Text_0, MSGBOX_SIGN
 	return
 
 
 playersHouse_cabinet::
-# 154 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 164 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	msgbox playersHouse_cabinet_Text_0, MSGBOX_SIGN
 	return
 
 
 playersHouse_TV::
-# 157 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 167 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	msgbox playersHouse_TV_Text_0, MSGBOX_SIGN
 	return
 
 
 dadCallLivingRoomTop_Text_0:
 # 23 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	.string "Dad$"
+
+dadCallLivingRoomTop_Text_1:
+# 24 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	.string "over here$"
 
 quigleyIntro_Text_0:
-# 70 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 77 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	.string "{PLAYER} this is quigley$"
 
 quigleyIntro_Text_1:
-# 72 "data/maps/beaston_playersHouse_floor1/scripts.pory"
-	.string "ayo whaddup i'm quigley\pmy dad's like the professor\phe told me to come get u so c'mon\pi'll be outside when ur ready$"
+# 79 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	.string "Quigley$"
 
 quigleyIntro_Text_2:
-# 78 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 80 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+	.string "ayo whaddup i'm quigley\pmy dad's like the professor\phe told me to come get u so c'mon\pi'll be outside when ur ready$"
+
+quigleyIntro_Text_3:
+# 87 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	.string "well go get ur stuff kid i'll be down\nhere watching old man shows$"
 
 playersHouse_fridge_Text_0:
-# 145 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 155 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	.string "fritch$"
 
 playersHouse_sink_Text_0:
-# 148 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 158 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	.string "the sink bro$"
 
 playersHouse_shelves_Text_0:
-# 151 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 161 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	.string "shelves full of stuff$"
 
 playersHouse_cabinet_Text_0:
-# 154 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 164 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	.string "dishes in tha cabinet$"
 
 playersHouse_TV_Text_0:
-# 157 "data/maps/beaston_playersHouse_floor1/scripts.pory"
+# 167 "data/maps/beaston_playersHouse_floor1/scripts.pory"
 	.string "old man shows are on$"

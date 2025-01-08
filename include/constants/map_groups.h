@@ -65,6 +65,8 @@
 #define MAP_UNDERWATER_ROUTE125 (56 | (0 << 8))
 #define MAP_BEASTON             (57 | (0 << 8))
 #define MAP_ASTERRA             (58 | (0 << 8))
+#define MAP_PORKBELLY           (59 | (0 << 8))
+#define MAP_GAGIL_ROUTE4        (60 | (0 << 8))
 
 // gMapGroup_IndoorLittleroot
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    (0 | (1 << 8))

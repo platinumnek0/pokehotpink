@@ -662,10 +662,7 @@ void AnimTask_Rollout(u8 taskId)
         var3 = var1;
 
     rolloutCounter = GetRolloutCounter();
-    if (rolloutCounter == 1)
-        task->data[8] = 32;
-    else
-        task->data[8] = 48 - (rolloutCounter * 8);
+    task->data[8] = 32 + (rolloutCounter * 8);
 
     task->data[0] = 0;
     task->data[11] = 0;
@@ -685,6 +682,47 @@ void AnimTask_Rollout(u8 taskId)
     task->data[13] = pan1;
     task->data[14] = (pan2 - pan1) / task->data[8];
     task->data[1] = rolloutCounter;
+    task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
+
+    task->func = AnimTask_Rollout_Step;
+}
+
+void AnimTask_RockClimbRollout(u8 taskId)
+{
+    u16 var0, var1, var2, var3;
+    s16 pan1, pan2;
+    struct Task *task;
+
+    task = &gTasks[taskId];
+
+    var0 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    var1 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y) + 24;
+    var2 = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    var3 = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 24;
+
+    if (BATTLE_PARTNER(gBattleAnimAttacker) == gBattleAnimTarget)
+        var3 = var1;
+
+    task->data[8] = 48;
+
+    task->data[0] = 0;
+    task->data[11] = 0;
+    task->data[9] = 0;
+    task->data[12] = 1;
+    task->data[10] = (task->data[8] / 8) - 1;
+    task->data[2] = var0 * 8;
+    task->data[3] = var1 * 8;
+    task->data[4] = ((var2 - var0) * 8) / task->data[8];
+    task->data[5] = ((var3 - var1) * 8) / task->data[8];
+    task->data[6] = 0;
+    task->data[7] = 0;
+
+    pan1 = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
+    pan2 = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
+
+    task->data[13] = pan1;
+    task->data[14] = (pan2 - pan1) / task->data[8];
+    task->data[1] = 2;
     task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
 
     task->func = AnimTask_Rollout_Step;
@@ -867,9 +905,9 @@ static void AnimRolloutParticle(struct Sprite *sprite)
 
 static u8 GetRolloutCounter(void)
 {
-    u8 retVal = gAnimDisableStructPtr->rolloutTimer;
-    if (retVal > 4)
-        retVal = 4;
+    u8 retVal = gAnimDisableStructPtr->furyCutterCounter;
+    if (retVal > 5)
+        retVal = 5;
 
     return retVal;
 }

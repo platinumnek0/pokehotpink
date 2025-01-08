@@ -1,6 +1,10 @@
 #ifndef GUARD_METATILE_LABELS_H
 #define GUARD_METATILE_LABELS_H
 
+// gTileset_Asterra
+#define METATILE_Asterra_Door_Asterra  0x822
+#define METATILE_Asterra_Door_Shed     0x83C
+
 // gTileset_BattleArena
 #define METATILE_BattleArena_Door  0x81B
 

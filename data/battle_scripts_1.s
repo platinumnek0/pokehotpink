@@ -1990,6 +1990,7 @@ BattleScript_EffectGrowth::
 	attackcanceler
 	attackstring
 	ppreduce
+	clearminimize
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_GrowthDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPATK, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
 BattleScript_GrowthDoMoveAnim::
@@ -4266,11 +4267,7 @@ BattleScript_NightmareWorked::
 BattleScript_EffectMinimize::
 	attackcanceler
 	setminimize
-.if B_MINIMIZE_EVASION >= GEN_5
-	setstatchanger STAT_EVASION, 2, FALSE
-.else
 	setstatchanger STAT_EVASION, 1, FALSE
-.endif
 	goto BattleScript_EffectStatUpAfterAtkCanceler
 
 BattleScript_EffectCurse::
@@ -9668,6 +9665,7 @@ BattleScript_EffectHitSetRemoveTerrain::
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
+	setadditionaleffects
 	setremoveterrain BattleScript_TryFaint
 	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
 	printfromtable gTerrainStringIds

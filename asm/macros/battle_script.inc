@@ -1626,6 +1626,10 @@
 	callnative BS_TryUpdateRecoilTracker
 	.endm
 
+	.macro clearminimize
+	callnative BS_ClearMinimize
+	.endm
+
 	.macro trytidyup clear:req, jumpInstr:req
 	callnative BS_TryTidyUp
 	.byte \clear

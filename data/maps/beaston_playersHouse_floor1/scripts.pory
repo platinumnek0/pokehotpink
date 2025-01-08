@@ -20,8 +20,10 @@ script playerWalkOverToLivingRoomTop{
 }
 
 script dadCallLivingRoomTop{
+    speakername("Dad")
     msgbox("over here", MSGBOX_AUTOCLOSE)
     waitmessage
+    speakername(NULL)
     applymovement(OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverTop)
     waitmovement(OBJ_EVENT_ID_PLAYER)
     goto(quigleyIntro)
@@ -35,8 +37,10 @@ script playerWalkOverToLivingRoomMid{
 }
 
 script dadCallLivingRoomMid{
+    speakername("Dad")
     msgbox("over here", MSGBOX_AUTOCLOSE)
     waitmessage
+    speakername(NULL)
     applymovement(OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverMid)
     waitmovement(OBJ_EVENT_ID_PLAYER)
     goto(quigleyIntro)
@@ -50,8 +54,10 @@ script playerWalkOverToLivingRoomBottom{
 }
 
 script dadCallLivingRoomBottom{
+    speakername("Dad")
     msgbox("over here", MSGBOX_AUTOCLOSE)
     waitmessage
+    speakername(NULL)
     applymovement(OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverBottom)
     waitmovement(OBJ_EVENT_ID_PLAYER)
     goto(quigleyIntro)
@@ -67,16 +73,20 @@ script quigleyIntro{
     applymovement(2, playersHouse_dadWalkUp)
     applymovement (1, playersHouse_quigleyWalkUp)
     waitmovement (1)
+    speakername("Dad")
     msgbox("{PLAYER} this is quigley")
     waitmessage
+    speakername("Quigley")
     msgbox ("ayo whaddup i'm quigley\pmy dad's like the professor\phe told me to come get u so c'mon\pi'll be outside when ur ready", MSGBOX_AUTOCLOSE)
     applymovement(1, playersHouse_quigleyLeave)
     waitmovement(1)
     removeobject(1)
     applymovement(2, playersHouse_dadLookRight)
     waitmovement(2)
+    speakername("Dad")
     msgbox("well go get ur stuff kid i'll be down\nhere watching old man shows", MSGBOX_AUTOCLOSE)
     waitmessage
+    speakername(NULL)
     applymovement(2, playersHouse_dadSettle)
     waitmovement(2)
     removeobject(2)

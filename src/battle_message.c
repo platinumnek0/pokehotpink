@@ -863,9 +863,11 @@ static const u8 sText_GrimDice_Eight[] = _("an 8");
 static const u8 sText_GrimDice_Ten[] = _("a 10");
 static const u8 sText_GrimDice_Twelve[] = _("a 12");
 static const u8 sText_warmWelcome[] = _("{B_ATK_NAME_WITH_PREFIX} welcomes its\nopponents with open arms!");
+static const u8 sText_AbilitySharplyBoostedStat[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nsharply raised its {B_BUFF1}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_ABILITYSHARPLYBOOSTEDSTAT - BATTLESTRINGS_TABLE_START] = sText_AbilitySharplyBoostedStat,
     [STRINGID_WARMWELCOME - BATTLESTRINGS_TABLE_START] = sText_warmWelcome,
     [STRINGID_GRIMDICE_TWELVE - BATTLESTRINGS_TABLE_START] = sText_GrimDice_Twelve,
     [STRINGID_GRIMDICE_TEN - BATTLESTRINGS_TABLE_START] = sText_GrimDice_Ten,

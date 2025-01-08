@@ -1,21 +1,16 @@
 static const struct TrainerMon sParty_Sawyer1[] = {
     {
-    .lvl = 40,
-    .species = SPECIES_MARRANTULA,
-    .moves = {MOVE_LEECH_LIFE, MOVE_STICKY_WEB, MOVE_ROCK_CLIMB, MOVE_DIG},
-    .ability = ABILITY_TINTED_LENS,
+    .lvl = 30,
+    .species = SPECIES_COLEOX,
+    .moves = {MOVE_RAGING_BULL, MOVE_MOLT, MOVE_WILD_CHARGE, MOVE_ROCK_CLIMB},
+    .ability = ABILITY_STURDY,
     },
     {
-    .lvl = 41,
-    .species = SPECIES_DEMOLIZARD,
-    .moves = {MOVE_NASTY_PLOT, MOVE_SEARING_SHOT, MOVE_SUNNY_DAY, MOVE_SHADOW_BALL},
-    .ability = ABILITY_ARTILLERY,
-    },
-    {
-    .lvl = 42,
-    .species = SPECIES_WIRLYDOO,
-    .moves = {MOVE_IRON_DEFENSE, MOVE_FLASH_CANNON, MOVE_AIR_SLASH, MOVE_THUNDER_WAVE}
-    },
+    .lvl = 30,
+    .species = SPECIES_COLEOX,
+    .moves = {MOVE_RAGING_BULL, MOVE_MOLT, MOVE_WILD_CHARGE, MOVE_ROCK_CLIMB},
+    .ability = ABILITY_STURDY,
+    }
 };
 
 static const struct TrainerMon sParty_GruntAquaHideout1[] = {
@@ -6472,8 +6467,10 @@ static const struct TrainerMon sParty_BrendanRoute119Mudkip[] = {
 
 static const struct TrainerMon sParty_BrendanRoute103Treecko[] = {
     {
-    .lvl = 5,
-    .species = SPECIES_TORCHIC,
+    .lvl = 4,
+    .species = SPECIES_CLEFFA,
+    .moves = {MOVE_TACKLE, MOVE_BABY_DOLL_EYES, MOVE_NONE, MOVE_NONE},
+    .ability = ABILITY_WELL_BAKED_BODY,
     }
 };
 

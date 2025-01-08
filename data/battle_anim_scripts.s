@@ -1008,6 +1008,8 @@ gBattleAnims_Moves::
 	.4byte Move_SCRUB_CLEAN
 	.4byte Move_TRANSMUTE
 	.4byte Move_WARM_WELCOME
+	.4byte Move_CINDER_SLIDE
+	.4byte Move_MIST_BOMB
 
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
@@ -3451,7 +3453,6 @@ Move_FLASH_CANNON:
 
 Move_ROCK_CLIMB:
 	delay 8
-	loopsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER, 38, 3
 	waitforvisualfinish
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_MUD_SAND
@@ -3459,7 +3460,7 @@ Move_ROCK_CLIMB:
 	monbg ANIM_DEF_PARTNER
 	splitbgprio ANIM_TARGET
 	setalpha 12, 8
-	createvisualtask AnimTask_Rollout, 2, 0
+	createvisualtask AnimTask_RockClimbRollout, 2, 0
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeTargetBasedOnMovePowerOrDmg, 2, 5, 0, 1, 30, 1, RGB(0, 16, 1)
 	createsprite gBasicHitSplatSpriteTemplate, 131, 4, -15, 8, 1, 1
@@ -36323,6 +36324,11 @@ WarmWelcomeSwitch:
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
+	end
+
+Move_CINDER_SLIDE:
+
+Move_MIST_BOMB:
 	end
 
 @@@ DYNAMAX AND MAX RAIDS

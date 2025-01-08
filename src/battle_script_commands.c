@@ -1607,11 +1607,16 @@ static bool32 AccuracyCalcHelper(u16 move)
             JumpIfMoveFailed(7, move);
             return TRUE;
         }
+        else if ((gBattleWeather & B_WEATHER_SANDSTORM) && gMovesInfo[move].effect == EFFECT_SAND_ALWAYS_HIT)
+        {
+            JumpIfMoveFailed(7, move);
+            return TRUE;
+        }
     }
 
     if (B_MINIMIZE_DMG_ACC >= GEN_6
      && (gStatuses3[gBattlerTarget] & STATUS3_MINIMIZED)
-     && gMovesInfo[move].minimizeDoubleDamage)
+     && (gMovesInfo[move].minimizeDoubleDamage || gMovesInfo[move].curlBoosted))
     {
         JumpIfMoveFailed(7, move);
         return TRUE;
@@ -11009,6 +11014,7 @@ static void Cmd_tryexplosion(void)
     CMD_ARGS();
 
     u32 dampBattler;
+    u32 demolitionistHpFraction;
     if (gBattleControllerExecFlags)
         return;
 
@@ -11023,7 +11029,8 @@ static void Cmd_tryexplosion(void)
 
     if(GetBattlerAbility(gBattlerAttacker) == ABILITY_DEMOLITIONIST && gBattleMons[gBattlerAttacker].hp >= (gBattleMons[gBattlerAttacker].maxHP / 2))
     {
-        gBattleMoveDamage = (gBattleMons[gBattlerAttacker].maxHP*9)/10;
+        demolitionistHpFraction = ((gBattleMons[gBattlerAttacker].maxHP*9)/10) - (gBattleMons[gBattlerAttacker].maxHP - gBattleMons[gBattlerAttacker].hp);
+        gBattleMoveDamage = (demolitionistHpFraction);
         BtlController_EmitHealthBarUpdate(gBattlerAttacker, BUFFER_A, gBattleMoveDamage);
     }
     else
@@ -11040,13 +11047,15 @@ static void Cmd_setatkhptozero(void)
 {
     CMD_ARGS();
 
+    u32 demolitionistHpFraction;
     if (gBattleControllerExecFlags)
         return;
 
     if(GetBattlerAbility(gBattlerAttacker) == ABILITY_DEMOLITIONIST && gBattleMons[gBattlerAttacker].hp >= (gBattleMons[gBattlerAttacker].maxHP / 2))
     {
-        gBattleMons[gBattlerAttacker].hp = gBattleMons[gBattlerAttacker].maxHP/10;
-        BtlController_EmitSetMonData(gBattlerAttacker, BUFFER_A, REQUEST_HP_BATTLE, 0, sizeof(gBattleMons[gBattlerAttacker].hp), (&gBattleMons[gBattlerAttacker].hp));
+        demolitionistHpFraction = ((gBattleMons[gBattlerAttacker].maxHP*9)/10) - (gBattleMons[gBattlerAttacker].hp);
+        gBattleMons[gBattlerAttacker].hp = (gBattleMons[gBattlerAttacker].maxHP - ((gBattleMons[gBattlerAttacker].maxHP*9)/10));
+        BtlController_EmitSetMonData(gBattlerAttacker, BUFFER_A, REQUEST_HP_BATTLE, 0, sizeof(demolitionistHpFraction), (&gBattleMons[gBattlerAttacker].hp));
     }
     else
     {
@@ -16443,6 +16452,7 @@ void BS_SetRemoveTerrain(void)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_PSYCHIC;
         break;
     case EFFECT_HIT_SET_REMOVE_TERRAIN:
+    case EFFECT_BULLDOZE:
         switch (gMovesInfo[gCurrentMove].argument)
         {
         case ARG_SET_PSYCHIC_TERRAIN: // Genesis Supernova
@@ -16940,6 +16950,16 @@ void BS_TryTidyUp(void)
         else
             gBattlescriptCurrInstr = cmd->nextInstr;
     }
+}
+
+void BS_ClearMinimize(void)
+{
+    NATIVE_ARGS();
+
+    if (gHitMarker & HITMARKER_OBEYS && gStatuses3[gBattlerAttacker] & STATUS3_MINIMIZED)
+        gStatuses3[gBattlerAttacker] &= ~STATUS3_MINIMIZED;
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_TryBoostAllyBestStat(void)

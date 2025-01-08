@@ -15,12 +15,24 @@
   "connections": [
     {
       "map": "MAP_ASTERRA",
-      "offset": -2,
+      "offset": -12,
       "direction": "down"
     }
   ],
   "object_events": [
-
+    {
+      "graphics_id": "OBJ_EVENT_GFX_LEAF",
+      "x": 12,
+      "y": 29,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_ROUTE_103_RIVAL"
+    }
   ],
   "warp_events": [
     {
@@ -53,7 +65,87 @@
     }
   ],
   "coord_events": [
-
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 39,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "7",
+      "script": "Route2_EventScript_WalkUpRightMost"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 39,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "7",
+      "script": "Route2_EventScript_WalkUpRight"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 39,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "7",
+      "script": "Route2_EventScript_WalkUpLeft"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 39,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "7",
+      "script": "Route2_EventScript_WalkUpMiddle"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 39,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "7",
+      "script": "Route2_EventScript_WalkUpLeftMost"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 35,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "8",
+      "script": "Route2_EventScript_ExitBlock"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 35,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "8",
+      "script": "Route2_EventScript_ExitBlock"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 35,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "8",
+      "script": "Route2_EventScript_ExitBlock"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 35,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "8",
+      "script": "Route2_EventScript_ExitBlock"
+    }
   ],
   "bg_events": [
     {

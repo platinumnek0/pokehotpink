@@ -34,6 +34,7 @@ script beaston_quigleyAsk{
     waitmovement(1)
     applymovement(1, playersHouse_dadLookRight)
     waitmovement(1)
+    speakername("Quigley")
     msgbox("so u ready", MSGBOX_YESNO)
     goto_if_eq(VAR_RESULT, NO, beaston_sendYouBack)
     goto(beaston_labEscort)
@@ -42,6 +43,7 @@ script beaston_quigleyAsk{
 script beaston_sendYouBack{
     msgbox ("yeah thought so\pget ur stuff and come back")
     waitmessage
+    speakername(NULL)
     opendoor(26, 24)
     applymovement(OBJ_EVENT_ID_PLAYER, beaston_playerWalkBack)
     waitmovement(OBJ_EVENT_ID_PLAYER)
@@ -50,6 +52,7 @@ script beaston_sendYouBack{
 }
 
 script beaston_labEscort{
+    speakername("Quigley")
     msgbox("sweet c'mon", MSGBOX_AUTOCLOSE)
     waitmessage
     setvar(VAR_LITTLEROOT_INTRO_STATE, 3)
@@ -65,6 +68,7 @@ script beaston_labEscort{
     waitmovement(OBJ_EVENT_ID_PLAYER)
     msgbox("idk why he didn't pick me but\pguess that doesn't really matter now\pc'mon", MSGBOX_AUTOCLOSE)
     waitmessage
+    speakername(NULL)
     opendoor(10, 16)
     applymovement(1, beaston_playerWalkBack)
     waitmovement(1)
@@ -109,10 +113,12 @@ script beaston_rivalBattleLoss_setup{
 
 script beaston_rivalBattleLoss_text{
     applymovement(OBJ_EVENT_ID_PLAYER, look_left)
+    speakername("Prof. Cokbern")
     msgbox("{PLAYER}! There you are!\pI'm glad you're alright, seems things\ndidn't quite go to plan…\pRegardless, I've something to ask of\nyou.\pMy niece, Stella, lives in the next town\nover. I'm sure you two are familiar\lwith each other.\pI'd like for you to bring her back to my\nlab, I've got something special for\lyou two.\pI'll be logging my recent findings, if\nyou need me.", MSGBOX_AUTOCLOSE)
     setflag(FLAG_UNUSED_0x024)
     setflag(FLAG_UNUSED_0x028)
     clearflag(FLAG_UNUSED_0x02A)
+    speakername(NULL)
     setvar(VAR_LITTLEROOT_INTRO_STATE, 7)
     if(var(VAR_STARTER_MON) == 1)
     {
@@ -198,4 +204,31 @@ movement beaston_cokbern_rivalBattleLoss_right_leave{
     walk_left * 4
     walk_up * 4
     walk_left * 5
+}
+
+script beaston_BlockNorthExit{
+    lockall
+    playmoncry(SPECIES_ROCKRUFF, CRY_MODE_NORMAL)
+    waitmoncry
+    playse(SE_SUPER_EFFECTIVE)
+    waitse
+    playse(SE_EFFECTIVE)
+    waitse
+    playse(SE_EFFECTIVE)
+    waitse
+    msgbox("Sounds like something hectic is\nhappening up ahead…", MSGBOX_AUTOCLOSE)
+    waitmessage
+    playmoncry(SPECIES_PIKIPEK, CRY_MODE_NORMAL)
+    waitmoncry
+    playse(SE_EFFECTIVE)
+    waitse
+    msgbox("You decide it's best to stay out of it.", MSGBOX_AUTOCLOSE)
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_player_stepBack)
+    waitmovement(0)
+    waitmessage
+    releaseall
+}
+
+movement beaston_player_stepBack{
+    walk_down
 }

@@ -635,7 +635,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_ANGER_POINT] =
     {
         .name = _("Anger Point"),
-        .description = COMPOUND_STRING("Critical & super-effective\nhits boost Sp.Atk."),
+        .description = COMPOUND_STRING("Critical & super-effective\nhits boost Atk or Sp.Atk."),
         .aiRating = 4,
     },
 
@@ -1358,7 +1358,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_GRASS_PELT] =
     {
         .name = _("Grass Pelt"),
-        .description = COMPOUND_STRING("Ups Defense in grass."),
+        .description = COMPOUND_STRING("Raises Defense in lush\nterrain."),
         .aiRating = 2,
         .breakable = TRUE,
     },
@@ -1646,8 +1646,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_COMATOSE] =
     {
-        .name = _("Comatose"),
-        .description = COMPOUND_STRING("Always drowsing."),
+        .name = _("Sleepwalker"),
+        .description = COMPOUND_STRING("Always sleeping. Can still\nbattle, but won't wake up."),
         .aiRating = 6,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -1771,7 +1771,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     #else
         .name = _("ElectrcSurge"),
     #endif
-        .description = COMPOUND_STRING("Field becomes Electric."),
+        .description = COMPOUND_STRING("Creates electric terrain when\nswitching in."),
         .aiRating = 8,
     },
 
@@ -1782,21 +1782,21 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     #else
         .name = _("PsychicSurge"),
     #endif
-        .description = COMPOUND_STRING("Field becomes weird."),
+        .description = COMPOUND_STRING("Creates psychic terrain when\nswitching in."),
         .aiRating = 8,
     },
 
     [ABILITY_MISTY_SURGE] =
     {
         .name = _("Misty Surge"),
-        .description = COMPOUND_STRING("Field becomes misty."),
+        .description = COMPOUND_STRING("Creates misty terrain when\nswitching in."),
         .aiRating = 8,
     },
 
     [ABILITY_GRASSY_SURGE] =
     {
         .name = _("Grassy Surge"),
-        .description = COMPOUND_STRING("Field becomes grassy."),
+        .description = COMPOUND_STRING("Creates lush terrain when\nswitching in."),
         .aiRating = 8,
     },
 
@@ -2709,7 +2709,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_DEMOLITIONIST] =
     {
         .name = _("Demolitionist"),
-        .description = COMPOUND_STRING("Survives exploding, if done\nabove half HP."),
+        .description = COMPOUND_STRING("Survives exploding, if done\nabove half HP. Boosts ballistic\nmoves' power."),
         .aiRating = 6,
     },
 
@@ -2727,7 +2727,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .failsOnImposter = TRUE,
     },
 
-    [ABILITY_MOMENTUM] =
+    [ABILITY_RECURSION] =
     {
         .name = _("Recursion"),
         .description = COMPOUND_STRING("Moves used repeatedly get\nstronger."),
@@ -2798,4 +2798,19 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Poisons the attacker if\nbitten."),
         .aiRating = 4,
     },
+
+    [ABILITY_SANDMAN] =
+    {
+        .name = _("Sandman"),
+        .description = COMPOUND_STRING("Sand moves may cause sleep."),
+        .aiRating = 4,
+    },
+
+    [ABILITY_MOMENTUM] =
+    {
+        .name = _("Momentum"),
+        .description = COMPOUND_STRING("Boosts Speed when hit."),
+        .aiRating = 6,
+    },
+
 };

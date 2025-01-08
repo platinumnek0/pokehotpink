@@ -1237,7 +1237,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_BULLDOZE] =
     {
-        .battleScript = BattleScript_EffectHit,
+        .battleScript = BattleScript_EffectHitSetRemoveTerrain,
         .battleTvScore = 0, // TODO: Assign points
     },
 
@@ -2320,6 +2320,24 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_WARM_WELCOME] =
     {
         .battleScript = BattleScript_EffectWarmWelcome,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_CINDER_SLIDE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_MIST_BOMB] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_SAND_ALWAYS_HIT] =
+    {
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
     },
 

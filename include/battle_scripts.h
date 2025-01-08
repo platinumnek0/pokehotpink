@@ -499,6 +499,7 @@ extern const u8 BattleScript_MoltNoStatus[];
 extern const u8 BattleScript_FoeTrapped[];
 extern const u8 BattleScript_RenewActivates[];
 extern const u8 BattleScript_QuantumShiftSwitchIn[];
+extern const u8 BattleScript_SharplyRaiseStatOnFaintingTarget[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
