@@ -836,3 +836,14 @@ const struct Tileset gTileset_Asterra =
     .metatileAttributes = gMetatileAttributes_Asterra,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_lost_settlement =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_lost_settlement,
+    .palettes = gTilesetPalettes_lost_settlement,
+    .metatiles = gMetatiles_lost_settlement,
+    .metatileAttributes = gMetatileAttributes_lost_settlement,
+    .callback = NULL,
+};

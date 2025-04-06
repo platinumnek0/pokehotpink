@@ -3879,6 +3879,33 @@ void SetMoveEffect(bool32 primary, bool32 certain)
     gBattleScripting.moveEffect = 0;
 }
 
+static bool32 ChangesStats(const struct AdditionalEffect *additionalEffect)
+{
+    if(additionalEffect->moveEffect == MOVE_EFFECT_ATK_MINUS_1 || additionalEffect->moveEffect == MOVE_EFFECT_DEF_MINUS_1
+    || additionalEffect->moveEffect == MOVE_EFFECT_SPD_MINUS_1 || additionalEffect->moveEffect == MOVE_EFFECT_SP_ATK_MINUS_1
+    || additionalEffect->moveEffect == MOVE_EFFECT_SP_DEF_MINUS_1 || additionalEffect->moveEffect == MOVE_EFFECT_ACC_MINUS_1
+    || additionalEffect->moveEffect == MOVE_EFFECT_EVS_MINUS_1 || additionalEffect->moveEffect == MOVE_EFFECT_ATK_PLUS_1
+    || additionalEffect->moveEffect == MOVE_EFFECT_DEF_PLUS_1 || additionalEffect->moveEffect == MOVE_EFFECT_SPD_PLUS_1
+    || additionalEffect->moveEffect == MOVE_EFFECT_SP_ATK_PLUS_1 || additionalEffect->moveEffect == MOVE_EFFECT_SP_DEF_PLUS_1
+    || additionalEffect->moveEffect == MOVE_EFFECT_ACC_PLUS_1 || additionalEffect->moveEffect == MOVE_EFFECT_EVS_PLUS_1
+    || additionalEffect->moveEffect == MOVE_EFFECT_ATK_MINUS_2 || additionalEffect->moveEffect == MOVE_EFFECT_DEF_MINUS_2
+    || additionalEffect->moveEffect == MOVE_EFFECT_SPD_MINUS_2 || additionalEffect->moveEffect == MOVE_EFFECT_SP_ATK_MINUS_2
+    || additionalEffect->moveEffect == MOVE_EFFECT_SP_DEF_MINUS_2 || additionalEffect->moveEffect == MOVE_EFFECT_ACC_MINUS_2
+    || additionalEffect->moveEffect == MOVE_EFFECT_EVS_MINUS_2 || additionalEffect->moveEffect == MOVE_EFFECT_ATK_PLUS_2
+    || additionalEffect->moveEffect == MOVE_EFFECT_DEF_PLUS_2 || additionalEffect->moveEffect == MOVE_EFFECT_SPD_PLUS_2
+    || additionalEffect->moveEffect == MOVE_EFFECT_SP_ATK_PLUS_2 || additionalEffect->moveEffect == MOVE_EFFECT_SP_DEF_PLUS_2
+    || additionalEffect->moveEffect == MOVE_EFFECT_ACC_PLUS_2 || additionalEffect->moveEffect == MOVE_EFFECT_EVS_PLUS_2
+    || additionalEffect->moveEffect == MOVE_EFFECT_ATK_DEF_DOWN || additionalEffect->moveEffect == MOVE_EFFECT_DEF_SPDEF_DOWN
+    || additionalEffect->moveEffect == MOVE_EFFECT_V_CREATE || additionalEffect->moveEffect == MOVE_EFFECT_ALL_STATS_UP)
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
 static bool32 CanApplyAdditionalEffect(const struct AdditionalEffect *additionalEffect)
 {
     // Self-targeting move effects only apply after the last mon has been hit
@@ -3887,6 +3914,11 @@ static bool32 CanApplyAdditionalEffect(const struct AdditionalEffect *additional
       && (moveTarget == MOVE_TARGET_BOTH || moveTarget == MOVE_TARGET_FOES_AND_ALLY)
       && GetNextTarget(moveTarget, TRUE) != MAX_BATTLERS_COUNT)
         return FALSE;
+    
+    if(ChangesStats(additionalEffect) && GetBattlerAbility(gBattlerAttacker) == ABILITY_APATHY && additionalEffect->self)
+    {
+        return FALSE;
+    }
 
     // Certain move effects only apply if the target raised stats this turn (e.g. Burning Jealousy)
     if (additionalEffect->onlyIfTargetRaisedStats && !gProtectStructs[gBattlerTarget].statRaised)
@@ -5331,15 +5363,12 @@ static void Cmd_playstatchangeanimation(void)
 
         while (stats != 0)
         {
-            if(ability != ABILITY_APATHY)
+            if ((stats & 1 && gBattleMons[battler].statStages[currStat] < MAX_STAT_STAGE))
             {
-                if ((stats & 1 && gBattleMons[battler].statStages[currStat] < MAX_STAT_STAGE))
-                {
-                    statAnimId = startingStatAnimId + currStat;
-                    changeableStatsCount++;
-                }
-                stats >>= 1, currStat++;
+                statAnimId = startingStatAnimId + currStat;
+                changeableStatsCount++;
             }
+            stats >>= 1, currStat++;
         }
 
         if (changeableStatsCount > 1) // more than one stat, so the color is gray
@@ -5351,7 +5380,11 @@ static void Cmd_playstatchangeanimation(void)
         }
     }
 
-    if (flags & STAT_CHANGE_MULTIPLE_STATS && changeableStatsCount < 2)
+    if(ability == ABILITY_APATHY)
+    {
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else if (flags & STAT_CHANGE_MULTIPLE_STATS && changeableStatsCount < 2)
     {
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
@@ -11661,7 +11694,8 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                     else
                     {
                         gBattlerAbility = battler;
-                        if(battlerAbility == ABILITY_APATHY)
+                        BattleScriptPush(BS_ptr);
+                        if (battlerAbility == ABILITY_APATHY)
                         {
                             gBattlescriptCurrInstr = BattleScript_ApathyStatChange;
                         }
@@ -11671,6 +11705,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                         }
                         gLastUsedAbility = battlerAbility;
                         RecordAbilityBattle(battler, gLastUsedAbility);
+                        
                     }
                     gSpecialStatuses[battler].statLowered = TRUE;
                 }
@@ -11780,7 +11815,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
     {
         if(battlerAbility == ABILITY_APATHY)
         {
-             if (flags == STAT_CHANGE_ALLOW_PTR)
+            if (flags == STAT_CHANGE_ALLOW_PTR)
             {
                 if (gProtectStructs[battler].statRaised)
                 {
@@ -11788,14 +11823,11 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                 }
                 else
                 {
-                    BattleScriptPush(BS_ptr);
                     gBattleScripting.battler = battler;
-                    
-                    gBattlerAbility = battler;
+                    BattleScriptPush(BS_ptr);
                     gBattlescriptCurrInstr = BattleScript_ApathyStatChange;
                     gLastUsedAbility = battlerAbility;
                     RecordAbilityBattle(battler, gLastUsedAbility);
-                    
                     gProtectStructs[battler].statRaised = TRUE;
                 }
             }
@@ -14858,7 +14890,7 @@ bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move)
         return FALSE;
     else if (gMovesInfo[move].ignoresSubstitute)
         return FALSE;
-    else if (GetBattlerAbility(battlerAtk) == ABILITY_INFILTRATOR || GetBattlerAbility(battlerAtk) == ABILITY_APATHY)
+    else if (GetBattlerAbility(battlerAtk) == ABILITY_INFILTRATOR)
         return FALSE;
     else
         return TRUE;
@@ -17155,4 +17187,75 @@ void BS_setFoeTypeToRandomWeakness(void)
 
         gBattlescriptCurrInstr = cmd->failInstr;
     }
+}
+
+void BS_RemoveAllScreens()
+{
+    NATIVE_ARGS();
+
+    u8 attackerSide;
+    u8 defenderSide;
+    bool32 failed;
+    bool32 attackerHasScreens = FALSE;
+    bool32 defenderHasScreens = FALSE;
+
+    attackerSide = GetBattlerSide(gBattlerAttacker);
+    defenderSide = GetBattlerSide(gBattlerTarget);
+
+    failed = (gMoveResultFlags & MOVE_RESULT_NO_EFFECT);
+
+    //check for screens on each side- much more compact and allows for nicer if/else statements
+    if(gSideTimers[attackerSide].reflectTimer
+        || gSideTimers[attackerSide].lightscreenTimer
+        || gSideTimers[attackerSide].auroraVeilTimer)
+        {
+            attackerHasScreens = TRUE;
+        }
+    
+    if(gSideTimers[defenderSide].reflectTimer
+        || gSideTimers[defenderSide].lightscreenTimer
+        || gSideTimers[defenderSide].auroraVeilTimer)
+        {
+            defenderHasScreens = TRUE;
+        }    
+
+    //if neither side has screens or the move failed, be normal
+    if(failed || !(attackerHasScreens || defenderHasScreens))
+    {
+        gBattleScripting.animTurn = 0;
+        gBattleScripting.animTargetsHit = 0;
+    }
+    else
+    {
+        //this is just a check for failure
+        if(!failed)
+        {
+            gBattleScripting.animTurn = 1;
+            gBattleScripting.animTargetsHit = 1;
+        }
+
+        //if the attacker's side has screens and the move didn't fail, remove them
+        if(attackerHasScreens && !failed)
+        {
+            gSideStatuses[attackerSide] &= ~SIDE_STATUS_REFLECT;
+            gSideStatuses[attackerSide] &= ~SIDE_STATUS_LIGHTSCREEN;
+            gSideStatuses[attackerSide] &= ~SIDE_STATUS_AURORA_VEIL;
+            gSideTimers[attackerSide].reflectTimer = 0;
+            gSideTimers[attackerSide].lightscreenTimer = 0;
+            gSideTimers[attackerSide].auroraVeilTimer = 0;
+        }
+
+        //if the target's side has screens and the move didn't fail, remove them
+        if(defenderHasScreens && !failed)
+        {
+            gSideStatuses[defenderSide] &= ~SIDE_STATUS_REFLECT;
+            gSideStatuses[defenderSide] &= ~SIDE_STATUS_LIGHTSCREEN;
+            gSideStatuses[defenderSide] &= ~SIDE_STATUS_AURORA_VEIL;
+            gSideTimers[defenderSide].reflectTimer = 0;
+            gSideTimers[defenderSide].lightscreenTimer = 0;
+            gSideTimers[defenderSide].auroraVeilTimer = 0;
+        }
+    }
+    //move on with the battle
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }

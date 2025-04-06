@@ -850,5 +850,10 @@ extern const u8 BattleScript_EffectGrimDice[];
 extern const u8 BattleScript_DemolitionistActivates[];
 extern const u8 BattleScript_EffectTransmute[];
 extern const u8 BattleScript_EffectWarmWelcome[];
+extern const u8 BattleScript_EffectBarrierCrash[];
+extern const u8 BattleScript_OvergrowOnEntry[];
+extern const u8 BattleScript_BlazeOnEntry[];
+extern const u8 BattleScript_TorrentOnEntry[];
+extern const u8 BattleScript_SwarmOnEntry[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

@@ -4414,7 +4414,7 @@
     {
       "id": "LAYOUT_BEASTON",
       "name": "Beaston_Layout",
-      "width": 40,
+      "width": 44,
       "height": 34,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
@@ -4467,7 +4467,7 @@
       "width": 32,
       "height": 32,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_lost_settlement",
       "border_filepath": "data/layouts/testZone/border.bin",
       "blockdata_filepath": "data/layouts/testZone/map.bin"
     },
@@ -4490,6 +4490,16 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/gagilRoute4/border.bin",
       "blockdata_filepath": "data/layouts/gagilRoute4/map.bin"
+    },
+    {
+      "id": "LAYOUT_GAGIL_ROUTE12",
+      "name": "gagilRoute12_Layout",
+      "width": 48,
+      "height": 72,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_lost_settlement",
+      "border_filepath": "data/layouts/gagilRoute12/border.bin",
+      "blockdata_filepath": "data/layouts/gagilRoute12/map.bin"
     }
   ]
 }

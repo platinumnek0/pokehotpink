@@ -1010,6 +1010,7 @@ gBattleAnims_Moves::
 	.4byte Move_WARM_WELCOME
 	.4byte Move_CINDER_SLIDE
 	.4byte Move_MIST_BOMB
+	.4byte Move_BARRIER_CRASH
 
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
@@ -36329,6 +36330,8 @@ WarmWelcomeSwitch:
 Move_CINDER_SLIDE:
 
 Move_MIST_BOMB:
+
+Move_BARRIER_CRASH:
 	end
 
 @@@ DYNAMAX AND MAX RAIDS

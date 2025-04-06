@@ -2377,6 +2377,15 @@ if (ability == ABILITY_MAGIC_GUARD) \
             break;\
 }
 
+static inline bool32 HadMoreThanOneThirdHpNowHasLess(u32 battler)
+{
+    u32 cutoff = gBattleMons[battler].maxHP / 3;
+    if (gBattleMons[battler].maxHP % 3 == 1)
+        cutoff++;
+    // Had more than 1/3 of hp before, now has less
+     return (gBattleStruct->hpBefore[battler] >= cutoff
+             && gBattleMons[battler].hp < cutoff);
+}
 
 u8 DoBattlerEndTurnEffects(void)
 {
@@ -4616,6 +4625,13 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         case ABILITY_SCHOOLING:
             if (gBattleMons[battler].level < 20)
                 break;
+        case ABILITY_OVERGROW:
+            if ((gBattleMons[battler].hp <= (gBattleMons[battler].maxHP / 3)) && gSpecialStatuses[battler].switchInAbilityDone != TRUE)
+            {
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                BattleScriptPushCursorAndCallback(BattleScript_OvergrowOnEntry);
+                effect++;
+            }
         // Fallthrough
         case ABILITY_ZEN_MODE:
         case ABILITY_SHIELDS_DOWN:
@@ -5276,6 +5292,18 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 SET_STATCHANGER(STAT_SPATK, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
+                effect++;
+            }
+            break;
+        case ABILITY_OVERGROW:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+            && TARGET_TURN_DAMAGED
+            && IsBattlerAlive(battler)
+            && HadMoreThanOneThirdHpNowHasLess(battler)
+            && (gMultiHitCounter == 0 || gMultiHitCounter == 1))
+            {
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_OvergrowActivates;
                 effect++;
             }
             break;
@@ -8910,6 +8938,19 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         if ((gBattleMons[battlerDef].status1 | (STATUS1_SLEEP * (abilityDef == ABILITY_COMATOSE))) & gMovesInfo[move].argument)
             basePower *= 2;
         break;
+    case EFFECT_HELLRAZE:
+        if(gBattleMons[battlerDef].status1 & STATUS1_BURN)
+        {
+            basePower *= 1.5;
+        }
+        break;
+    case EFFECT_BARRIER_CRASH:
+        if((gSideStatuses[GetBattlerSide(battlerAtk)] & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL))
+        && (gSideStatuses[GetBattlerSide(battlerDef)] & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL)))
+        {
+            basePower *= 1.5;
+        }
+        break;
     case EFFECT_VARY_POWER_BASED_ON_HP:
         basePower = gMovesInfo[move].argument * gBattleMons[battlerDef].hp / gBattleMons[battlerDef].maxHP;
         break;
@@ -10064,7 +10105,7 @@ static inline uq4_12_t GetScreensModifier(u32 move, u32 battlerAtk, u32 battlerD
     bool32 reflect = (sideStatus & SIDE_STATUS_REFLECT) && IS_MOVE_PHYSICAL(move);
     bool32 auroraVeil = sideStatus & SIDE_STATUS_AURORA_VEIL;
 
-    if (isCrit || abilityAtk == ABILITY_INFILTRATOR || abilityAtk == ABILITY_APATHY|| gProtectStructs[battlerAtk].confusionSelfDmg)
+    if (isCrit || abilityAtk == ABILITY_INFILTRATOR|| gProtectStructs[battlerAtk].confusionSelfDmg)
         return UQ_4_12(1.0);
     if (reflect || lightScreen || auroraVeil)
         return (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) ? UQ_4_12(0.667) : UQ_4_12(0.5);

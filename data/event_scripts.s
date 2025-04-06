@@ -1087,3 +1087,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/Porkbelly/scripts.inc"
 
 	.include "data/maps/gagilRoute4/scripts.inc"
+
+	.include "data/maps/gagilRoute12/scripts.inc"

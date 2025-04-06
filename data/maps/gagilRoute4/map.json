@@ -5,7 +5,7 @@
   "music": "MUS_ROUTE104",
   "region_map_section": "MAPSEC_ROUTE_104",
   "requires_flash": false,
-  "weather": "WEATHER_NONE",
+  "weather": "WEATHER_SUNNY",
   "map_type": "MAP_TYPE_ROUTE",
   "allow_cycling": true,
   "allow_escaping": false,
@@ -15,7 +15,7 @@
   "connections": [
     {
       "map": "MAP_BEASTON",
-      "offset": -6,
+      "offset": -10,
       "direction": "down"
     },
     {
@@ -39,7 +39,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BALTOY_DOLL",
+      "graphics_id": "OBJ_EVENT_GFX_DUSKULL_DOLL",
       "x": 19,
       "y": 11,
       "elevation": 0,

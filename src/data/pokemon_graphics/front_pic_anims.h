@@ -10398,6 +10398,35 @@ static const union AnimCmd sAnim_Wirlydoo_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_Chocli_1[] = 
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Choclstack_1[] = 
+{
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Gingechocl_1[] = 
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_Pareccur_1[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -13242,6 +13271,9 @@ SINGLE_ANIMATION(Borzyzyzy);
 SINGLE_ANIMATION(Pischool);
 SINGLE_ANIMATION(Willywoo);
 SINGLE_ANIMATION(Wirlydoo);
+SINGLE_ANIMATION(Chocli);
+SINGLE_ANIMATION(Choclstack);
+SINGLE_ANIMATION(Gingechocl);
 SINGLE_ANIMATION(Cixno);
 SINGLE_ANIMATION(Pareccur);
 SINGLE_ANIMATION(Parereccur);

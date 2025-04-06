@@ -727,8 +727,12 @@
 #define STRINGID_GRIMDICE_TWELVE                      725
 #define STRINGID_WARMWELCOME                          726
 #define STRINGID_ABILITYSHARPLYBOOSTEDSTAT            727
+#define STRINGID_OVERGROWACTIVATEDATTACKER            728
+#define STRINGID_BLAZEACTIVATEDATTACKER               729
+#define STRINGID_TORRENTACTIVATEDATTACKER             730
+#define STRINGID_SWARMACTIVATEDATTACKER               731
 
-#define BATTLESTRINGS_COUNT                           728
+#define BATTLESTRINGS_COUNT                           732
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

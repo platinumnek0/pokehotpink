@@ -11462,7 +11462,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .argument = STATUS1_PSN_ANY,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_POISON,
-            .chance = 20,
+            .chance = 15,
         }),
         .contestEffect = CONTEST_EFFECT_BETTER_IF_SAME_TYPE,
         .contestCategory = CONTEST_CATEGORY_TOUGH,
@@ -18033,7 +18033,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_PSYSHIELD_BASH] =
     {
-        .name = HANDLE_EXPANDED_MOVE_NAME("PsyshieldBsh", "Psyshield Bash"),
+        .name = COMPOUND_STRING("Barrier Bash"),
         .description = COMPOUND_STRING(
             "Hits a foe with psychic\n"
             "energy. May raise Defense."),
@@ -18275,7 +18275,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_POISON,
-            .chance = 20,
+            .chance = 15,
         }),
     },
 
@@ -19957,20 +19957,20 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Oil Slick"),
         .description = COMPOUND_STRING(
-        "Hurls a blob of oil to\n"
-        "attack. May lower Speed."),
+        "Slides into the foe,\n"
+        "slick with oil. Harshly\n"
+        "lowers the foe's speed."),
         .effect = EFFECT_HIT,
-        .power = 90,
+        .power = 75,
         .type = TYPE_POISON,
         .accuracy = 100,
         .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .category = DAMAGE_CATEGORY_SPECIAL,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
         .canFerry = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_SPD_MINUS_1,
-            .chance = 30,
+            .moveEffect = MOVE_EFFECT_SPD_MINUS_2,
         }),
     },
 
@@ -19978,9 +19978,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Hellraze"),
         .description = COMPOUND_STRING(
-            "A red-hot pummel that may\n"
-            "cause a burn."),
-        .effect = EFFECT_HIT,
+            "A searing-hot punch that\n"
+            "may burn; stronger on\n"
+            "burned foes."),
+        .effect = EFFECT_HELLRAZE,
         .power = 90,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
@@ -22421,6 +22422,24 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .ballisticMove = TRUE,
+    },
+
+    [MOVE_BARRIER_CRASH] =
+    {
+        .name = COMPOUND_STRING("Barrier Crash"),
+        .description = COMPOUND_STRING(
+            "A psychic wall attack that only\n"
+            "works if barriers are up. Breaks\n"
+            "barriers as well."),
+        .effect = EFFECT_BARRIER_CRASH,
+        .power = 100,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
     },
 
     // Z-Moves

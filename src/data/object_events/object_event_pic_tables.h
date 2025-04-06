@@ -754,7 +754,7 @@ static const struct SpriteFrameImage sPicTable_MudkipDoll[] = {
 };
 
 static const struct SpriteFrameImage sPicTable_DuskullDoll[] = {
-    obj_frame_tiles(gObjectEventPic_DuskullDoll),
+    overworld_ascending_frames(gObjectEventPic_DuskullDoll, 2, 2),
 };
 
 static const struct SpriteFrameImage sPicTable_WynautDoll[] = {

@@ -1702,7 +1702,7 @@
 #define SPECIES_WIRLYDOO                                1591
 #define SPECIES_CHOCLI                                  1592
 #define SPECIES_CHOCLSTACK                              1593
-#define SPECIES_GINGEHCHOCL                             1594
+#define SPECIES_GINGECHOCL                              1594
 #define SPECIES_BUNBBLE                                 1595
 #define SPECIES_USLUGGI                                 1596
 #define SPECIES_GASTRABBOD                              1597

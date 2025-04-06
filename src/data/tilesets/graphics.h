@@ -1653,3 +1653,22 @@ const u16 gTilesetPalettes_Asterra[][16] =
 };
 
 const u32 gTilesetTiles_Asterra[] = INCBIN_U32("data/tilesets/secondary/asterra/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_lost_settlement[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lost_settlement/palettes/12.gbapal"),
+};
+
+const u32 gTilesetTiles_lost_settlement[] = INCBIN_U32("data/tilesets/secondary/lost_settlement/tiles.4bpp.lz");

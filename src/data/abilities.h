@@ -635,7 +635,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_ANGER_POINT] =
     {
         .name = _("Anger Point"),
-        .description = COMPOUND_STRING("Critical & super-effective\nhits boost Atk or Sp.Atk."),
+        .description = COMPOUND_STRING("Super-effective hits boost the\nbetter attacking stat; critical\nhits max it out."),
         .aiRating = 4,
     },
 
@@ -2676,7 +2676,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_APATHY] =
     {
         .name = _("Apathy"),
-        .description = COMPOUND_STRING("Ignores self and foes' stat\nchanges, even positive ones."),
+        .description = COMPOUND_STRING("Blocks all stat changes, even\npositive ones, and ignores\nthe foe's."),
         .aiRating = -1,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,

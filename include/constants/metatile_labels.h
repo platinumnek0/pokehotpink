@@ -783,6 +783,11 @@
 #define METATILE_Underwater_FloorShadow  0x828
 #define METATILE_Underwater_RockWall     0x81E
 
+// gTileset_lost_settlement
+#define METATILE_lost_settlement_SnowyGrass          0x80B
+#define METATILE_lost_settlement_fence_above_player  0x855
+#define METATILE_lost_settlement_fence_below_player  0x854
+
 // Other
 #define METATILE_EmptyDesk                     0x88E
 #define METATILE_RSMossdeepGym_RedArrow_Down   0x805

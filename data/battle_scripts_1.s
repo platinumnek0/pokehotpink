@@ -5279,6 +5279,46 @@ BattleScript_EffectRecycle::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectBarrierCrash::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_REFLECT, BattleScript_BarrierCrashHit
+	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_LIGHTSCREEN, BattleScript_BarrierCrashHit
+	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_AURORA_VEIL, BattleScript_BarrierCrashHit
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_REFLECT, BattleScript_BarrierCrashHit
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_LIGHTSCREEN, BattleScript_BarrierCrashHit
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_AURORA_VEIL, BattleScript_BarrierCrashHit
+	goto BattleScript_ButItFailed
+BattleScript_BarrierCrashHit::
+	critcalc
+	damagecalc
+	adjustdamage
+	removeallscreens
+	jumpifbyte CMP_EQUAL, sB_ANIM_TURN, 0, BattleScript_BarrierCrashAnim
+	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
+BattleScript_BarrierCrashAnim::
+	attackanimation
+	waitanimation
+	jumpifbyte CMP_LESS_THAN, sB_ANIM_TURN, 2, BattleScript_BarrierCrashDoHit
+	printstring STRINGID_THEWALLSHATTERED
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_BarrierCrashDoHit::
+	typecalc
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	setadditionaleffects
+	tryfaintmon BS_TARGET
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectBrickBreak::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
@@ -8513,11 +8553,23 @@ BattleScript_CursedBodyActivates::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_OvergrowOnEntry::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_OVERGROWACTIVATED
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
 BattleScript_OvergrowActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_OVERGROWACTIVATED
 	waitmessage B_WAIT_TIME_LONG
 	return
+
+BattleScript_BlazeOnEntry::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_BLAZEACTIVATED
+	waitmessage B_WAIT_TIME_LONG
+	end3
 
 BattleScript_BlazeActivates::
 	call BattleScript_AbilityPopUp
@@ -8525,11 +8577,23 @@ BattleScript_BlazeActivates::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_TorrentOnEntry::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TORRENTACTIVATED
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
 BattleScript_TorrentActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_TORRENTACTIVATED
 	waitmessage B_WAIT_TIME_LONG
 	return
+
+BattleScript_SwarmOnEntry::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_SWARMACTIVATED
+	waitmessage B_WAIT_TIME_LONG
+	end3
 
 BattleScript_SwarmActivates::
 	call BattleScript_AbilityPopUp
