@@ -1659,6 +1659,12 @@
 	callnative BS_RemoveAllScreens
 	.endm
 
+	.macro jumpifabilitycantchange, failInstr:req
+	callnative BS_JumpIfAbilityCantChange
+	.4byte \failInstr
+	.endm
+
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -1838,6 +1844,11 @@
 
 	.macro setabilitysimple battler:req, failInstr:req
 	various \battler VARIOUS_SET_SIMPLE_BEAM
+	.4byte \failInstr
+	.endm
+
+	.macro setabilitydulled battler:req, failInstr:req
+	various \battler VARIOUS_SET_DULLED
 	.4byte \failInstr
 	.endm
 

@@ -731,8 +731,10 @@
 #define STRINGID_BLAZEACTIVATEDATTACKER               729
 #define STRINGID_TORRENTACTIVATEDATTACKER             730
 #define STRINGID_SWARMACTIVATEDATTACKER               731
+#define STRINGID_PKMNACQUIREDDULLED                   732
+#define STRINGID_ABILITYREPLACEFAIL                   733
 
-#define BATTLESTRINGS_COUNT                           732
+#define BATTLESTRINGS_COUNT                           734
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

@@ -2351,6 +2351,12 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectBarrierCrash,
         .battleTvScore = 2,
-    }
+    },
+
+    [EFFECT_CYNICIZE] =
+    {
+        .battleScript = BattleScript_EffectCynicize,
+        .battleTvScore = 0, // TODO: Assign points
+    },
 
 };

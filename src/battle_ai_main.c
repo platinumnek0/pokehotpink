@@ -887,6 +887,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case ABILITY_APATHY:
             case ABILITY_WHITE_SMOKE:
             case ABILITY_DEFENDANT:
+            case ABILITY_DULLED:
                 if (IsStatLoweringEffect(moveEffect))
                     RETURN_SCORE_MINUS(10);
                 break;

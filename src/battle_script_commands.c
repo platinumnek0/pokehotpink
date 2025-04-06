@@ -1644,11 +1644,11 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     accStage = gBattleMons[battlerAtk].statStages[STAT_ACC];
     evasionStage = gBattleMons[battlerDef].statStages[STAT_EVASION];
     if (atkAbility == ABILITY_UNAWARE || atkAbility == ABILITY_KEEN_EYE || atkAbility == ABILITY_MINDS_EYE
-            || (B_ILLUMINATE_EFFECT >= GEN_9 && atkAbility == ABILITY_ILLUMINATE) || defAbility == ABILITY_APATHY || atkAbility == ABILITY_APATHY)
+            || (B_ILLUMINATE_EFFECT >= GEN_9 && atkAbility == ABILITY_ILLUMINATE) || atkAbility == ABILITY_APATHY)
         evasionStage = DEFAULT_STAT_STAGE;
     if (gMovesInfo[move].ignoresTargetDefenseEvasionStages)
         evasionStage = DEFAULT_STAT_STAGE;
-    if (defAbility == ABILITY_UNAWARE || defAbility == ABILITY_APATHY || atkAbility == ABILITY_APATHY)
+    if (defAbility == ABILITY_UNAWARE || defAbility == ABILITY_APATHY)
         accStage = DEFAULT_STAT_STAGE;
 
     if (gBattleMons[battlerDef].status2 & STATUS2_FORESIGHT || gStatuses3[battlerDef] & STATUS3_MIRACLE_EYED)
@@ -3915,7 +3915,7 @@ static bool32 CanApplyAdditionalEffect(const struct AdditionalEffect *additional
       && GetNextTarget(moveTarget, TRUE) != MAX_BATTLERS_COUNT)
         return FALSE;
     
-    if(ChangesStats(additionalEffect) && GetBattlerAbility(gBattlerAttacker) == ABILITY_APATHY && additionalEffect->self)
+    if(ChangesStats(additionalEffect) && (GetBattlerAbility(gBattlerAttacker) == ABILITY_APATHY || GetBattlerAbility(gBattlerAttacker) == ABILITY_DULLED) && additionalEffect->self)
     {
         return FALSE;
     }
@@ -5329,6 +5329,7 @@ static void Cmd_playstatchangeanimation(void)
                         && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_CLEAR_AMULET
                         && ability != ABILITY_CLEAR_BODY
                         && ability != ABILITY_APATHY
+                        && ability != ABILITY_DULLED
                         && ability != ABILITY_FULL_METAL_BODY
                         && ability != ABILITY_WHITE_SMOKE
                         && !((ability == ABILITY_KEEN_EYE || ability == ABILITY_MINDS_EYE) && currStat == STAT_ACC)
@@ -5380,7 +5381,7 @@ static void Cmd_playstatchangeanimation(void)
         }
     }
 
-    if(ability == ABILITY_APATHY)
+    if(ability == ABILITY_APATHY || ability == ABILITY_DULLED)
     {
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
@@ -9640,6 +9641,30 @@ static void Cmd_various(void)
         }
         return;
     }
+    case VARIOUS_SET_DULLED:
+    {
+        VARIOUS_ARGS(const u8 *failInstr);
+        if (gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeOverwritten
+            || gBattleMons[gBattlerTarget].ability == ABILITY_DULLED)
+        {
+            RecordAbilityBattle(gBattlerTarget, gBattleMons[gBattlerTarget].ability);
+            gBattlescriptCurrInstr = cmd->failInstr;
+        }
+        else if (GetBattlerHoldEffect(gBattlerTarget, TRUE) == HOLD_EFFECT_ABILITY_SHIELD)
+        {
+            RecordItemEffectBattle(gBattlerTarget, HOLD_EFFECT_ABILITY_SHIELD);
+            gBattlescriptCurrInstr = cmd->failInstr;
+        }
+        else
+        {
+            if (gBattleMons[gBattlerTarget].ability == ABILITY_NEUTRALIZING_GAS)
+                gSpecialStatuses[gBattlerTarget].neutralizingGasRemoved = TRUE;
+
+            gBattleMons[gBattlerTarget].ability = gBattleStruct->overwrittenAbilities[gBattlerTarget] = ABILITY_DULLED;
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        }
+        return;
+    }
     case VARIOUS_TRY_ENTRAINMENT:
     {
         VARIOUS_ARGS(const u8 *failInstr);
@@ -11695,7 +11720,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                     {
                         gBattlerAbility = battler;
                         BattleScriptPush(BS_ptr);
-                        if (battlerAbility == ABILITY_APATHY)
+                        if (battlerAbility == ABILITY_APATHY || battlerAbility == ABILITY_DULLED)
                         {
                             gBattlescriptCurrInstr = BattleScript_ApathyStatChange;
                         }
@@ -11813,7 +11838,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
     }
     else // stat increase
     {
-        if(battlerAbility == ABILITY_APATHY)
+        if(battlerAbility == ABILITY_APATHY || battlerAbility == ABILITY_DULLED)
         {
             if (flags == STAT_CHANGE_ALLOW_PTR)
             {
@@ -15956,6 +15981,7 @@ static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 byIntimidate)
     {
     case ABILITY_CLEAR_BODY:
     case ABILITY_APATHY:
+    case ABILITY_DULLED:
     case ABILITY_FULL_METAL_BODY:
     case ABILITY_WHITE_SMOKE:
         return TRUE;
@@ -16597,6 +16623,20 @@ void BS_TrySetOctolock(void)
         gDisableStructs[battler].octolock = TRUE;
         gBattleMons[battler].status2 |= STATUS2_ESCAPE_PREVENTION;
         gDisableStructs[battler].battlerPreventingEscape = gBattlerAttacker;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
+void BS_JumpIfAbilityCantChange(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    if(gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeOverwritten)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }

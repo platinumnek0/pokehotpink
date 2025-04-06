@@ -1934,6 +1934,8 @@ BattleScript_EffectShellSmash::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifability BS_ATTACKER, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_ATTACKER, ABILITY_DULLED, BattleScript_ApathyMoveEnd
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_ShellSmashTryDef
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_ShellSmashTryDef
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPEED, MAX_STAT_STAGE, BattleScript_ShellSmashTryDef
@@ -2096,6 +2098,8 @@ BattleScript_EffectCoil::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifability BS_ATTACKER, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_ATTACKER, ABILITY_DULLED, BattleScript_ApathyMoveEnd
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_CoilDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_DEF, MAX_STAT_STAGE, BattleScript_CoilDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ACC, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
@@ -2128,6 +2132,8 @@ BattleScript_EffectQuiverDance::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifability BS_ATTACKER, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_ATTACKER, ABILITY_DULLED, BattleScript_ApathyMoveEnd
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_QuiverDanceDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_QuiverDanceDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
@@ -2160,6 +2166,8 @@ BattleScript_EffectVictoryDance::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifability BS_ATTACKER, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_ATTACKER, ABILITY_DULLED, BattleScript_ApathyMoveEnd
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_VictoryDanceDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_DEF, MAX_STAT_STAGE, BattleScript_VictoryDanceDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
@@ -2202,6 +2210,8 @@ BattleScript_EffectAttackSpAttackUp::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifability BS_ATTACKER, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_ATTACKER, ABILITY_DULLED, BattleScript_ApathyMoveEnd
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_AttackSpAttackUpDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPATK, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
 BattleScript_AttackSpAttackUpDoMoveAnim::
@@ -2227,6 +2237,8 @@ BattleScript_EffectAttackAccUp::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifability BS_ATTACKER, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_ATTACKER, ABILITY_DULLED, BattleScript_ApathyMoveEnd
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_AttackAccUpDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ACC, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
 BattleScript_AttackAccUpDoMoveAnim::
@@ -2352,6 +2364,47 @@ BattleScript_EffectSimpleBeam::
 	tryrevertweatherform
 	flushtextbox
 	tryendneutralizinggas BS_TARGET
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectCynicize::
+	setstatchanger STAT_SPEED, 2, TRUE
+	attackcanceler
+	jumpifsubstituteblocks BattleScript_FailedFromAtkString
+	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_SPEED, MIN_STAT_STAGE, BattleScript_CynicizeWorks
+BattleScript_CynicizeWorks:
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	jumpifability BS_TARGET, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_TARGET, ABILITY_DULLED, BattleScript_ApathyMoveEnd
+	jumpifabilitycantchange BattleScript_CynicizeCouldntChangeAbility
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_CynicizeTryChangeAbility
+	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_CynicizeDoAnim
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_FELL_EMPTY, BattleScript_CynicizeTryChangeAbility
+	pause B_WAIT_TIME_SHORT
+	goto BattleScript_CynicizePrintString
+BattleScript_CynicizeDoAnim::
+	attackanimation
+	waitanimation
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_CynicizePrintString::
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_CynicizeTryChangeAbility::
+	setabilitydulled BS_TARGET, BattleScript_CynicizeCouldntChangeAbility
+	printstring STRINGID_PKMNACQUIREDDULLED
+	call BattleScript_AbilityPopUpTarget
+	waitmessage B_WAIT_TIME_LONG
+	trytoclearprimalweather
+	tryrevertweatherform
+	flushtextbox
+	tryendneutralizinggas BS_TARGET
+	goto BattleScript_MoveEnd
+BattleScript_CynicizeCouldntChangeAbility::
+	call BattleScript_AbilityPopUpTarget
+	printstring STRINGID_ABILITYREPLACEFAIL
+	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSuckerPunch::
@@ -4848,6 +4901,14 @@ BattleScript_ButItFailed::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_ApathyMoveEnd::
+	pause B_WAIT_TIME_SHORT
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_APATHYDONTCARE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_NotAffected::
 	pause B_WAIT_TIME_SHORT
 	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
@@ -5519,6 +5580,8 @@ BattleScript_EffectCosmicPower::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifability BS_ATTACKER, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_ATTACKER, ABILITY_DULLED, BattleScript_ApathyMoveEnd
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_DEF, MAX_STAT_STAGE, BattleScript_CosmicPowerDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
 BattleScript_CosmicPowerDoMoveAnim::
@@ -5544,6 +5607,8 @@ BattleScript_EffectBulkUp::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifability BS_ATTACKER, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_ATTACKER, ABILITY_DULLED, BattleScript_ApathyMoveEnd
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_BulkUpDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_DEF, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
 BattleScript_BulkUpDoMoveAnim::
@@ -5570,6 +5635,8 @@ BattleScript_EffectCalmMind::
 	attackstring
 	ppreduce
 BattleScript_CalmMindTryToRaiseStats::
+	jumpifability BS_ATTACKER, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_ATTACKER, ABILITY_DULLED, BattleScript_ApathyMoveEnd
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_CalmMindDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
 BattleScript_CalmMindDoMoveAnim::
@@ -5604,6 +5671,8 @@ BattleScript_EffectDragonDance::
 	attackstring
 	ppreduce
 BattleScript_EffectDragonDanceFromStatUp::
+	jumpifability BS_ATTACKER, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_ATTACKER, ABILITY_DULLED, BattleScript_ApathyMoveEnd
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_DragonDanceDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
 BattleScript_DragonDanceDoMoveAnim::

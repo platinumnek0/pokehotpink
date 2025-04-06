@@ -1011,6 +1011,7 @@ gBattleAnims_Moves::
 	.4byte Move_CINDER_SLIDE
 	.4byte Move_MIST_BOMB
 	.4byte Move_BARRIER_CRASH
+	.4byte Move_CYNICIZE
 
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
@@ -36332,6 +36333,25 @@ Move_CINDER_SLIDE:
 Move_MIST_BOMB:
 
 Move_BARRIER_CRASH:
+	end
+
+Move_CYNICIZE:
+	monbg ANIM_DEF_PARTNER
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 1, 0, 10, RGB_BLACK
+	waitbgfadein
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 2, 6, 0, 8, RGB_WHITE
+	createvisualtask AnimTask_SpiteTargetShadow, 2
+	delay 8
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_TARGET
+	waitforvisualfinish
+	delay 8
+	playsewithpan SE_M_SAND_ATTACK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
+	waitforvisualfinish
+	delay 16
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 2, 10, 0, RGB_BLACK
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
 	end
 
 @@@ DYNAMAX AND MAX RAIDS

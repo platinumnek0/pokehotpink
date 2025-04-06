@@ -7114,23 +7114,23 @@ static u8 ItemEffectMoveEnd(u32 battler, u16 holdEffect)
             effect = HealConfuseBerry(battler, gLastUsedItem, FLAVOR_SOUR, FALSE);
         break;
     case HOLD_EFFECT_ATTACK_UP:
-        if (B_BERRIES_INSTANT >= GEN_4)
+        if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
             effect = StatRaiseBerry(battler, gLastUsedItem, STAT_ATK, FALSE);
         break;
     case HOLD_EFFECT_DEFENSE_UP:
-        if (B_BERRIES_INSTANT >= GEN_4)
+        if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
             effect = StatRaiseBerry(battler, gLastUsedItem, STAT_DEF, FALSE);
         break;
     case HOLD_EFFECT_SPEED_UP:
-        if (B_BERRIES_INSTANT >= GEN_4)
+        if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
             effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPEED, FALSE);
         break;
     case HOLD_EFFECT_SP_ATTACK_UP:
-        if (B_BERRIES_INSTANT >= GEN_4)
+        if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
             effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPATK, FALSE);
         break;
     case HOLD_EFFECT_SP_DEFENSE_UP:
-        if (B_BERRIES_INSTANT >= GEN_4)
+        if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
             effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPDEF, FALSE);
         break;
     case HOLD_EFFECT_ENIGMA_BERRY: // consume and heal if hit by super effective move
@@ -7138,15 +7138,15 @@ static u8 ItemEffectMoveEnd(u32 battler, u16 holdEffect)
             effect = TrySetEnigmaBerry(battler);
         break;
     case HOLD_EFFECT_KEE_BERRY:  // consume and boost defense if used physical move
-        if (B_BERRIES_INSTANT >= GEN_4)
+        if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
             effect = DamagedStatBoostBerryEffect(battler, STAT_DEF, DAMAGE_CATEGORY_PHYSICAL);
         break;
     case HOLD_EFFECT_MARANGA_BERRY:  // consume and boost sp. defense if used special move
-        if (B_BERRIES_INSTANT >= GEN_4)
+        if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
             effect = DamagedStatBoostBerryEffect(battler, STAT_SPDEF, DAMAGE_CATEGORY_SPECIAL);
         break;
     case HOLD_EFFECT_RANDOM_STAT_UP:
-        if (B_BERRIES_INSTANT >= GEN_4)
+        if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
             effect = RandomStatRaiseBerry(battler, gLastUsedItem, FALSE);
         break;
     case HOLD_EFFECT_CURE_PAR:
@@ -7350,23 +7350,23 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                     effect = HealConfuseBerry(battler, gLastUsedItem, FLAVOR_SOUR, TRUE);
                 break;
             case HOLD_EFFECT_ATTACK_UP:
-                if (B_BERRIES_INSTANT >= GEN_4)
+                if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = StatRaiseBerry(battler, gLastUsedItem, STAT_ATK, TRUE);
                 break;
             case HOLD_EFFECT_DEFENSE_UP:
-                if (B_BERRIES_INSTANT >= GEN_4)
+                if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = StatRaiseBerry(battler, gLastUsedItem, STAT_DEF, TRUE);
                 break;
             case HOLD_EFFECT_SPEED_UP:
-                if (B_BERRIES_INSTANT >= GEN_4)
+                if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPEED, TRUE);
                 break;
             case HOLD_EFFECT_SP_ATTACK_UP:
-                if (B_BERRIES_INSTANT >= GEN_4)
+                if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPATK, TRUE);
                 break;
             case HOLD_EFFECT_SP_DEFENSE_UP:
-                if (B_BERRIES_INSTANT >= GEN_4)
+                if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPDEF, TRUE);
                 break;
             case HOLD_EFFECT_CRITICAL_UP:
@@ -7381,7 +7381,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_RANDOM_STAT_UP:
-                if (B_BERRIES_INSTANT >= GEN_4)
+                if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = RandomStatRaiseBerry(battler, gLastUsedItem, TRUE);
                 break;
             case HOLD_EFFECT_CURE_PAR:
@@ -7654,23 +7654,23 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                     effect = HealConfuseBerry(battler, gLastUsedItem, FLAVOR_SOUR, TRUE);
                 break;
             case HOLD_EFFECT_ATTACK_UP:
-                if (!moveTurn)
+                if (!moveTurn && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = StatRaiseBerry(battler, gLastUsedItem, STAT_ATK, TRUE);
                 break;
             case HOLD_EFFECT_DEFENSE_UP:
-                if (!moveTurn)
+                if (!moveTurn && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = StatRaiseBerry(battler, gLastUsedItem, STAT_DEF, TRUE);
                 break;
             case HOLD_EFFECT_SPEED_UP:
-                if (!moveTurn)
+                if (!moveTurn && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPEED, TRUE);
                 break;
             case HOLD_EFFECT_SP_ATTACK_UP:
-                if (!moveTurn)
+                if (!moveTurn && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPATK, TRUE);
                 break;
             case HOLD_EFFECT_SP_DEFENSE_UP:
-                if (!moveTurn)
+                if (!moveTurn && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPDEF, TRUE);
                 break;
             case HOLD_EFFECT_CRITICAL_UP:
@@ -7684,7 +7684,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_RANDOM_STAT_UP:
-                if (!moveTurn)
+                if (!moveTurn && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
                     effect = RandomStatRaiseBerry(battler, gLastUsedItem, TRUE);
                 break;
             case HOLD_EFFECT_CURE_PAR:
@@ -9633,7 +9633,7 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
     if (isCrit && atkStage < DEFAULT_STAT_STAGE)
         atkStage = DEFAULT_STAT_STAGE;
     // pokemon with unaware ignore attack stat changes while taking damage
-    if (defAbility == ABILITY_UNAWARE || defAbility == ABILITY_APATHY || atkAbility == ABILITY_APATHY)
+    if (defAbility == ABILITY_UNAWARE || defAbility == ABILITY_APATHY)
         atkStage = DEFAULT_STAT_STAGE;
 
     atkStat *= gStatStageRatios[atkStage][0];
@@ -9863,7 +9863,7 @@ static inline u32 CalcDefenseStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 
     if (isCrit && defStage > DEFAULT_STAT_STAGE)
         defStage = DEFAULT_STAT_STAGE;
     // pokemon with unaware ignore defense stat changes while dealing damage
-    if (atkAbility == ABILITY_UNAWARE || defAbility == ABILITY_APATHY || atkAbility == ABILITY_APATHY)
+    if (atkAbility == ABILITY_UNAWARE || atkAbility == ABILITY_APATHY)
         defStage = DEFAULT_STAT_STAGE;
     // certain moves also ignore stat changes
     if (gMovesInfo[move].ignoresTargetDefenseEvasionStages)

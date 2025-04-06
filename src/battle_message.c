@@ -853,7 +853,7 @@ static const u8 sText_BlazeActivated[] = _("{B_DEF_NAME_WITH_PREFIX}'s Fire\nmov
 static const u8 sText_TorrentActivated[] = _("{B_DEF_NAME_WITH_PREFIX}'s Water\nmoves grow stronger!");
 static const u8 sText_SwarmActivated[] = _("{B_DEF_NAME_WITH_PREFIX}'s Bug\nmoves grow stronger!");
 static const u8 sText_AngerPointSpAtk[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nraised its Sp.Atk!");
-static const u8 sText_ApathyDontCare[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} doesn't care…");
+static const u8 sText_ApathyDontCare[] = _("{B_DEF_NAME_WITH_PREFIX} doesn't care…");
 static const u8 sText_RenewFormChange[] = _("{B_ATK_NAME_WITH_PREFIX} was born anew…");
 static const u8 sText_SwappedAttackingStats[] = _("{B_ATK_NAME_WITH_PREFIX} swapped its\nAttack and Sp.Atk!");
 static const u8 sText_GrimDiceRoll[] = _("{B_ATK_NAME_WITH_PREFIX} rolled\n{B_BUFF1}!");
@@ -868,9 +868,13 @@ static const u8 sText_OvergrowActivatedAttacker[] = _("{B_ATK_NAME_WITH_PREFIX}'
 static const u8 sText_BlazeActivatedAttacker[] = _("{B_ATK_NAME_WITH_PREFIX}'s Fire\nmoves grow stronger!");
 static const u8 sText_TorrentActivatedAttacker[] = _("{B_ATK_NAME_WITH_PREFIX}'s Water\nmoves grow stronger!");
 static const u8 sText_SwarmActivatedAttacker[] = _("{B_ATK_NAME_WITH_PREFIX}'s Bug\nmoves grow stronger!");
+static const u8 sText_PkmnAcquiredDulled[] =_("{B_DEF_NAME_WITH_PREFIX}'s Ability\nwas changed to Dulled!");
+static const u8 sText_AbilityReplaceFail[] =_("{B_DEF_NAME_WITH_PREFIX}'s Ability\ncan't be changed!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_ABILITYREPLACEFAIL - BATTLESTRINGS_TABLE_START] = sText_AbilityReplaceFail,
+    [STRINGID_PKMNACQUIREDDULLED - BATTLESTRINGS_TABLE_START] = sText_PkmnAcquiredDulled,
     [STRINGID_SWARMACTIVATEDATTACKER - BATTLESTRINGS_TABLE_START] = sText_SwarmActivatedAttacker,
     [STRINGID_TORRENTACTIVATEDATTACKER - BATTLESTRINGS_TABLE_START] = sText_BlazeActivatedAttacker,
     [STRINGID_BLAZEACTIVATEDATTACKER - BATTLESTRINGS_TABLE_START] = sText_TorrentActivatedAttacker,

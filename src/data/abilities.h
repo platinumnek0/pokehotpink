@@ -2682,6 +2682,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
         .cantBeSuppressed = TRUE,
+        .cantBeOverwritten = TRUE,
     },
 
     [ABILITY_BEFUDDLING] =
@@ -2811,6 +2812,13 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Momentum"),
         .description = COMPOUND_STRING("Boosts Speed when hit."),
         .aiRating = 6,
+    },
+
+    [ABILITY_DULLED] =
+    {
+        .name = _("Dulled"),
+        .description = COMPOUND_STRING("--"),
+        .aiRating = -1,
     },
 
 };

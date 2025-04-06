@@ -855,5 +855,6 @@ extern const u8 BattleScript_OvergrowOnEntry[];
 extern const u8 BattleScript_BlazeOnEntry[];
 extern const u8 BattleScript_TorrentOnEntry[];
 extern const u8 BattleScript_SwarmOnEntry[];
+extern const u8 BattleScript_EffectCynicize[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

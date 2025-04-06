@@ -22442,6 +22442,23 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
     },
 
+    [MOVE_CYNICIZE] =
+    {
+        .name = COMPOUND_STRING("Cynicize"),
+        .description = COMPOUND_STRING(
+            "Kills the foe's joy, cutting its\n"
+            "Speed and changing its Ability to\n"
+            "block further stat changes."),
+        .effect = EFFECT_CYNICIZE,
+        .power = 0,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
