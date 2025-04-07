@@ -4569,7 +4569,35 @@ static void Cmd_getexp(void)
 
                 BattleScriptPushCursor();
                 gLeveledUpInBattle |= gBitTable[*expMonId];
-                gBattlescriptCurrInstr = BattleScript_LevelUp;
+
+                while(gLeveledUpInBattle != 0)
+                {
+                    for (i = 0; i < PARTY_SIZE; i++)
+                    {
+                        if (gLeveledUpInBattle & gBitTable[i])
+                        {
+                            u16 species;
+                            
+                            u8 levelUpBits = gLeveledUpInBattle;
+
+                            levelUpBits &= ~(gBitTable[i]);
+                            gLeveledUpInBattle = levelUpBits;
+
+                            species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, ITEM_NONE, NULL);
+                            if (species != SPECIES_NONE)
+                            {
+                                gBattlescriptCurrInstr = BattleScript_LeveledUpCanEvolve;
+                            }
+                            else
+                            {
+                                gBattlescriptCurrInstr = BattleScript_LevelUp;
+                            }
+
+                        }
+                    }
+                }
+
+                //gBattlescriptCurrInstr = BattleScript_LevelUp;
                 gBattleMoveDamage = T1_READ_32(&gBattleResources->bufferB[expBattler][2]);
                 AdjustFriendship(&gPlayerParty[*expMonId], FRIENDSHIP_EVENT_GROW_LEVEL);
 

@@ -870,9 +870,11 @@ static const u8 sText_TorrentActivatedAttacker[] = _("{B_ATK_NAME_WITH_PREFIX}'s
 static const u8 sText_SwarmActivatedAttacker[] = _("{B_ATK_NAME_WITH_PREFIX}'s Bug\nmoves grow stronger!");
 static const u8 sText_PkmnAcquiredDulled[] =_("{B_DEF_NAME_WITH_PREFIX}'s Ability\nwas changed to Dulled!");
 static const u8 sText_AbilityReplaceFail[] =_("{B_DEF_NAME_WITH_PREFIX}'s Ability\ncan't be changed!");
+static const u8 sText_PkmnCanEvolve[] = _("{B_BUFF1} is ready\nto evolve!{WAIT_SE}\p");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_PKMNCANEVOLVE - BATTLESTRINGS_TABLE_START] = sText_PkmnCanEvolve,
     [STRINGID_ABILITYREPLACEFAIL - BATTLESTRINGS_TABLE_START] = sText_AbilityReplaceFail,
     [STRINGID_PKMNACQUIREDDULLED - BATTLESTRINGS_TABLE_START] = sText_PkmnAcquiredDulled,
     [STRINGID_SWARMACTIVATEDATTACKER - BATTLESTRINGS_TABLE_START] = sText_SwarmActivatedAttacker,

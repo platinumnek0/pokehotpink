@@ -256,6 +256,8 @@ const u8 gText_TheBattle[] = _("the battle");
 const u8 gText_ThePokemonList[] = _("the Pokémon List");
 const u8 gText_TheShop[] = _("the shop");
 const u8 gText_ThePC[] = _("the PC");
+const u8 gText_EvolutionArrow[] = _("{UP_ARROW}");
+const u8 gText_EvolutionYellowColor[] = _("{COLOR 14}");
 
 const u8 *const gBagMenu_ReturnToStrings[] =
 {
@@ -1881,3 +1883,4 @@ const u8 gText_Fertilize[] = _("FERTILIZE");
 const u8 gText_PlantBerry[] = _("PLANT BERRY");
 const u8 gText_Moves_Menu[] = _("Change Moves");
 const u8 gText_Nickname[] = _("Nickname");
+const u8 gText_Evolution[] = _("Evolve");

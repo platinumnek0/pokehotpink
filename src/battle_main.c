@@ -5878,23 +5878,17 @@ static void TryEvolvePokemon(void)
             {
                 u16 species;
                 u8 levelUpBits = gLeveledUpInBattle;
-                bool8 evoModeNormal = TRUE;
 
                 levelUpBits &= ~(gBitTable[i]);
                 gLeveledUpInBattle = levelUpBits;
 
                 species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, levelUpBits, NULL);
-                if (species == SPECIES_NONE)
-                {
-                    species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_CANT_STOP, levelUpBits, NULL);
-                    evoModeNormal = FALSE;
-                }
 
                 if (species != SPECIES_NONE)
                 {
                     FreeAllWindowBuffers();
                     gBattleMainFunc = WaitForEvoSceneToFinish;
-                    EvolutionScene(&gPlayerParty[i], species, evoModeNormal, i);
+                    //EvolutionScene(&gPlayerParty[i], species, evoModeNormal, i);
                     return;
                 }
             }

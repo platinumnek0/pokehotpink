@@ -4334,6 +4334,24 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = evolutions[i].targetSpecies;
                 }
                 break;
+            case EVO_SPECIFIC_MON_IN_PARTY:
+                if(level >= 32)
+                {
+                    
+                    for (j = 0; j < PARTY_SIZE; j++)
+                    {
+                        if ((GetMonData(mon, MON_DATA_IS_SHINY) == FALSE) && (GetMonData(&gPlayerParty[j], MON_DATA_IS_SHINY) == TRUE))
+                        {
+                            continue;
+                        }
+                        else if (GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL) == evolutions[i].param)
+                        {
+                            targetSpecies = evolutions[i].targetSpecies;
+                            //ZeroMonData(&gPlayerParty[j]);
+                        }
+                    }
+                }
+                break;
             case EVO_LEVEL_RAIN:
                 j = GetCurrentWeather();
                 if (evolutions[i].param <= level
@@ -4526,38 +4544,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             }
         }
         break;
-    case EVO_MODE_CANT_STOP:
-        level = GetMonData(mon, MON_DATA_LEVEL, 0);
-        friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
 
-        for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
-        {
-            if (SanitizeSpeciesId(evolutions[i].targetSpecies) == SPECIES_NONE)
-                continue;
-
-            switch (evolutions[i].method)
-            {
-            case EVO_SPECIFIC_MON_IN_PARTY:
-                if(level >= 32)
-                {
-                for (j = 0; j < PARTY_SIZE; j++)
-                {
-                    if (GetMonData(mon, MON_DATA_IS_SHINY) == FALSE && GetMonData(&gPlayerParty[j], MON_DATA_IS_SHINY))
-                    {
-                        break;
-                    }
-                    else if (GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL) == evolutions[i].param)
-                    {
-                        ZeroMonData(&gPlayerParty[j]);
-                        targetSpecies = evolutions[i].targetSpecies;
-
-                    }
-                }
-                }
-                break;
-            }
-        }
-        break;
     }
 
     // Pikachu, Meowth, and Eevee cannot evolve if they have the

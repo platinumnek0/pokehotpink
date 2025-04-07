@@ -996,6 +996,8 @@ extern const u8 gText_None[];
 extern const u8 gText_RibbonsVar1[];
 extern const u8 gText_OneDash[];
 extern const u8 gText_TwoDashes[];
+extern const u8 gText_EvolutionArrow[];
+extern const u8 gText_EvolutionYellowColor[];
 
 extern const u8 *const gBagMenu_ReturnToStrings[];
 extern const u8 *const gPyramidBagMenu_ReturnToStrings[];
@@ -3063,5 +3065,8 @@ extern const u8 gText_Fertilize[];
 extern const u8 gText_PlantBerry[];
 
 extern const u8 gText_Moves_Menu[];
+
+//party menu evo option
+extern const u8 gText_Evolution[];
 
 #endif // GUARD_STRINGS_H

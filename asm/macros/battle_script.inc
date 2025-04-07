@@ -1664,7 +1664,6 @@
 	.4byte \failInstr
 	.endm
 
-
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES

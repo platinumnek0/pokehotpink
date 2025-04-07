@@ -84,6 +84,8 @@
 #define AddTextPrinterParameterized3(a, b, c, d, e, f, str) AddTextPrinterParameterized3(a, b, c, d, e, f, MirrorPtr(str))
 #endif
 
+extern struct Evolution *evolutions;
+
 enum {
     MENU_SUMMARY,
     MENU_NICKNAME,
@@ -105,6 +107,7 @@ enum {
     MENU_TRADE1,
     MENU_TRADE2,
     MENU_TOSS,
+    MENU_EVOLUTION,
     MENU_CATALOG_BULB,
     MENU_CATALOG_OVEN,
     MENU_CATALOG_WASHING,
@@ -114,7 +117,7 @@ enum {
     MENU_CHANGE_FORM,
     MENU_CHANGE_ABILITY,
     MENU_MOVES,
-    MENU_FIELD_MOVES
+    MENU_FIELD_MOVES,
 };
 
 // IDs for the action lists that appear when a party mon is selected
@@ -300,6 +303,7 @@ static void DisplayPartyPokemonDataToTeachMove(u8, u16);
 static u8 CanTeachMove(struct Pokemon *, u16);
 static void DisplayPartyPokemonBarDetail(u8, const u8 *, u8, const u8 *);
 static void DisplayPartyPokemonLevel(u8, struct PartyMenuBox *);
+static void DisplayPartyPokemonLevelCanEvolve(u8, struct PartyMenuBox *);
 static void DisplayPartyPokemonGender(u8, u16, u8 *, struct PartyMenuBox *);
 static void DisplayPartyPokemonHP(u16 hp, u16 maxHp, struct PartyMenuBox *menuBox);
 static void DisplayPartyPokemonMaxHP(u16, struct PartyMenuBox *);
@@ -518,6 +522,7 @@ static bool8 SetUpFieldMove_Dive(void);
 void TryItemHoldFormChange(struct Pokemon *mon);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
+static void CursorCb_Evolution(u8 taskId);
 
 // static const data
 #include "data/party_menu.h"
@@ -2457,6 +2462,8 @@ static void DisplayPartyPokemonNickname(struct Pokemon *mon, struct PartyMenuBox
 
 static void DisplayPartyPokemonLevelCheck(struct Pokemon *mon, struct PartyMenuBox *menuBox, u8 c)
 {
+    u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL);
+
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         u8 ailment = GetMonAilment(mon);
@@ -2465,9 +2472,28 @@ static void DisplayPartyPokemonLevelCheck(struct Pokemon *mon, struct PartyMenuB
             if (c != 0)
                 menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->dimensions[4] >> 3, (menuBox->infoRects->dimensions[5] >> 3) + 1, menuBox->infoRects->dimensions[6] >> 3, menuBox->infoRects->dimensions[7] >> 3, FALSE);
             if (c != 2)
-                DisplayPartyPokemonLevel(GetMonData(mon, MON_DATA_LEVEL), menuBox);
+            {
+                if(targetSpecies != SPECIES_NONE)
+                {
+                    DisplayPartyPokemonLevelCanEvolve(GetMonData(mon, MON_DATA_LEVEL), menuBox);
+                }
+                else
+                {
+                    DisplayPartyPokemonLevel(GetMonData(mon, MON_DATA_LEVEL), menuBox);
+                }
+            }
         }
     }
+}
+
+static void DisplayPartyPokemonLevelCanEvolve(u8 level, struct PartyMenuBox *menuBox)
+{
+    ConvertIntToDecimalStringN(gStringVar2, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringCopy(gStringVar1, gText_EvolutionYellowColor);
+    StringAppend(gStringVar1, gText_LevelSymbol);
+    StringAppend(gStringVar1, gStringVar2);
+    StringAppend(gStringVar1, gText_EvolutionArrow);
+    DisplayPartyPokemonBarDetail(menuBox->windowId, gStringVar1, 0, &menuBox->infoRects->dimensions[4]);
 }
 
 static void DisplayPartyPokemonLevel(u8 level, struct PartyMenuBox *menuBox)
@@ -2823,6 +2849,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
 
     // Add field moves to action list
+    
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         for (j = 0; j != FIELD_MOVES_COUNT; j++)
@@ -2844,12 +2871,17 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         if (GetNumberOfRelearnableMoves(&mons[slotId]) != 0) {
 			AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_MOVES);
 		}
+        if (GetEvolutionTargetSpecies(&mons[slotId], EVO_MODE_NORMAL, ITEM_NONE, NULL) != SPECIES_NONE)
+        {
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_EVOLUTION);
+        }
         if (ItemIsMail(GetMonData(&mons[slotId], MON_DATA_HELD_ITEM)))
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_MAIL);
         
         else
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_ITEM);
     }
+
 }
 
 static u8 GetPartyMenuActionsType(struct Pokemon *mon)
@@ -5592,7 +5624,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     s16 *arrayPtr = ptr->data;
     u16 *itemPtr = &gSpecialVar_ItemId;
     bool8 cannotUseEffect;
-    bool8 evoModeNormal = TRUE;
+    //bool8 evoModeNormal = TRUE;
     u8 holdEffectParam = ItemId_GetHoldEffectParam(*itemPtr);
 
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
@@ -5617,19 +5649,13 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
 
         if (holdEffectParam == 0)
             targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL);
-            
-        if (targetSpecies == SPECIES_NONE)
-            {
-                targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_CANT_STOP, ITEM_NONE, NULL);
-                evoModeNormal = FALSE;
-            }
 
         if (targetSpecies != SPECIES_NONE)
         {
             RemoveBagItem(gSpecialVar_ItemId, 1);
             FreePartyPointers();
             gCB2_AfterEvolution = gPartyMenu.exitCallback;
-            BeginEvolutionScene(mon, targetSpecies, evoModeNormal, gPartyMenu.slotId);
+            //BeginEvolutionScene(mon, targetSpecies, evoModeNormal, gPartyMenu.slotId);
             DestroyTask(taskId);
         }
         else
@@ -5804,17 +5830,14 @@ static void PartyMenuTryEvolution(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL);
-    bool8 evoModeNormal = TRUE;
+    bool8 evoModeNormal = FALSE;
+
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
 
     // Resets values to 0 so other means of teaching moves doesn't overwrite levels
     sInitialLevel = 0;
     sFinalLevel = 0;
-
-    if(targetSpecies == SPECIES_NONE)
-    {
-        targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_CANT_STOP, ITEM_NONE, NULL);
-        evoModeNormal = FALSE;
-    }
 
     if (targetSpecies != SPECIES_NONE)
     {
@@ -5823,7 +5846,29 @@ static void PartyMenuTryEvolution(u8 taskId)
             gCB2_AfterEvolution = CB2_ReturnToPartyMenuUsingRareCandy;
         else
             gCB2_AfterEvolution = gPartyMenu.exitCallback;
-        BeginEvolutionScene(mon, targetSpecies, evoModeNormal, gPartyMenu.slotId);
+
+        //test for knitwit's evo method consuming the other mon
+        if(evolutions[0].method == EVO_SPECIFIC_MON_IN_PARTY)
+        {
+            for(int j = 0; j < PARTY_SIZE; j++)
+            {
+                if((GetMonData(mon, MON_DATA_IS_SHINY) == FALSE) && (GetMonData(&gPlayerParty[j], MON_DATA_IS_SHINY) == TRUE))
+                {
+                    continue;
+                }
+                else if(GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL) == evolutions[0].param)
+                {
+                    BeginEvolutionScene(mon, targetSpecies, evoModeNormal, gPartyMenu.slotId);
+                    ZeroMonData(&gPlayerParty[j]);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            BeginEvolutionScene(mon, targetSpecies, evoModeNormal, gPartyMenu.slotId);
+        }
+
         DestroyTask(taskId);
     }
     else
@@ -7820,5 +7865,24 @@ void IsLastMonThatKnowsSurf(void)
         }
         if (AnyStorageMonWithMove(move) != TRUE)
             gSpecialVar_Result = TRUE;
+    }
+}
+
+static void CursorCb_Evolution(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL);
+
+    PlaySE(SE_SELECT);
+    if (targetSpecies != SPECIES_NONE)
+    {
+        gPartyMenu.exitCallback = CB2_ReturnToPartyMenuFromFlyMap;
+        PartyMenuTryEvolution(taskId);
+    }
+    else
+    {
+        DisplayPartyMenuMessage(gText_WontHaveEffect, FALSE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
     }
 }
