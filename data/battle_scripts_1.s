@@ -4968,8 +4968,8 @@ BattleScript_EffectStockpileEnd:
 
 BattleScript_MoveEffectStockpileWoreOff::
 	.if B_STOCKPILE_RAISES_DEFS >= GEN_4
-	dostockpilestatchangeswearoff BS_ATTACKER, BattleScript_StockpileStatChangeDown
 	printstring STRINGID_STOCKPILEDEFFECTWOREOFF
+	dostockpilestatchangeswearoff BS_ATTACKER, BattleScript_StockpileStatChangeDown
 	waitmessage B_WAIT_TIME_SHORT
 	.endif
 	return

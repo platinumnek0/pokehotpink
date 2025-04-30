@@ -8913,7 +8913,7 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
             basePower *= (4 - gMultiHitCounter);
         break;
     case EFFECT_SPIT_UP:
-        basePower = 100 * gDisableStructs[battlerAtk].stockpileCounter;
+        basePower = 80 * gDisableStructs[battlerAtk].stockpileCounter;
         break;
     case EFFECT_REVENGE:
         if ((gProtectStructs[battlerAtk].physicalDmg
@@ -9191,6 +9191,11 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
     case EFFECT_FACADE:
         if (gBattleMons[battlerAtk].status1 & (STATUS1_BURN | STATUS1_PSN_ANY | STATUS1_PARALYSIS | STATUS1_FROSTBITE | STATUS1_FREEZE))
             modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
+        break;
+    case EFFECT_BACKSTAB:
+        if (gBattleMons[battlerDef].status2 & STATUS2_INFATUATED_WITH(battlerAtk))
+            modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
+            gBattleMons[battlerDef].status2 &= ~STATUS2_INFATUATED_WITH(battlerAtk);
         break;
     case EFFECT_SNORE:
         if (gBattleMons[battlerAtk].status1 & (STATUS1_SLEEP))
@@ -10405,8 +10410,6 @@ static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 move
     if (moveType == TYPE_GROUND && defType == TYPE_FLYING && IsBattlerGrounded(battlerDef) && mod == UQ_4_12(0.0))
         mod = UQ_4_12(1.0);
     if (moveType == TYPE_FIRE && gDisableStructs[battlerDef].tarShot)
-        mod = UQ_4_12(2.0);
-    if (gMovesInfo[move].effect == EFFECT_BACKSTAB && gBattleMons[battlerDef].status2 & STATUS2_INFATUATION)
         mod = UQ_4_12(2.0);
     if (gMovesInfo[move].effect == EFFECT_FALSE_SWIPE && defType == TYPE_GHOST && mod == UQ_4_12(0.0))
         mod = UQ_4_12(1.0);        

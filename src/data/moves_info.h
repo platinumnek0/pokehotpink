@@ -6247,7 +6247,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
-        .pp = 15,
+        .pp = 20,
         .target = MOVE_TARGET_USER,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
@@ -20690,10 +20690,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Backstab"),
         .description = COMPOUND_STRING(
-            "Super effective if the foe\n"
-            "is infatuated."),
+            "Stronger if the target is in love\n"
+            "with the user, but removes\n"
+            "infatuation."),
         .effect = EFFECT_BACKSTAB,
-        .power = 60,
+        .power = 65,
         .type = TYPE_DARK,
         .accuracy = 100,
         .pp = 10,

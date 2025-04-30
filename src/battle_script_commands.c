@@ -5757,9 +5757,10 @@ static void Cmd_moveend(void)
             case MOVE_EFFECT_STOCKPILE_WORE_OFF:
                 if (gDisableStructs[gBattlerAttacker].stockpileCounter != 0)
                 {
-                    gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
+                    gDisableStructs[gBattlerAttacker].stockpileCounter -= 1;
                     effect = TRUE;
                     BattleScriptPush(gBattlescriptCurrInstr);
+                    PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 1, gDisableStructs[gBattlerAttacker].stockpileCounter);
                     gBattlescriptCurrInstr = BattleScript_MoveEffectStockpileWoreOff;
                 }
                 break;
@@ -11535,14 +11536,13 @@ static void Cmd_stockpiletohpheal(void)
     {
         if (gBattleMons[gBattlerAttacker].maxHP == gBattleMons[gBattlerAttacker].hp)
         {
-            gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
             gBattlescriptCurrInstr = failInstr;
             gBattlerTarget = gBattlerAttacker;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWALLOW_FULL_HP;
         }
         else
         {
-            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / (1 << (3 - gDisableStructs[gBattlerAttacker].stockpileCounter));
+            gBattleMoveDamage = (GetNonDynamaxMaxHP(gBattlerAttacker) / 4) * (gDisableStructs[gBattlerAttacker].stockpileCounter);
 
             if (gBattleMoveDamage == 0)
                 gBattleMoveDamage = 1;
@@ -15908,17 +15908,18 @@ void BS_DoStockpileStatChangesWearOff(void)
     NATIVE_ARGS(u8 battler, const u8 *statChangeInstr);
 
     u32 battler = GetBattlerForBattleScript(cmd->battler);
-    if (gDisableStructs[battler].stockpileDef != 0)
+    u16 stockpiles = gDisableStructs[battler].stockpileCounter;
+    if (gDisableStructs[battler].stockpileDef > stockpiles)
     {
-        SET_STATCHANGER(STAT_DEF, abs(gDisableStructs[battler].stockpileDef), TRUE);
-        gDisableStructs[battler].stockpileDef = 0;
+        SET_STATCHANGER(STAT_DEF, 1, TRUE);
+        gDisableStructs[battler].stockpileDef -= 1;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = cmd->statChangeInstr;
     }
-    else if (gDisableStructs[battler].stockpileSpDef)
+    else if (gDisableStructs[battler].stockpileSpDef > stockpiles)
     {
-        SET_STATCHANGER(STAT_SPDEF, abs(gDisableStructs[battler].stockpileSpDef), TRUE);
-        gDisableStructs[battler].stockpileSpDef = 0;
+        SET_STATCHANGER(STAT_SPDEF, 1, TRUE);
+        gDisableStructs[battler].stockpileSpDef -= 1;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = cmd->statChangeInstr;
     }

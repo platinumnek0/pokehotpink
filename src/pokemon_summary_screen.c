@@ -3778,13 +3778,13 @@ static void PrintMoveDetails(u16 move)
             PrintMovePowerAndAccuracy(move);
 
             if (moveEffect != EFFECT_PLACEHOLDER)
-                PrintTextOnWindowSmall(windowId, gMovesInfo[move].description, 6, 1, 0, 0);
+                PrintTextOnWindowSmallNarrow(windowId, gMovesInfo[move].description, 6, 1, 2, 0);
             else
                 PrintTextOnWindow(windowId, gNotDoneYetDescription, 6, 1, 0, 0);
         }
         else
         {
-            PrintTextOnWindowSmall(windowId, gContestEffectDescriptionPointers[gMovesInfo[move].contestEffect], 6, 1, 0, 0);
+            PrintTextOnWindowSmallNarrow(windowId, gContestEffectDescriptionPointers[gMovesInfo[move].contestEffect], 6, 1, 2, 0);
         }
         PutWindowTilemap(windowId);
     }
