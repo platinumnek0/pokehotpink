@@ -14,7 +14,7 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ASTERRA",
+      "map": "MAP_ASTERRA_WITH_HEALSPOT",
       "offset": -12,
       "direction": "down"
     }
@@ -22,8 +22,8 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_LEAF",
-      "x": 12,
-      "y": 29,
+      "x": 26,
+      "y": 37,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -36,122 +36,28 @@
   ],
   "warp_events": [
     {
-      "x": 8,
-      "y": 6,
+      "x": 18,
+      "y": 5,
       "elevation": 0,
       "dest_map": "MAP_PETALBURG_WOODS",
       "dest_warp_id": "0"
     },
     {
-      "x": 9,
-      "y": 6,
+      "x": 19,
+      "y": 5,
       "elevation": 0,
       "dest_map": "MAP_PETALBURG_WOODS",
       "dest_warp_id": "1"
-    },
-    {
-      "x": 10,
-      "y": 6,
-      "elevation": 0,
-      "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": "2"
-    },
-    {
-      "x": 11,
-      "y": 6,
-      "elevation": 0,
-      "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": "3"
     }
   ],
   "coord_events": [
-    {
-      "type": "trigger",
-      "x": 14,
-      "y": 39,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "7",
-      "script": "Route2_EventScript_WalkUpRightMost"
-    },
-    {
-      "type": "trigger",
-      "x": 13,
-      "y": 39,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "7",
-      "script": "Route2_EventScript_WalkUpRight"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 39,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "7",
-      "script": "Route2_EventScript_WalkUpLeft"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 39,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "7",
-      "script": "Route2_EventScript_WalkUpMiddle"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 39,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "7",
-      "script": "Route2_EventScript_WalkUpLeftMost"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 35,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "8",
-      "script": "Route2_EventScript_ExitBlock"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 35,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "8",
-      "script": "Route2_EventScript_ExitBlock"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 35,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "8",
-      "script": "Route2_EventScript_ExitBlock"
-    },
-    {
-      "type": "trigger",
-      "x": 13,
-      "y": 35,
-      "elevation": 0,
-      "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "8",
-      "script": "Route2_EventScript_ExitBlock"
-    }
+
   ],
   "bg_events": [
     {
       "type": "sign",
-      "x": 14,
-      "y": 45,
+      "x": 13,
+      "y": 43,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "NULL"

@@ -500,6 +500,13 @@ extern const u8 BattleScript_FoeTrapped[];
 extern const u8 BattleScript_RenewActivates[];
 extern const u8 BattleScript_QuantumShiftSwitchIn[];
 extern const u8 BattleScript_SharplyRaiseStatOnFaintingTarget[];
+extern const u8 BattleScript_InfatuationWoreOff[];
+extern const u8 BattleScript_ChargeBeamCharges[];
+extern const u8 BattleScript_ChargeCountFell[];
+extern const u8 BattleScript_LostCharge[];
+extern const u8 BattleScript_OneChargeLeft[];
+extern const u8 BattleScript_HeartbreakMessage[];
+extern const u8 BattleScript_HeartbreakWoreOff[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
@@ -857,5 +864,6 @@ extern const u8 BattleScript_TorrentOnEntry[];
 extern const u8 BattleScript_SwarmOnEntry[];
 extern const u8 BattleScript_EffectCynicize[];
 extern const u8 BattleScript_LeveledUpCanEvolve[];
+extern const u8 BattleScript_EffectHolistics[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

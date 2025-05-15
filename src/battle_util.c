@@ -2331,6 +2331,8 @@ enum
     ENDTURN_UPROAR,
     ENDTURN_THRASH,
     ENDTURN_FLINCH,
+    ENDTURN_INFATUATION,
+    ENDTURN_HEARTBREAK,
     ENDTURN_DISABLE,
     ENDTURN_ENCORE,
     ENDTURN_MAGNET_RISE,
@@ -2710,6 +2712,32 @@ u8 DoBattlerEndTurnEffects(void)
             gBattleMons[battler].status2 &= ~STATUS2_FLINCHED;
             gBattleStruct->turnEffectsTracker++;
             break;
+        case ENDTURN_INFATUATION: //decrement infat timer, remove infatuation if it reaches 0
+            if(gStatuses4[battler] & STATUS4_INFAT_TIMER)
+            {
+                gStatuses4[battler] -= STATUS4_INFATUATION_TURN(1);
+            }
+            if((gBattleMons[battler].status2 & STATUS2_INFATUATION) && !(gStatuses4[battler] & STATUS4_INFAT_TIMER))
+            {
+                gBattleMons[battler].status2 &= ~STATUS2_INFATUATION;
+                BattleScriptExecute(BattleScript_InfatuationWoreOff);
+                effect++;
+            }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_HEARTBREAK:
+            if(gStatuses4[battler] & STATUS4_HEARTBREAK)
+            {
+                gStatuses4[battler] -= STATUS4_HEARTBREAK_TURN(1);
+                
+                if(!(gStatuses4[battler] & STATUS4_HEARTBREAK))
+                {
+                    BattleScriptExecute(BattleScript_HeartbreakWoreOff);
+                    effect++;
+                }
+            }
+            gBattleStruct->turnEffectsTracker++;
+            break;
         case ENDTURN_DISABLE:  // disable
             if (gDisableStructs[battler].disableTimer != 0)
             {
@@ -2760,9 +2788,26 @@ u8 DoBattlerEndTurnEffects(void)
             if (gDisableStructs[battler].chargeTimer > 0)
             {
                 gDisableStructs[battler].chargeTimer -= 1;
+                PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 2, (gDisableStructs[battler].chargeTimer));
+
+                if(gDisableStructs[battler].chargeTimer == 1)
+                {
+                    BattleScriptExecute(BattleScript_OneChargeLeft);
+                    effect++;
+                }
+                else
+                {
+                    BattleScriptExecute(BattleScript_ChargeCountFell);
+                    effect++;
+                }
+
+                if (gDisableStructs[battler].chargeTimer == 0)
+                {
+                    gStatuses3[battler] &= ~STATUS3_CHARGED_UP;
+                    BattleScriptExecute(BattleScript_LostCharge);
+                    effect++;
+                }
             }
-            if (gDisableStructs[battler].chargeTimer == 0)
-                gStatuses3[battler] &= ~STATUS3_CHARGED_UP;
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_TAUNT:  // taunt
@@ -4589,7 +4634,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 {
                     gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                     gFieldStatuses |= STATUS_FIELD_GRAVITY;
-                    gFieldTimers.gravityTimer = 5;
+                    gFieldTimers.gravityTimer = 3;
                     BattleScriptPushCursorAndCallback(BattleScript_QuantumShiftSwitchIn);
                     effect++;
                 }
@@ -5609,7 +5654,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && (IsMoveMakingContact(move, gBattlerAttacker))
              && TARGET_TURN_DAMAGED
              && CanBeBurned(gBattlerAttacker)
-             && (Random() % 5) == 0)
+             && (Random() % 10) <= 2)
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_BURN;
                 BattleScriptPushCursor();
@@ -5662,6 +5707,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && !IsAbilityOnSide(gBattlerAttacker, ABILITY_AROMA_VEIL))
             {
                 gBattleMons[gBattlerAttacker].status2 |= STATUS2_INFATUATED_WITH(gBattlerTarget);
+                gStatuses4[gBattlerAttacker] |= STATUS4_INFATUATION_TURN(3);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_CuteCharmActivates;
                 effect++;
@@ -5891,23 +5937,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && (Random() % 5) == 0)
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_POISON;
-                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
-                gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
-                effect++;
-            }
-            break;
-        case ABILITY_FLAME_BODY:
-            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-             && gBattleMons[gBattlerTarget].hp != 0
-             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && CanBeBurned(gBattlerTarget)
-             && IsMoveMakingContact(move, gBattlerAttacker)
-             && TARGET_TURN_DAMAGED // Need to actually hit the target
-             && (Random() % 5) == 0)
-            {
-                gBattleScripting.moveEffect = MOVE_EFFECT_BURN;
                 PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
@@ -6979,6 +7008,7 @@ static bool32 GetMentalHerbEffect(u32 battler)
     if (gBattleMons[battler].status2 & STATUS2_INFATUATION)
     {
         gBattleMons[battler].status2 &= ~STATUS2_INFATUATION;
+        gStatuses4[battler] &= ~STATUS4_INFAT_TIMER;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_INFATUATION;  // STRINGID_TARGETGOTOVERINFATUATION
         StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
         ret = TRUE;
@@ -9121,7 +9151,7 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         break;
     case EFFECT_CINDER_SLIDE:
         if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_GRASSY_TERRAIN))
-            basePower *= 2;
+            basePower = uq4_12_multiply(basePower, UQ_4_12(1.5));
         break;
     case EFFECT_BEAT_UP:
         if (B_BEAT_UP >= GEN_5)
@@ -9131,19 +9161,19 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         {
             if(gBattleMons[battlerAtk].level >= 50)
             {
-                basePower = 80;
+                basePower += 10;
             }
-            else if(gBattleMons[battlerAtk].level >= 40)
+            if(gBattleMons[battlerAtk].level >= 40)
             {
-                basePower = 70;
+                basePower += 10;
             }
-            else if(gBattleMons[battlerAtk].level >= 30)
+            if(gBattleMons[battlerAtk].level >= 30)
             {
-                basePower = 60;
+                basePower += 10;
             }
-            else if(gBattleMons[battlerAtk].level >= 20)
+            if(gBattleMons[battlerAtk].level >= 20)
             {
-                basePower = 50;
+                basePower += 10;
             }
         }
     case EFFECT_MAX_MOVE:
@@ -9195,7 +9225,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
     case EFFECT_BACKSTAB:
         if (gBattleMons[battlerDef].status2 & STATUS2_INFATUATED_WITH(battlerAtk))
             modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
-            gBattleMons[battlerDef].status2 &= ~STATUS2_INFATUATED_WITH(battlerAtk);
+            //gBattleMons[battlerDef].status2 &= ~STATUS2_INFATUATED_WITH(battlerAtk);
         break;
     case EFFECT_SNORE:
         if (gBattleMons[battlerAtk].status1 & (STATUS1_SLEEP))
@@ -9241,24 +9271,20 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.0) + sPercentToModifier[gSpecialStatuses[battlerAtk].gemParam]);
     if (gStatuses3[battlerAtk] & STATUS3_CHARGED_UP && moveType == TYPE_ELECTRIC)
         {
-        modifier = uq4_12_multiply(modifier, GetChargeModifier(battlerAtk));
-        gDisableStructs[battlerAtk].chargeTimer = 0;
+            modifier = uq4_12_multiply(modifier, GetChargeModifier(battlerAtk));
+            gDisableStructs[battlerAtk].chargeTimer = 0;
+            gStatuses3[battlerAtk] &= ~STATUS3_CHARGED_UP;
         }
     if (gStatuses3[battlerAtk] & STATUS3_ME_FIRST)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
-    if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_GRASSY_TERRAIN) && moveType == TYPE_GRASS)
+    if ((IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_GRASSY_TERRAIN) && moveType == TYPE_GRASS)
+        || (IsBattlerTerrainAffected(battlerDef, STATUS_FIELD_MISTY_TERRAIN) && moveType == TYPE_FAIRY) 
+        || (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_ELECTRIC_TERRAIN) && moveType == TYPE_ELECTRIC)
+        || (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_PSYCHIC_TERRAIN) && moveType == TYPE_PSYCHIC))
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
-    if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_GRASSY_TERRAIN) && moveType == TYPE_GROUND && gMovesInfo[move].effect != EFFECT_BULLDOZE)
-        modifier = uq4_12_multiply(modifier, UQ_4_12(0.7));
-    if (IsBattlerTerrainAffected(battlerDef, STATUS_FIELD_MISTY_TERRAIN) && moveType == TYPE_DRAGON)
-        modifier = uq4_12_multiply(modifier, UQ_4_12(0.7));
-    if (IsBattlerTerrainAffected(battlerDef, STATUS_FIELD_MISTY_TERRAIN) && moveType == TYPE_FAIRY)
-        modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
-    if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_ELECTRIC_TERRAIN) && moveType == TYPE_ELECTRIC)
-        modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
-    if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_PSYCHIC_TERRAIN) && moveType == TYPE_PSYCHIC)
-        modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
-    if (IsBattlerTerrainAffected(battlerDef, STATUS_FIELD_MISTY_TERRAIN) && (moveType == TYPE_DARK || moveType == TYPE_GHOST))
+    if ((IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_GRASSY_TERRAIN) && moveType == TYPE_GROUND && gMovesInfo[move].effect != EFFECT_BULLDOZE)
+        || (IsBattlerTerrainAffected(battlerDef, STATUS_FIELD_MISTY_TERRAIN) && moveType == TYPE_DRAGON)
+        || (IsBattlerTerrainAffected(battlerDef, STATUS_FIELD_PSYCHIC_TERRAIN) && (moveType == TYPE_DARK || moveType == TYPE_GHOST)))
         modifier = uq4_12_multiply(modifier, UQ_4_12(0.7));
     if (moveType == TYPE_ELECTRIC && ((gFieldStatuses & STATUS_FIELD_MUDSPORT)
     || AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_MUD_SPORT, 0)))
@@ -9271,8 +9297,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
     if (gMovesInfo[move].curlBoosted && gBattleMons[gBattlerAttacker].status2 & STATUS2_DEFENSE_CURL)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
     if(gMovesInfo[move].effect == EFFECT_SKYSTRIKE && (IsBattlerGrounded(battlerDef) == FALSE))
-        {modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));}
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
     if (gMovesInfo[move].gravityBoosted && (gFieldStatuses & STATUS_FIELD_GRAVITY))
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
+    if (move == MOVE_HEART_STAMP && gBattleMons[battlerDef].status2 & STATUS2_INFATUATED_WITH(battlerAtk))
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
 
     // attacker's abilities
@@ -9620,6 +9648,11 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
         atkStat = gBattleMons[battlerAtk].speed;
         atkStage = gBattleMons[battlerAtk].statStages[STAT_SPEED];
     }
+    else if(gMovesInfo[move].soundMove && atkAbility == ABILITY_DRUMMER)
+    {
+        atkStat = gBattleMons[battlerAtk].attack;
+        atkStage = gBattleMons[battlerAtk].statStages[STAT_ATK];
+    }
     else
     {
         if (IS_MOVE_PHYSICAL(move))
@@ -9871,7 +9904,7 @@ static inline u32 CalcDefenseStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 
     if (atkAbility == ABILITY_UNAWARE || atkAbility == ABILITY_APATHY)
         defStage = DEFAULT_STAT_STAGE;
     // certain moves also ignore stat changes
-    if (gMovesInfo[move].ignoresTargetDefenseEvasionStages)
+    if (gMovesInfo[move].ignoresTargetDefenseEvasionStages && (defStage > DEFAULT_STAT_STAGE) )
         defStage = DEFAULT_STAT_STAGE;
 
     defStat *= gStatStageRatios[defStage][0];
@@ -10133,6 +10166,7 @@ static inline uq4_12_t GetAttackerAbilitiesModifier(u32 battlerAtk, uq4_12_t typ
             return UQ_4_12(1.25);
         break;
     case ABILITY_SNIPER:
+    case ABILITY_SHARPNESS:
         if (isCrit)
             return UQ_4_12(1.5);
         break;
@@ -11596,11 +11630,11 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
     {
         if (gBattleWeather & B_WEATHER_SUN)
         {
-            secondaryEffectChance *= 1.5;
+            secondaryEffectChance *= 1.25;
         }
         if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_RAIN))
         {
-            secondaryEffectChance *= 0.5;
+            secondaryEffectChance *= 0.75;
         }
     }
     //freeze and frostbite chance are halved in sun, and boosted by 50% in hail
@@ -11608,11 +11642,11 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
     {
         if (gBattleWeather & B_WEATHER_SUN)
         {
-            secondaryEffectChance *= 0.5;
+            secondaryEffectChance *= 0.75;
         }
         if (gBattleWeather & B_WEATHER_HAIL)
         {
-            secondaryEffectChance *= 1.5;
+            secondaryEffectChance *= 1.25;
         }
     }
 
@@ -11621,7 +11655,7 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
     {
         if(IsBattlerTerrainAffected(battler, STATUS_FIELD_ELECTRIC_TERRAIN))
         {
-            secondaryEffectChance *= 1.5;
+            secondaryEffectChance *= 1.3;
         }
     }
 
@@ -11630,7 +11664,7 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
     {
         if(IsBattlerTerrainAffected(battler, STATUS_FIELD_PSYCHIC_TERRAIN))
         {
-            secondaryEffectChance *= 1.5;
+            secondaryEffectChance *= 1.3;
         }
     }
 

@@ -1089,3 +1089,11 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/gagilRoute4/scripts.inc"
 
 	.include "data/maps/gagilRoute12/scripts.inc"
+
+	.include "data/maps/AsterraWithHealspot/scripts.inc"
+
+	.include "data/maps/gagilRoute3/scripts.inc"
+
+	.include "data/maps/gagilRoute5/scripts.inc"
+
+	.include "data/maps/subfloraWoods/scripts.inc"

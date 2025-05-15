@@ -1609,10 +1609,12 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
                 gBattleMons[data->battlerId].status2 |= STATUS2_INFATUATED_WITH(BATTLE_OPPOSITE(data->battlerId));
             else
                 gBattleMons[data->battlerId].status2 |= STATUS2_INFATUATED_WITH(BATTLE_PARTNER(BATTLE_OPPOSITE(data->battlerId)));
+            gStatuses4[data->battlerId] |= STATUS4_INFATUATION_TURN(5);
         }
         else
         {
             gBattleMons[data->battlerId].status2 &= ~STATUS2_INFATUATION;
+            gStatuses4[data->battlerId] &= ~STATUS4_INFAT_TIMER;
         }
         break;
     }

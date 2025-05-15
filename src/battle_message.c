@@ -871,9 +871,25 @@ static const u8 sText_SwarmActivatedAttacker[] = _("{B_ATK_NAME_WITH_PREFIX}'s B
 static const u8 sText_PkmnAcquiredDulled[] =_("{B_DEF_NAME_WITH_PREFIX}'s Ability\nwas changed to Dulled!");
 static const u8 sText_AbilityReplaceFail[] =_("{B_DEF_NAME_WITH_PREFIX}'s Ability\ncan't be changed!");
 static const u8 sText_PkmnCanEvolve[] = _("{B_BUFF1} is ready\nto evolve!{WAIT_SE}\p");
+static const u8 sText_InfatTimerWoreOff[] = _("{B_ATK_NAME_WITH_PREFIX} got over\nits infatuation!");
+static const u8 sText_PkmnWasHeartbroken[] = _("{B_DEF_NAME_WITH_PREFIX}'s\n heart shattered…");
+static const u8 sText_HeartbreakWoreOff[] = _("{B_ATK_NAME_WITH_PREFIX} got over\nits Heartbreak!");
+static const u8 sText_ChargeCountRose[] = _("{B_ATK_NAME_WITH_PREFIX}'s Charge\ncount rose to {B_BUFF3}!");
+static const u8 sText_ChargeCountFell[] = _("{B_ATK_NAME_WITH_PREFIX} has {B_BUFF3}\nturns of Charge left!");
+static const u8 sText_LostCharge[] = _("{B_ATK_NAME_WITH_PREFIX}'s\nCharge flickered out!");
+static const u8 sText_OneChargeLeft[] = _("{B_ATK_NAME_WITH_PREFIX} has {B_BUFF3}\nturn of Charge left!");
+static const u8 sText_DefChargeCountRose[] = _("{B_DEF_NAME_WITH_PREFIX}'s Charge\ncount rose to {B_BUFF3}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_DEFCHARGECOUNTROSE - BATTLESTRINGS_TABLE_START] = sText_DefChargeCountRose,
+    [STRINGID_ONECHARGELEFT - BATTLESTRINGS_TABLE_START] = sText_OneChargeLeft,
+    [STRINGID_LOSTCHARGE - BATTLESTRINGS_TABLE_START] = sText_LostCharge,
+    [STRINGID_CHARGECOUNTFELL - BATTLESTRINGS_TABLE_START] = sText_ChargeCountFell,
+    [STRINGID_CHARGECOUNTROSE - BATTLESTRINGS_TABLE_START] = sText_ChargeCountRose,
+    [STRINGID_HEARTBREAKWOREOFF - BATTLESTRINGS_TABLE_START] = sText_HeartbreakWoreOff,
+    [STRINGID_PKMNWASHEARTBROKEN - BATTLESTRINGS_TABLE_START] = sText_PkmnWasHeartbroken,
+    [STRINGID_INFATTIMERWOREOFF - BATTLESTRINGS_TABLE_START] = sText_InfatTimerWoreOff,
     [STRINGID_PKMNCANEVOLVE - BATTLESTRINGS_TABLE_START] = sText_PkmnCanEvolve,
     [STRINGID_ABILITYREPLACEFAIL - BATTLESTRINGS_TABLE_START] = sText_AbilityReplaceFail,
     [STRINGID_PKMNACQUIREDDULLED - BATTLESTRINGS_TABLE_START] = sText_PkmnAcquiredDulled,

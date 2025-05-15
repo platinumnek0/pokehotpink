@@ -1104,6 +1104,38 @@ BattleScript_JungleHealingTryRestoreAlly:
 	setallytonexttarget JungleHealing_RestoreTargetHealth
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectHolistics::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifteamhealthy BS_ATTACKER, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	copybyte gBattlerTarget, gBattlerAttacker
+	setbyte gBattleCommunication, 0
+Holistics_RestoreTargetHealth:
+	copybyte gBattlerAttacker, gBattlerTarget
+	tryhealmorepoisoned BS_TARGET, BattleScript_Holistics_TryCureStatus
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	printstring STRINGID_PKMNREGAINEDHEALTH
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_Holistics_TryCureStatus:
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_HolisticsCureStatus
+	goto BattleScript_HolisticsTryRestoreAlly
+BattleScript_HolisticsCureStatus:
+	curestatus BS_TARGET
+	updatestatusicon BS_TARGET
+	printstring STRINGID_PKMNSTATUSNORMAL
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_HolisticsTryRestoreAlly:
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_MoveEnd
+	addbyte gBattleCommunication, 1
+	jumpifnoally BS_TARGET, BattleScript_MoveEnd
+	setallytonexttarget Holistics_RestoreTargetHealth
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectRelicSong::
 	call BattleScript_EffectHit_Ret
 	tryfaintmon BS_TARGET
@@ -2764,6 +2796,8 @@ BattleScript_TryTailwindAbilitiesLoop_WindPower:
 	call BattleScript_AbilityPopUp
 	setcharge BS_TARGET
 	printstring STRINGID_BEINGHITCHARGEDPKMNWITHPOWER
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_DEFCHARGECOUNTROSE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_TryTailwindAbilitiesLoop_Increment
 
@@ -5209,6 +5243,7 @@ BattleScript_EffectCharge::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifatmaxcharge BattleScript_ButItFailed
 	setcharge BS_ATTACKER
 	attackanimation
 	waitanimation
@@ -5223,6 +5258,8 @@ BattleScript_EffectCharge::
 BattleScript_EffectChargeString:
 .endif
 	printstring STRINGID_PKMNCHARGINGPOWER
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_CHARGECOUNTROSE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
@@ -6499,6 +6536,21 @@ BattleScript_EncoredNoMore::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
+BattleScript_ChargeCountFell::
+	printstring STRINGID_CHARGECOUNTFELL
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_OneChargeLeft::
+	printstring STRINGID_ONECHARGELEFT
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_LostCharge::
+	printstring STRINGID_LOSTCHARGE
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
 BattleScript_DestinyBondTakesLife::
 	printstring STRINGID_PKMNTOOKFOE
 	waitmessage B_WAIT_TIME_LONG
@@ -6712,8 +6764,28 @@ BattleScript_WindPowerActivates::
 	setcharge BS_TARGET
 	printstring STRINGID_BEINGHITCHARGEDPKMNWITHPOWER
 	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_DEFCHARGECOUNTROSE
+	waitmessage B_WAIT_TIME_LONG
 BattleScript_WindPowerActivates_Ret:
 	return
+
+BattleScript_ChargeBeamCharges::
+	setcharge BS_ATTACKER
+	printstring STRINGID_PKMNCHARGINGPOWER
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_CHARGECOUNTROSE
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_HeartbreakMessage::
+	printstring STRINGID_PKMNWASHEARTBROKEN
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_HeartbreakWoreOff::
+	printstring STRINGID_HEARTBREAKWOREOFF
+	waitmessage B_WAIT_TIME_LONG
+	end2
 
 BattleScript_ToxicDebrisActivates::
 	call BattleScript_AbilityPopUp
@@ -7457,6 +7529,11 @@ BattleScript_DoTurnDmg:
 	tryfaintmon BS_ATTACKER
 	checkteamslost BattleScript_DoTurnDmgEnd
 BattleScript_DoTurnDmgEnd:
+	end2
+
+BattleScript_InfatuationWoreOff::
+	printstring STRINGID_INFATTIMERWOREOFF
+	waitmessage B_WAIT_TIME_LONG
 	end2
 
 BattleScript_PoisonHealActivates::

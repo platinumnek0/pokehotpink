@@ -384,7 +384,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_FLAME_BODY] =
     {
         .name = _("Flame Body"),
-        .description = COMPOUND_STRING("May poison on contact, when\nattacking or when hit."),
+        .description = COMPOUND_STRING("May burn the attacker when\nhit with a contact move."),
         .aiRating = 4,
     },
 
@@ -1586,8 +1586,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SCHOOLING] =
     {
-        .name = _("Schooling"),
-        .description = COMPOUND_STRING("Forms a school when strong."),
+        .name = _("Hundredfold"),
+        .description = COMPOUND_STRING("When above 1/4th HP, hundreds\nhuddle together to become a beast."),
         .aiRating = 6,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -1599,7 +1599,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_DISGUISE] =
     {
         .name = _("Door open."),
-        .description = COMPOUND_STRING("Protected from a hit, once\nper battle."),
+        .description = COMPOUND_STRING("Once per battle, the door on the\nPokémon's shell protects it from\nan attack."),
         .aiRating = 8,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -1640,7 +1640,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_CORROSION] =
     {
         .name = _("Corrosion"),
-        .description = COMPOUND_STRING("Poisons any type."),
+        .description = COMPOUND_STRING("Poison and Steel foes can be\npoisoned and are weak to Poison\nmoves."),
         .aiRating = 5,
     },
 
@@ -1766,37 +1766,29 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_ELECTRIC_SURGE] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
-        .name = _("Electric Surge"),
-    #else
-        .name = _("ElectrcSurge"),
-    #endif
-        .description = COMPOUND_STRING("Creates electric terrain when\nswitching in."),
+        .name = _("Haywire"),
+        .description = COMPOUND_STRING("When switching in, summons\nstatic terrain on the\nbattlefield."),
         .aiRating = 8,
     },
 
     [ABILITY_PSYCHIC_SURGE] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
-        .name = _("Psychic Surge"),
-    #else
-        .name = _("PsychicSurge"),
-    #endif
-        .description = COMPOUND_STRING("Creates psychic terrain when\nswitching in."),
+        .name = _("Abstraction"),
+        .description = COMPOUND_STRING("When switching in, summons\nabstract terrain on the\nbattlefield."),
         .aiRating = 8,
     },
 
     [ABILITY_MISTY_SURGE] =
     {
         .name = _("Misty Surge"),
-        .description = COMPOUND_STRING("Creates misty terrain when\nswitching in."),
+        .description = COMPOUND_STRING("When switching in, summons\nmisty terrain on the\nbattlefield."),
         .aiRating = 8,
     },
 
     [ABILITY_GRASSY_SURGE] =
     {
-        .name = _("Grassy Surge"),
-        .description = COMPOUND_STRING("Creates lush terrain when\nswitching in."),
+        .name = _("Greenhouse"),
+        .description = COMPOUND_STRING("When switching in, summons\nlush terrain on the\nbattlefield."),
         .aiRating = 8,
     },
 
@@ -1923,8 +1915,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_PUNK_ROCK] =
     {
-        .name = _("Amplifier"),
-        .description = COMPOUND_STRING("Boosts sound moves' power.\nResists sound moves."),
+        .name = _("Resonant"),
+        .description = COMPOUND_STRING("Boosts sound moves the Pokémon\nuses. Lowers damage from foes'\nsound moves."),
         .aiRating = 2,
         .breakable = TRUE,
     },
@@ -2021,12 +2013,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_GORILLA_TACTICS] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
         .name = _("Goose Gall"),
-    #else
-        .name = _("GorillaTacti"),
-    #endif
-        .description = COMPOUND_STRING("Boosts damage, but locks into\nthe first move."),
+        .description = COMPOUND_STRING("The Pokémon's hubris boosts its\nAttack, but locks it into onlt\nusing one move."),
         .aiRating = 4,
     },
 
@@ -2269,12 +2257,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_ELECTROMORPHOSIS] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
-        .name = _("Electromorphosis"),
-    #else
-        .name = _("Elecmrphosis"),
-    #endif
-        .description = COMPOUND_STRING("Gets Charged when hit."),
+        .name = _("Generator"),
+        .description = COMPOUND_STRING("Gains a level of Charge when\nhit by an attack."),
         .aiRating = 5,
     },
 
@@ -2399,7 +2383,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_SHARPNESS] =
     {
         .name = _("Sharpness"),
-        .description = COMPOUND_STRING("Strengthens slicing moves."),
+        .description = COMPOUND_STRING("Boosts the power of slicing\nmoves. Critical hits deal more\ndamage."),
         .aiRating = 7,
     },
 
@@ -2699,10 +2683,10 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 7,
     },
 
-    [ABILITY_DEFENDANT] =
+    [ABILITY_ATTORNEY] =
     {
-        .name = _("Defendant"),
-        .description = COMPOUND_STRING("Protects self and ally from\nstat drops."),
+        .name = _("Attorney"),
+        .description = COMPOUND_STRING("Protects itself and allies below\n1/2 HP from stat drops."),
         .aiRating = 4,
         .breakable = TRUE,
     },
@@ -2820,5 +2804,13 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("--"),
         .aiRating = -1,
     },
+
+    [ABILITY_DRUMMER] = 
+    {
+        .name = _("Drummer"),
+        .description = COMPOUND_STRING("Sound-based moves use Attack\ninstead of Sp.Atk."),
+        .aiRating = 6,
+    },
+
 
 };

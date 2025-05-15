@@ -5038,9 +5038,6 @@ HoneClawsAnim:
 
 Move_WIDE_GUARD:
 	loadspritegfx ANIM_TAG_ICE_SPIKES @motion from icy wind
-	loadspritegfx ANIM_TAG_PINK_PETAL @pink color
-	loadspritegfx ANIM_TAG_SMALL_EMBER @yellow color
-	loadspritegfx ANIM_TAG_ROCKS @brown color
 	loadspritegfx ANIM_TAG_CONVERSION @conversion
 	loadspritegfx ANIM_TAG_WATER_ORB @blue color
 	monbg ANIM_ATTACKER

@@ -1491,8 +1491,7 @@ bool32 ShouldLowerStat(u32 battler, u32 battlerAbility, u32 stat)
          || battlerAbility == ABILITY_WHITE_SMOKE
          || battlerAbility == ABILITY_FULL_METAL_BODY
          || battlerAbility == ABILITY_APATHY
-         || battlerAbility == ABILITY_DULLED
-         || battlerAbility == ABILITY_DEFENDANT)
+         || battlerAbility == ABILITY_DULLED)
             return FALSE;
 
         switch (stat)

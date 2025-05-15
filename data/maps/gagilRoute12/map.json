@@ -29,7 +29,7 @@
     {
       "type": "trigger",
       "x": 10,
-      "y": 31,
+      "y": 51,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
@@ -38,7 +38,7 @@
     {
       "type": "trigger",
       "x": 11,
-      "y": 32,
+      "y": 52,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
@@ -47,7 +47,7 @@
     {
       "type": "trigger",
       "x": 12,
-      "y": 32,
+      "y": 52,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
@@ -56,7 +56,7 @@
     {
       "type": "trigger",
       "x": 13,
-      "y": 32,
+      "y": 52,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
@@ -65,88 +65,7 @@
     {
       "type": "trigger",
       "x": 14,
-      "y": 31,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 39,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 13,
-      "y": 40,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 14,
-      "y": 40,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 15,
-      "y": 40,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 16,
-      "y": 40,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 17,
-      "y": 39,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 27,
-      "y": 36,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 28,
-      "y": 37,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 29,
-      "y": 37,
+      "y": 51,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
@@ -155,7 +74,7 @@
     {
       "type": "trigger",
       "x": 30,
-      "y": 37,
+      "y": 51,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
@@ -164,34 +83,7 @@
     {
       "type": "trigger",
       "x": 31,
-      "y": 36,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 30,
-      "y": 30,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 31,
-      "y": 31,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
-    },
-    {
-      "type": "trigger",
-      "x": 33,
-      "y": 31,
+      "y": 51,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
@@ -200,7 +92,7 @@
     {
       "type": "trigger",
       "x": 32,
-      "y": 31,
+      "y": 52,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
@@ -208,8 +100,8 @@
     },
     {
       "type": "trigger",
-      "x": 34,
-      "y": 30,
+      "x": 33,
+      "y": 52,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
@@ -246,6 +138,60 @@
       "type": "trigger",
       "x": 47,
       "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "NULL"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 57,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "NULL"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 56,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "NULL"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 56,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "NULL"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 56,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "NULL"
+    },
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 54,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "NULL"
+    },
+    {
+      "type": "trigger",
+      "x": 30,
+      "y": 54,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",

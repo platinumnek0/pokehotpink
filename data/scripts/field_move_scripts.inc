@@ -12,7 +12,7 @@ EventScript_CutTree_Part2::
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	msgbox Text_WantToCut, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
-	msgbox Text_CutTree, MSGBOX_DEFAULT
+	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
@@ -21,7 +21,6 @@ EventScript_CutTree_Part2::
 
 @ Load "cut" into the move name
 EventScript_CutBuffer_Cut::
-	buffermovename STR_VAR_2, MOVE_CUT
 	goto EventScript_CutTree_Part2
 	end
 
@@ -167,6 +166,7 @@ EventScript_CantStrength::
 	end
 
 EventScript_CheckActivatedBoulder::
+	checkstrengthmoves
 	msgbox Text_StrengthActivated, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -177,21 +177,21 @@ EventScript_CancelStrength::
 	end
 
 Text_WantToStrength:
-	.string "It's a big boulder, but a POKéMON\n"
+	.string "It's a big boulder, but a Pokémon\n"
 	.string "may be able to push it aside.\p"
-	.string "Would you like to use STRENGTH?$"
+	.string "Would you like to use {STR_VAR_2}?$"
 
 Text_MonUsedStrength:
-	.string "{STR_VAR_1} used STRENGTH!\p"
-	.string "{STR_VAR_1}'s STRENGTH made it\n"
+	.string "{STR_VAR_1} used {STR_VAR_2}!\p"
+	.string "{STR_VAR_1}'s {STR_VAR_2} made it\n"
 	.string "possible to move boulders around!$"
 
 Text_CantStrength:
-	.string "It's a big boulder, but a POKéMON\n"
+	.string "It's a big boulder, but a Pokémon\n"
 	.string "may be able to push it aside.$"
 
 Text_StrengthActivated:
-	.string "STRENGTH made it possible to move\n"
+	.string "{STR_VAR_2} made it possible to move\n"
 	.string "boulders around.$"
 
 EventScript_UseWaterfall::

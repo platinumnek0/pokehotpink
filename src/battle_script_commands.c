@@ -1646,7 +1646,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     if (atkAbility == ABILITY_UNAWARE || atkAbility == ABILITY_KEEN_EYE || atkAbility == ABILITY_MINDS_EYE
             || (B_ILLUMINATE_EFFECT >= GEN_9 && atkAbility == ABILITY_ILLUMINATE) || atkAbility == ABILITY_APATHY)
         evasionStage = DEFAULT_STAT_STAGE;
-    if (gMovesInfo[move].ignoresTargetDefenseEvasionStages)
+    if (gMovesInfo[move].ignoresTargetDefenseEvasionStages && (evasionStage > DEFAULT_STAT_STAGE))
         evasionStage = DEFAULT_STAT_STAGE;
     if (defAbility == ABILITY_UNAWARE || defAbility == ABILITY_APATHY)
         accStage = DEFAULT_STAT_STAGE;
@@ -3539,6 +3539,22 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     gBattleMons[gEffectBattler].status2 |= STATUS2_LOCK_CONFUSE_TURN(RandomUniform(RNG_RAMPAGE_TURNS, 2, 3));
                 }
                 break;
+            case MOVE_EFFECT_CHARGE:
+                if (!NoAliveMonsForEitherParty())
+                {
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_ChargeBeamCharges;
+                }
+                break;
+            case MOVE_EFFECT_HEARTBREAK:
+                if (!NoAliveMonsForEitherParty() && (gBattleMons[gEffectBattler].status2 & STATUS2_INFATUATED_WITH(gBattlerAttacker)))
+                {
+                    gBattleMons[gEffectBattler].status2 &= ~STATUS2_INFATUATED_WITH(gBattlerAttacker);
+                    gStatuses4[gEffectBattler] |= STATUS4_HEARTBREAK_TURN(4);
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_HeartbreakMessage;
+                }
+                break;
             case MOVE_EFFECT_SP_ATK_TWO_DOWN: // Overheat
                 if (!NoAliveMonsForEitherParty())
                 {
@@ -3867,7 +3883,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 else if (!(gStatuses3[gEffectBattler] & STATUS3_HEAL_BLOCK))
                 {
                     gStatuses3[gEffectBattler] |= STATUS3_HEAL_BLOCK;
-                    gDisableStructs[gEffectBattler].healBlockTimer = 3;
+                    gDisableStructs[gEffectBattler].healBlockTimer = 5;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_EffectPsychicNoise;
                 }
@@ -8633,7 +8649,14 @@ static bool32 TryTidyUpClear(u32 battlerAtk, bool32 clear)
 
 u32 IsFlowerVeilProtected(u32 battler)
 {
-    return IsAbilityOnSide(battler, ABILITY_DEFENDANT);
+    if (IsAbilityOnSide(battler, ABILITY_ATTORNEY) && (gBattleMons[gBattlerTarget].hp <= (GetNonDynamaxMaxHP(gBattlerTarget) / 2)))
+    { 
+        return TRUE ;
+    }
+    else
+    {
+        return FALSE;
+    }
 }
 
 u32 IsLeafGuardProtected(u32 battler)
@@ -10330,6 +10353,27 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->nextInstr;   // can heal
         return;
     }
+    case VARIOUS_TRY_HEAL_MORE_POISONED:
+    {
+        VARIOUS_ARGS(const u8 *failInstr);
+        if (gBattleMons[battler].status1 & (STATUS1_POISON | STATUS1_TOXIC_POISON))
+        {
+            gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 3;
+        }
+        else
+        {
+            gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 4;
+        }
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
+        gBattleMoveDamage *= -1;
+
+        if (gBattleMons[battler].hp == gBattleMons[battler].maxHP)
+            gBattlescriptCurrInstr = cmd->failInstr;    // fail
+        else
+            gBattlescriptCurrInstr = cmd->nextInstr;   // can heal
+        return;
+    }
     case VARIOUS_REMOVE_TERRAIN:
     {
         VARIOUS_ARGS();
@@ -10722,6 +10766,7 @@ static void Cmd_various(void)
         if (gBattleMons[battler].status2 & STATUS2_INFATUATION)
         {
             gBattleMons[battler].status2 &= ~(STATUS2_INFATUATION);
+            gStatuses4[battler] &= ~(STATUS4_INFAT_TIMER);
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MENTALHERBCURE_INFATUATION;  // STRINGID_TARGETGOTOVERINFATUATION
             StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
         }
@@ -11182,7 +11227,14 @@ static void Cmd_tryhealhalfhealth(void)
     if (cmd->battler == BS_ATTACKER)
         gBattlerTarget = gBattlerAttacker;
 
-    gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
+    if(gLastMoves[gBattlerTarget] == gChosenMoveByBattler[gBattlerTarget])
+    {
+        gBattleMoveDamage = (GetNonDynamaxMaxHP(gBattlerTarget) / 20) * 7;
+    }
+    else
+    {
+        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
+    }
     if (gBattleMoveDamage == 0)
         gBattleMoveDamage = 1;
     gBattleMoveDamage *= -1;
@@ -11779,7 +11831,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                     gBattleScripting.battler = battler;
                     gBattlerAbility = index - 1;
                     gBattlescriptCurrInstr = BattleScript_FlowerVeilProtectsRet;
-                    gLastUsedAbility = ABILITY_DEFENDANT;
+                    gLastUsedAbility = ABILITY_ATTORNEY;
                     gSpecialStatuses[battler].statLowered = TRUE;
                 }
             }
@@ -12597,13 +12649,14 @@ static void Cmd_tryinfatuating(void)
     }
     else
     {
-        if (gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATION)
+        if ((gBattleMons[gBattlerTarget].status2 & (STATUS2_INFATUATION)) || (gStatuses4[gEffectBattler] & (STATUS4_HEARTBREAK)))
         {
             gBattlescriptCurrInstr = cmd->failInstr;
         }
         else
         {
             gBattleMons[gBattlerTarget].status2 |= STATUS2_INFATUATED_WITH(gBattlerAttacker);
+            gStatuses4[gBattlerTarget] |= STATUS4_INFATUATION_TURN(5);
             gBattlescriptCurrInstr = cmd->nextInstr;
         }
     }
@@ -14095,7 +14148,11 @@ static void Cmd_setcharge(void)
     CMD_ARGS(u8 battler);
 
     u8 battler = GetBattlerForBattleScript(cmd->battler);
-    gStatuses3[battler] |= STATUS3_CHARGED_UP;
+    if(!(gStatuses3[battler] & STATUS3_CHARGED_UP))
+    {
+        gStatuses3[battler] |= STATUS3_CHARGED_UP;
+    }
+    
     if (gDisableStructs[battler].chargeTimer == 3)
     {
         gDisableStructs[battler].chargeTimer = 4;
@@ -14104,6 +14161,9 @@ static void Cmd_setcharge(void)
     {
         gDisableStructs[battler].chargeTimer += 2;
     }
+
+    PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 2, (gDisableStructs[battler].chargeTimer - 1));
+
     gBattlescriptCurrInstr++;
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -16661,6 +16721,20 @@ void BS_JumpIfAbilityCantChange(void)
     NATIVE_ARGS(const u8 *failInstr);
 
     if(gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeOverwritten)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
+void BS_JumpIfAtMaxCharge(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    if(gDisableStructs[gBattlerAttacker].chargeTimer > 2)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }

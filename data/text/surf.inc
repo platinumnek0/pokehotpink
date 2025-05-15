@@ -3,4 +3,4 @@ gText_WantToUseSurf::
 	.string "Would you like to surf on it?$"
 
 gText_PlayerUsedSurf::
-	.string "{STR_VAR_1} leapt into the water!$"
+	.string "{STR_VAR_1} used {STR_VAR_2}!$"

@@ -22,6 +22,11 @@
       "map": "MAP_GAGIL_ROUTE4",
       "offset": 10,
       "direction": "up"
+    },
+    {
+      "map": "MAP_GAGIL_ROUTE5",
+      "offset": 0,
+      "direction": "left"
     }
   ],
   "object_events": [

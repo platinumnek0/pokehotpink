@@ -164,8 +164,8 @@
     {
       "id": "LAYOUT_ROUTE101",
       "name": "Route101_Layout",
-      "width": 52,
-      "height": 20,
+      "width": 56,
+      "height": 28,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Route101/border.bin",
@@ -174,8 +174,8 @@
     {
       "id": "LAYOUT_ROUTE102",
       "name": "Route102_Layout",
-      "width": 50,
-      "height": 54,
+      "width": 48,
+      "height": 52,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Asterra",
       "border_filepath": "data/layouts/Route102/border.bin",
@@ -4484,7 +4484,7 @@
     {
       "id": "LAYOUT_GAGIL_ROUTE4",
       "name": "gagilRoute4_Layout",
-      "width": 28,
+      "width": 32,
       "height": 56,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
@@ -4500,6 +4500,46 @@
       "secondary_tileset": "gTileset_lost_settlement",
       "border_filepath": "data/layouts/gagilRoute12/border.bin",
       "blockdata_filepath": "data/layouts/gagilRoute12/map.bin"
+    },
+    {
+      "id": "LAYOUT_ASTERRA_WITH_HEALSPOT",
+      "name": "AsterraWithHealspot_Layout",
+      "width": 44,
+      "height": 28,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Asterra",
+      "border_filepath": "data/layouts/AsterraWithHealspot/border.bin",
+      "blockdata_filepath": "data/layouts/AsterraWithHealspot/map.bin"
+    },
+    {
+      "id": "LAYOUT_GAGIL_ROUTE3",
+      "name": "gagilRoute3_Layout",
+      "width": 68,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/gagilRoute3/border.bin",
+      "blockdata_filepath": "data/layouts/gagilRoute3/map.bin"
+    },
+    {
+      "id": "LAYOUT_GAGIL_ROUTE5",
+      "name": "gagilRoute5_Layout",
+      "width": 72,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/gagilRoute5/border.bin",
+      "blockdata_filepath": "data/layouts/gagilRoute5/map.bin"
+    },
+    {
+      "id": "LAYOUT_SUBFLORA_WOODS",
+      "name": "subfloraWoods_Layout",
+      "width": 64,
+      "height": 64,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/subfloraWoods/border.bin",
+      "blockdata_filepath": "data/layouts/subfloraWoods/map.bin"
     }
   ]
 }

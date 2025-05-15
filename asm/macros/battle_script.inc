@@ -1664,6 +1664,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro jumpifatmaxcharge, failInstr:req
+	callnative BS_JumpIfAtMaxCharge
+	.4byte \failInstr
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -2166,6 +2171,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro tryhealmorepoisoned battler:req, failInstr:req
+	various \battler, VARIOUS_TRY_HEAL_MORE_POISONED
+	.4byte \failInstr
+	.endm
+
 	.macro removeterrain
 	various BS_ATTACKER, VARIOUS_REMOVE_TERRAIN
 	.endm
@@ -2413,12 +2423,12 @@
 	.endm
 
 	.macro jumpifflowerveil jumpInstr:req
-	jumpifability BS_TARGET_SIDE, ABILITY_DEFENDANT, \jumpInstr
+	jumpifability BS_TARGET_SIDE, ABILITY_ATTORNEY, \jumpInstr
 	1:
 	.endm
 
 	.macro jumpifflowerveilattacker jumpInstr:req
-	jumpifability BS_ATTACKER_SIDE, ABILITY_DEFENDANT, \jumpInstr
+	jumpifability BS_ATTACKER_SIDE, ABILITY_ATTORNEY, \jumpInstr
 	1:
 	.endm
 

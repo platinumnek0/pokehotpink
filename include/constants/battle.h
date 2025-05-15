@@ -193,6 +193,11 @@
 #define STATUS4_SALT_CURE               (1 << 4)
 #define STATUS4_SYRUP_BOMB              (1 << 5)
 #define STATUS4_GLAIVE_RUSH             (1 << 6)
+#define STATUS4_HEARTBREAK              (1 << 7 | 1 << 8 | 1 << 9 | 1 << 10)
+#define STATUS4_HEARTBREAK_TURN(num)    (((num) << 7) & STATUS4_HEARTBREAK)
+#define STATUS4_DIVORCED                (1 << 11)
+#define STATUS4_INFAT_TIMER             (1 << 12 | 1 << 13 | 1 << 14 | 1 << 15 | 1 << 16)
+#define STATUS4_INFATUATION_TURN(num)   (((num) << 12) & STATUS4_INFAT_TIMER)
 
 #define HITMARKER_WAKE_UP_CLEAR         (1 << 4) // Cleared when waking up. Never set or checked.
 #define HITMARKER_IGNORE_BIDE           (1 << 5)
@@ -400,8 +405,10 @@
 #define MOVE_EFFECT_PSYCHIC_NOISE       79
 #define MOVE_EFFECT_TAR_SHOT            80
 #define MOVE_EFFECT_SPREAD_USER_STATUS  81
+#define MOVE_EFFECT_CHARGE              82
+#define MOVE_EFFECT_HEARTBREAK          83
 
-#define NUM_MOVE_EFFECTS                82
+#define NUM_MOVE_EFFECTS                84
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000

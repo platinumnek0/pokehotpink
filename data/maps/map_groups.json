@@ -97,7 +97,10 @@
     "Asterra",
     "Porkbelly",
     "gagilRoute4",
-    "gagilRoute12"
+    "gagilRoute12",
+    "AsterraWithHealspot",
+    "gagilRoute3",
+    "gagilRoute5"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -437,7 +440,8 @@
     "TerraCave_End",
     "AlteringCave",
     "MeteorFalls_StevensCave",
-    "subfloraEggRoom"
+    "subfloraEggRoom",
+    "subfloraWoods"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

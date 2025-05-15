@@ -534,11 +534,28 @@ bool8 Script_checkCutMoves(struct ScriptContext *ctx)
         if (!species)
             break;
         if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && (gMovesInfo[move1].canFellTrees == TRUE
-        || gMovesInfo[move2].canFellTrees == TRUE || gMovesInfo[move3].canFellTrees == TRUE || gMovesInfo[move4].canFellTrees == TRUE
-        || GetMonAbility(&gPlayerParty[i]) == ABILITY_SHARPNESS))
+        || gMovesInfo[move2].canFellTrees == TRUE || gMovesInfo[move3].canFellTrees == TRUE || gMovesInfo[move4].canFellTrees == TRUE))
         {
             gSpecialVar_Result = i;
             gSpecialVar_0x8004 = species;
+
+            if(gMovesInfo[move1].canFellTrees)
+            {
+                StringCopy(gStringVar2, gMovesInfo[move1].name);
+            }
+            else if(gMovesInfo[move2].canFellTrees)
+            {
+                StringCopy(gStringVar2, gMovesInfo[move2].name);
+            }
+            else if(gMovesInfo[move3].canFellTrees)
+            {
+                StringCopy(gStringVar2, gMovesInfo[move3].name);
+            }
+            else
+            {
+                StringCopy(gStringVar2, gMovesInfo[move4].name);
+            }
+
             break;
         }
     }
@@ -560,11 +577,28 @@ bool8 Script_checkStrengthMoves(struct ScriptContext *ctx)
         if (!species)
             break;
         if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && (gMovesInfo[move1].canMoveBoulders == TRUE
-        || gMovesInfo[move2].canMoveBoulders == TRUE || gMovesInfo[move3].canMoveBoulders == TRUE || gMovesInfo[move4].canMoveBoulders == TRUE
-        || GetMonAbility(&gPlayerParty[i]) == ABILITY_HUGE_POWER))
+        || gMovesInfo[move2].canMoveBoulders == TRUE || gMovesInfo[move3].canMoveBoulders == TRUE || gMovesInfo[move4].canMoveBoulders == TRUE))
         {
             gSpecialVar_Result = i;
             gSpecialVar_0x8004 = species;
+
+            if(gMovesInfo[move1].canMoveBoulders)
+            {
+                StringCopy(gStringVar2, gMovesInfo[move1].name);
+            }
+            else if(gMovesInfo[move2].canMoveBoulders)
+            {
+                StringCopy(gStringVar2, gMovesInfo[move2].name);
+            }
+            else if(gMovesInfo[move3].canMoveBoulders)
+            {
+                StringCopy(gStringVar2, gMovesInfo[move3].name);
+            }
+            else
+            {
+                StringCopy(gStringVar2, gMovesInfo[move4].name);
+            }
+
             break;
         }
     }
@@ -590,6 +624,24 @@ bool8 Script_checkSurfMoves(struct ScriptContext *ctx)
         {
             gSpecialVar_Result = i;
             gSpecialVar_0x8004 = species;
+
+            if(gMovesInfo[move1].canFerry)
+            {
+                StringCopy(gStringVar2, gMovesInfo[move1].name);
+            }
+            else if(gMovesInfo[move2].canFerry)
+            {
+                StringCopy(gStringVar2, gMovesInfo[move2].name);
+            }
+            else if(gMovesInfo[move3].canFerry)
+            {
+                StringCopy(gStringVar2, gMovesInfo[move3].name);
+            }
+            else
+            {
+                StringCopy(gStringVar2, gMovesInfo[move4].name);
+            }
+
             break;
         }
     }
