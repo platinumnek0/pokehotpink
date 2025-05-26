@@ -213,3 +213,6 @@ const u16 gMetatileAttributes_Asterra[] = INCBIN_U16("data/tilesets/secondary/as
 
 const u16 gMetatiles_lost_settlement[] = INCBIN_U16("data/tilesets/secondary/lost_settlement/metatiles.bin");
 const u16 gMetatileAttributes_lost_settlement[] = INCBIN_U16("data/tilesets/secondary/lost_settlement/metatile_attributes.bin");
+
+const u16 gMetatiles_Hamborough[] = INCBIN_U16("data/tilesets/secondary/hamborough/metatiles.bin");
+const u16 gMetatileAttributes_Hamborough[] = INCBIN_U16("data/tilesets/secondary/hamborough/metatile_attributes.bin");

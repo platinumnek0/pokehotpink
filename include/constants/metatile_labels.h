@@ -253,6 +253,10 @@
 #define METATILE_GenericBuilding_TrickHouse_Door_Closed  0x81B
 #define METATILE_GenericBuilding_TrickHouse_Stairs_Down  0x819
 
+// gTileset_Hamborough
+#define METATILE_Hamborough_hamborough_civilian_door      0x823
+#define METATILE_Hamborough_hamborough_door_burger_place  0x852
+
 // gTileset_InsideOfTruck
 #define METATILE_InsideOfTruck_DoorClosedFloor_Bottom  0x81D
 #define METATILE_InsideOfTruck_DoorClosedFloor_Mid     0x815

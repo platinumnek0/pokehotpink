@@ -301,6 +301,7 @@
 #define EVO_LEVEL_ITEM                    53     // evolves at level 36, when holding the given item
 #define EVO_LEVEL_PARTY_OF_FOUR           54     // evolves at a given level, when the party has 4 or more pokemon
 #define EVO_LEVEL_FULL_PARTY              55     // evolves at a given level, when the party is full
+#define EVO_MOVE_20_TIMES_ON_GRASS_TYPES  56     // evolves after hitting a grass-type with a given move 20 times
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0

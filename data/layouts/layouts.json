@@ -4524,10 +4524,10 @@
     {
       "id": "LAYOUT_GAGIL_ROUTE5",
       "name": "gagilRoute5_Layout",
-      "width": 72,
-      "height": 32,
+      "width": 64,
+      "height": 40,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_Hamborough",
       "border_filepath": "data/layouts/gagilRoute5/border.bin",
       "blockdata_filepath": "data/layouts/gagilRoute5/map.bin"
     },
@@ -4540,6 +4540,16 @@
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/subfloraWoods/border.bin",
       "blockdata_filepath": "data/layouts/subfloraWoods/map.bin"
+    },
+    {
+      "id": "LAYOUT_HAMBOROUGH",
+      "name": "Hamborough_Layout",
+      "width": 52,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Hamborough",
+      "border_filepath": "data/layouts/Hamborough/border.bin",
+      "blockdata_filepath": "data/layouts/Hamborough/map.bin"
     }
   ]
 }

@@ -15,8 +15,13 @@
   "connections": [
     {
       "map": "MAP_BEASTON",
-      "offset": 0,
+      "offset": -8,
       "direction": "right"
+    },
+    {
+      "map": "MAP_HAMBOROUGH",
+      "offset": 8,
+      "direction": "left"
     }
   ],
   "object_events": [

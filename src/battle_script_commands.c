@@ -6421,6 +6421,11 @@ static void Cmd_moveend(void)
             // If the Pokémon needs to keep track of move usage for its evolutions, do it
             if (originallyUsedMove != MOVE_NONE)
                 TryUpdateEvolutionTracker(EVO_LEVEL_MOVE_TWENTY_TIMES, 1);
+                
+                if(IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_GRASS))
+                {
+                    TryUpdateEvolutionTracker(EVO_MOVE_20_TIMES_ON_GRASS_TYPES, 1);
+                }
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_CLEAR_BITS: // Clear/Set bits for things like using a move for all targets and all hits.
@@ -15251,7 +15256,7 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_NET_BALL:
                 if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_WATER) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_BUG))
-                    ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 300 : 300;
+                    ballMultiplier = 300;
                 break;
             case ITEM_DIVE_BALL:
                 if (GetCurrentMapType() == MAP_TYPE_UNDERWATER
