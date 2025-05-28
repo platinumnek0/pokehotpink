@@ -272,6 +272,8 @@ bool32 IsBattlerTrapped(u32 battler, bool32 checkSwitch)
 
     if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
         return FALSE;
+    if (GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
+        return FALSE;
     if (checkSwitch && holdEffect == HOLD_EFFECT_SHED_SHELL)
         return FALSE;
     else if (!checkSwitch && GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
@@ -1914,6 +1916,26 @@ bool32 HasSleepMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef)
 bool32 IsHealingMove(u32 move)
 {
     return gMovesInfo[move].healingMove;
+}
+
+bool32 IsJumpscareAffected(u32 move)
+{
+    if(IS_MOVE_STATUS(move))
+    {
+        return FALSE;
+    }
+    else if(gMovesInfo[move].power > 80)
+    {
+        return FALSE;
+    }
+    else if( (gMovesInfo[move].priority < 0) || (gMovesInfo[move].priority > 2) )
+    {
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
 }
 
 bool32 HasHealingEffect(u32 battlerId)

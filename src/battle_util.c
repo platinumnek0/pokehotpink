@@ -5701,7 +5701,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && TARGET_TURN_DAMAGED
              && gBattleMons[gBattlerTarget].hp != 0
              && RandomWeighted(RNG_CUTE_CHARM, 2, 1)
-             && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION)
+             && !( (gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION) || (gStatuses4[gBattlerAttacker] & STATUS4_HEARTBREAK ))
              && GetBattlerAbility(gBattlerAttacker) != ABILITY_OBLIVIOUS
              && IsMoveMakingContact(move, gBattlerAttacker)
              && !IsAbilityOnSide(gBattlerAttacker, ABILITY_AROMA_VEIL))
@@ -5959,6 +5959,22 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_JUMPSCARE:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && gBattleMons[gBattlerTarget].hp != 0
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && (Random() % 5) == 0
+             && TARGET_TURN_DAMAGED
+             && (IsJumpscareAffected(gCurrentMove))
+             && (gDisableStructs[battler].isFirstTurn) )
+            {
+                gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
+                BattleScriptPushCursor();
+                SetMoveEffect(FALSE, FALSE);
+                BattleScriptPop();
+                effect++;
+            }
+            break;
         case ABILITY_BEFUDDLING:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerTarget].hp != 0
@@ -6106,10 +6122,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 {
                     StringCopy(gBattleTextBuff1, gStatusConditionString_ConfusionJpn);
                     effect = 2;
-                }
-                else if (gBattleMons[battler].status2 & STATUS2_INFATUATION)
-                {
-                    effect = 3;
                 }
                 break;
             case ABILITY_LIMBER:
@@ -6525,6 +6537,8 @@ bool32 CanBattlerEscape(u32 battler) // no ability check
     if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_SHED_SHELL)
         return TRUE;
     else if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+        return TRUE;
+    else if (GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
         return TRUE;
     else if (gBattleMons[battler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
         return FALSE;

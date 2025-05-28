@@ -5075,6 +5075,10 @@ s8 GetMovePriority(u32 battler, u16 move)
     {
         priority++;
     }
+    else if (ability == ABILITY_JUMPSCARE && (gDisableStructs[battler].isFirstTurn) && (IsJumpscareAffected(move)))
+    {
+        priority++;
+    }
     else if (ability == ABILITY_TRIAGE && IsHealingMove(move))
         priority += 3;
 

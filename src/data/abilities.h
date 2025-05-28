@@ -391,7 +391,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_RUN_AWAY] =
     {
         .name = _("Run Away"),
-        .description = COMPOUND_STRING("Makes escaping easier."),
+        .description = COMPOUND_STRING("Can always switch out or run\nfrom wild battles."),
         .aiRating = 0,
     },
 
@@ -436,7 +436,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_CUTE_CHARM] =
     {
         .name = _("Cute Charm"),
-        .description = COMPOUND_STRING("Infatuates on contact."),
+        .description = COMPOUND_STRING("Foes that make contact may be\ninfatuated for 3 turns."),
         .aiRating = 2,
     },
 
@@ -2812,5 +2812,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 6,
     },
 
+    [ABILITY_JUMPSCARE] = 
+    {
+        .name = _("Jumpscare"),
+        .description = COMPOUND_STRING("On the first turn, attacks with\n80 power or below go first\nand may flinch."),
+        .aiRating = 6,
+    },
 
 };
