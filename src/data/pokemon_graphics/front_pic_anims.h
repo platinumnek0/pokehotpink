@@ -10364,11 +10364,10 @@ static const union AnimCmd sAnim_Pischool_1[] =
 
 static const union AnimCmd sAnim_Cixno_1[] =
 {
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 45),
     ANIMCMD_FRAME(1, 30),
     ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 

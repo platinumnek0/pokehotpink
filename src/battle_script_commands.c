@@ -1644,11 +1644,11 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     accStage = gBattleMons[battlerAtk].statStages[STAT_ACC];
     evasionStage = gBattleMons[battlerDef].statStages[STAT_EVASION];
     if (atkAbility == ABILITY_UNAWARE || atkAbility == ABILITY_KEEN_EYE || atkAbility == ABILITY_MINDS_EYE
-            || (B_ILLUMINATE_EFFECT >= GEN_9 && atkAbility == ABILITY_ILLUMINATE) || atkAbility == ABILITY_APATHY)
+            || (B_ILLUMINATE_EFFECT >= GEN_9 && atkAbility == ABILITY_ILLUMINATE))
         evasionStage = DEFAULT_STAT_STAGE;
     if (gMovesInfo[move].ignoresTargetDefenseEvasionStages && (evasionStage > DEFAULT_STAT_STAGE))
         evasionStage = DEFAULT_STAT_STAGE;
-    if (defAbility == ABILITY_UNAWARE || defAbility == ABILITY_APATHY)
+    if (defAbility == ABILITY_UNAWARE)
         accStage = DEFAULT_STAT_STAGE;
 
     if (gBattleMons[battlerDef].status2 & STATUS2_FORESIGHT || gStatuses3[battlerDef] & STATUS3_MIRACLE_EYED)
@@ -3931,7 +3931,8 @@ static bool32 CanApplyAdditionalEffect(const struct AdditionalEffect *additional
       && GetNextTarget(moveTarget, TRUE) != MAX_BATTLERS_COUNT)
         return FALSE;
     
-    if(ChangesStats(additionalEffect) && (GetBattlerAbility(gBattlerAttacker) == ABILITY_APATHY || GetBattlerAbility(gBattlerAttacker) == ABILITY_DULLED) && additionalEffect->self)
+    //apathy and dulled block self stat changes
+    if(ChangesStats(additionalEffect) && IsBattlerImmuneToStatChanges(gBattlerAttacker) && additionalEffect->self)
     {
         return FALSE;
     }
@@ -5372,8 +5373,7 @@ static void Cmd_playstatchangeanimation(void)
                 else if (!gSideTimers[GetBattlerSide(battler)].mistTimer
                         && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_CLEAR_AMULET
                         && ability != ABILITY_CLEAR_BODY
-                        && ability != ABILITY_APATHY
-                        && ability != ABILITY_DULLED
+                        && !IsBattlerImmuneToStatChanges(battler)
                         && ability != ABILITY_FULL_METAL_BODY
                         && ability != ABILITY_WHITE_SMOKE
                         && !((ability == ABILITY_KEEN_EYE || ability == ABILITY_MINDS_EYE) && currStat == STAT_ACC)
@@ -5425,7 +5425,7 @@ static void Cmd_playstatchangeanimation(void)
         }
     }
 
-    if(ability == ABILITY_APATHY || ability == ABILITY_DULLED)
+    if(IsBattlerImmuneToStatChanges(battler))
     {
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
@@ -5637,7 +5637,8 @@ static void Cmd_moveend(void)
                 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                 && TARGET_TURN_DAMAGED
                 && gMovesInfo[gCurrentMove].power != 0
-                && CompareStat(gBattlerTarget, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
+                && CompareStat(gBattlerTarget, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN)
+                && !(IsBattlerImmuneToStatChanges(gBattlerTarget)))
             {
                 SET_STATCHANGER(STAT_ATK, 1, FALSE);
                 BattleScriptPushCursor();
@@ -7294,7 +7295,8 @@ static void Cmd_switchineffects(void)
     else if (!(gDisableStructs[battler].stickyWebDone)
         && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_STICKY_WEB)
         && IsBattlerAffectedByHazards(battler, FALSE)
-        && IsBattlerGrounded(battler))
+        && IsBattlerGrounded(battler)
+        && !(IsBattlerImmuneToStatChanges(battler)))
     {
         gDisableStructs[battler].stickyWebDone = TRUE;
         gBattleScripting.battler = battler;
@@ -9150,8 +9152,12 @@ static void Cmd_various(void)
             if (gBattleStruct->stolenStats[0] & gBitTable[i])
             {
                 gBattleStruct->stolenStats[0] &= ~(gBitTable[i]);
-                SET_STATCHANGER(i, gBattleStruct->stolenStats[i], FALSE);
-                if (ChangeStatBuffs(GET_STAT_BUFF_VALUE_WITH_SIGN(gBattleScripting.statChanger), i, MOVE_EFFECT_CERTAIN | MOVE_EFFECT_AFFECTS_USER, NULL) == STAT_CHANGE_WORKED)
+                if(!(IsBattlerImmuneToStatChanges(battler)))
+                {
+                    SET_STATCHANGER(i, gBattleStruct->stolenStats[i], FALSE);
+                }
+                if (ChangeStatBuffs(GET_STAT_BUFF_VALUE_WITH_SIGN(gBattleScripting.statChanger), i, MOVE_EFFECT_CERTAIN | MOVE_EFFECT_AFFECTS_USER, NULL) == STAT_CHANGE_WORKED
+                && !(IsBattlerImmuneToStatChanges(battler)))
                 {
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_StatUpMsg;
@@ -9627,7 +9633,8 @@ static void Cmd_various(void)
         if (gMovesInfo[gCurrentMove].effect == EFFECT_FELL_STINGER
             && HasAttackerFaintedTarget()
             && !NoAliveMonsForEitherParty()
-            && CompareStat(gBattlerAttacker, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
+            && CompareStat(gBattlerAttacker, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN)
+            && !(IsBattlerImmuneToStatChanges(gBattleScripting.battler)))
         {
             SET_STATCHANGER(STAT_ATK, (B_FELL_STINGER_STAT_RAISE >= GEN_7 ? 3 : 2), FALSE);
             PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
@@ -10182,7 +10189,7 @@ static void Cmd_various(void)
     {
         VARIOUS_ARGS(const u8 *jumpInstr);
         battler = gBattlerAttacker;
-        if (gQueuedStatBoosts[battler].stats == 0)
+        if (gQueuedStatBoosts[battler].stats == 0 || IsBattlerImmuneToStatChanges(battler))
         {
             gBattlescriptCurrInstr = cmd->nextInstr;    // stats done, exit
         }
@@ -10676,7 +10683,10 @@ static void Cmd_various(void)
         // For Mirror Armor: "If the Pokémon with this Ability is affected by Sticky Web, the effect is reflected back to the Pokémon which set it up.
         //  If Pokémon which set up Sticky Web is not on the field, no Pokémon have their Speed lowered."
         gBattlerAttacker = gBattlerTarget;  // Initialize 'fail' condition
-        SET_STATCHANGER(STAT_SPEED, 1, TRUE);
+        if(!IsBattlerImmuneToStatChanges(battler))
+        {
+            SET_STATCHANGER(STAT_SPEED, 1, TRUE);
+        }
         if (gSideTimers[GetBattlerSide(battler)].stickyWebBattlerId != 0xFF)
             gBattlerAttacker = gSideTimers[GetBattlerSide(battler)].stickyWebBattlerId;
         break;
@@ -11805,7 +11815,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                     {
                         gBattlerAbility = battler;
                         BattleScriptPush(BS_ptr);
-                        if (battlerAbility == ABILITY_APATHY || battlerAbility == ABILITY_DULLED)
+                        if (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) == ABILITY_DULLED)
                         {
                             gBattlescriptCurrInstr = BattleScript_ApathyStatChange;
                         }
@@ -11923,7 +11933,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
     }
     else // stat increase
     {
-        if(battlerAbility == ABILITY_APATHY || battlerAbility == ABILITY_DULLED)
+        if(IsBattlerImmuneToStatChanges(battler))
         {
             if (flags == STAT_CHANGE_ALLOW_PTR)
             {
@@ -15976,14 +15986,20 @@ void BS_DoStockpileStatChangesWearOff(void)
     u16 stockpiles = gDisableStructs[battler].stockpileCounter;
     if (gDisableStructs[battler].stockpileDef > stockpiles)
     {
-        SET_STATCHANGER(STAT_DEF, 1, TRUE);
+        if(!IsBattlerImmuneToStatChanges(battler))
+        {
+            SET_STATCHANGER(STAT_DEF, 1, TRUE);
+        }
         gDisableStructs[battler].stockpileDef -= 1;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = cmd->statChangeInstr;
     }
     else if (gDisableStructs[battler].stockpileSpDef > stockpiles)
     {
-        SET_STATCHANGER(STAT_SPDEF, 1, TRUE);
+        if(!IsBattlerImmuneToStatChanges(battler))
+        {
+            SET_STATCHANGER(STAT_SPDEF, 1, TRUE);
+        }
         gDisableStructs[battler].stockpileSpDef -= 1;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = cmd->statChangeInstr;

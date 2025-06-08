@@ -2819,4 +2819,17 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 6,
     },
 
+    [ABILITY_TWINDRILL] =
+    {
+        .name = _("Twindrill"),
+        .description = COMPOUND_STRING("Boosts the power of spinning-\nand piercing-based moves."),
+        .aiRating = 7,
+    },
+
+    [ABILITY_VAMPIRIC] =
+    {
+        .name = _("Vampiric"),
+        .description = COMPOUND_STRING("Boosts the power of biting and\ndraining moves. The latter heal\na bit more HP."),
+        .aiRating = 7,
+    },
 };

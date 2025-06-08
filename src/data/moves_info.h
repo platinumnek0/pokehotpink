@@ -3080,7 +3080,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .windMove = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_POISON,
-            .chance = 20,
+            .chance = 30,
         }),
         .contestEffect = CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS,
         .contestCategory = CONTEST_CATEGORY_TOUGH,
@@ -3866,7 +3866,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
-        .pp = 5,
+        .pp = 10,
         .target = MOVE_TARGET_USER,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
@@ -9643,10 +9643,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_POISON_JAB] =
     {
-        .name = COMPOUND_STRING("Venomash"),
+        .name = COMPOUND_STRING("Poison Jab"),
         .description = COMPOUND_STRING(
-            "A bashing attack that\n"
-            "may poison the foe."),
+            "Stabs the foe with a sharp,\n"
+            "venomous appendage. This may\n"
+            "poison the foe."),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_POISON,
@@ -12205,10 +12206,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             "Does double damage if the\n"
             "foe has a status problem."),
         .effect = EFFECT_DOUBLE_POWER_ON_ARG_STATUS,
-        .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 65 : 50,
+        .power = 65,
         .type = TYPE_GHOST,
         .accuracy = 100,
-        .pp = 10,
+        .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
@@ -17494,6 +17495,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+        .argument = STATUS_FIELD_GRASSY_TERRAIN,
+        .skyBattleBanned = B_EXTRAPOLATED_MOVE_FLAGS,
+        .contestEffect = CONTEST_EFFECT_NEXT_APPEAL_EARLIER,
+        .contestCategory = CONTEST_CATEGORY_SMART,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {COMBO_STARTER_GRASSY_TERRAIN}
+    },
+
+    [MOVE_SPARKSURF] =
+    {
+        .name = COMPOUND_STRING("Sparksurf"),
+        .description = COMPOUND_STRING(
+            "The user slides along the ground\n"
+            "to tackle the foe. Goes first on\n"
+            "static terrain."),
+        .effect = EFFECT_GRASSY_GLIDE,
+        .power = 55,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .argument = STATUS_FIELD_ELECTRIC_TERRAIN,
         .skyBattleBanned = B_EXTRAPOLATED_MOVE_FLAGS,
         .contestEffect = CONTEST_EFFECT_NEXT_APPEAL_EARLIER,
         .contestCategory = CONTEST_CATEGORY_SMART,

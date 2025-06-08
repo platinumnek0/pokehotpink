@@ -1502,6 +1502,8 @@ BattleScript_EffectAcupressure::
 BattleScript_EffectAcupressureTry:
 	attackstring
 	ppreduce
+	jumpifability BS_TARGET, ABILITY_APATHY, BattleScript_ApathyMoveEnd
+	jumpifability BS_TARGET, ABILITY_DULLED, BattleScript_ApathyMoveEnd
 	tryaccupressure BS_TARGET, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
@@ -3592,8 +3594,8 @@ BattleScript_EffectRest::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifability BS_ATTACKER, ABILITY_COMATOSE, BattleScript_EffectRestoreHp
 	jumpifstatus BS_ATTACKER, STATUS1_SLEEP, BattleScript_RestIsAlreadyAsleep
-	jumpifability BS_ATTACKER, ABILITY_COMATOSE, BattleScript_RestIsAlreadyAsleep
 	jumpifuproarwakes BattleScript_RestCantSleep
 	jumpifability BS_TARGET, ABILITY_INSOMNIA, BattleScript_InsomniaProtects
 	jumpifability BS_TARGET, ABILITY_VITAL_SPIRIT, BattleScript_InsomniaProtects
@@ -4980,6 +4982,8 @@ BattleScript_EffectStockpile::
 	goto BattleScript_EffectStockpileEnd
 	.endif
 	jumpifmovehadnoeffect BattleScript_EffectStockpileEnd
+	jumpifability BS_ATTACKER, ABILITY_APATHY, BattleScript_EffectStockpileEnd
+	jumpifability BS_ATTACKER, ABILITY_DULLED, BattleScript_EffectStockpileEnd
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_DEF, MAX_STAT_STAGE, BattleScript_EffectStockpileDef
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_EffectStockpileEnd
 BattleScript_EffectStockpileDef:

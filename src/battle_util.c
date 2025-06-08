@@ -6449,6 +6449,15 @@ bool32 IsMoldBreakerTypeAbility(u32 ability)
     return (ability == ABILITY_MOLD_BREAKER || ability == ABILITY_TERAVOLT || ability == ABILITY_TURBOBLAZE);
 }
 
+bool32 IsSpinningPiercingMove(u32 move)
+{
+    return (move == MOVE_RAPID_SPIN || move == MOVE_HORN_ATTACK || move == MOVE_RAGING_BULL || move == MOVE_HYPER_DRILL
+    || move == MOVE_PECK || move == MOVE_DRILL_PECK || move == MOVE_MORTAL_SPIN || move == MOVE_POISON_STING || move == MOVE_POISON_JAB
+    || move == MOVE_DRILL_RUN || move == MOVE_SAND_TOMB || move == MOVE_PIN_MISSILE || move == MOVE_FELL_STINGER || move == MOVE_MEGAHORN || move == MOVE_GYRO_BALL
+    || move == MOVE_SMART_STRIKE || move == MOVE_FIRE_SPIN || move == MOVE_FLAME_WHEEL || move == MOVE_WHIRLPOOL || move == MOVE_NEEDLE_ARM
+    || move == MOVE_BOLT_BEAK || move == MOVE_ICICLE_SPEAR || move == MOVE_ICE_SPINNER || move == MOVE_ICICLE_CRASH);
+}
+
 u32 GetBattlerAbility(u32 battler)
 {
     if (gAbilitiesInfo[gBattleMons[battler].ability].cantBeSuppressed)
@@ -6695,6 +6704,18 @@ bool32 CanBeConfused(u32 battler)
     return TRUE;
 }
 
+bool32 IsBattlerImmuneToStatChanges(u32 battler)
+{
+    if( (GetBattlerAbility(battler) == ABILITY_APATHY) || (GetBattlerAbility(battler) == ABILITY_DULLED) )
+    {
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
+}
+
 // second argument is 1/X of current hp compared to max hp
 bool32 HasEnoughHpToEatBerry(u32 battler, u32 hpFraction, u32 itemId)
 {
@@ -6758,7 +6779,8 @@ static u8 HealConfuseBerry(u32 battler, u32 itemId, u32 flavorId, bool32 end2)
 
 static u8 StatRaiseBerry(u32 battler, u32 itemId, u32 statId, bool32 end2)
 {
-    if (CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN) && HasEnoughHpToEatBerry(battler, GetBattlerItemHoldEffectParam(battler, itemId), itemId) && !(GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
+    if (CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN) && HasEnoughHpToEatBerry(battler, GetBattlerItemHoldEffectParam(battler, itemId), itemId)
+    && !(GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) == ABILITY_DULLED))
     {
         BufferStatChange(battler, statId, STRINGID_STATROSE);
         gEffectBattler = battler;
@@ -6794,7 +6816,8 @@ static u8 RandomStatRaiseBerry(u32 battler, u32 itemId, bool32 end2)
         if (CompareStat(battler, STAT_ATK + i, MAX_STAT_STAGE, CMP_LESS_THAN))
             break;
     }
-    if (i != NUM_STATS - 1 && HasEnoughHpToEatBerry(battler, GetBattlerItemHoldEffectParam(battler, itemId), itemId) && !(GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
+    if (i != NUM_STATS - 1 && HasEnoughHpToEatBerry(battler, GetBattlerItemHoldEffectParam(battler, itemId), itemId)
+    && !(GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) == ABILITY_DULLED))
     {
         u16 battlerAbility = GetBattlerAbility(battler);
         do
@@ -6879,6 +6902,7 @@ static u8 DamagedStatBoostBerryEffect(u32 battler, u8 statId, u8 category)
 {
     if (IsBattlerAlive(battler)
      && CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN)
+     && !(GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) == ABILITY_DULLED)
      && (gBattleScripting.overrideBerryRequirements
          || (!DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)
              && GetBattleMoveCategory(gCurrentMove) == category
@@ -7182,15 +7206,15 @@ static u8 ItemEffectMoveEnd(u32 battler, u16 holdEffect)
             effect = TrySetEnigmaBerry(battler);
         break;
     case HOLD_EFFECT_KEE_BERRY:  // consume and boost defense if used physical move
-        if (B_BERRIES_INSTANT >= GEN_4 && !(GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
+        if (B_BERRIES_INSTANT >= GEN_4)
             effect = DamagedStatBoostBerryEffect(battler, STAT_DEF, DAMAGE_CATEGORY_PHYSICAL);
         break;
     case HOLD_EFFECT_MARANGA_BERRY:  // consume and boost sp. defense if used special move
-        if (B_BERRIES_INSTANT >= GEN_4 && !(GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
+        if (B_BERRIES_INSTANT >= GEN_4)
             effect = DamagedStatBoostBerryEffect(battler, STAT_SPDEF, DAMAGE_CATEGORY_SPECIAL);
         break;
     case HOLD_EFFECT_RANDOM_STAT_UP:
-        if (B_BERRIES_INSTANT >= GEN_4 && (GetBattlerAbility(battler) == ABILITY_APATHY || GetBattlerAbility(battler) ==ABILITY_DULLED))
+        if (B_BERRIES_INSTANT >= GEN_4)
             effect = RandomStatRaiseBerry(battler, gLastUsedItem, FALSE);
         break;
     case HOLD_EFFECT_CURE_PAR:
@@ -9481,6 +9505,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         if (gMovesInfo[move].slicingMove)
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
+    case ABILITY_TWINDRILL:
+        if(IsSpinningPiercingMove(move))
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
+        break;
     case ABILITY_SUPREME_OVERLORD:
         modifier = uq4_12_multiply(modifier, GetSupremeOverlordModifier(battlerAtk));
         break;
@@ -11661,24 +11689,6 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
         if (gBattleWeather & B_WEATHER_HAIL)
         {
             secondaryEffectChance *= 1.25;
-        }
-    }
-
-    //paralysis chance is boosted by 50% in electric terrain
-    if ( additionalEffect->moveEffect == MOVE_EFFECT_PARALYSIS )
-    {
-        if(IsBattlerTerrainAffected(battler, STATUS_FIELD_ELECTRIC_TERRAIN))
-        {
-            secondaryEffectChance *= 1.3;
-        }
-    }
-
-    //confusion chance is boosted by 50% in psychic terrain
-    if ( additionalEffect->moveEffect == MOVE_EFFECT_CONFUSION )
-    {
-        if(IsBattlerTerrainAffected(battler, STATUS_FIELD_PSYCHIC_TERRAIN))
-        {
-            secondaryEffectChance *= 1.3;
         }
     }
 
