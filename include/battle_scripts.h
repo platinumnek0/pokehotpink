@@ -507,6 +507,9 @@ extern const u8 BattleScript_LostCharge[];
 extern const u8 BattleScript_OneChargeLeft[];
 extern const u8 BattleScript_HeartbreakMessage[];
 extern const u8 BattleScript_HeartbreakWoreOff[];
+extern const u8 BattleScript_DefiantRaiseAttack[];
+extern const u8 BattleScript_CompetitiveRaiseSpAtk[];
+extern const u8 BattleScript_TailwindEndsReturn[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
@@ -830,7 +833,6 @@ extern const u8 BattleScript_EffectSaltCure[];
 extern const u8 BattleScript_EffectChillyReception[];
 extern const u8 BattleScript_EffectMaxMove[];
 extern const u8 BattleScript_EffectGlaiveRush[];
-extern const u8 BattleScript_EffectBrickBreak[];
 extern const u8 BattleScript_EffectDoodle[];
 extern const u8 BattleScript_EffectFilletAway[];
 extern const u8 BattleScript_EffectShedTail[];
@@ -865,5 +867,7 @@ extern const u8 BattleScript_SwarmOnEntry[];
 extern const u8 BattleScript_EffectCynicize[];
 extern const u8 BattleScript_LeveledUpCanEvolve[];
 extern const u8 BattleScript_EffectHolistics[];
+extern const u8 BattleScript_EffectTrapLowerSpeed[];
+extern const u8 BattleScript_EffectDetectParry[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

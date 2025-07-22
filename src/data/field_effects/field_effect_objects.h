@@ -654,13 +654,10 @@ static const struct SpriteFrameImage sPicTable_LongGrass[] = {
 
 static const union AnimCmd sAnim_LongGrass[] =
 {
-    ANIMCMD_FRAME(1, 3),
-    ANIMCMD_FRAME(2, 3),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(3, 4),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(3, 4),
-    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(2, 10),
+    ANIMCMD_FRAME(3, 10),
     ANIMCMD_END,
 };
 

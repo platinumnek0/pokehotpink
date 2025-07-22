@@ -2881,6 +2881,7 @@ extern const u32 gBattleAnimSpritePal_SyrupRed[];
 extern const u32 gBattleAnimSpritePal_SyrupYellow[];
 extern const u32 gBattleAnimSpriteGfx_Scale[];
 extern const u32 gBattleAnimSpritePal_Scale[];
+extern const u32 gBattleAnimSpriteGfx_BindingChain[];
 
 extern const u32 gBattleAnimBgImage_Dark[];
 extern const u32 gBattleAnimBgImage_Ghost[];

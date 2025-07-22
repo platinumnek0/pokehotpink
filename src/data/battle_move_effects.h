@@ -2256,12 +2256,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
-     [EFFECT_NUTBOLT] =
-    {
-        .battleScript = BattleScript_EffectHit,
-        .battleTvScore = 0, // TODO: Assign points
-    },
-
     [EFFECT_BACKSTAB] =
     {
         .battleScript = BattleScript_EffectHit,
@@ -2365,4 +2359,16 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
+    [EFFECT_TRAP_LOWER_SPEED] =
+    {
+        .battleScript = BattleScript_EffectTrapLowerSpeed,
+        .battleTvScore = 5,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_PRIMORDIAL_PULSE] = 
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 1,
+    },
 };

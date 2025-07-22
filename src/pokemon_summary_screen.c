@@ -3778,7 +3778,7 @@ static void PrintMoveDetails(u16 move)
             PrintMovePowerAndAccuracy(move);
 
             if (moveEffect != EFFECT_PLACEHOLDER)
-                PrintTextOnWindowSmallNarrow(windowId, gMovesInfo[move].description, 6, 1, 2, 0);
+                PrintTextOnWindowSmallNarrow(windowId, gMovesInfo[move].description, 6, 1, 3, 0);
             else
                 PrintTextOnWindow(windowId, gNotDoneYetDescription, 6, 1, 0, 0);
         }

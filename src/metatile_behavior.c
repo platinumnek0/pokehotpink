@@ -12,7 +12,7 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_TALL_GRASS]                      = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_LONG_GRASS]                      = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_SNOWY_GRASS]                     = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
-    [MB_UNUSED_05]                       = TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_UNUSED_05]                       = TILE_FLAG_UNUSED,
     [MB_DEEP_SAND]                       = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_SHORT_GRASS]                     = TILE_FLAG_UNUSED,
     [MB_CAVE]                            = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
@@ -490,6 +490,16 @@ bool8 MetatileBehavior_IsPlayerFacingTVScreen(u8 metatileBehavior, u8 playerDir)
     if (playerDir != DIR_NORTH)
         return FALSE;
     else if (metatileBehavior == MB_TELEVISION)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsPlayerFacingHeadbuttTreeBase(u8 metatileBehavior, u8 playerDir)
+{
+    if (playerDir != DIR_NORTH)
+        return FALSE;
+    else if (metatileBehavior == MB_HEADBUTT_TREE_BASE)
         return TRUE;
     else
         return FALSE;

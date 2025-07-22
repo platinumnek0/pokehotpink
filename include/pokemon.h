@@ -505,6 +505,7 @@ struct MoveInfo
     u32 canMoveBoulders:1;
     u32 gravityBoosted:1;
     u32 canFerry:1;
+    u32 piercingMove:1;
 
     // Ban flags
     u32 gravityBanned:1;
@@ -546,6 +547,10 @@ struct AdditionalEffect
     u8 onlyIfTargetRaisedStats:1;
     u8 onChargeTurnOnly:1;
     u8 chance; // 0% = effect certain, primary effect
+    u8 onlyIfConfused:1;
+    u8 onlyInHail:1;
+    u8 onlyInSand:1;
+    u8 onlyInTailwind:1;
 };
 
 struct Ability

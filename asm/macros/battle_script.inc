@@ -1448,6 +1448,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro tryparry failInstr:req
+	callnative BS_TryParry
+	.4byte \failInstr
+	.endm
+
 	.macro setzeffect
 	callnative BS_SetZEffect
 	.endm
@@ -1667,6 +1672,10 @@
 	.macro jumpifatmaxcharge, failInstr:req
 	callnative BS_JumpIfAtMaxCharge
 	.4byte \failInstr
+	.endm
+
+	.macro removetailwind
+	callnative BS_RemoveTailwind
 	.endm
 
 @ various command changed to more readable macros

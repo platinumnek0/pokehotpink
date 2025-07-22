@@ -2190,3 +2190,7 @@
 	.macro checksurfmoves
 	callnative Script_checkSurfMoves
 	.endm
+
+	.macro checkheadbuttmoves
+	callnative Script_checkHeadbuttMoves
+	.endm

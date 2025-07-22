@@ -1099,3 +1099,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/subfloraWoods/scripts.inc"
 
 	.include "data/maps/Hamborough/scripts.inc"
+
+	.include "data/maps/gagilRoute17/scripts.inc"

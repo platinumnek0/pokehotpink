@@ -10172,7 +10172,7 @@ static const union AnimCmd sAnim_Roderect_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_Eggrole_1[] =
+static const union AnimCmd sAnim_Mimichick_1[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(1, 10),
@@ -10368,6 +10368,16 @@ static const union AnimCmd sAnim_Cixno_1[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(1, 15),
     ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Equavian_1[] =
+{
+    ANIMCMD_FRAME(0, 35),
+    ANIMCMD_FRAME(1, 25),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
 
@@ -13247,7 +13257,7 @@ SINGLE_ANIMATION(Croconut);
 SINGLE_ANIMATION(Skrappup);
 SINGLE_ANIMATION(Kitfisk);
 SINGLE_ANIMATION(Roderect);
-SINGLE_ANIMATION(Eggrole);
+SINGLE_ANIMATION(Mimichick);
 SINGLE_ANIMATION(Sqweekling);
 SINGLE_ANIMATION(Azzalien);
 SINGLE_ANIMATION(Weevillain);
@@ -13268,6 +13278,7 @@ SINGLE_ANIMATION(Borzy);
 SINGLE_ANIMATION(Borzyzy);
 SINGLE_ANIMATION(Borzyzyzy);
 SINGLE_ANIMATION(Pischool);
+SINGLE_ANIMATION(Equavian);
 SINGLE_ANIMATION(Willywoo);
 SINGLE_ANIMATION(Wirlydoo);
 SINGLE_ANIMATION(Chocli);

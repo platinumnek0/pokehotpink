@@ -742,8 +742,10 @@
 #define STRINGID_LOSTCHARGE                           740
 #define STRINGID_ONECHARGELEFT                        741
 #define STRINGID_DEFCHARGECOUNTROSE                   742
+#define STRINGID_PARRIEDATTACK                        743
+#define STRINGID_PARRYFAILED                          744
 
-#define BATTLESTRINGS_COUNT                           743
+#define BATTLESTRINGS_COUNT                           745
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

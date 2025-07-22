@@ -1151,7 +1151,16 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             break;
         case EFFECT_CHARGE:
             if (gStatuses3[battlerAtk] & STATUS3_CHARGED_UP)
-                ADJUST_SCORE(-20);
+            {
+                if(gDisableStructs[battlerAtk].chargeTimer == 3)
+                {
+                    ADJUST_SCORE(-20);
+                }
+                else if(gDisableStructs[battlerAtk].chargeTimer < 3) 
+                {
+                    ADJUST_SCORE(-5);
+                }
+            }
             else if (!HasMoveWithType(battlerAtk, TYPE_ELECTRIC))
                 ADJUST_SCORE(-10);
             else if (B_CHARGE_SPDEF_RAISE >= GEN_5

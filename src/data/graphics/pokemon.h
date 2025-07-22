@@ -13104,11 +13104,11 @@ const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mar
     const u32 gMonShinyPalette_Chodent_Epic[] = INCBIN_U32("graphics/pokemon/chodent/epic/shiny.gbapal.lz");
     const u8 gMonIcon_Chodent_Epic[] = INCBIN_U8("graphics/pokemon/chodent/epic/icon.4bpp");
 
-    const u32 gMonFrontPic_Eggrole[] = INCBIN_U32("graphics/pokemon/eggrole/anim_front.4bpp.lz");
-    const u32 gMonPalette_Eggrole[] = INCBIN_U32("graphics/pokemon/eggrole/normal.gbapal.lz");
-    const u32 gMonBackPic_Eggrole[] = INCBIN_U32("graphics/pokemon/eggrole/back.4bpp.lz");
-    const u32 gMonShinyPalette_Eggrole[] = INCBIN_U32("graphics/pokemon/eggrole/shiny.gbapal.lz");
-    const u8 gMonIcon_Eggrole[] = INCBIN_U8("graphics/pokemon/eggrole/icon.4bpp");
+    const u32 gMonFrontPic_Mimichick[] = INCBIN_U32("graphics/pokemon/mimichick/anim_front.4bpp.lz");
+    const u32 gMonPalette_Mimichick[] = INCBIN_U32("graphics/pokemon/mimichick/normal.gbapal.lz");
+    const u32 gMonBackPic_Mimichick[] = INCBIN_U32("graphics/pokemon/mimichick/back.4bpp.lz");
+    const u32 gMonShinyPalette_Mimichick[] = INCBIN_U32("graphics/pokemon/mimichick/shiny.gbapal.lz");
+    const u8 gMonIcon_Mimichick[] = INCBIN_U8("graphics/pokemon/mimichick/icon.4bpp");
     const u32 gMonFrontPic_Actern[] = INCBIN_U32("graphics/pokemon/actern/anim_front.4bpp.lz");
     const u32 gMonPalette_Actern[] = INCBIN_U32("graphics/pokemon/actern/normal.gbapal.lz");
     const u32 gMonBackPic_Actern[] = INCBIN_U32("graphics/pokemon/actern/back.4bpp.lz");
@@ -13303,6 +13303,17 @@ const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mar
     const u32 gMonBackPic_Pischool[] = INCBIN_U32("graphics/pokemon/pischool/back.4bpp.lz");
     const u32 gMonShinyPalette_Pischool[] = INCBIN_U32("graphics/pokemon/pischool/shiny.gbapal.lz");
     const u8 gMonIcon_Pischool[] = INCBIN_U8("graphics/pokemon/pischool/icon.4bpp");
+
+    const u32 gMonFrontPic_Coofoal[] = INCBIN_U32("graphics/pokemon/coofoal/anim_front.4bpp.lz");
+    const u32 gMonPalette_Coofoal[] = INCBIN_U32("graphics/pokemon/coofoal/normal.gbapal.lz");
+    const u32 gMonBackPic_Coofoal[] = INCBIN_U32("graphics/pokemon/coofoal/back.4bpp.lz");
+    const u32 gMonShinyPalette_Coofoal[] = INCBIN_U32("graphics/pokemon/coofoal/shiny.gbapal.lz");
+    const u8 gMonIcon_Coofoal[] = INCBIN_U8("graphics/pokemon/coofoal/icon.4bpp");
+    const u32 gMonFrontPic_Equavian[] = INCBIN_U32("graphics/pokemon/equavian/anim_front.4bpp.lz");
+    const u32 gMonPalette_Equavian[] = INCBIN_U32("graphics/pokemon/equavian/normal.gbapal.lz");
+    const u32 gMonBackPic_Equavian[] = INCBIN_U32("graphics/pokemon/equavian/back.4bpp.lz");
+    const u32 gMonShinyPalette_Equavian[] = INCBIN_U32("graphics/pokemon/equavian/shiny.gbapal.lz");
+    const u8 gMonIcon_Equavian[] = INCBIN_U8("graphics/pokemon/equavian/icon.4bpp");
 
     const u32 gMonFrontPic_Willywoo[] = INCBIN_U32("graphics/pokemon/willywoo/anim_front.4bpp.lz");
     const u32 gMonPalette_Willywoo[] = INCBIN_U32("graphics/pokemon/willywoo/normal.gbapal.lz");

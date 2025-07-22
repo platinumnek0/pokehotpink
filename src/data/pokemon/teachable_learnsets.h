@@ -35851,7 +35851,7 @@ static const u16 sKitfiskTeachableLearnset[] = {
 static const u16 sRoderectTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
-static const u16 sEggroleTeachableLearnset[] = {
+static const u16 sMimichickTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 static const u16 sSqweeklingTeachableLearnset[] = {

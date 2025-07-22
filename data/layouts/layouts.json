@@ -4514,7 +4514,7 @@
     {
       "id": "LAYOUT_GAGIL_ROUTE3",
       "name": "gagilRoute3_Layout",
-      "width": 68,
+      "width": 76,
       "height": 32,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
@@ -4544,12 +4544,22 @@
     {
       "id": "LAYOUT_HAMBOROUGH",
       "name": "Hamborough_Layout",
-      "width": 52,
+      "width": 54,
       "height": 32,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Hamborough",
       "border_filepath": "data/layouts/Hamborough/border.bin",
       "blockdata_filepath": "data/layouts/Hamborough/map.bin"
+    },
+    {
+      "id": "LAYOUT_GAGIL_ROUTE17",
+      "name": "gagilRoute17_Layout",
+      "width": 64,
+      "height": 54,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Hamborough",
+      "border_filepath": "data/layouts/gagilRoute17/border.bin",
+      "blockdata_filepath": "data/layouts/gagilRoute17/map.bin"
     }
   ]
 }

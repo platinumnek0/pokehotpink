@@ -254,6 +254,9 @@
 #define METATILE_GenericBuilding_TrickHouse_Stairs_Down  0x819
 
 // gTileset_Hamborough
+#define METATILE_Hamborough_beachGrass                    0x879
+#define METATILE_Hamborough_beachGrassLayered             0x87A
+#define METATILE_Hamborough_beachGrassRoot                0x878
 #define METATILE_Hamborough_hamborough_civilian_door      0x823
 #define METATILE_Hamborough_hamborough_door_burger_place  0x852
 

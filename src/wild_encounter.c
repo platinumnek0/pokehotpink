@@ -785,6 +785,84 @@ void RockSmashWildEncounter(void)
     }
 }
 
+void SetUpHeadbuttBattle(void)
+{
+    u16 rngSeed;
+    u16 encounterSeed;
+    rngSeed = Random();
+    /*mon pool:
+    croconut (1%)
+    mimichick (10%)
+    denkomori (4%)
+    snaam (20%)
+    magpile (10%)
+    monkraft (10%)
+    chilichick (20%)
+    jibjab (5%)
+    baobaby (20%)*/
+
+    if((rngSeed % 2) == 1)
+    {
+        //roll for encounters
+        encounterSeed = (Random() % 100);
+
+        if(encounterSeed < 1)
+        {
+            CreateWildMon(SPECIES_CROCONUT, 15);
+            BattleSetup_StartWildBattle();
+        }
+        else if(encounterSeed < 11)
+        {
+            CreateWildMon(SPECIES_MIMICHICK, 15);
+            BattleSetup_StartWildBattle();
+        }
+        else if(encounterSeed < 15)
+        {
+            CreateWildMon(SPECIES_DENKOMORI, 15);
+            BattleSetup_StartWildBattle();
+        }
+        else if(encounterSeed < 35)
+        {
+            CreateWildMon(SPECIES_SNAAM, 15);
+            BattleSetup_StartWildBattle();
+        }
+        else if(encounterSeed < 45)
+        {
+            CreateWildMon(SPECIES_DENKOMORI, 15);
+            //CreateWildMon(SPECIES_MAGPILE, 15);
+            BattleSetup_StartWildBattle();
+        }
+        else if(encounterSeed < 55)
+        {
+            CreateWildMon(SPECIES_MIMICHICK, 15);
+            //CreateWildMon(SPECIES_MONKRAFT, 15);
+            BattleSetup_StartWildBattle();
+        }
+        else if(encounterSeed < 75)
+        {
+            CreateWildMon(SPECIES_SNAAM, 15);
+            //CreateWildMon(SPECIES_CHILICHICK, 15);
+            BattleSetup_StartWildBattle();
+        }
+        else if(encounterSeed < 80)
+        {
+            CreateWildMon(SPECIES_JIBJAB, 15);
+            BattleSetup_StartWildBattle();
+        }
+        else
+        {
+            CreateWildMon(SPECIES_JIBJAB, 15);
+            //CreateWildMon(SPECIES_BAOBABY, 15);
+            BattleSetup_StartWildBattle();
+        }
+        gSpecialVar_Result = TRUE;
+    }
+    else
+    {
+        gSpecialVar_Result = FALSE;
+    }
+}
+
 bool8 SweetScentWildEncounter(void)
 {
     s16 x, y;

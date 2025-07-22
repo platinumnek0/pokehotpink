@@ -934,7 +934,7 @@ gBattleAnims_Moves::
 	.4byte Move_ANCIENT_AURA 
 	.4byte Move_FOSSILIZE 
 	.4byte Move_TAR_SEEP 
-	.4byte Move_PRIMAL_PULSE 
+	.4byte Move_PRIMORDIAL_PULSE 
 	.4byte Move_VOLCALITH 
 	.4byte Move_PESTER 
 	.4byte Move_FRIGHTEN 
@@ -993,7 +993,7 @@ gBattleAnims_Moves::
 	.4byte Move_GOLD_SWARM 
 	.4byte Move_MAKE_IT_PLAGUE 
 	.4byte Move_DOZEN_HANDS 
-	.4byte Move_NUTBOLT 
+	.4byte Move_WHITE_NOISE 
 	.4byte Move_PIG_DREAMS 
 	.4byte Move_CURL_UP 
 	.4byte Move_GREGA_IMPACT
@@ -1012,6 +1012,7 @@ gBattleAnims_Moves::
 	.4byte Move_MIST_BOMB
 	.4byte Move_BARRIER_CRASH
 	.4byte Move_CYNICIZE
+	.4byte Move_DESERT_DAGGER
 
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
@@ -10972,28 +10973,24 @@ Move_BANEFUL_BUNKER::
 
 Move_SPIRIT_SHACKLE::
 	loadspritegfx ANIM_TAG_SPIRIT_ARROW @Arrow
-	loadspritegfx ANIM_TAG_CHAIN_LINK @Chain
 	monbg ANIM_DEF_PARTNER
-	splitbgprio ANIM_TARGET
-	setalpha 12, 8
-	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0x10, 0x0
-	waitforvisualfinish
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 1, 0, 10, RGB_BLACK
+	waitbgfadein
 	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_ATTACKER
 	createsprite gSpiritShackleArrowTemplate, ANIM_TARGET, 2, 0x10, 0x0, 0x0, 0x0, 0xf
 	delay 0x8
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 10, 1
+	playsewithpan SE_M_SAND_ATTACK, SOUND_PAN_TARGET
+	waitsound
 	waitforvisualfinish
-	loopsewithpan SE_SHINY, SOUND_PAN_ATTACKER, 0x1c, 0x2
-	createsprite gSpiritShackleChainTemplate, ANIM_TARGET, 2, 0xfff0, 0xfff0
-	delay 0x4
-	createsprite gSpiritShackleChainTemplate, ANIM_TARGET, 2, 0xfff0, 0x0
-	delay 0x4
-	createsprite gSpiritShackleChainTemplate, ANIM_TARGET, 2, 0xfff0, 0x10
+	delay 2
+	createvisualtask AnimTask_SpiteTargetShadow, 2
+	delay 8
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_TARGET
 	waitforvisualfinish
-	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x10, 0x0, 0x0
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 2, 10, 0, RGB_BLACK
 	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	blendoff
+	clearmonbg ANIM_TARGET
 	end
 
 Move_DARKEST_LARIAT::
@@ -35914,7 +35911,7 @@ Move_FOSSILIZE:
 
 Move_TAR_SEEP:
 
-Move_PRIMAL_PULSE:
+Move_PRIMORDIAL_PULSE:
 
 Move_VOLCALITH:
 
@@ -36042,7 +36039,7 @@ Move_MAKE_IT_PLAGUE:
 
 Move_DOZEN_HANDS:
 
-Move_NUTBOLT:
+Move_WHITE_NOISE:
 
 Move_PIG_DREAMS:
 	end
@@ -36349,6 +36346,9 @@ Move_CYNICIZE:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 2, 10, 0, RGB_BLACK
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
+	end
+
+Move_DESERT_DAGGER:
 	end
 
 @@@ DYNAMAX AND MAX RAIDS

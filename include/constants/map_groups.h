@@ -72,6 +72,7 @@
 #define MAP_GAGIL_ROUTE3          (63 | (0 << 8))
 #define MAP_GAGIL_ROUTE5          (64 | (0 << 8))
 #define MAP_HAMBOROUGH            (65 | (0 << 8))
+#define MAP_GAGIL_ROUTE17         (66 | (0 << 8))
 
 // gMapGroup_IndoorLittleroot
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    (0 | (1 << 8))

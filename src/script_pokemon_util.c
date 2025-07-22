@@ -647,3 +647,54 @@ bool8 Script_checkSurfMoves(struct ScriptContext *ctx)
     }
     return FALSE;
 }
+
+bool8 isHeadbuttMove(u32 move)
+{
+    return (move == MOVE_RAGING_BULL || move == MOVE_TAKE_DOWN || move == MOVE_HEADBUTT
+    || move == MOVE_STRENGTH || move == MOVE_HIGH_HORSEPOWER || move == MOVE_IRON_HEAD
+    || move == MOVE_LIQUIDATION || move == MOVE_NEWTON_TACKLE || move == MOVE_ZEN_HEADBUTT
+    || move == MOVE_WALLOP);
+}
+
+bool8 Script_checkHeadbuttMoves(struct ScriptContext *ctx)
+{
+    u8 i;
+
+    gSpecialVar_Result = PARTY_SIZE;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        u16 move1 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1);
+        u16 move2 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE2);
+        u16 move3 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE3);
+        u16 move4 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE4);
+        if (!species)
+            break;
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && (isHeadbuttMove(move1)
+        || isHeadbuttMove(move2) || isHeadbuttMove(move3) || isHeadbuttMove(move4)))
+        {
+            gSpecialVar_Result = i;
+            gSpecialVar_0x8004 = species;
+
+            if(isHeadbuttMove(move1))
+            {
+                StringCopy(gStringVar2, gMovesInfo[move1].name);
+            }
+            else if(isHeadbuttMove(move2))
+            {
+                StringCopy(gStringVar2, gMovesInfo[move2].name);
+            }
+            else if(isHeadbuttMove(move3))
+            {
+                StringCopy(gStringVar2, gMovesInfo[move3].name);
+            }
+            else
+            {
+                StringCopy(gStringVar2, gMovesInfo[move4].name);
+            }
+
+            break;
+        }
+    }
+    return FALSE;
+}

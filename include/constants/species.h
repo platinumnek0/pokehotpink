@@ -1641,7 +1641,7 @@
 #define SPECIES_PANTHUNDER                              1532
 #define SPECIES_RODERECT                                1533
 #define SPECIES_CHODENT_COMMON                          1534
-#define SPECIES_EGGROLE                                 1535
+#define SPECIES_MIMICHICK                               1535
 #define SPECIES_ACTERN                                  1536
 #define SPECIES_DECEPTRICE                              1537
 #define SPECIES_SQWEEKLING                              1538

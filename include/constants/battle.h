@@ -407,8 +407,9 @@
 #define MOVE_EFFECT_SPREAD_USER_STATUS  81
 #define MOVE_EFFECT_CHARGE              82
 #define MOVE_EFFECT_HEARTBREAK          83
+#define MOVE_EFFECT_CLEAR_TAILWIND      84
 
-#define NUM_MOVE_EFFECTS                84
+#define NUM_MOVE_EFFECTS                85
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000
