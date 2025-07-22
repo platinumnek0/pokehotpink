@@ -977,7 +977,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_CURSED_BODY] =
     {
         .name = _("Cursed Body"),
-        .description = COMPOUND_STRING("Disables moves on contact."),
+        .description = COMPOUND_STRING("When hit by a move, may Disable\nit or Torment the attacker."),
         .aiRating = 4,
     },
 
@@ -1583,7 +1583,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_SCHOOLING] =
     {
         .name = _("Hundredfold"),
-        .description = COMPOUND_STRING("When above 1/4th HP, hundreds\nhuddle together to become a beast."),
+        .description = COMPOUND_STRING("When above 1/4th HP, hundreds\nhuddle together to become a\nbeast."),
         .aiRating = 6,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -2811,7 +2811,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_JUMPSCARE] = 
     {
         .name = _("Jumpscare"),
-        .description = COMPOUND_STRING("On the first turn, attacks with\n80 power or below go first\nand may flinch."),
+        .description = COMPOUND_STRING("On the first turn, attacks below\n80 power go first and may flinch."),
         .aiRating = 6,
     },
 

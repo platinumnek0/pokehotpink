@@ -3621,7 +3621,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_MULTIHIT_MOVES:
-            if (gMovesInfo[gCurrentMove].effect == EFFECT_MULTI_HIT)
+            if (gMovesInfo[gCurrentMove].effect == EFFECT_MULTI_HIT || gMovesInfo[gCurrentMove].effect == EFFECT_RICOCHET)
             {
                 u16 ability = gBattleMons[gBattlerAttacker].ability;
 
@@ -9234,10 +9234,11 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
     case EFFECT_LAST_RESPECTS:
         basePower += (basePower * min(100, GetBattlerSideFaintCounter(battlerAtk)));
         break;
+    case EFFECT_RICOCHET:
     case EFFECT_PRIMORDIAL_PULSE:
-        if(gBattleMons[battlerAtk].statStages[gMovesInfo[move].argument] > 1)
+        if(gBattleMons[battlerAtk].statStages[gMovesInfo[gCurrentMove].argument] > 1)
         {
-            basePower += (10 * gBattleMons[battlerAtk].statStages[gMovesInfo[move].argument]);
+            basePower += (10 * (gBattleMons[battlerAtk].statStages[gMovesInfo[gCurrentMove].argument]));
         }
         break;
     }

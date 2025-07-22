@@ -5364,6 +5364,16 @@ BattleScript_EffectTaunt::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_TauntMessageReturn::
+	printstring STRINGID_PKMNFELLFORTAUNT
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_TormentMessageReturn::
+	printstring STRINGID_PKMNSUBJECTEDTOTORMENT
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_EffectHelpingHand::
 	attackcanceler
 	attackstring

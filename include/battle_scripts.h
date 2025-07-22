@@ -869,5 +869,7 @@ extern const u8 BattleScript_LeveledUpCanEvolve[];
 extern const u8 BattleScript_EffectHolistics[];
 extern const u8 BattleScript_EffectTrapLowerSpeed[];
 extern const u8 BattleScript_EffectDetectParry[];
+extern const u8 BattleScript_TauntMessageReturn[];
+extern const u8 BattleScript_TormentMessageReturn[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

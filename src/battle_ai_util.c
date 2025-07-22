@@ -1924,11 +1924,11 @@ bool32 IsJumpscareAffected(u32 move)
     {
         return FALSE;
     }
-    else if(gMovesInfo[move].power > 80)
+    else if(gMovesInfo[move].power >= 80)
     {
         return FALSE;
     }
-    else if( (gMovesInfo[move].priority < 0) || (gMovesInfo[move].priority > 2) )
+    else if( (gMovesInfo[move].priority < 0) || (gMovesInfo[move].priority >= 2) )
     {
         return FALSE;
     }

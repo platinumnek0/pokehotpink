@@ -1317,8 +1317,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Disable"),
         .description = COMPOUND_STRING(
-            "Psychically disables one of\n"
-            "the foe's moves for 5 turns."),
+            "For 5 turns, the foe is unable\n"
+            "to use whichever of its moves it\n"
+            "used last."),
         .accuracy = 100,
         .effect = EFFECT_DISABLE,
         .power = 0,
@@ -11030,17 +11031,17 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Attack Order"),
         .description = COMPOUND_STRING(
-            "Underlings pummel the foe.\n"
-            "High critical-hit ratio."),
-        .effect = EFFECT_HIT,
-        .power = 90,
+            "Underlings pummel the foe,\n"
+            "hitting up to 10 times."),
+        .effect = EFFECT_POPULATION_BOMB,
+        .power = 20,
         .type = TYPE_BUG,
-        .accuracy = 100,
-        .criticalHitStage = 1,
-        .pp = 15,
+        .accuracy = 85,
+        .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
+        .strikeCount = 10,
         .contestEffect = CONTEST_EFFECT_AFFECTED_BY_PREV_APPEAL,
         .contestCategory = CONTEST_CATEGORY_SMART,
         .contestComboStarterId = COMBO_STARTER_ATTACK_ORDER,
@@ -15373,8 +15374,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Throat Chop"),
         .description = COMPOUND_STRING(
-            "Chops the throat to disable\n"
-            "sound moves for a while."),
+            "A swift chop to the throat,\n"
+            "disabling sound-based moves\n"
+            "for 3 turns."),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_DARK,
@@ -20062,17 +20064,19 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Ricochet"),
         .description = COMPOUND_STRING(
-            "Bounces around and hits\n"
-            "the foe 2 to 5 times."),
-        .effect = EFFECT_MULTI_HIT,
+            "Bounces around and hits the foe\n"
+            "2-5 times. Gets stronger for each\n"
+            "of the user's Speed boosts."),
+        .effect = EFFECT_RICOCHET,
         .power = 20,
         .type = TYPE_RUBBER,
-        .accuracy = 100,
+        .accuracy = 90,
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+        .argument = STAT_SPEED,
     },
 
     [MOVE_ENERGY_BURST] =
@@ -21494,8 +21498,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Terror Wave"),
         .description = COMPOUND_STRING(
-            "Hits with a wave of pure\n"
-            "fear. May paralyze."),
+            "Drowns the foe in a wave of pure\n"
+            "fear, causing Torment and keeping\n"
+            "it from using the same move twice."),
         .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_GHOST,
@@ -21506,8 +21511,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .pulseMove = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_PARALYSIS,
-            .chance = 30,
+            .moveEffect = MOVE_EFFECT_TORMENT,
+            .chance = 100,
         }),
     },
     
@@ -22030,8 +22035,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Trash Talk"),
         .description = COMPOUND_STRING(
-            "Berates the foe, but may\n"
-            "boost its Attack."),
+            "Berates the foe, taunting it\n"
+            "into only using attacking moves."),
         .effect = EFFECT_HIT,
         .power = 70,
         .type = TYPE_DARK,
@@ -22042,8 +22047,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .soundMove= TRUE,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_ATK_PLUS_1,
-            .chance = 20,
+            .moveEffect = MOVE_EFFECT_TAUNT,
+            .chance = 100,
         }),
     },
 
@@ -22218,13 +22223,13 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Kinetic Shot"),
         .description = COMPOUND_STRING(
-            "Stronger the faster the user\n"
-            "is than the foe."),
-        .effect = EFFECT_ELECTRO_BALL,
-        .power = 1,
+            "A burst of energy that's stronger\n"
+            "the higher the user's Speed is."),
+        .effect = EFFECT_NEWTON_TACKLE,
+        .power = 80,
         .type = TYPE_RUBBER,
         .accuracy = 100,
-        .pp = 15,
+        .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
@@ -22682,6 +22687,26 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .moveEffect = MOVE_EFFECT_POISON,
             .chance = 10,
         }),
+    },
+
+    [MOVE_SOUL_STEAL] =
+    {
+        .name = COMPOUND_STRING("Soul Steal"),
+        .description = COMPOUND_STRING(
+            "Eats away at the target's life\n"
+            "force, healing the user for half\n"
+            "the damage dealt."),
+        .effect = EFFECT_ABSORB,
+        .power = 80,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .makesContact = TRUE,
+        .bitingMove = TRUE,
+        .healingMove = B_HEAL_BLOCKING >= GEN_6,
     },
 
     // Z-Moves

@@ -1013,6 +1013,14 @@ gBattleAnims_Moves::
 	.4byte Move_BARRIER_CRASH
 	.4byte Move_CYNICIZE
 	.4byte Move_DESERT_DAGGER
+	.4byte Move_FEATHER_RAID
+	.4byte Move_OIL_SPILL
+	.4byte Move_OIL_FIRE
+	.4byte Move_OVERLOAD
+	.4byte Move_COLD_SNAP
+	.4byte Move_TURN_TAIL
+	.4byte Move_GORGE
+	.4byte Move_SOUL_STEAL
 
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
@@ -36349,6 +36357,22 @@ Move_CYNICIZE:
 	end
 
 Move_DESERT_DAGGER:
+
+Move_FEATHER_RAID:
+
+Move_OIL_SPILL:
+
+Move_OIL_FIRE:
+
+Move_OVERLOAD:
+
+Move_COLD_SNAP:
+
+Move_TURN_TAIL:
+
+Move_GORGE:
+
+Move_SOUL_STEAL:
 	end
 
 @@@ DYNAMAX AND MAX RAIDS

@@ -3691,7 +3691,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 }
                 break;
             case MOVE_EFFECT_THROAT_CHOP:
-                gDisableStructs[gEffectBattler].throatChopTimer = 2;
+                gDisableStructs[gEffectBattler].throatChopTimer = 3;
                 gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_INCINERATE:
@@ -3913,6 +3913,26 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     }
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_EffectPsychicNoise;
+                }
+                break;
+            case MOVE_EFFECT_TAUNT:
+                if(gDisableStructs[gEffectBattler].tauntTimer == 0 && !(GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
+                && !(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_SAFEGUARD))
+                {
+                    gDisableStructs[gEffectBattler].tauntTimer = 4;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_TauntMessageReturn;
+                }
+                break;
+            case MOVE_EFFECT_TORMENT:
+                if(!(gBattleMons[gEffectBattler].status2 & STATUS2_TORMENT) && !(GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
+                && !(gSideStatuses[GetBattlerSide(gEffectBattler)] & SIDE_STATUS_SAFEGUARD))
+                {
+                    gBattleMons[gEffectBattler].status2 |= STATUS2_TORMENT;
+                    gDisableStructs[gEffectBattler].tormentTimer = PERMANENT_TORMENT; // permanent
+                    
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_TormentMessageReturn;
                 }
                 break;
             }

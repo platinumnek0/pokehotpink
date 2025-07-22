@@ -408,8 +408,10 @@
 #define MOVE_EFFECT_CHARGE              82
 #define MOVE_EFFECT_HEARTBREAK          83
 #define MOVE_EFFECT_CLEAR_TAILWIND      84
+#define MOVE_EFFECT_TAUNT               85
+#define MOVE_EFFECT_TORMENT             86
 
-#define NUM_MOVE_EFFECTS                85
+#define NUM_MOVE_EFFECTS                87
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000
