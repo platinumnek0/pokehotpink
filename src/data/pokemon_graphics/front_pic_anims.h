@@ -10554,6 +10554,22 @@ static const union AnimCmd sAnim_Delicausty_1[] =
     ANIMCMD_END
 };
 
+static const union AnimCmd sAnim_Amewba_1[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 40),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_Mewkaryote_1[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 45),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_Salamancer_1[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -10570,6 +10586,22 @@ static const union AnimCmd sAnim_Alchemandr_1[] =
     ANIMCMD_FRAME(1, 30),
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_Baobaby_1[] =
+{
+    ANIMCMD_FRAME(0, 35),
+    ANIMCMD_FRAME(1, 45),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Baobaboon_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 50),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_Arrengai_1[] =
@@ -13298,7 +13330,11 @@ SINGLE_ANIMATION(Jonfyrkend);
 SINGLE_ANIMATION(Jakikendi);
 SINGLE_ANIMATION(Frightuff);
 SINGLE_ANIMATION(Delicausty);
+SINGLE_ANIMATION(Amewba);
+SINGLE_ANIMATION(Mewkaryote);
 SINGLE_ANIMATION(Salamancer);
 SINGLE_ANIMATION(Alchemandr);
+SINGLE_ANIMATION(Baobaby);
+SINGLE_ANIMATION(Baobaboon);
 SINGLE_ANIMATION(Arrengai);
 SINGLE_ANIMATION(Egg);

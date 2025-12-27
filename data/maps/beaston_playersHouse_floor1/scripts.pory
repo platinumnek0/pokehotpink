@@ -1,27 +1,30 @@
 raw`
 beaston_playersHouse_floor1_MapScripts::
     map_script MAP_SCRIPT_ON_FRAME_TABLE, beaston_playersHouse_floor1_onWarp
-    map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_2F_OnTransition
     .byte 0
 
 beaston_playersHouse_floor1_onWarp::
-    map_script_2 VAR_LITTLEROOT_INTRO_STATE, 3, playersHouse_resetIntroVar
+    map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, playersHouse_resetIntroVar
     .2byte 0
 `
+
 script playersHouse_resetIntroVar{
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 1)
 }
 
 script playerWalkOverToLivingRoomTop{
     lockall
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 1)
+    setobjectxyperm(2, 2, 10)
+    setflag(FLAG_HIDE_DAD_INTRO)
+    setflag(FLAG_HIDE_QUIGLEY_PLAYER_HOUSE)
     applymovement(OBJ_EVENT_ID_PLAYER, playerSurprise)
     goto(dadCallLivingRoomTop)
 }
 
 script dadCallLivingRoomTop{
     speakername("Dad")
-    msgbox("over here", MSGBOX_AUTOCLOSE)
+    msgbox(dadCallOver, MSGBOX_AUTOCLOSE)
     waitmessage
     speakername(NULL)
     applymovement(OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverTop)
@@ -31,14 +34,17 @@ script dadCallLivingRoomTop{
 
 script playerWalkOverToLivingRoomMid{
     lockall
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 1)
+    setobjectxyperm(2, 2, 10)
+    setflag(FLAG_HIDE_DAD_INTRO)
+    setflag(FLAG_HIDE_QUIGLEY_PLAYER_HOUSE)
     applymovement(OBJ_EVENT_ID_PLAYER, playerSurprise)
     goto(dadCallLivingRoomMid)
 }
 
 script dadCallLivingRoomMid{
     speakername("Dad")
-    msgbox("over here", MSGBOX_AUTOCLOSE)
+    msgbox(dadCallOver, MSGBOX_AUTOCLOSE)
     waitmessage
     speakername(NULL)
     applymovement(OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverMid)
@@ -48,14 +54,17 @@ script dadCallLivingRoomMid{
 
 script playerWalkOverToLivingRoomBottom{
     lockall
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 1)
+    setobjectxyperm(2, 2, 10)
+    setflag(FLAG_HIDE_DAD_INTRO)
+    setflag(FLAG_HIDE_QUIGLEY_PLAYER_HOUSE)
     applymovement(OBJ_EVENT_ID_PLAYER, playerSurprise)
     goto(dadCallLivingRoomBottom)
 }
 
 script dadCallLivingRoomBottom{
     speakername("Dad")
-    msgbox("over here", MSGBOX_AUTOCLOSE)
+    msgbox(dadCallOver, MSGBOX_AUTOCLOSE)
     waitmessage
     speakername(NULL)
     applymovement(OBJ_EVENT_ID_PLAYER, playersHouse_playerWalkOverBottom)
@@ -65,7 +74,9 @@ script dadCallLivingRoomBottom{
 
 script quigleyIntro{
     addobject(2)
-    setflag(FLAG_UNUSED_0x02B)
+    clearflag(FLAG_HIDE_DAD_INTRO)
+    clearflag(FLAG_HIDE_QUIGLEY_PLAYER_HOUSE)
+    setflag(FLAG_HIDE_AMANITA_BEASTON)
     playse(SE_DOOR)
     applymovement(2, playersHouse_dadEnter)
     waitmovement(2)
@@ -77,7 +88,7 @@ script quigleyIntro{
     msgbox("{PLAYER} this is quigley")
     waitmessage
     speakername("Quigley")
-    msgbox ("ayo whaddup i'm quigley\pmy dad's like the professor\phe told me to come get u so c'mon\pi'll be outside when ur ready", MSGBOX_AUTOCLOSE)
+    msgbox ("ayo whaddup i'm quigley\pmy mom's like the professor\pshe told me to come get u so c'mon\pi'll be outside when ur ready", MSGBOX_AUTOCLOSE)
     applymovement(1, playersHouse_quigleyLeave)
     waitmovement(1)
     removeobject(1)
@@ -89,10 +100,7 @@ script quigleyIntro{
     speakername(NULL)
     applymovement(2, playersHouse_dadSettle)
     waitmovement(2)
-    removeobject(2)
-    setflag(FLAG_UNUSED_0x022)
-    addobject(3)
-    clearflag(FLAG_UNUSED_0x021)
+    setflag(FLAG_HIDE_QUIGLEY_PLAYER_HOUSE)
     releaseall
 }
 
@@ -165,4 +173,8 @@ script playersHouse_cabinet{
 }
 script playersHouse_TV{
     msgbox("old man shows are on", MSGBOX_SIGN)
+}
+
+text dadCallOver{
+    "{PLAYER}! C'mere!"
 }

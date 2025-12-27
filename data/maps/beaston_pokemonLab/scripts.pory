@@ -1,12 +1,22 @@
 raw`
 beaston_pokemonLab_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, beaston_lab_onWarp
+    map_script MAP_SCRIPT_ON_TRANSITION, beaston_lab_HidePokeballs
 	.byte 0
 
 beaston_lab_onWarp::
-    map_script_2 VAR_LITTLEROOT_INTRO_STATE, 3, beaston_lab_Intro
+    map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, beaston_lab_Intro
     .2byte 0
 `
+script beaston_lab_HidePokeballs{
+    if(var(VAR_LITTLEROOT_INTRO_STATE) > 5)
+    {
+        setflag(FLAG_TEMP_1)
+        setflag(FLAG_TEMP_2)
+        setflag(FLAG_TEMP_3)
+    }
+    end
+}
 
 script beaston_lab_notebooks1{
     lockall
@@ -21,7 +31,7 @@ script beaston_lab_notebooks_rubber{
 
 script beaston_lab_notebooks2{
     lockall
-    msgbox("It's a stack of notebooks labeled\n“Evo Schematics.” Read it?", MSGBOX_YESNO)
+    msgbox("It's a stack of notebooks labeled\n“Schematics.” Read it?", MSGBOX_YESNO)
     goto_if_eq(VAR_RESULT, YES, beaston_lab_notebooks_evo_croconut)
     goto_if_eq(VAR_RESULT, NO, beaston_lab_notebooks_close)
     releaseall
@@ -58,14 +68,14 @@ script beaston_lab_notebooks_nullType{
 
 script beaston_lab_Intro{
     lockall
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 4)
-    setflag(FLAG_UNUSED_0x029)
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 2)
+    setflag(FLAG_HIDE_QUIGLEY_BEASTON)
     applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_player_walkUp)
     waitmovement(OBJ_EVENT_ID_PLAYER)
     applymovement(1, beaston_lab_quigley_lookAround)
     waitmovement(1)
-    speakername("Quigley")
-    msgbox("looks like dad's busy\pi guess just chill til he comes back", MSGBOX_AUTOCLOSE)
+    speakername(nameplateQuigley)
+    msgbox("looks like mom's busy\pi guess just chill til she comes back", MSGBOX_AUTOCLOSE)
     waitmessage
     speakername(NULL)
     applymovement(1, beaston_lab_quigley_standAround)
@@ -95,8 +105,8 @@ movement beaston_lab_quigley_standAround{
 }
 
 script beaston_lab_quigley_dialogue{
-    speakername("Quigley")
-    if(var(VAR_LITTLEROOT_INTRO_STATE) == 5)
+    speakername(nameplateQuigley)
+    if(var(VAR_LITTLEROOT_INTRO_STATE) == 3)
     {
         msgbox("fuck of", MSGBOX_NPC)
         waitmessage
@@ -104,7 +114,7 @@ script beaston_lab_quigley_dialogue{
     }
     else
     {
-        msgbox("idk when dad's gonna be back so just\ndon't mess with anything", MSGBOX_NPC)
+        msgbox("idk when mom's gonna be back so just\ndon't mess with anything", MSGBOX_NPC)
     }
     speakername(NULL)
 }
@@ -112,12 +122,12 @@ script beaston_lab_quigley_dialogue{
 script beaston_lab_quigley_stopExit_left{
     lockall
     applymovement(1, playerSurprise)
-    speakername("Quigley")
+    speakername(nameplateQuigley)
     msgbox("hey dude no", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement(1, beaston_lab_quigley_grab_left)
     waitmovement(1)
-    msgbox("we gotta wait for dad", MSGBOX_AUTOCLOSE)
+    msgbox("we gotta wait for mom", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement(1, beaston_lab_quigley_walkBack_left)
     applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround)
@@ -128,12 +138,12 @@ script beaston_lab_quigley_stopExit_left{
 script beaston_lab_quigley_stopExit_middle{
     lockall
     applymovement(1, playerSurprise)
-    speakername("Quigley")
+    speakername(nameplateQuigley)
     msgbox("hey dude no", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement(1, beaston_lab_quigley_grab_middle)
     waitmovement(1)
-    msgbox("we gotta wait for dad", MSGBOX_AUTOCLOSE)
+    msgbox("we gotta wait for mom", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement(1, beaston_lab_quigley_walkBack_middle)
     applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround)
@@ -144,12 +154,12 @@ script beaston_lab_quigley_stopExit_middle{
 script beaston_lab_quigley_stopExit_right{
     lockall
     applymovement(1, playerSurprise)
-    speakername("Quigley")
+    speakername(nameplateQuigley)
     msgbox("hey dude no", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement(1, beaston_lab_quigley_grab_right)
     waitmovement(1)
-    msgbox("we gotta wait for dad", MSGBOX_AUTOCLOSE)
+    msgbox("we gotta wait for mom", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement(1, beaston_lab_quigley_walkBack_right)
     applymovement(OBJ_EVENT_ID_PLAYER, beaston_lab_quigley_standAround)
@@ -185,7 +195,7 @@ movement beaston_lab_quigley_walkBack_right{
 
 script beaston_lab_pokeballs_left{
     lockall
-    goto_if_eq(VAR_LITTLEROOT_INTRO_STATE, 5, beaston_lab_croconut)
+    goto_if_eq(VAR_LITTLEROOT_INTRO_STATE, 3, beaston_lab_croconut)
     call(beaston_lab_professor_appear)
     call_if_eq(VAR_FACING, DIR_EAST, beaston_lab_player_comeAround_left_side)
     call_if_eq(VAR_FACING, DIR_SOUTH, beaston_lab_player_comeAround_left_top)
@@ -193,7 +203,7 @@ script beaston_lab_pokeballs_left{
 }
 script beaston_lab_pokeballs_middle{
     lockall
-    goto_if_eq(VAR_LITTLEROOT_INTRO_STATE, 5, beaston_lab_skrappup)
+    goto_if_eq(VAR_LITTLEROOT_INTRO_STATE, 3, beaston_lab_skrappup)
     call(beaston_lab_professor_appear)
     call_if_eq(VAR_FACING, DIR_NORTH, beaston_lab_player_comeAround_middle_bottom)
     call_if_eq(VAR_FACING, DIR_SOUTH, beaston_lab_player_comeAround_middle_top)
@@ -201,7 +211,7 @@ script beaston_lab_pokeballs_middle{
 }
 script beaston_lab_pokeballs_right{
     lockall
-    goto_if_eq(VAR_LITTLEROOT_INTRO_STATE, 5, beaston_lab_kitfisk)
+    goto_if_eq(VAR_LITTLEROOT_INTRO_STATE, 3, beaston_lab_kitfisk)
     call(beaston_lab_professor_appear)
     call_if_eq(VAR_FACING, DIR_NORTH, beaston_lab_player_comeAround_right_bottom)
     call_if_eq(VAR_FACING, DIR_WEST, beaston_lab_player_comeAround_right_side)
@@ -210,7 +220,7 @@ script beaston_lab_pokeballs_right{
 }
 
 script beaston_lab_professor_intro{
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("so ur {PLAYER} huh\psweet\pi bet quigley already told u but i've\nheard a lot abt u and i think u would\lmake a good help\pnow i won't force u but i do wanna say\nif u wanna come along u get a partner\lmon as a gift\pi'm studying pokemon genetics and how\nthey're related, it'll be a huge help\lif u can log me info on more mons\pso what do u say", MSGBOX_YESNO)
     goto_if_eq(VAR_RESULT, NO, beaston_lab_professor_help_no)
     msgbox("freakin sweet lewis")
@@ -225,12 +235,12 @@ script beaston_lab_professor_starter_choice{
     msgbox("quigley move so {PLAYER} can pick a mon")
     applymovement(1, beaston_lab_quigley_moveAway)
     waitmessage
-    speakername("Quigley")
+    speakername(nameplateQuigley)
     msgbox("fine")
     waitmovement(1)
     applymovement(5, beaston_lab_professor_shuffle)
     waitmessage
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("alright kid now pick a mon", MSGBOX_AUTOCLOSE)
     waitmessage
     speakername(NULL)
@@ -246,8 +256,9 @@ movement beaston_lab_professor_shuffle{
 }
 
 script beaston_lab_professor_appear{
-    clearflag(FLAG_UNUSED_0x024)
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 5)
+    setobjectxyperm(5, 15, 16)
+    clearflag(FLAG_HIDE_AMANITA_LAB)
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 3)
     addobject(5)
     playse(SE_DOOR)
     applymovement(5, beaston_lab_professor_walkUp)
@@ -258,6 +269,7 @@ script beaston_lab_professor_appear{
     waitmessage
     applymovement(5, beaston_lab_professor_frantic)
     waitmovement(5)
+    speakername("???")
     msgbox("this place is a mess, sorry\pwhy don't u come on and introduce\nurself", MSGBOX_AUTOCLOSE)
     waitmessage
 }
@@ -345,7 +357,7 @@ script beaston_lab_croconut{
     lockall
     showmonpic(SPECIES_CROCONUT, 10, 3)
     playmoncry(SPECIES_CROCONUT, CRY_MODE_NORMAL)
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("Ah, the Grass-type Croconut! This\neasygoing Pokémon likes lying in the\lsun.")
     msgbox("Say, is Croconut your choice for your\nPokémon partner?", MSGBOX_YESNO)
     goto_if_eq(VAR_RESULT, YES, beaston_lab_chose_croconut)
@@ -359,7 +371,7 @@ script beaston_lab_chose_croconut{
     givemon(SPECIES_CROCONUT, 5)
     setflag(FLAG_SYS_POKEMON_GET)
     setvar(VAR_STARTER_MON, 1)
-    setflag(FLAG_UNUSED_0x025)
+    setflag(FLAG_TEMP_1)
     removeobject(3)
     playfanfare(MUS_EVOLVED)
     speakername(NULL)
@@ -384,7 +396,7 @@ script beaston_lab_skrappup{
     lockall
     showmonpic(SPECIES_SKRAPPUP, 10, 3)
     playmoncry(SPECIES_SKRAPPUP, CRY_MODE_NORMAL)
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("Ah, the Fire-type Skrappup! This high-\nenergy Pokémon is very loyal!")
     msgbox("Is Skrappup the Pokémon you'd like as\nyour first partner?", MSGBOX_YESNO)
     goto_if_eq(VAR_RESULT, YES, beaston_lab_chose_skrappup)
@@ -398,7 +410,7 @@ script beaston_lab_chose_skrappup{
     givemon(SPECIES_SKRAPPUP, 5)
     setflag(FLAG_SYS_POKEMON_GET)
     setvar(VAR_STARTER_MON, 2)
-    setflag(FLAG_UNUSED_0x026)
+    setflag(FLAG_TEMP_2)
     removeobject(2)
     playfanfare(MUS_EVOLVED)
     speakername(NULL)
@@ -422,7 +434,7 @@ script beaston_lab_kitfisk{
     lockall
     showmonpic(SPECIES_KITFISK, 10, 3)
     playmoncry(SPECIES_KITFISK, CRY_MODE_NORMAL)
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("Ah, the Water-type Kitfisk! This sneaky\nPokémon has a keen hunter's instinct!")
     msgbox("Would you like to choose Kitfisk as\nyour partner Pokémon?", MSGBOX_YESNO)
     goto_if_eq(VAR_RESULT, YES, beaston_lab_chose_kitfisk)
@@ -436,7 +448,7 @@ script beaston_lab_chose_kitfisk{
     givemon(SPECIES_KITFISK, 5)
     setflag(FLAG_SYS_POKEMON_GET)
     setvar(VAR_STARTER_MON, 3)
-    setflag(FLAG_UNUSED_0x027)
+    setflag(FLAG_TEMP_3)
     removeobject(4)
     playfanfare(MUS_EVOLVED)
     speakername(NULL)
@@ -504,7 +516,7 @@ script beaston_lab_choseKitfisk_WalkAroundTop{
 }
 
 script beaston_lab_nicknameStarter{
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     applymovement(OBJ_EVENT_ID_PLAYER, lookDown)
     msgbox("Now, would you like to give your new\npartner a nickname?", MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES)
@@ -514,7 +526,7 @@ script beaston_lab_nicknameStarter{
     }
     elif(var(VAR_RESULT) == NO)
     {
-        msgbox("I see. Well, I suppose you can always\ngive it one later, if you'd like.", MSGBOX_AUTOCLOSE)
+        msgbox("I see. Well, I suppose you could\nalways give it one later.", MSGBOX_AUTOCLOSE)
     }
     releaseall
     call(beaston_lab_battleSetup)
@@ -532,15 +544,15 @@ script beaston_lab_battleSetup{
     msgbox("Ah!\p{PLAYER}, since you have your own\nPokémon now, how about challenging\lQuigley to a battle?\pI'd offer myself, but, ah…\nI don't seem to have any Pokémon with\lme.", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement(1, beaston_lab_quigley_shuffle)
-    speakername("Quigley")
+    speakername(nameplateQuigley)
     msgbox("Hey! You never told me I'd be BATTLING\n{PLAYER}!", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement(5, beaston_lab_professor_shuffle)
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("Now, now, Quigley.\pIt's just one battle so {PLAYER} can\nlearn the ropes. I'm sure you'd want\lthem to do the same if you were in\ltheir shoes.")
     waitmessage
     applymovement(1, beaston_lab_quigley_shuffle)
-    speakername("Quigley")
+    speakername(nameplateQuigley)
     msgbox("…fine.\p{PLAYER}, you're lucky I only have one mon on me.")
 }
 
@@ -572,17 +584,20 @@ movement look_right{
 }
 
 script beaston_lab_quigleyBattle{
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 6)
-    trainerbattle_single(TRAINER_BRENDAN_ROUTE_103_MUDKIP, "Well… here goes.", "Sigh… about what I expected.", beaston_lab_PostQuigleyBattle)
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 5)
+    waitmessage
+    trainerbattle_no_intro(TRAINER_BRENDAN_ROUTE_103_MUDKIP, "Sigh… about what I expected.")
+    goto(beaston_lab_PostQuigleyBattle)
 }
 script beaston_lab_PostQuigleyBattle{
+    special(HealPlayerParty)
     applymovement(5, beaston_lab_professor_shuffle)
     applymovement(OBJ_EVENT_ID_PLAYER, look_down)
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("Aha! You're a natural, {PLAYER}!\pNow, what was I going to say…\pAh, right.\pMy niece, Stella, lives in the next town\nover. I'm sure you two are familiar\lwith each other.\pI'd like for you to bring her back\nhere.", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement(1, beaston_lab_quigley_shuffle)
-    speakername("Quigley")
+    speakername(nameplateQuigley)
     msgbox("Ugh… of course you ask {PLAYER} to do\nit.\pWhatever. I'm going home.", MSGBOX_AUTOCLOSE)
     waitmessage
 }
@@ -604,11 +619,11 @@ movement beaston_lab_quigley_leave{
 }
 
 script beaston_lab_cokbern_AfterBattle{
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 7)
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 6)
     removeobject(1)
-    setflag(FLAG_UNUSED_0x028)
+    setflag(FLAG_HIDE_QUIGLEY_LAB)
     playse(SE_EXIT)
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("Ah, that Quigley…\pHe can be a bit of a handful at times.", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement(5, beaston_lab_professor_shuffle)
@@ -617,61 +632,55 @@ script beaston_lab_cokbern_AfterBattle{
     applymovement(5, beaston_lab_cokbern_headToDesk)
     waitmovement(5)
     msgbox("Suppose I should take care of these as\nwell.", MSGBOX_AUTOCLOSE)
-    if(var(VAR_STARTER_MON) == 1)
+    switch(var(VAR_STARTER_MON))
     {
-        applymovement(5, beaston_lab_cokbern_grabLeft)
-        waitmovement(5)
-        removeobject(4)
-        setflag(FLAG_UNUSED_0x027)
-        playse(SE_BALL)
-        waitse
-        applymovement(5, beaston_lab_cokbern_grabLeft)
-        waitmovement(5)
-        removeobject(2)
-        setflag(FLAG_UNUSED_0x026)
-        playse(SE_BALL)
-        waitse
-        applymovement(5, beaston_lab_cokbern_finish_center)
-        waitmovement(5)
+        case 1:
+            applymovement(5, beaston_lab_cokbern_grabLeft)
+            waitmovement(5)
+            removeobject(4)
+            setflag(FLAG_TEMP_3)
+            playse(SE_BALL)
+            waitse
+            applymovement(5, beaston_lab_cokbern_grabLeft)
+            waitmovement(5)
+            removeobject(2)
+            setflag(FLAG_TEMP_2)
+            playse(SE_BALL)
+            waitse
+            applymovement(5, beaston_lab_cokbern_finish_center)
+            break
+        case 2:
+            applymovement(5, beaston_lab_cokbern_grabLeft)
+            waitmovement(5)
+            removeobject(4)
+            setflag(FLAG_TEMP_3)
+            playse(SE_BALL)
+            waitse
+            applymovement(5, beaston_lab_cokbern_grabTwoLeft)
+            waitmovement(5)
+            removeobject(3)
+            setflag(FLAG_TEMP_1)
+            playse(SE_BALL)
+            waitse
+            applymovement(5, beaston_lab_cokbern_finish_left)
+            break
+        case 3:
+            applymovement(5, beaston_lab_cokbern_grabTwoLeft)
+            waitmovement(5)
+            removeobject(2)
+            setflag(FLAG_TEMP_2)
+            playse(SE_BALL)
+            waitse
+            applymovement(5, beaston_lab_cokbern_grabLeft)
+            waitmovement(5)
+            removeobject(3)
+            setflag(FLAG_TEMP_1)
+            playse(SE_BALL)
+            waitse
+            applymovement(5, beaston_lab_cokbern_finish_left)
+            break
     }
-    if(var(VAR_STARTER_MON) == 2)
-    {
-        applymovement(5, beaston_lab_cokbern_grabLeft)
-        waitmovement(5)
-        removeobject(4)
-        setflag(FLAG_UNUSED_0x027)
-        playse(SE_BALL)
-        waitse
-        applymovement(5, beaston_lab_cokbern_grabTwoLeft)
-        waitmovement(5)
-        removeobject(3)
-        setflag(FLAG_UNUSED_0x025)
-        playse(SE_BALL)
-        waitse
-        applymovement(5, beaston_lab_cokbern_finish_left)
-        waitmovement(5)
-    }
-    if(var(VAR_STARTER_MON) == 3)
-    {
-        applymovement(5, beaston_lab_cokbern_grabTwoLeft)
-        waitmovement(5)
-        removeobject(2)
-        setflag(FLAG_UNUSED_0x026)
-        playse(SE_BALL)
-        waitse
-        applymovement(5, beaston_lab_cokbern_grabLeft)
-        waitmovement(5)
-        removeobject(3)
-        setflag(FLAG_UNUSED_0x025)
-        playse(SE_BALL)
-        waitse
-        applymovement(5, beaston_lab_cokbern_finish_left)
-        waitmovement(5)
-    }
-    removeobject(5)
-    setflag(FLAG_UNUSED_0x024)
-    addobject(6)
-    clearflag(FLAG_UNUSED_0x02A)
+    waitmovement(5)
     speakername(NULL)
     releaseall
 }
@@ -684,7 +693,7 @@ movement beaston_lab_cokbern_headToDesk{
 
 script beaston_lab_cokbern_idle{
     lockall
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("go on kid pick a mon any mon", MSGBOX_NPC)
     applymovement(5, look_up)
     waitmessage
@@ -696,7 +705,7 @@ movement look_up{
 }
 
 script beaston_lab_cokbern_busy{
-    msgbox("He seems too busy writing things down\nto talk…", MSGBOX_SIGN)
+    msgbox("She seems too busy writing to talk…", MSGBOX_SIGN)
 }
 movement beaston_lab_cokbern_grabLeft{
     walk_left
@@ -719,7 +728,7 @@ script beaston_lab_preventExit_middle{
     lockall
     applymovement(5, beaston_lab_cokbern_preventExit_surprise)
     waitmovement(5)
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("wait bro don't leave", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement (5, beaston_lab_cokbern_walkDown_middle)
@@ -735,7 +744,7 @@ script beaston_lab_preventExit_left{
     lockall
     applymovement(5, beaston_lab_cokbern_preventExit_surprise)
     waitmovement(5)
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("wait bro don't leave", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement (5, beaston_lab_cokbern_walkDown_left)
@@ -751,7 +760,7 @@ script beaston_lab_preventExit_right{
     lockall
     applymovement(5, beaston_lab_cokbern_preventExit_surprise)
     waitmovement(5)
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("wait bro don't leave", MSGBOX_AUTOCLOSE)
     waitmessage
     applymovement (5, beaston_lab_cokbern_walkDown_right)
@@ -804,4 +813,12 @@ movement beaston_lab_player_walkUp_right{
     walk_up * 3
     walk_left
     walk_in_place_up
+}
+
+text nameplateQuigley{
+    "Quigley"
+}
+
+text nameplateProfessor{
+    "Amanita"
 }

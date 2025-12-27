@@ -1292,6 +1292,11 @@ const u32 gItemIconPalette_FlameOrb[] = INCBIN_U32("graphics/items/icon_palettes
 const u32 gItemIcon_ToxicOrb[] = INCBIN_U32("graphics/items/icons/toxic_orb.4bpp.lz");
 const u32 gItemIconPalette_ToxicOrb[] = INCBIN_U32("graphics/items/icon_palettes/toxic_orb.gbapal.lz");
 
+const u32 gItemIcon_FrostOrb[] = INCBIN_U32("graphics/items/icons/frost_orb.4bpp.lz");
+const u32 gItemIconPalette_FrostOrb[] = INCBIN_U32("graphics/items/icon_palettes/frost_orb.gbapal.lz");
+
+const u32 gItemIcon_PoisonOrb[] = INCBIN_U32("graphics/items/icons/poison_orb.4bpp.lz");
+
 // Weather Rocks
 
 const u32 gItemIcon_DampRock[] = INCBIN_U32("graphics/items/icons/damp_rock.4bpp.lz");
@@ -2116,3 +2121,13 @@ const u32 gItemIconPalette_MasterBait[] = INCBIN_U32("graphics/items/icon_palett
 
 const u32 gItemIcon_Excalibur[] = INCBIN_U32("graphics/items/icons/excalibur.4bpp.lz");
 const u32 gItemIconPalette_Excalibur[] = INCBIN_U32("graphics/items/icon_palettes/excalibur.gbapal.lz");
+
+const u32 gItemIcon_ShrinkRay[] = INCBIN_U32("graphics/items/icons/shrink_ray.4bpp.lz");
+const u32 gItemIconPalette_ShrinkRay[] = INCBIN_U32("graphics/items/icon_palettes/shrink_ray.gbapal.lz");
+
+const u32 gItemIcon_BurgerCoupon[] = INCBIN_U32("graphics/items/icons/burger_coupon.4bpp.lz");
+const u32 gItemIconPalette_BurgerCoupon[] = INCBIN_U32("graphics/items/icon_palettes/burger_coupon.gbapal.lz");
+
+const u32 gItemIcon_HeartLocket[] = INCBIN_U32("graphics/items/icons/heart_locket.4bpp.lz");
+const u32 gItemIconPalette_SoulLocket[] = INCBIN_U32("graphics/items/icon_palettes/soul_locket.gbapal.lz");
+const u32 gItemIconPalette_DevilLocket[] = INCBIN_U32("graphics/items/icon_palettes/devil_locket.gbapal.lz");

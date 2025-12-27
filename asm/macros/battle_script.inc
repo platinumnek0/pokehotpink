@@ -1355,6 +1355,23 @@
 	.4byte \failInstr
 	.endm
 
+	.macro trypanic failInstr:req
+	callnative BS_TryPanic
+	.4byte \failInstr
+	.endm
+
+	.macro maxcharge battler:req, jumpInstr:req
+	callnative BS_SetMaxCharge
+	.byte \battler
+	.4byte \jumpInstr
+	.endm
+
+	.macro jumpifcharged battler:req, failInstr:req
+	callnative BS_JumpIfCharged
+	.byte \battler
+	.4byte \failInstr
+	.endm
+
 	.macro jumpifcantfling battler:req, jumpInstr:req
 	callnative BS_JumpIfCantFling
 	.byte \battler
@@ -1656,7 +1673,7 @@
 	.endm
 
 	.macro settypetorandomweakness failInstr:req
-	callnative BS_setFoeTypeToRandomWeakness
+	callnative BS_setTypeToFoeWeakness
 	.4byte \failInstr
 	.endm
 
@@ -1676,6 +1693,10 @@
 
 	.macro removetailwind
 	callnative BS_RemoveTailwind
+	.endm
+
+	.macro tryupdatekomovetracker
+	callnative BS_TryUpdateKOMoveTracker
 	.endm
 
 @ various command changed to more readable macros
@@ -1838,6 +1859,10 @@
 
 	.macro tryactivatefellstinger battler:req
 	various \battler, VARIOUS_TRY_ACTIVATE_FELL_STINGER
+	.endm
+
+	.macro tryactivatehamfist battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_HAMFIST
 	.endm
 
 	.macro playmoveanimation battler:req, move:req

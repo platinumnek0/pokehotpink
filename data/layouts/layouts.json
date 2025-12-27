@@ -4454,10 +4454,10 @@
     {
       "id": "LAYOUT_SUBFLORA_EGG_ROOM",
       "name": "subfloraEggRoom_Layout",
-      "width": 24,
-      "height": 40,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Rustboro",
+      "width": 9,
+      "height": 11,
+      "primary_tileset": "gTileset_SecretBase",
+      "secondary_tileset": "gTileset_SecretBaseTree",
       "border_filepath": "data/layouts/subfloraEggRoom/border.bin",
       "blockdata_filepath": "data/layouts/subfloraEggRoom/map.bin"
     },

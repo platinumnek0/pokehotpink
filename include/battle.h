@@ -131,6 +131,7 @@ struct DisableStruct
     u8 terrainAbilityDone:1;
     u8 usedProteanLibero:1;
     u8 recursionCounter;
+    u8 chargeDecreased:1;
 };
 
 struct ProtectStruct
@@ -231,6 +232,7 @@ struct SpecialStatus
     u8 afterYou:1;
     u8 preventLifeOrbDamage:1; // So that Life Orb doesn't activate various effects.
     u8 flytrapRedirected:1;
+    u8 flashFireRedirected:1;
 };
 
 struct SideTimer

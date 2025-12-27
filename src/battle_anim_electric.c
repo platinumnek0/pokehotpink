@@ -245,17 +245,6 @@ const struct SpriteTemplate gAnchorShotChainTemplate =
     .callback = AnimThunderWave
 };
 
-const struct SpriteTemplate gWrappingChainTemplate =
-{
-    .tileTag = ANIM_TAG_WRAPPING_CHAIN,
-    .paletteTag = ANIM_TAG_CHAIN_LINK,
-    .oam = &gOamData_AffineOff_ObjNormal_32x16,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimThunderWave,
-};
-
 static const s8 sElectricChargingParticleCoordOffsets[][2] =
 {
     { 58, -60},

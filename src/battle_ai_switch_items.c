@@ -356,6 +356,16 @@ static bool32 FindMonThatAbsorbsOpponentsMove(u32 battler, bool32 emitResult)
         absorbingTypeAbilities[0] = ABILITY_SAP_SIPPER;
         numAbsorbingAbilities = 1;
     }
+    else if(gMovesInfo[gLastLandedMoves[battler]].type == TYPE_POISON)
+    {
+        absorbingTypeAbilities[0] = ABILITY_TOXIC_BOOST;
+        numAbsorbingAbilities = 1;
+    }
+    else if(gMovesInfo[gLastLandedMoves[battler]].type == TYPE_BUG)
+    {
+        absorbingTypeAbilities[0] = ABILITY_FLYTRAP;
+        numAbsorbingAbilities = 1;
+    }
     else
     {
         return FALSE;

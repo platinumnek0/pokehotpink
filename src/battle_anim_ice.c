@@ -253,6 +253,31 @@ const struct SpriteTemplate gIceCrystalHitSmallSpriteTemplate =
     .callback = AnimIceEffectParticle,
 };
 
+
+
+const struct SpriteTemplate gSaltCrystalHitLargeSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_SALT_CRYSTALS,
+    .oam = &gOamData_AffineNormal_ObjBlend_8x16,
+    .anims = gAnims_IceCrystalLarge,
+    .images = NULL,
+    .affineAnims = gAffineAnims_IceCrystalHit,
+    .callback = AnimIceEffectParticle,
+};
+
+const struct SpriteTemplate gSaltCrystalHitSmallSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_SALT_CRYSTALS,
+    .oam = &gOamData_AffineNormal_ObjBlend_8x8,
+    .anims = gAnims_IceCrystalSmall,
+    .images = NULL,
+    .affineAnims = gAffineAnims_IceCrystalHit,
+    .callback = AnimIceEffectParticle,
+};
+
+
 const struct SpriteTemplate gSwirlingSnowballSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,

@@ -50,7 +50,7 @@
 #define VAR_RECYCLE_GOODS                                0x4020
 #define VAR_REPEL_STEP_COUNT                             0x4021
 #define VAR_ICE_STEP_COUNT                               0x4022
-#define VAR_STARTER_MON                                  0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
+#define VAR_STARTER_MON                                  0x4023 // 1: croconut, 2: skrappup, 3: kitfisk
 #define VAR_MIRAGE_RND_H                                 0x4024
 #define VAR_MIRAGE_RND_L                                 0x4025
 #define VAR_SECRET_BASE_MAP                              0x4026
@@ -97,17 +97,17 @@
 #define VAR_POKELOT_PRIZE_PLACE                          0x404D
 #define VAR_HEADBUTT_ENCOUNTER                           0x404E // rng for headbutting trees
 #define VAR_LOTAD_SIZE_RECORD                            0x404F
-#define VAR_LITTLEROOT_TOWN_STATE                        0x4050
-#define VAR_OLDALE_TOWN_STATE                            0x4051
-#define VAR_DEWFORD_TOWN_STATE                           0x4052 // Unused Var
+#define VAR_LITTLEROOT_TOWN_STATE                        0x4050 
+#define VAR_OLDALE_TOWN_STATE                            0x4051 //asterra story progress
+#define VAR_ELUCYON_QUEST_STATE                          0x4052 //tracks the elucyon quest. 1: seen in subflora woods. 2: seen at mt. bighair. 3: seen at the big soup.
 #define VAR_LAVARIDGE_TOWN_STATE                         0x4053
 #define VAR_CURRENT_SECRET_BASE                          0x4054 // was probably allocated for VAR_FALLARBOR_TOWN_STATE at one point
-#define VAR_VERDANTURF_TOWN_STATE                        0x4055 // Unused Var
+#define VAR_HOT_PINK_STORY                               0x4055 // incremented throughout the game, keeps track of major things rather than town-specific stuff
 #define VAR_PACIFIDLOG_TOWN_STATE                        0x4056 // Unused Var
 #define VAR_PETALBURG_CITY_STATE                         0x4057
 #define VAR_SLATEPORT_CITY_STATE                         0x4058
 #define VAR_MAUVILLE_CITY_STATE                          0x4059 // Unused Var
-#define VAR_RUSTBORO_CITY_STATE                          0x405A
+#define VAR_RUSTBORO_CITY_STATE                          0x405A // 1: beat the porkbelly gym. 2: beat/lost the evo form starter battle
 #define VAR_FORTREE_CITY_STATE                           0x405B // Unused Var
 #define VAR_LILYCOVE_CITY_STATE                          0x405C // Unused Var
 #define VAR_MOSSDEEP_CITY_STATE                          0x405D
@@ -163,13 +163,13 @@
 #define VAR_DEVON_CORP_3F_STATE                          0x408F
 #define VAR_BRINEY_HOUSE_STATE                           0x4090
 #define VAR_UNUSED_0x4091                                0x4091 // Unused Var
-#define VAR_LITTLEROOT_INTRO_STATE                       0x4092
+#define VAR_LITTLEROOT_INTRO_STATE                       0x4092 // pre-evo-battle beaston progress. 1: met quigley in the living room. 2: taken to the lab. 3: met amanita. 4: gotten your starter. 5: won/lost the battle with quigley, only really used for if you lose and get sent back to beaston. 6: on the stella fetch quest. 7: won the battle with stella. 8: done with the intro altogether (gotten pokedex)
 #define VAR_MAUVILLE_GYM_STATE                           0x4093
 #define VAR_LILYCOVE_MUSEUM_2F_STATE                     0x4094
 #define VAR_LILYCOVE_FAN_CLUB_STATE                      0x4095
 #define VAR_BRINEY_LOCATION                              0x4096
 #define VAR_INIT_SECRET_BASE                             0x4097
-#define VAR_PETALBURG_WOODS_STATE                        0x4098
+#define VAR_PETALBURG_WOODS_STATE                        0x4098 // 0: haven't met dredge and gotten the old rod. 1: have met dredge, have the old rod
 #define VAR_LILYCOVE_CONTEST_LOBBY_STATE                 0x4099
 #define VAR_RUSTURF_TUNNEL_STATE                         0x409A
 #define VAR_UNUSED_0x409B                                0x409B // Unused Var

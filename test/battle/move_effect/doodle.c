@@ -30,19 +30,19 @@ DOUBLE_BATTLE_TEST("Doodle can't copy a banned ability")
     GIVEN {
         PLAYER(SPECIES_WYNAUT);
         PLAYER(SPECIES_WYNAUT);
-        OPPONENT(SPECIES_GREAT_TUSK) { Ability(ABILITY_PROTOSYNTHESIS); }
+        OPPONENT(SPECIES_KOMALA) { Ability(ABILTIY_COMATOSE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_DOODLE, target: opponentLeft);  }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DOODLE, playerLeft);
         NONE_OF {
-            MESSAGE("Wynaut copied Foe Great Tusk's Protosynthesis!");
-            MESSAGE("Wynaut copied Foe Great Tusk's Protosynthesis!");
+            MESSAGE("Wynaut copied Foe Komala's Comatose!");
+            MESSAGE("Wynaut copied Foe Komala's Comatose!");
         }
     } THEN {
-        EXPECT(playerLeft->ability != ABILITY_PROTOSYNTHESIS);
-        EXPECT(playerRight->ability != ABILITY_PROTOSYNTHESIS);
+        EXPECT(playerLeft->ability != ABILTIY_COMATOSE);
+        EXPECT(playerRight->ability != ABILTIY_COMATOSE);
     }
 }
 

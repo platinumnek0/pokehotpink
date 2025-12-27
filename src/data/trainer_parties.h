@@ -6422,10 +6422,11 @@ static const struct TrainerMon sParty_WallyVR1[] = {
 
 static const struct TrainerMon sParty_BrendanRoute103Mudkip[] = {
     {
-    .lvl = 5,
+    .lvl = 4,
     .species = SPECIES_SQWEEKLING,
     .moves = {MOVE_GROWL, MOVE_TACKLE, MOVE_NONE, MOVE_NONE},
     .gender = TRAINER_MON_MALE,
+    .nature = NATURE_CAREFUL,
     }
 };
 
@@ -6468,9 +6469,10 @@ static const struct TrainerMon sParty_BrendanRoute119Mudkip[] = {
 static const struct TrainerMon sParty_BrendanRoute103Treecko[] = {
     {
     .lvl = 4,
-    .species = SPECIES_CLEFFA,
+    .species = SPECIES_CHOCLI,
     .moves = {MOVE_TACKLE, MOVE_BABY_DOLL_EYES, MOVE_NONE, MOVE_NONE},
-    .ability = ABILITY_WELL_BAKED_BODY,
+    .ability = ABILITY_FROSTY_CHEER,
+    .nature = NATURE_BRAVE,
     }
 };
 

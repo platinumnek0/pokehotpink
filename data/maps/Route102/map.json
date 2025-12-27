@@ -39,19 +39,63 @@
       "x": 18,
       "y": 5,
       "elevation": 0,
-      "dest_map": "MAP_PETALBURG_WOODS",
+      "dest_map": "MAP_SUBFLORA_WOODS",
       "dest_warp_id": "0"
     },
     {
       "x": 19,
       "y": 5,
       "elevation": 0,
-      "dest_map": "MAP_PETALBURG_WOODS",
+      "dest_map": "MAP_SUBFLORA_WOODS",
       "dest_warp_id": "1"
     }
   ],
   "coord_events": [
-
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 42,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "6",
+      "script": "gagilRoute2_initiateStellaCutsceneLeft"
+    },
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 42,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "6",
+      "script": "gagilRoute2_initiateStellaCutsceneRight"
+    },
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "7",
+      "script": "gagilRoute2_cantLeaveRightTop"
+    },
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "7",
+      "script": "gagilRoute2_cantLeaveRightBottom"
+    },
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_INTRO_STATE",
+      "var_value": "7",
+      "script": "gagilRoute2_cantLeaveLeft"
+    }
   ],
   "bg_events": [
     {

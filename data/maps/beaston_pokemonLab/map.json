@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "beaston_lab_quigley_dialogue",
-      "flag": "FLAG_UNUSED_0x028"
+      "flag": "FLAG_HIDE_QUIGLEY_LAB"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -38,7 +38,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "beaston_lab_pokeballs_middle",
-      "flag": "FLAG_UNUSED_0x026"
+      "flag": "FLAG_TEMP_2"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -51,7 +51,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "beaston_lab_pokeballs_left",
-      "flag": "FLAG_UNUSED_0x025"
+      "flag": "FLAG_TEMP_1"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -64,20 +64,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "beaston_lab_pokeballs_right",
-      "flag": "FLAG_UNUSED_0x027"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
-      "x": 15,
-      "y": 16,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "beaston_lab_cokbern_idle",
-      "flag": "FLAG_UNUSED_0x024"
+      "flag": "FLAG_TEMP_3"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
@@ -89,8 +76,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "beaston_lab_cokbern_busy",
-      "flag": "FLAG_UNUSED_0x02A"
+      "script": "beaston_lab_cokbern_idle",
+      "flag": "FLAG_HIDE_AMANITA_LAB"
     }
   ],
   "warp_events": [
@@ -116,7 +103,7 @@
       "y": 14,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "4",
+      "var_value": "2",
       "script": "beaston_lab_quigley_stopExit_left"
     },
     {
@@ -125,7 +112,7 @@
       "y": 14,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "4",
+      "var_value": "2",
       "script": "beaston_lab_quigley_stopExit_middle"
     },
     {
@@ -134,7 +121,7 @@
       "y": 14,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "4",
+      "var_value": "2",
       "script": "beaston_lab_quigley_stopExit_right"
     },
     {
@@ -143,7 +130,7 @@
       "y": 15,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "5",
+      "var_value": "3",
       "script": "beaston_lab_preventExit_left"
     },
     {
@@ -152,7 +139,7 @@
       "y": 15,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "5",
+      "var_value": "3",
       "script": "beaston_lab_preventExit_middle"
     },
     {
@@ -161,7 +148,7 @@
       "y": 15,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "5",
+      "var_value": "3",
       "script": "beaston_lab_preventExit_right"
     }
   ],

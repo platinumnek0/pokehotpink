@@ -510,6 +510,7 @@ extern const u8 BattleScript_HeartbreakWoreOff[];
 extern const u8 BattleScript_DefiantRaiseAttack[];
 extern const u8 BattleScript_CompetitiveRaiseSpAtk[];
 extern const u8 BattleScript_TailwindEndsReturn[];
+extern const u8 BattleScript_ChargeCountLeft[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
@@ -839,7 +840,7 @@ extern const u8 BattleScript_EffectShedTail[];
 extern const u8 BattleScript_EffectUpperHand[];
 extern const u8 BattleScript_EffectTidyUp[];
 extern const u8 BattleScript_EffectMolt[];
-extern const u8 BattleScript_UnnerveActivates[];
+extern const u8 BattleScript_UnsettleActivates[];
 extern const u8 BattleScript_OvergrowActivates[];
 extern const u8 BattleScript_BlazeActivates[];
 extern const u8 BattleScript_TorrentActivates[];
@@ -871,5 +872,16 @@ extern const u8 BattleScript_EffectTrapLowerSpeed[];
 extern const u8 BattleScript_EffectDetectParry[];
 extern const u8 BattleScript_TauntMessageReturn[];
 extern const u8 BattleScript_TormentMessageReturn[];
+extern const u8 BattleScript_DisableMessageReturn[];
+extern const u8 BattleScript_CursedBodyTorments[];
+extern const u8 BattleScript_PowderMessageReturn[];
+extern const u8 BattleScript_SpeedEvaDown[];
+extern const u8 BattleScript_FrostOrb[];
+extern const u8 BattleScript_PoisonOrb[];
+extern const u8 BattleScript_ItemMinimizeTarget[];
+extern const u8 BattleScript_MinimizeEffectReturn[];
+extern const u8 BattleScript_SoulLocketMsgBreak[];
+extern const u8 BattleScript_DevilLocketMsgBreak[];
+extern const u8 BattleScript_SaltCureEffectReturn[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

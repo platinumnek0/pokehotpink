@@ -11,7 +11,7 @@ Beaston_MapScripts::
 # 6 "data/maps/Beaston/scripts.pory"
 beaston_onWarp::
 # 7 "data/maps/Beaston/scripts.pory"
-    map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, beaston_checkVar
+    map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, beaston_quigleyAsk
 # 8 "data/maps/Beaston/scripts.pory"
     .2byte 0
 
@@ -39,146 +39,172 @@ beastonLabSign::
 	return
 
 
-beaston_checkVar::
-# 27 "data/maps/Beaston/scripts.pory"
-	setvar VAR_LITTLEROOT_INTRO_STATE, 3
-# 28 "data/maps/Beaston/scripts.pory"
-	goto beaston_quigleyAsk
-	return
-
-
 beaston_quigleyAsk::
-# 32 "data/maps/Beaston/scripts.pory"
+# 27 "data/maps/Beaston/scripts.pory"
 	lockall
-# 33 "data/maps/Beaston/scripts.pory"
+# 28 "data/maps/Beaston/scripts.pory"
 	applymovement 1, playerSurprise
-# 34 "data/maps/Beaston/scripts.pory"
+# 29 "data/maps/Beaston/scripts.pory"
 	waitmovement 1
-# 35 "data/maps/Beaston/scripts.pory"
+# 30 "data/maps/Beaston/scripts.pory"
 	applymovement 1, playersHouse_dadLookRight
-# 36 "data/maps/Beaston/scripts.pory"
+# 31 "data/maps/Beaston/scripts.pory"
 	waitmovement 1
-# 37 "data/maps/Beaston/scripts.pory"
+# 32 "data/maps/Beaston/scripts.pory"
 	speakername beaston_quigleyAsk_Text_0
-# 38 "data/maps/Beaston/scripts.pory"
+# 33 "data/maps/Beaston/scripts.pory"
 	msgbox beaston_quigleyAsk_Text_1, MSGBOX_YESNO
-# 39 "data/maps/Beaston/scripts.pory"
+# 34 "data/maps/Beaston/scripts.pory"
 	goto_if_eq VAR_RESULT, NO, beaston_sendYouBack
-# 40 "data/maps/Beaston/scripts.pory"
+# 35 "data/maps/Beaston/scripts.pory"
 	goto beaston_labEscort
 	return
 
 
 beaston_sendYouBack::
-# 44 "data/maps/Beaston/scripts.pory"
-	msgbox beaston_sendYouBack_Text_0
-# 45 "data/maps/Beaston/scripts.pory"
+# 39 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_sendYouBack_Text_0, MSGBOX_AUTOCLOSE
+# 40 "data/maps/Beaston/scripts.pory"
 	waitmessage
-# 46 "data/maps/Beaston/scripts.pory"
+# 41 "data/maps/Beaston/scripts.pory"
 	speakername NULL
-# 47 "data/maps/Beaston/scripts.pory"
-	opendoor 26, 24
-# 48 "data/maps/Beaston/scripts.pory"
+# 42 "data/maps/Beaston/scripts.pory"
+	opendoor 30, 24
+# 43 "data/maps/Beaston/scripts.pory"
+	waitdooranim
+# 44 "data/maps/Beaston/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_playerWalkBack
-# 49 "data/maps/Beaston/scripts.pory"
+# 45 "data/maps/Beaston/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
-# 50 "data/maps/Beaston/scripts.pory"
+# 46 "data/maps/Beaston/scripts.pory"
 	warp MAP_BEASTON_PLAYERS_HOUSE_FLOOR1, 2, 10
-# 51 "data/maps/Beaston/scripts.pory"
+# 47 "data/maps/Beaston/scripts.pory"
 	releaseall
 	return
 
 
 beaston_labEscort::
-# 55 "data/maps/Beaston/scripts.pory"
+# 51 "data/maps/Beaston/scripts.pory"
 	speakername beaston_quigleyAsk_Text_0
-# 56 "data/maps/Beaston/scripts.pory"
+# 52 "data/maps/Beaston/scripts.pory"
 	msgbox beaston_labEscort_Text_0, MSGBOX_AUTOCLOSE
-# 57 "data/maps/Beaston/scripts.pory"
+# 53 "data/maps/Beaston/scripts.pory"
 	waitmessage
-# 58 "data/maps/Beaston/scripts.pory"
-	setvar VAR_LITTLEROOT_INTRO_STATE, 3
-# 59 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x024
-# 60 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x02A
-# 61 "data/maps/Beaston/scripts.pory"
+# 54 "data/maps/Beaston/scripts.pory"
+	setflag FLAG_HIDE_AMANITA_LAB
+# 55 "data/maps/Beaston/scripts.pory"
 	applymovement 1, beaston_quigleyEscort1
-# 62 "data/maps/Beaston/scripts.pory"
+# 56 "data/maps/Beaston/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_playerFollowQuigley1
-# 63 "data/maps/Beaston/scripts.pory"
+# 57 "data/maps/Beaston/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
-# 64 "data/maps/Beaston/scripts.pory"
+# 58 "data/maps/Beaston/scripts.pory"
 	msgbox beaston_labEscort_Text_1, MSGBOX_AUTOCLOSE
-# 65 "data/maps/Beaston/scripts.pory"
+# 59 "data/maps/Beaston/scripts.pory"
 	waitmessage
-# 66 "data/maps/Beaston/scripts.pory"
+# 60 "data/maps/Beaston/scripts.pory"
 	applymovement 1, beaston_quigleyEscort2
-# 67 "data/maps/Beaston/scripts.pory"
+# 61 "data/maps/Beaston/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_playerFollowQuigley2
-# 68 "data/maps/Beaston/scripts.pory"
+# 62 "data/maps/Beaston/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
-# 69 "data/maps/Beaston/scripts.pory"
+# 63 "data/maps/Beaston/scripts.pory"
 	msgbox beaston_labEscort_Text_2, MSGBOX_AUTOCLOSE
-# 70 "data/maps/Beaston/scripts.pory"
+# 64 "data/maps/Beaston/scripts.pory"
 	waitmessage
-# 71 "data/maps/Beaston/scripts.pory"
+# 65 "data/maps/Beaston/scripts.pory"
 	speakername NULL
-# 72 "data/maps/Beaston/scripts.pory"
-	opendoor 10, 16
-# 73 "data/maps/Beaston/scripts.pory"
+# 66 "data/maps/Beaston/scripts.pory"
+	opendoor 14, 16
+# 67 "data/maps/Beaston/scripts.pory"
+	waitdooranim
+# 68 "data/maps/Beaston/scripts.pory"
 	applymovement 1, beaston_playerWalkBack
-# 74 "data/maps/Beaston/scripts.pory"
+# 69 "data/maps/Beaston/scripts.pory"
 	waitmovement 1
-# 75 "data/maps/Beaston/scripts.pory"
+# 70 "data/maps/Beaston/scripts.pory"
 	removeobject 1
-# 76 "data/maps/Beaston/scripts.pory"
+# 71 "data/maps/Beaston/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_playerWalkBack
-# 77 "data/maps/Beaston/scripts.pory"
+# 72 "data/maps/Beaston/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
-# 78 "data/maps/Beaston/scripts.pory"
+# 73 "data/maps/Beaston/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_playerWalkBack
-# 79 "data/maps/Beaston/scripts.pory"
+# 74 "data/maps/Beaston/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
-# 80 "data/maps/Beaston/scripts.pory"
+# 75 "data/maps/Beaston/scripts.pory"
 	warp MAP_BEASTON_POKEMON_LAB, 15, 17
-# 81 "data/maps/Beaston/scripts.pory"
+# 76 "data/maps/Beaston/scripts.pory"
 	releaseall
 	return
 
 
-# 84 "data/maps/Beaston/scripts.pory"
+# 79 "data/maps/Beaston/scripts.pory"
 beaston_playerWalkBack:
-# 85 "data/maps/Beaston/scripts.pory"
+# 80 "data/maps/Beaston/scripts.pory"
 	walk_up
 	step_end
 
-# 87 "data/maps/Beaston/scripts.pory"
+# 82 "data/maps/Beaston/scripts.pory"
 beaston_quigleyEscort1:
-# 88 "data/maps/Beaston/scripts.pory"
+# 83 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 88 "data/maps/Beaston/scripts.pory"
+# 83 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 88 "data/maps/Beaston/scripts.pory"
+# 83 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 88 "data/maps/Beaston/scripts.pory"
+# 83 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 89 "data/maps/Beaston/scripts.pory"
+# 84 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 89 "data/maps/Beaston/scripts.pory"
+# 84 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 89 "data/maps/Beaston/scripts.pory"
+# 84 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 89 "data/maps/Beaston/scripts.pory"
+# 84 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 90 "data/maps/Beaston/scripts.pory"
+# 85 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 91 "data/maps/Beaston/scripts.pory"
+# 86 "data/maps/Beaston/scripts.pory"
 	walk_in_place_right
 	step_end
 
-# 93 "data/maps/Beaston/scripts.pory"
+# 88 "data/maps/Beaston/scripts.pory"
 beaston_playerFollowQuigley1:
+# 89 "data/maps/Beaston/scripts.pory"
+	walk_left
+# 89 "data/maps/Beaston/scripts.pory"
+	walk_left
+# 89 "data/maps/Beaston/scripts.pory"
+	walk_left
+# 89 "data/maps/Beaston/scripts.pory"
+	walk_left
+# 89 "data/maps/Beaston/scripts.pory"
+	walk_left
+# 90 "data/maps/Beaston/scripts.pory"
+	walk_up
+# 90 "data/maps/Beaston/scripts.pory"
+	walk_up
+# 90 "data/maps/Beaston/scripts.pory"
+	walk_up
+# 90 "data/maps/Beaston/scripts.pory"
+	walk_up
+# 91 "data/maps/Beaston/scripts.pory"
+	walk_in_place_left
+	step_end
+
+# 93 "data/maps/Beaston/scripts.pory"
+beaston_quigleyEscort2:
+# 94 "data/maps/Beaston/scripts.pory"
+	walk_left
+# 94 "data/maps/Beaston/scripts.pory"
+	walk_left
+# 94 "data/maps/Beaston/scripts.pory"
+	walk_left
+# 94 "data/maps/Beaston/scripts.pory"
+	walk_left
+# 94 "data/maps/Beaston/scripts.pory"
+	walk_left
 # 94 "data/maps/Beaston/scripts.pory"
 	walk_left
 # 94 "data/maps/Beaston/scripts.pory"
@@ -198,416 +224,386 @@ beaston_playerFollowQuigley1:
 # 95 "data/maps/Beaston/scripts.pory"
 	walk_up
 # 96 "data/maps/Beaston/scripts.pory"
-	walk_in_place_left
-	step_end
-
-# 98 "data/maps/Beaston/scripts.pory"
-beaston_quigleyEscort2:
-# 99 "data/maps/Beaston/scripts.pory"
-	walk_left
-# 99 "data/maps/Beaston/scripts.pory"
-	walk_left
-# 99 "data/maps/Beaston/scripts.pory"
-	walk_left
-# 99 "data/maps/Beaston/scripts.pory"
-	walk_left
-# 99 "data/maps/Beaston/scripts.pory"
-	walk_left
-# 99 "data/maps/Beaston/scripts.pory"
-	walk_left
-# 99 "data/maps/Beaston/scripts.pory"
-	walk_left
-# 99 "data/maps/Beaston/scripts.pory"
-	walk_left
-# 99 "data/maps/Beaston/scripts.pory"
-	walk_left
-# 99 "data/maps/Beaston/scripts.pory"
-	walk_left
-# 100 "data/maps/Beaston/scripts.pory"
-	walk_up
-# 100 "data/maps/Beaston/scripts.pory"
-	walk_up
-# 100 "data/maps/Beaston/scripts.pory"
-	walk_up
-# 100 "data/maps/Beaston/scripts.pory"
-	walk_up
-# 101 "data/maps/Beaston/scripts.pory"
 	walk_in_place_down
 	step_end
 
-# 103 "data/maps/Beaston/scripts.pory"
+# 98 "data/maps/Beaston/scripts.pory"
 beaston_playerFollowQuigley2:
-# 104 "data/maps/Beaston/scripts.pory"
+# 99 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 104 "data/maps/Beaston/scripts.pory"
+# 99 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 104 "data/maps/Beaston/scripts.pory"
+# 99 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 104 "data/maps/Beaston/scripts.pory"
+# 99 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 104 "data/maps/Beaston/scripts.pory"
+# 99 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 104 "data/maps/Beaston/scripts.pory"
+# 99 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 104 "data/maps/Beaston/scripts.pory"
+# 99 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 104 "data/maps/Beaston/scripts.pory"
+# 99 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 104 "data/maps/Beaston/scripts.pory"
+# 99 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 104 "data/maps/Beaston/scripts.pory"
+# 99 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 104 "data/maps/Beaston/scripts.pory"
+# 99 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 105 "data/maps/Beaston/scripts.pory"
+# 100 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 105 "data/maps/Beaston/scripts.pory"
+# 100 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 105 "data/maps/Beaston/scripts.pory"
+# 100 "data/maps/Beaston/scripts.pory"
 	walk_up
 	step_end
 
 beaston_rivalBattleLoss_setup::
-# 109 "data/maps/Beaston/scripts.pory"
+# 104 "data/maps/Beaston/scripts.pory"
 	lockall
-# 110 "data/maps/Beaston/scripts.pory"
-	clearflag FLAG_UNUSED_0x02B
-# 111 "data/maps/Beaston/scripts.pory"
+# 105 "data/maps/Beaston/scripts.pory"
+	clearflag FLAG_HIDE_AMANITA_LAB
+# 106 "data/maps/Beaston/scripts.pory"
 	addobject 2
 	return
 
 
 beaston_rivalBattleLoss_text::
-# 115 "data/maps/Beaston/scripts.pory"
+# 110 "data/maps/Beaston/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, look_left
-# 116 "data/maps/Beaston/scripts.pory"
-	speakername beaston_rivalBattleLoss_text_Text_0
-# 117 "data/maps/Beaston/scripts.pory"
-	msgbox beaston_rivalBattleLoss_text_Text_1, MSGBOX_AUTOCLOSE
-# 118 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x024
-# 119 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x028
-# 120 "data/maps/Beaston/scripts.pory"
+# 111 "data/maps/Beaston/scripts.pory"
+	speakername nameplateProfessor
+# 112 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_rivalBattleLoss_text_Text_0, MSGBOX_AUTOCLOSE
+# 113 "data/maps/Beaston/scripts.pory"
+	setflag FLAG_HIDE_AMANITA_LAB
+# 114 "data/maps/Beaston/scripts.pory"
+	setflag FLAG_HIDE_QUIGLEY_LAB
+# 115 "data/maps/Beaston/scripts.pory"
 	clearflag FLAG_UNUSED_0x02A
-# 121 "data/maps/Beaston/scripts.pory"
+# 116 "data/maps/Beaston/scripts.pory"
 	speakername NULL
-# 122 "data/maps/Beaston/scripts.pory"
-	setvar VAR_LITTLEROOT_INTRO_STATE, 7
-# 123 "data/maps/Beaston/scripts.pory"
-	compare VAR_STARTER_MON, 1
-	goto_if_eq beaston_rivalBattleLoss_text_1
-# 128 "data/maps/Beaston/scripts.pory"
-	compare VAR_STARTER_MON, 2
-	goto_if_eq beaston_rivalBattleLoss_text_2
-# 133 "data/maps/Beaston/scripts.pory"
-	compare VAR_STARTER_MON, 3
-	goto_if_eq beaston_rivalBattleLoss_text_3
-	return
-
-beaston_rivalBattleLoss_text_1:
-# 125 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x026
-# 126 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x027
-	return
-
-beaston_rivalBattleLoss_text_2:
-# 130 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x025
-# 131 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x027
-	return
-
-beaston_rivalBattleLoss_text_3:
-# 135 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x025
-# 136 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x026
+# 117 "data/maps/Beaston/scripts.pory"
+	setvar VAR_LITTLEROOT_INTRO_STATE, 6
 	return
 
 
 beaston_rivalBattleLoss_left::
-# 141 "data/maps/Beaston/scripts.pory"
+# 121 "data/maps/Beaston/scripts.pory"
 	call beaston_rivalBattleLoss_setup
-# 142 "data/maps/Beaston/scripts.pory"
+# 122 "data/maps/Beaston/scripts.pory"
 	applymovement 2, beaston_cokbern_rivalBattleLoss_left_enter
-# 143 "data/maps/Beaston/scripts.pory"
+# 123 "data/maps/Beaston/scripts.pory"
 	waitmovement 2
-# 144 "data/maps/Beaston/scripts.pory"
+# 124 "data/maps/Beaston/scripts.pory"
 	call beaston_rivalBattleLoss_text
-# 145 "data/maps/Beaston/scripts.pory"
+# 125 "data/maps/Beaston/scripts.pory"
 	waitmessage
-# 146 "data/maps/Beaston/scripts.pory"
+# 126 "data/maps/Beaston/scripts.pory"
 	applymovement 2, beaston_cokbern_rivalBattleLoss_left_leave
-# 147 "data/maps/Beaston/scripts.pory"
+# 127 "data/maps/Beaston/scripts.pory"
 	waitmovement 2
-# 148 "data/maps/Beaston/scripts.pory"
+# 128 "data/maps/Beaston/scripts.pory"
 	removeobject 2
-# 149 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x02B
-# 150 "data/maps/Beaston/scripts.pory"
+# 129 "data/maps/Beaston/scripts.pory"
+	setflag FLAG_HIDE_AMANITA_LAB
+# 130 "data/maps/Beaston/scripts.pory"
 	releaseall
 	return
 
 
-# 152 "data/maps/Beaston/scripts.pory"
+# 132 "data/maps/Beaston/scripts.pory"
 beaston_cokbern_rivalBattleLoss_left_enter:
-# 153 "data/maps/Beaston/scripts.pory"
+# 133 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 153 "data/maps/Beaston/scripts.pory"
+# 133 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 153 "data/maps/Beaston/scripts.pory"
+# 133 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 153 "data/maps/Beaston/scripts.pory"
+# 133 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 153 "data/maps/Beaston/scripts.pory"
+# 133 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 154 "data/maps/Beaston/scripts.pory"
+# 134 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 154 "data/maps/Beaston/scripts.pory"
+# 134 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 154 "data/maps/Beaston/scripts.pory"
+# 134 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 154 "data/maps/Beaston/scripts.pory"
+# 134 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 155 "data/maps/Beaston/scripts.pory"
+# 135 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 155 "data/maps/Beaston/scripts.pory"
+# 135 "data/maps/Beaston/scripts.pory"
 	walk_right
 	step_end
 
-# 157 "data/maps/Beaston/scripts.pory"
+# 137 "data/maps/Beaston/scripts.pory"
 beaston_cokbern_rivalBattleLoss_left_leave:
-# 158 "data/maps/Beaston/scripts.pory"
+# 138 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 158 "data/maps/Beaston/scripts.pory"
+# 138 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 159 "data/maps/Beaston/scripts.pory"
+# 139 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 159 "data/maps/Beaston/scripts.pory"
+# 139 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 159 "data/maps/Beaston/scripts.pory"
+# 139 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 159 "data/maps/Beaston/scripts.pory"
+# 139 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 160 "data/maps/Beaston/scripts.pory"
+# 140 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 160 "data/maps/Beaston/scripts.pory"
+# 140 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 160 "data/maps/Beaston/scripts.pory"
+# 140 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 160 "data/maps/Beaston/scripts.pory"
+# 140 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 160 "data/maps/Beaston/scripts.pory"
+# 140 "data/maps/Beaston/scripts.pory"
 	walk_left
 	step_end
 
 beaston_rivalBattleLoss_down::
-# 164 "data/maps/Beaston/scripts.pory"
+# 144 "data/maps/Beaston/scripts.pory"
 	call beaston_rivalBattleLoss_setup
-# 165 "data/maps/Beaston/scripts.pory"
+# 145 "data/maps/Beaston/scripts.pory"
 	applymovement 2, beaston_cokbern_rivalBattleLoss_down_enter
-# 166 "data/maps/Beaston/scripts.pory"
+# 146 "data/maps/Beaston/scripts.pory"
 	waitmovement 2
-# 167 "data/maps/Beaston/scripts.pory"
+# 147 "data/maps/Beaston/scripts.pory"
 	call beaston_rivalBattleLoss_text
-# 168 "data/maps/Beaston/scripts.pory"
+# 148 "data/maps/Beaston/scripts.pory"
 	waitmessage
-# 169 "data/maps/Beaston/scripts.pory"
+# 149 "data/maps/Beaston/scripts.pory"
 	applymovement 2, beaston_cokbern_rivalBattleLoss_down_leave
-# 170 "data/maps/Beaston/scripts.pory"
+# 150 "data/maps/Beaston/scripts.pory"
 	waitmovement 2
-# 171 "data/maps/Beaston/scripts.pory"
+# 151 "data/maps/Beaston/scripts.pory"
 	removeobject 2
-# 172 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x02B
-# 173 "data/maps/Beaston/scripts.pory"
+# 152 "data/maps/Beaston/scripts.pory"
+	setflag FLAG_HIDE_AMANITA_LAB
+# 153 "data/maps/Beaston/scripts.pory"
 	releaseall
 	return
 
 
-# 175 "data/maps/Beaston/scripts.pory"
+# 155 "data/maps/Beaston/scripts.pory"
 beaston_cokbern_rivalBattleLoss_down_enter:
-# 176 "data/maps/Beaston/scripts.pory"
+# 156 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 176 "data/maps/Beaston/scripts.pory"
+# 156 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 176 "data/maps/Beaston/scripts.pory"
+# 156 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 176 "data/maps/Beaston/scripts.pory"
+# 156 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 176 "data/maps/Beaston/scripts.pory"
+# 156 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 177 "data/maps/Beaston/scripts.pory"
+# 157 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 177 "data/maps/Beaston/scripts.pory"
+# 157 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 177 "data/maps/Beaston/scripts.pory"
+# 157 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 177 "data/maps/Beaston/scripts.pory"
+# 157 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 177 "data/maps/Beaston/scripts.pory"
+# 157 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 178 "data/maps/Beaston/scripts.pory"
+# 158 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 178 "data/maps/Beaston/scripts.pory"
+# 158 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 178 "data/maps/Beaston/scripts.pory"
+# 158 "data/maps/Beaston/scripts.pory"
 	walk_right
 	step_end
 
-# 180 "data/maps/Beaston/scripts.pory"
+# 160 "data/maps/Beaston/scripts.pory"
 beaston_cokbern_rivalBattleLoss_down_leave:
-# 181 "data/maps/Beaston/scripts.pory"
+# 161 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 181 "data/maps/Beaston/scripts.pory"
+# 161 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 181 "data/maps/Beaston/scripts.pory"
+# 161 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 182 "data/maps/Beaston/scripts.pory"
+# 162 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 182 "data/maps/Beaston/scripts.pory"
+# 162 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 182 "data/maps/Beaston/scripts.pory"
+# 162 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 182 "data/maps/Beaston/scripts.pory"
+# 162 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 182 "data/maps/Beaston/scripts.pory"
+# 162 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 183 "data/maps/Beaston/scripts.pory"
+# 163 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 183 "data/maps/Beaston/scripts.pory"
+# 163 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 183 "data/maps/Beaston/scripts.pory"
+# 163 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 183 "data/maps/Beaston/scripts.pory"
+# 163 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 183 "data/maps/Beaston/scripts.pory"
+# 163 "data/maps/Beaston/scripts.pory"
 	walk_left
 	step_end
 
 beaston_rivalBattleLoss_right::
-# 187 "data/maps/Beaston/scripts.pory"
+# 167 "data/maps/Beaston/scripts.pory"
 	call beaston_rivalBattleLoss_setup
-# 188 "data/maps/Beaston/scripts.pory"
+# 168 "data/maps/Beaston/scripts.pory"
 	applymovement 2, beaston_cokbern_rivalBattleLoss_right_enter
-# 189 "data/maps/Beaston/scripts.pory"
+# 169 "data/maps/Beaston/scripts.pory"
 	waitmovement 2
-# 190 "data/maps/Beaston/scripts.pory"
+# 170 "data/maps/Beaston/scripts.pory"
 	call beaston_rivalBattleLoss_text
-# 191 "data/maps/Beaston/scripts.pory"
+# 171 "data/maps/Beaston/scripts.pory"
 	waitmessage
-# 192 "data/maps/Beaston/scripts.pory"
+# 172 "data/maps/Beaston/scripts.pory"
 	applymovement 2, beaston_cokbern_rivalBattleLoss_right_leave
-# 193 "data/maps/Beaston/scripts.pory"
+# 173 "data/maps/Beaston/scripts.pory"
 	waitmovement 2
-# 194 "data/maps/Beaston/scripts.pory"
+# 174 "data/maps/Beaston/scripts.pory"
 	removeobject 2
-# 195 "data/maps/Beaston/scripts.pory"
-	setflag FLAG_UNUSED_0x02B
-# 196 "data/maps/Beaston/scripts.pory"
+# 175 "data/maps/Beaston/scripts.pory"
+	setflag FLAG_HIDE_AMANITA_LAB
+# 176 "data/maps/Beaston/scripts.pory"
 	releaseall
 	return
 
 
-# 198 "data/maps/Beaston/scripts.pory"
+# 178 "data/maps/Beaston/scripts.pory"
 beaston_cokbern_rivalBattleLoss_right_enter:
-# 199 "data/maps/Beaston/scripts.pory"
+# 179 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 199 "data/maps/Beaston/scripts.pory"
+# 179 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 199 "data/maps/Beaston/scripts.pory"
+# 179 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 199 "data/maps/Beaston/scripts.pory"
+# 179 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 199 "data/maps/Beaston/scripts.pory"
+# 179 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 200 "data/maps/Beaston/scripts.pory"
+# 180 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 200 "data/maps/Beaston/scripts.pory"
+# 180 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 200 "data/maps/Beaston/scripts.pory"
+# 180 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 200 "data/maps/Beaston/scripts.pory"
+# 180 "data/maps/Beaston/scripts.pory"
 	walk_down
-# 201 "data/maps/Beaston/scripts.pory"
+# 181 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 201 "data/maps/Beaston/scripts.pory"
+# 181 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 201 "data/maps/Beaston/scripts.pory"
+# 181 "data/maps/Beaston/scripts.pory"
 	walk_right
-# 201 "data/maps/Beaston/scripts.pory"
+# 181 "data/maps/Beaston/scripts.pory"
 	walk_right
 	step_end
 
-# 203 "data/maps/Beaston/scripts.pory"
+# 183 "data/maps/Beaston/scripts.pory"
 beaston_cokbern_rivalBattleLoss_right_leave:
-# 204 "data/maps/Beaston/scripts.pory"
+# 184 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 204 "data/maps/Beaston/scripts.pory"
+# 184 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 204 "data/maps/Beaston/scripts.pory"
+# 184 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 204 "data/maps/Beaston/scripts.pory"
+# 184 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 205 "data/maps/Beaston/scripts.pory"
+# 185 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 205 "data/maps/Beaston/scripts.pory"
+# 185 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 205 "data/maps/Beaston/scripts.pory"
+# 185 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 205 "data/maps/Beaston/scripts.pory"
+# 185 "data/maps/Beaston/scripts.pory"
 	walk_up
-# 206 "data/maps/Beaston/scripts.pory"
+# 186 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 206 "data/maps/Beaston/scripts.pory"
+# 186 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 206 "data/maps/Beaston/scripts.pory"
+# 186 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 206 "data/maps/Beaston/scripts.pory"
+# 186 "data/maps/Beaston/scripts.pory"
 	walk_left
-# 206 "data/maps/Beaston/scripts.pory"
+# 186 "data/maps/Beaston/scripts.pory"
 	walk_left
 	step_end
 
 beaston_BlockNorthExit::
-# 210 "data/maps/Beaston/scripts.pory"
+# 190 "data/maps/Beaston/scripts.pory"
 	lockall
-# 211 "data/maps/Beaston/scripts.pory"
+# 191 "data/maps/Beaston/scripts.pory"
 	playmoncry SPECIES_ROCKRUFF, CRY_MODE_NORMAL
-# 212 "data/maps/Beaston/scripts.pory"
+# 192 "data/maps/Beaston/scripts.pory"
 	waitmoncry
-# 213 "data/maps/Beaston/scripts.pory"
+# 193 "data/maps/Beaston/scripts.pory"
 	playse SE_SUPER_EFFECTIVE
-# 214 "data/maps/Beaston/scripts.pory"
+# 194 "data/maps/Beaston/scripts.pory"
 	waitse
-# 215 "data/maps/Beaston/scripts.pory"
+# 195 "data/maps/Beaston/scripts.pory"
 	playse SE_EFFECTIVE
-# 216 "data/maps/Beaston/scripts.pory"
+# 196 "data/maps/Beaston/scripts.pory"
 	waitse
-# 217 "data/maps/Beaston/scripts.pory"
+# 197 "data/maps/Beaston/scripts.pory"
 	playse SE_EFFECTIVE
-# 218 "data/maps/Beaston/scripts.pory"
+# 198 "data/maps/Beaston/scripts.pory"
 	waitse
-# 219 "data/maps/Beaston/scripts.pory"
+# 199 "data/maps/Beaston/scripts.pory"
 	msgbox beaston_BlockNorthExit_Text_0, MSGBOX_AUTOCLOSE
-# 220 "data/maps/Beaston/scripts.pory"
+# 200 "data/maps/Beaston/scripts.pory"
 	waitmessage
-# 221 "data/maps/Beaston/scripts.pory"
+# 201 "data/maps/Beaston/scripts.pory"
 	playmoncry SPECIES_PIKIPEK, CRY_MODE_NORMAL
-# 222 "data/maps/Beaston/scripts.pory"
+# 202 "data/maps/Beaston/scripts.pory"
 	waitmoncry
-# 223 "data/maps/Beaston/scripts.pory"
+# 203 "data/maps/Beaston/scripts.pory"
 	playse SE_EFFECTIVE
-# 224 "data/maps/Beaston/scripts.pory"
+# 204 "data/maps/Beaston/scripts.pory"
 	waitse
-# 225 "data/maps/Beaston/scripts.pory"
+# 205 "data/maps/Beaston/scripts.pory"
 	msgbox beaston_BlockNorthExit_Text_1, MSGBOX_AUTOCLOSE
-# 226 "data/maps/Beaston/scripts.pory"
+# 206 "data/maps/Beaston/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, beaston_player_stepBack
-# 227 "data/maps/Beaston/scripts.pory"
+# 207 "data/maps/Beaston/scripts.pory"
 	waitmovement 0
+# 208 "data/maps/Beaston/scripts.pory"
+	waitmessage
+# 209 "data/maps/Beaston/scripts.pory"
+	releaseall
+	return
+
+
+# 212 "data/maps/Beaston/scripts.pory"
+beaston_player_stepBack:
+# 213 "data/maps/Beaston/scripts.pory"
+	walk_down
+	step_end
+
+beaston_burgerGuyRoadblockItemCheck::
+# 217 "data/maps/Beaston/scripts.pory"
+	lockall
+# 218 "data/maps/Beaston/scripts.pory"
+	faceplayer
+# 219 "data/maps/Beaston/scripts.pory"
+	checkitem ITEM_BURGER_COUPON
+# 220 "data/maps/Beaston/scripts.pory"
+	goto_if_eq VAR_RESULT, FALSE, beaston_burgerGuyRoadblockTalkedTo
+# 221 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_text_burgerGuyPigleys, MSGBOX_NPC
+# 222 "data/maps/Beaston/scripts.pory"
+	waitmessage
+# 223 "data/maps/Beaston/scripts.pory"
+	releaseall
+	return
+
+
+beaston_burgerGuyRoadblockTalkedTo::
+# 227 "data/maps/Beaston/scripts.pory"
+	call beaston_burgerGuyRoadblockAskQuestion
 # 228 "data/maps/Beaston/scripts.pory"
 	waitmessage
 # 229 "data/maps/Beaston/scripts.pory"
@@ -615,10 +611,269 @@ beaston_BlockNorthExit::
 	return
 
 
-# 232 "data/maps/Beaston/scripts.pory"
-beaston_player_stepBack:
+beaston_burgerGuyRoadblockAskQuestion::
 # 233 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_text_burgerGuyRoadblock, MSGBOX_YESNO
+# 234 "data/maps/Beaston/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq beaston_burgerGuyRoadblockAskQuestion_2
+# 240 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_text_burgerGuyNo, MSGBOX_DEFAULT
+beaston_burgerGuyRoadblockAskQuestion_1:
+# 242 "data/maps/Beaston/scripts.pory"
+	waitmessage
+# 243 "data/maps/Beaston/scripts.pory"
+	giveitem ITEM_BURGER_COUPON, 1
+# 244 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_text_burgerGuyCoupon, MSGBOX_AUTOCLOSE
+	return
+
+beaston_burgerGuyRoadblockAskQuestion_2:
+# 236 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_text_burgerGuyYes, MSGBOX_DEFAULT
+	goto beaston_burgerGuyRoadblockAskQuestion_1
+
+
+beaston_burgerGuyRoadblock_top::
+# 276 "data/maps/Beaston/scripts.pory"
+	lockall
+# 277 "data/maps/Beaston/scripts.pory"
+	applymovement 3, beaston_movement_burgerGuyUp
+# 278 "data/maps/Beaston/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, look_down
+# 279 "data/maps/Beaston/scripts.pory"
+	waitmovement 3
+# 280 "data/maps/Beaston/scripts.pory"
+	checkitem ITEM_BURGER_COUPON
+# 281 "data/maps/Beaston/scripts.pory"
+	goto_if_eq VAR_RESULT, TRUE, beaston_burgerGuyRoadblock_topHaveVoucher
+# 282 "data/maps/Beaston/scripts.pory"
+	call beaston_burgerGuyRoadblockAskQuestion
+# 283 "data/maps/Beaston/scripts.pory"
+	waitmessage
+# 284 "data/maps/Beaston/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_movement_playerLeaveBurgerGuy
+# 285 "data/maps/Beaston/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 286 "data/maps/Beaston/scripts.pory"
+	applymovement 3, beaston_movement_burgerGuyDefault
+# 287 "data/maps/Beaston/scripts.pory"
+	waitmovement 3
+# 288 "data/maps/Beaston/scripts.pory"
+	releaseall
+	return
+
+
+beaston_burgerGuyRoadblock_topHaveVoucher::
+# 292 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_text_burgerHaveCoupon, MSGBOX_AUTOCLOSE
+# 293 "data/maps/Beaston/scripts.pory"
+	waitmessage
+# 294 "data/maps/Beaston/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_movement_playerLeaveBurgerGuy
+# 295 "data/maps/Beaston/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 296 "data/maps/Beaston/scripts.pory"
+	applymovement 3, beaston_movement_burgerGuyDefault
+# 297 "data/maps/Beaston/scripts.pory"
+	waitmovement 3
+# 298 "data/maps/Beaston/scripts.pory"
+	releaseall
+	return
+
+
+beaston_burgerGuyRoadblock_bottom::
+# 302 "data/maps/Beaston/scripts.pory"
+	lockall
+# 303 "data/maps/Beaston/scripts.pory"
+	applymovement 3, beaston_movement_burgerGuyDown
+# 304 "data/maps/Beaston/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, look_up
+# 305 "data/maps/Beaston/scripts.pory"
+	waitmovement 3
+# 306 "data/maps/Beaston/scripts.pory"
+	checkitem ITEM_BURGER_COUPON
+# 307 "data/maps/Beaston/scripts.pory"
+	goto_if_eq VAR_RESULT, TRUE, beaston_burgerGuyRoadblock_topHaveVoucher
+# 308 "data/maps/Beaston/scripts.pory"
+	call beaston_burgerGuyRoadblockAskQuestion
+# 309 "data/maps/Beaston/scripts.pory"
+	waitmessage
+# 310 "data/maps/Beaston/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_movement_playerLeaveBurgerGuy
+# 311 "data/maps/Beaston/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 312 "data/maps/Beaston/scripts.pory"
+	applymovement 3, beaston_movement_burgerGuyDefault
+# 313 "data/maps/Beaston/scripts.pory"
+	waitmovement 3
+# 314 "data/maps/Beaston/scripts.pory"
+	releaseall
+	return
+
+
+beaston_burgerGuyRoadblock_extraBottom::
+# 318 "data/maps/Beaston/scripts.pory"
+	lockall
+# 319 "data/maps/Beaston/scripts.pory"
+	applymovement 3, beaston_movement_burgerGuyExtraDown
+# 320 "data/maps/Beaston/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, look_up
+# 321 "data/maps/Beaston/scripts.pory"
+	waitmovement 3
+# 322 "data/maps/Beaston/scripts.pory"
+	checkitem ITEM_BURGER_COUPON
+# 323 "data/maps/Beaston/scripts.pory"
+	goto_if_eq VAR_RESULT, TRUE, beaston_burgerGuyRoadblock_bottomHaveVoucher
+# 324 "data/maps/Beaston/scripts.pory"
+	call beaston_burgerGuyRoadblockAskQuestion
+# 325 "data/maps/Beaston/scripts.pory"
+	waitmessage
+# 326 "data/maps/Beaston/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_movement_playerLeaveBurgerGuy
+# 327 "data/maps/Beaston/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 328 "data/maps/Beaston/scripts.pory"
+	applymovement 3, beaston_movement_burgerGuyReturn
+# 329 "data/maps/Beaston/scripts.pory"
+	waitmovement 3
+# 330 "data/maps/Beaston/scripts.pory"
+	releaseall
+	return
+
+
+beaston_burgerGuyRoadblock_bottomHaveVoucher::
+# 334 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_text_burgerHaveCoupon, MSGBOX_AUTOCLOSE
+# 335 "data/maps/Beaston/scripts.pory"
+	waitmessage
+# 336 "data/maps/Beaston/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_movement_playerLeaveBurgerGuy
+# 337 "data/maps/Beaston/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 338 "data/maps/Beaston/scripts.pory"
+	applymovement 3, beaston_movement_burgerGuyReturn
+# 339 "data/maps/Beaston/scripts.pory"
+	waitmovement 3
+# 340 "data/maps/Beaston/scripts.pory"
+	releaseall
+	return
+
+
+# 343 "data/maps/Beaston/scripts.pory"
+beaston_movement_burgerGuyUp:
+# 344 "data/maps/Beaston/scripts.pory"
+	emote_exclamation_mark
+# 345 "data/maps/Beaston/scripts.pory"
+	face_up
+	step_end
+
+# 348 "data/maps/Beaston/scripts.pory"
+beaston_movement_burgerGuyDown:
+# 349 "data/maps/Beaston/scripts.pory"
+	emote_exclamation_mark
+# 350 "data/maps/Beaston/scripts.pory"
+	face_down
+	step_end
+
+# 353 "data/maps/Beaston/scripts.pory"
+beaston_movement_burgerGuyExtraDown:
+# 354 "data/maps/Beaston/scripts.pory"
+	emote_exclamation_mark
+# 355 "data/maps/Beaston/scripts.pory"
+	face_down
+# 356 "data/maps/Beaston/scripts.pory"
+	delay_4
+# 357 "data/maps/Beaston/scripts.pory"
 	walk_down
+	step_end
+
+# 360 "data/maps/Beaston/scripts.pory"
+beaston_movement_burgerGuyDefault:
+# 361 "data/maps/Beaston/scripts.pory"
+	face_right
+	step_end
+
+# 364 "data/maps/Beaston/scripts.pory"
+beaston_movement_burgerGuyReturn:
+# 365 "data/maps/Beaston/scripts.pory"
+	walk_up
+# 366 "data/maps/Beaston/scripts.pory"
+	face_right
+	step_end
+
+# 369 "data/maps/Beaston/scripts.pory"
+beaston_movement_playerLeaveBurgerGuy:
+# 370 "data/maps/Beaston/scripts.pory"
+	walk_right
+# 370 "data/maps/Beaston/scripts.pory"
+	walk_right
+	step_end
+
+beaston_blockWestExit::
+# 374 "data/maps/Beaston/scripts.pory"
+	lockall
+# 375 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_text_cantLeaveYet, MSGBOX_AUTOCLOSE
+# 376 "data/maps/Beaston/scripts.pory"
+	waitmessage
+# 377 "data/maps/Beaston/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_movement_blockWestExit
+# 378 "data/maps/Beaston/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 379 "data/maps/Beaston/scripts.pory"
+	releaseall
+	return
+
+
+beaston_blockEastExit::
+# 383 "data/maps/Beaston/scripts.pory"
+	lockall
+# 384 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_text_cantLeaveYet, MSGBOX_AUTOCLOSE
+# 385 "data/maps/Beaston/scripts.pory"
+	waitmessage
+# 386 "data/maps/Beaston/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_movement_blockEastExit
+# 387 "data/maps/Beaston/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 388 "data/maps/Beaston/scripts.pory"
+	releaseall
+	return
+
+
+beaston_blockSouthExit::
+# 392 "data/maps/Beaston/scripts.pory"
+	lockall
+# 393 "data/maps/Beaston/scripts.pory"
+	msgbox beaston_text_cantLeaveYet, MSGBOX_AUTOCLOSE
+# 394 "data/maps/Beaston/scripts.pory"
+	waitmessage
+# 395 "data/maps/Beaston/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, beaston_movement_blockSouthExit
+# 396 "data/maps/Beaston/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 397 "data/maps/Beaston/scripts.pory"
+	releaseall
+	return
+
+
+# 406 "data/maps/Beaston/scripts.pory"
+beaston_movement_blockWestExit:
+# 407 "data/maps/Beaston/scripts.pory"
+	walk_right
+	step_end
+
+# 410 "data/maps/Beaston/scripts.pory"
+beaston_movement_blockEastExit:
+# 411 "data/maps/Beaston/scripts.pory"
+	walk_left
+	step_end
+
+# 414 "data/maps/Beaston/scripts.pory"
+beaston_movement_blockSouthExit:
+# 415 "data/maps/Beaston/scripts.pory"
+	walk_up
 	step_end
 
 beastonSign_Text_0:
@@ -638,41 +893,71 @@ beastonLabSign_Text_0:
 	.string "beaston research lab$"
 
 beaston_quigleyAsk_Text_0:
-# 37 "data/maps/Beaston/scripts.pory"
+# 32 "data/maps/Beaston/scripts.pory"
 	.string "Quigley$"
 
 beaston_quigleyAsk_Text_1:
-# 38 "data/maps/Beaston/scripts.pory"
+# 33 "data/maps/Beaston/scripts.pory"
 	.string "so u ready$"
 
 beaston_sendYouBack_Text_0:
-# 44 "data/maps/Beaston/scripts.pory"
+# 39 "data/maps/Beaston/scripts.pory"
 	.string "yeah thought so\pget ur stuff and come back$"
 
 beaston_labEscort_Text_0:
-# 56 "data/maps/Beaston/scripts.pory"
+# 52 "data/maps/Beaston/scripts.pory"
 	.string "sweet c'mon$"
 
 beaston_labEscort_Text_1:
-# 64 "data/maps/Beaston/scripts.pory"
+# 58 "data/maps/Beaston/scripts.pory"
 	.string "right so\pmy dad needed someone to help with his\nresearch\pidk what he's doing but he heard stella\ntalk abt u\pso i guess he thought you'd be good\nhelp$"
 
 beaston_labEscort_Text_2:
-# 69 "data/maps/Beaston/scripts.pory"
+# 63 "data/maps/Beaston/scripts.pory"
 	.string "idk why he didn't pick me but\pguess that doesn't really matter now\pc'mon$"
 
 beaston_rivalBattleLoss_text_Text_0:
-# 116 "data/maps/Beaston/scripts.pory"
-	.string "Prof. Cokbern$"
-
-beaston_rivalBattleLoss_text_Text_1:
-# 117 "data/maps/Beaston/scripts.pory"
+# 112 "data/maps/Beaston/scripts.pory"
 	.string "{PLAYER}! There you are!\pI'm glad you're alright, seems things\ndidn't quite go to plan…\pRegardless, I've something to ask of\nyou.\pMy niece, Stella, lives in the next town\nover. I'm sure you two are familiar\lwith each other.\pI'd like for you to bring her back to my\nlab, I've got something special for\lyou two.\pI'll be logging my recent findings, if\nyou need me.$"
 
 beaston_BlockNorthExit_Text_0:
-# 219 "data/maps/Beaston/scripts.pory"
+# 199 "data/maps/Beaston/scripts.pory"
 	.string "Sounds like something hectic is\nhappening up ahead…$"
 
 beaston_BlockNorthExit_Text_1:
-# 225 "data/maps/Beaston/scripts.pory"
+# 205 "data/maps/Beaston/scripts.pory"
 	.string "You decide it's best to stay out of it.$"
+
+beaston_text_burgerGuyRoadblock::
+# 247 "data/maps/Beaston/scripts.pory"
+	.string "Hey, hey, hey!\p"
+	.string "Tell me… d'ya like burgers?$"
+
+beaston_text_burgerGuyPigleys::
+# 252 "data/maps/Beaston/scripts.pory"
+	.string "Man… Pigby's has gotta be my favorite\nrestaurant!\p"
+	.string "Nothing beats the fries and lemonade!$"
+
+beaston_text_burgerGuyYes::
+# 257 "data/maps/Beaston/scripts.pory"
+	.string "Now that's what I like to hear!$"
+
+beaston_text_burgerGuyNo::
+# 261 "data/maps/Beaston/scripts.pory"
+	.string "Aww… well I've got somethin' that'll\nchange your mind for sure!$"
+
+beaston_text_burgerGuyCoupon::
+# 265 "data/maps/Beaston/scripts.pory"
+	.string "This'll get ya one free burger at\nPigby's. Just tell 'em Jimmy sent\lya.$"
+
+beaston_text_burgerHaveCoupon::
+# 269 "data/maps/Beaston/scripts.pory"
+	.string "Hey, hey, hey!\p"
+	.string "I'm not givin' out more coupons for\nfree!\p"
+	.string "You already got one!$"
+
+beaston_text_cantLeaveYet::
+# 400 "data/maps/Beaston/scripts.pory"
+	.string "You feel like you really shouldn't\n"
+	.string "leave without telling the professor\l"
+	.string "about what you saw…$"

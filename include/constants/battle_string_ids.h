@@ -738,14 +738,20 @@
 #define STRINGID_PKMNWASHEARTBROKEN                   736
 #define STRINGID_HEARTBREAKWOREOFF                    737
 #define STRINGID_CHARGECOUNTROSE                      738
-#define STRINGID_CHARGECOUNTFELL                      739
+#define STRINGID_CHARGECOUNTLEFT                      739
 #define STRINGID_LOSTCHARGE                           740
-#define STRINGID_ONECHARGELEFT                        741
+#define STRINGID_CHARGECOUNTFELL                      741
 #define STRINGID_DEFCHARGECOUNTROSE                   742
 #define STRINGID_PARRIEDATTACK                        743
 #define STRINGID_PARRYFAILED                          744
+#define STRINGID_CURSEDBODYTORMENTED                  745
+#define STRINGID_STARTEDTOPANIC                       746
+#define STRINGID_TARGETMINIMIZED                      747
+#define STRINGID_TARGETMINIMIZEDBYITEM                748
+#define STRINGID_LOCKETSHATTERED                      749
+#define STRINGID_ONECHARGELEFT                        750
 
-#define BATTLESTRINGS_COUNT                           745
+#define BATTLESTRINGS_COUNT                           751
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

@@ -117,6 +117,7 @@ enum {
     MENU_CHANGE_FORM,
     MENU_CHANGE_ABILITY,
     MENU_MOVES,
+    MENU_SELECT_FIELD_MOVE,
     MENU_FIELD_MOVES,
 };
 
@@ -138,6 +139,7 @@ enum {
     ACTIONS_TAKEITEM_TOSS,
     ACTIONS_ROTOM_CATALOG,
     ACTIONS_ZYGARDE_CUBE,
+    ACTIONS_FIELD_MOVE,
 };
 
 // In CursorCb_FieldMove, field moves <= FIELD_MOVE_WATERFALL are assumed to line up with the badge flags.
@@ -523,6 +525,9 @@ void TryItemHoldFormChange(struct Pokemon *mon);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
 static void CursorCb_Evolution(u8 taskId);
+static u8 CountFieldMoves(struct Pokemon *);
+static void CursorCb_FieldMoveSelection(u8);
+static void ShowFieldMoveSelectWindow(u8 slot);
 
 // static const data
 #include "data/party_menu.h"
@@ -2230,6 +2235,36 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
         return CAN_LEARN_MOVE;
 }
 
+static u8 CountFieldMoves(struct Pokemon *mon)
+{
+    u8 fieldMoveCount = 0;
+    u8 i;
+
+    if(CanLearnTeachableMove(GetMonData(mon, MON_DATA_SPECIES_OR_EGG), MOVE_FLY))
+    {
+        fieldMoveCount++;
+    }
+
+    for(i = 0; i < MAX_MON_MOVES; i++)
+    {
+        switch(GetMonData(mon, i + MON_DATA_MOVE1))
+        {
+            case MOVE_DIVE:
+                fieldMoveCount++;
+                break;
+            case MOVE_DIG:
+                fieldMoveCount++;
+                break;
+            case MOVE_SWEET_SCENT:
+                fieldMoveCount++;
+                break;
+        }
+    }
+
+    return fieldMoveCount;
+}
+
+
 static void InitPartyMenuWindows(u8 layout)
 {
     switch (layout)
@@ -2681,6 +2716,7 @@ void DisplayPartyMenuStdMessage(u32 stringId)
             break;
         case PARTY_MSG_RESTORE_WHICH_MOVE:
         case PARTY_MSG_BOOST_PP_WHICH_MOVE:
+        case PARTY_MSG_CHOOSE_FIELD_MOVE:
             *windowPtr = AddWindow(&sWhichMoveMsgWindowTemplate);
             break;
         case PARTY_MSG_ALREADY_HOLDING_ONE:
@@ -2767,7 +2803,7 @@ static u8 DisplaySelectionWindow(u8 windowType)
     case SELECTWINDOW_ZYGARDECUBE:
         window = sZygardeCubeSelectWindowTemplate;
         break;
-    default: // SELECTWINDOW_MOVES
+    default: // SELECTWINDOW_MOVES, SELECTWINDOW_FIELDMOVES
         window = sMoveSelectWindowTemplate;
         break;
     }
@@ -2782,7 +2818,7 @@ static u8 DisplaySelectionWindow(u8 windowType)
     for (i = 0; i < sPartyMenuInternal->numActions; i++)
     {
         const u8 *text;
-        u8 fontColorsId = ( (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES) || (sPartyMenuInternal->actions[i] == MENU_EVOLUTION)) ? 4 : 3;
+        u8 fontColorsId = ( (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES) || (sPartyMenuInternal->actions[i] == MENU_SELECT_FIELD_MOVE) || (sPartyMenuInternal->actions[i] == MENU_EVOLUTION)) ? 4 : 3;
         if (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES)
             text = gMovesInfo[sFieldMoves[sPartyMenuInternal->actions[i] - MENU_FIELD_MOVES]].name;
         else
@@ -2843,22 +2879,42 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
 
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 {
-    u8 i;
+    u8 i, fieldMoveCount;
 
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
+    fieldMoveCount = CountFieldMoves(&mons[slotId]);
 
-    // Add fly moves to action list
-    
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    if(fieldMoveCount == 1)
     {
-        if ( ((GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == MOVE_FLY) || (GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == MOVE_DIVEBOMB)) 
-        && FlagGet(FLAG_BADGE05_GET) == TRUE)
+
+        if(CanLearnTeachableMove(GetMonData(&mons[slotId], MON_DATA_SPECIES), MOVE_FLY))
         {
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, 5 + MENU_FIELD_MOVES);
-            break;
         }
+
+        for(i = 0; i < MAX_MON_MOVES; i++)
+        {
+            switch(GetMonData(&mons[slotId], i + MON_DATA_MOVE1))
+            {
+                case MOVE_DIVE:
+                    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, 6 + MENU_FIELD_MOVES);
+                    break;
+                case MOVE_DIG:
+                    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, 9 + MENU_FIELD_MOVES);
+                    break;
+                case MOVE_SWEET_SCENT:
+                    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, 13 + MENU_FIELD_MOVES);
+                    break;
+            }   
+        }
+
     }
+    else if(fieldMoveCount > 1)
+    {
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SELECT_FIELD_MOVE);
+    }
+    
 
     if (!InBattlePike())
     {
@@ -2866,6 +2922,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SWITCH);
         
         AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_NICKNAME);
+
         if (GetNumberOfRelearnableMoves(&mons[slotId]) != 0) {
 			AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_MOVES);
 		}
@@ -2878,6 +2935,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         
         else
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_ITEM);
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_CANCEL1);
     }
 
 }
@@ -3045,6 +3103,19 @@ static void CursorCb_Nickname(u8 taskId)
     gSpecialVar_0x8004 = gPartyMenu.slotId;
     sPartyMenuInternal->exitCallback = ChangePokemonNicknamePartyScreen;
     Task_ClosePartyMenu(taskId);
+}
+
+static void CursorCb_FieldMoveSelection(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    SetPartyMonSelectionActions(gPlayerParty, gPartyMenu.slotId, ACTIONS_FIELD_MOVE);
+    ShowFieldMoveSelectWindow(gPartyMenu.slotId);
+    DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_FIELD_MOVE);
+    gTasks[taskId].data[0] = 0xFF;
+    gTasks[taskId].func = Task_HandleSelectionMenuInput;
+    
 }
 
 static void CursorCb_Moves(u8 taskId)
@@ -5217,6 +5288,67 @@ static void ShowMoveSelectWindow(u8 slot)
         if (move != MOVE_NONE)
             moveCount++;
     }
+    InitMenuInUpperLeftCornerNormal(windowId, moveCount, 0);
+    ScheduleBgCopyTilemapToVram(2);
+}
+
+static void ShowFieldMoveSelectWindow(u8 slot)
+{
+    u8 i;
+    u8 moveCount = 0;
+    u8 fontId = FONT_NORMAL;
+    u8 windowId = DisplaySelectionWindow(SELECTWINDOW_MOVES);
+    u16 move;
+
+    if(CanLearnTeachableMove(GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES), MOVE_FLY))
+    {
+        AddTextPrinterParameterized(windowId, fontId, GetMoveName(MOVE_FLY), 8, 0 + 1, TEXT_SKIP_DRAW, NULL);
+        sPartyMenuInternal->actions[moveCount] = (5 + MENU_FIELD_MOVES);
+        moveCount++;
+    }
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        move = GetMonData(&gPlayerParty[slot], MON_DATA_MOVE1 + i);
+        if(move == MOVE_DIVE)
+        {
+            AddTextPrinterParameterized(windowId, fontId, GetMoveName(move), 8, (moveCount * 16) + 1, TEXT_SKIP_DRAW, NULL);
+            sPartyMenuInternal->actions[moveCount] = (6 + MENU_FIELD_MOVES);
+            moveCount++;
+        }
+    }
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        move = GetMonData(&gPlayerParty[slot], MON_DATA_MOVE1 + i);
+        if(move == MOVE_DIG)
+        {
+            AddTextPrinterParameterized(windowId, fontId, GetMoveName(move), 8, (moveCount * 16) + 1, TEXT_SKIP_DRAW, NULL);
+            sPartyMenuInternal->actions[moveCount] = (9 + MENU_FIELD_MOVES);
+            moveCount++;
+        }
+    }
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        move = GetMonData(&gPlayerParty[slot], MON_DATA_MOVE1 + i);
+        if(move == MOVE_SWEET_SCENT)
+        {
+            AddTextPrinterParameterized(windowId, fontId, GetMoveName(move), 8, (moveCount * 16) + 1, TEXT_SKIP_DRAW, NULL);
+            sPartyMenuInternal->actions[moveCount] = (13 + MENU_FIELD_MOVES);
+            moveCount++;
+        }
+    }
+
+    if(moveCount < 4)
+    {
+        for(i = moveCount; i < 4; i++)
+        {
+            AddTextPrinterParameterized(windowId, fontId, GetMoveName(MOVE_NONE), 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
+            sPartyMenuInternal->actions[i] = (MENU_CANCEL2);
+        }
+    }
+
     InitMenuInUpperLeftCornerNormal(windowId, moveCount, 0);
     ScheduleBgCopyTilemapToVram(2);
 }

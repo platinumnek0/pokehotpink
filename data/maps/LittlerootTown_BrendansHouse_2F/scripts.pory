@@ -305,18 +305,6 @@ script testSignPost{
     msgbox("This is a test!", MSGBOX_NPC)
 }
 
-script dadCallForYou{
-	setflag(FLAG_SYS_B_DASH)
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 1)
-	setflag(FLAG_SHOW_SPEAKER_NAME)
-	speakername("Dad")
-    msgbox("hey {PLAYER}\pcome downstairs some kid wants you", MSGBOX_NPC)
-	speakername(NULL)
-	setflag(FLAG_UNUSED_0x021)
-	setflag(FLAG_UNUSED_0x022)
-    end
-}
-
 script bedroom_amiiboGift{
 	lockall
 	//check if you have the amiibo, if so then go to the "you already have it" script

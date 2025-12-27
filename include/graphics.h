@@ -1198,6 +1198,9 @@ extern const u32 gItemIcon_FlameOrb[];
 extern const u32 gItemIconPalette_FlameOrb[];
 extern const u32 gItemIcon_ToxicOrb[];
 extern const u32 gItemIconPalette_ToxicOrb[];
+extern const u32 gItemIcon_FrostOrb[];
+extern const u32 gItemIconPalette_FrostOrb[];
+extern const u32 gItemIcon_PoisonOrb[];
 // Weather Rocks
 extern const u32 gItemIcon_DampRock[];
 extern const u32 gItemIconPalette_DampRock[];
@@ -1748,6 +1751,14 @@ extern const u32 gItemIcon_MasterBait[];
 extern const u32 gItemIconPalette_MasterBait[];
 extern const u32 gItemIcon_Excalibur[];
 extern const u32 gItemIconPalette_Excalibur[];
+extern const u32 gItemIcon_ShrinkRay[];
+extern const u32 gItemIconPalette_ShrinkRay[];
+extern const u32 gItemIcon_BurgerCoupon[];
+extern const u32 gItemIconPalette_BurgerCoupon[];
+extern const u32 gItemIcon_HeartLocket[];
+extern const u32 gItemIconPalette_SoulLocket[];
+extern const u32 gItemIconPalette_DevilLocket[];
+
 
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
@@ -2537,7 +2548,6 @@ extern const u32 gBattleAnimSpritePal_Impact[];
 extern const u32 gBattleAnimSpritePal_SharpTeeth[];
 extern const u32 gBattleAnimSpritePal_RainbowRings[];
 extern const u32 gBattleAnimSpritePal_IceCrystals[];
-extern const u32 gBattleAnimSpritePal_IceCrystals[];
 extern const u32 gBattleAnimSpritePal_HandsAndFeet[];
 extern const u32 gBattleAnimSpritePal_MistCloud[];
 extern const u32 gBattleAnimSpritePal_SharpTeeth[];
@@ -2882,6 +2892,8 @@ extern const u32 gBattleAnimSpritePal_SyrupYellow[];
 extern const u32 gBattleAnimSpriteGfx_Scale[];
 extern const u32 gBattleAnimSpritePal_Scale[];
 extern const u32 gBattleAnimSpriteGfx_BindingChain[];
+extern const u32 gBattleAnimSpriteGfx_SaltCrystals[];
+extern const u32 gBattleAnimSpritePal_SaltCrystals[];
 
 extern const u32 gBattleAnimBgImage_Dark[];
 extern const u32 gBattleAnimBgImage_Ghost[];

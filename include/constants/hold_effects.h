@@ -166,6 +166,20 @@
 
 //hot pink hold effects
 #define HOLD_EFFECT_EXCALIBUR           185
+#define HOLD_EFFECT_RUBBER_POWER        186
+#define HOLD_EFFECT_GOLDEN_NEEDLE       187
+#define HOLD_EFFECT_WINTER_COAT         188
+#define HOLD_EFFECT_DREAM_SAND          189
+#define HOLD_EFFECT_VORPAL_SWORD        190
+#define HOLD_EFFECT_MOON_CHARM          191
+#define HOLD_EFFECT_DOUBLOON            192
+#define HOLD_EFFECT_OMNI_HELIX          193
+#define HOLD_EFFECT_SNARE_DRUM          194
+#define HOLD_EFFECT_FROST_ORB           195
+#define HOLD_EFFECT_POISON_ORB          196
+#define HOLD_EFFECT_SHRINK_RAY          197
+#define HOLD_EFFECT_SOUL_LOCKET         198
+#define HOLD_EFFECT_DEVIL_LOCKET        199
 
 #define HOLD_EFFECT_CHOICE(holdEffect)((holdEffect == HOLD_EFFECT_CHOICE_BAND || holdEffect == HOLD_EFFECT_CHOICE_SCARF || holdEffect == HOLD_EFFECT_CHOICE_SPECS))
 

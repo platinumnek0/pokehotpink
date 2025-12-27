@@ -6,42 +6,35 @@
   "region_map_section": "MAPSEC_PETALBURG_WOODS",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",
-  "map_type": "MAP_TYPE_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
   "allow_cycling": false,
   "allow_escaping": false,
   "allow_running": true,
-  "show_map_name": false,
+  "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
-      "x": 12,
-      "y": 7,
+      "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
+      "x": 4,
+      "y": 3,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "subfloraEggRoom_man",
-      "flag": "FLAG_UNUSED_0x02C"
+      "script": "subfloraGrotto_triggerEncounter",
+      "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 11,
-      "y": 34,
+      "x": 4,
+      "y": 9,
       "elevation": 0,
-      "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": "6"
-    },
-    {
-      "x": 12,
-      "y": 34,
-      "elevation": 0,
-      "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": "7"
+      "dest_map": "MAP_SUBFLORA_WOODS",
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [

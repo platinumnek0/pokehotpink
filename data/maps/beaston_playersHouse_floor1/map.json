@@ -25,20 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_UNUSED_0x022"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_NORMAN",
-      "x": 2,
-      "y": 10,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_UNUSED_0x022"
+      "flag": "FLAG_HIDE_QUIGLEY_PLAYER_HOUSE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_NORMAN",
@@ -51,7 +38,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_UNUSED_0x021"
+      "flag": "FLAG_HIDE_DAD_INTRO"
     }
   ],
   "warp_events": [
@@ -84,7 +71,7 @@
       "y": 6,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "1",
+      "var_value": "0",
       "script": "playerWalkOverToLivingRoomTop"
     },
     {
@@ -93,7 +80,7 @@
       "y": 7,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "1",
+      "var_value": "0",
       "script": "playerWalkOverToLivingRoomMid"
     },
     {
@@ -102,7 +89,7 @@
       "y": 8,
       "elevation": 0,
       "var": "VAR_LITTLEROOT_INTRO_STATE",
-      "var_value": "1",
+      "var_value": "0",
       "script": "playerWalkOverToLivingRoomBottom"
     }
   ],

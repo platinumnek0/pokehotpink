@@ -460,6 +460,9 @@ const u32 gBattleAnimSpritePal_SyrupYellow[] = INCBIN_U32("graphics/battle_anims
 const u32 gBattleAnimSpriteGfx_Scale[] = INCBIN_U32("graphics/battle_anims/sprites/scale.4bpp.lz");
 const u32 gBattleAnimSpritePal_Scale[] = INCBIN_U32("graphics/battle_anims/sprites/scale.gbapal.lz");
 
+const u32 gBattleAnimSpriteGfx_SaltCrystals[] = INCBIN_U32("graphics/battle_anims/sprites/salt_crystal.4bpp.lz");
+const u32 gBattleAnimSpritePal_SaltCrystals[] = INCBIN_U32("graphics/battle_anims/sprites/salt_crystals.gbapal.lz");
+
 // old battle interface data, unused
 
 const u32 gOldBattleInterfaceGfx[] = INCBIN_U32("graphics/unused/obi1.4bpp.lz");

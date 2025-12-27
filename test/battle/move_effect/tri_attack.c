@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Tri Attack can inflict paralysis, burn or freeze")
     u8 statusAnim;
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; }
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FROSTBITE; }
     PASSES_RANDOMLY(1, 3, RNG_TRI_ATTACK);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -25,8 +25,8 @@ SINGLE_BATTLE_TEST("Tri Attack can inflict paralysis, burn or freeze")
         ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
         if (statusAnim == B_ANIM_STATUS_BRN) {
             STATUS_ICON(opponent, burn: TRUE);
-        } else if (statusAnim == B_ANIM_STATUS_FRZ) {
-            STATUS_ICON(opponent, freeze: TRUE);
+        } else if (statusAnim == B_ANIM_STATUS_FROSTBITE) {
+            STATUS_ICON(opponent, frostbite: TRUE);
         } else if (statusAnim == B_ANIM_STATUS_PRZ) {
             STATUS_ICON(opponent, paralysis: TRUE);
         }
@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze electric/fire/ice typ
     #if B_PARALYZE_ELECTRIC >= GEN_6
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = MOVE_EFFECT_PARALYSIS; species = SPECIES_RAICHU; }
     #endif // B_PARALYZE_ELECTRIC
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; rng = MOVE_EFFECT_FREEZE; species = SPECIES_GLALIE; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FROSTBITE; rng = MOVE_EFFECT_FROSTBITE; species = SPECIES_GLALIE; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = MOVE_EFFECT_BURN; species = SPECIES_ARCANINE; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -56,8 +56,8 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze electric/fire/ice typ
             ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
             if (statusAnim == B_ANIM_STATUS_BRN) {
                 STATUS_ICON(opponent, burn: TRUE);
-            } else if (statusAnim == B_ANIM_STATUS_FRZ) {
-                STATUS_ICON(opponent, freeze: TRUE);
+            } else if (statusAnim == B_ANIM_STATUS_FROSTBITE) {
+                STATUS_ICON(opponent, frostbite: TRUE);
             } else if (statusAnim == B_ANIM_STATUS_PRZ) {
                 STATUS_ICON(opponent, paralysis: TRUE);
             }
@@ -72,8 +72,8 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze pokemon with abilitie
     u32 rng;
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = MOVE_EFFECT_PARALYSIS; species = SPECIES_PERSIAN; ability = ABILITY_LIMBER; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = MOVE_EFFECT_PARALYSIS; species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; rng = MOVE_EFFECT_FREEZE; species = SPECIES_CAMERUPT; ability = ABILITY_MAGMA_ARMOR; }
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; rng = MOVE_EFFECT_FREEZE; species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FROSTBITE; rng = MOVE_EFFECT_FROSTBITE; species = SPECIES_CAMERUPT; ability = ABILITY_MAGMA_ARMOR; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FROSTBITE; rng = MOVE_EFFECT_FROSTBITE; species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = MOVE_EFFECT_BURN; species = SPECIES_DEWPIDER; ability = ABILITY_WATER_BUBBLE; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = MOVE_EFFECT_BURN; species = SPECIES_SEAKING; ability = ABILITY_WATER_VEIL; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = MOVE_EFFECT_BURN; species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
@@ -91,8 +91,8 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze pokemon with abilitie
             ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
             if (statusAnim == B_ANIM_STATUS_BRN) {
                 STATUS_ICON(opponent, burn: TRUE);
-            } else if (statusAnim == B_ANIM_STATUS_FRZ) {
-                STATUS_ICON(opponent, freeze: TRUE);
+            } else if (statusAnim == B_ANIM_STATUS_FROSTBITE) {
+                STATUS_ICON(opponent, frostbite: TRUE);
             } else if (statusAnim == B_ANIM_STATUS_PRZ) {
                 STATUS_ICON(opponent, paralysis: TRUE);
             }
@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze a mon which is alread
     u32 rng;
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = MOVE_EFFECT_PARALYSIS; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = MOVE_EFFECT_BURN; }
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; rng = MOVE_EFFECT_FREEZE; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FROSTBITE; rng = MOVE_EFFECT_FROSTBITE; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_SLEEP); }
@@ -120,8 +120,8 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze a mon which is alread
             ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
             if (statusAnim == B_ANIM_STATUS_BRN) {
                 STATUS_ICON(opponent, burn: TRUE);
-            } else if (statusAnim == B_ANIM_STATUS_FRZ) {
-                STATUS_ICON(opponent, freeze: TRUE);
+            } else if (statusAnim == B_ANIM_STATUS_FROSTBITE) {
+                STATUS_ICON(opponent, frostbite: TRUE);
             } else if (statusAnim == B_ANIM_STATUS_PRZ) {
                 STATUS_ICON(opponent, paralysis: TRUE);
             }

@@ -27,19 +27,54 @@
       "x": 70,
       "y": 21,
       "elevation": 0,
-      "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": "4"
+      "dest_map": "MAP_SUBFLORA_WOODS",
+      "dest_warp_id": "2"
     },
     {
       "x": 71,
       "y": 21,
       "elevation": 0,
-      "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": "5"
+      "dest_map": "MAP_SUBFLORA_WOODS",
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [
-
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "1",
+      "script": "beaston_blockEastExit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "1",
+      "script": "beaston_blockEastExit"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "1",
+      "script": "beaston_blockEastExit"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "1",
+      "script": "beaston_blockEastExit"
+    }
   ],
   "bg_events": [
 

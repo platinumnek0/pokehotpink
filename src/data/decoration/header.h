@@ -1101,7 +1101,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = DecorDesc_DUSKULL_DOLL,
-        .tiles = DecorGfx_DUSKULL_DOLL,
+        .tiles = DecorGfx_MUDKIP_DOLL,
     },
 
     [DECOR_WYNAUT_DOLL] =

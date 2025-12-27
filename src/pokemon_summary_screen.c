@@ -598,16 +598,16 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .tilemapLeft = 11,
         .tilemapTop = 9,
         .width = 19,
-        .height = 6,
+        .height = 7,
         .paletteNum = 6,
         .baseBlock = 487,
     },
     [PSS_DATA_WINDOW_INFO_MEMO] = {
         .bg = 0,
         .tilemapLeft = 11,
-        .tilemapTop = 15,
+        .tilemapTop = 16,
         .width = 19,
-        .height = 5,
+        .height = 4,
         .paletteNum = 6,
         .baseBlock = 591 + 19 * 6,
     },
@@ -3203,7 +3203,7 @@ static void PrintMonAbilityName(void)
 static void PrintMonAbilityDescription(void)
 {
     u16 ability = GetAbilityBySpecies(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum);
-    PrintTextOnWindowSmallNarrow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].description, 0, 14, 2, 0);
+    PrintTextOnWindowSmallNarrow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].description, 0, 14, 1, 0);
 }
 
 static void BufferMonTrainerMemo(void)
@@ -3260,7 +3260,7 @@ static void BufferMonTrainerMemo(void)
 
 static void PrintMonTrainerMemo(void)
 {
-    PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_MEMO), gStringVar4, 0, 9, 0, 0);
+    PrintTextOnWindowSmallNarrow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_MEMO), gStringVar4, 0, 9, 1, 0);
 }
 
 static void BufferNatureString(void)
@@ -3778,7 +3778,7 @@ static void PrintMoveDetails(u16 move)
             PrintMovePowerAndAccuracy(move);
 
             if (moveEffect != EFFECT_PLACEHOLDER)
-                PrintTextOnWindowSmallNarrow(windowId, gMovesInfo[move].description, 6, 1, 3, 0);
+                PrintTextOnWindowSmallNarrow(windowId, gMovesInfo[move].description, 6, 0, 1, 0);
             else
                 PrintTextOnWindow(windowId, gNotDoneYetDescription, 6, 1, 0, 0);
         }

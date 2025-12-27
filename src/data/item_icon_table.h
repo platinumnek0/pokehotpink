@@ -481,6 +481,8 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     // Status Orbs
     [ITEM_FLAME_ORB] = {gItemIcon_FlameOrb, gItemIconPalette_FlameOrb},
     [ITEM_TOXIC_ORB] = {gItemIcon_ToxicOrb, gItemIconPalette_ToxicOrb},
+    [ITEM_FROST_ORB] = {gItemIcon_FrostOrb, gItemIconPalette_FrostOrb},
+    [ITEM_POISON_ORB] = {gItemIcon_PoisonOrb, gItemIconPalette_ToxicOrb},
     // Weather Rocks
     [ITEM_DAMP_ROCK] = {gItemIcon_DampRock, gItemIconPalette_DampRock},
     [ITEM_HEAT_ROCK] = {gItemIcon_HeatRock, gItemIconPalette_HeatRock},
@@ -882,6 +884,10 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_BERRY_BAIT] = {gItemIcon_BerryBait, gItemIconPalette_BerryBait},
     [ITEM_MASTER_BAIT] = {gItemIcon_MasterBait, gItemIconPalette_MasterBait},
     [ITEM_EXCALIBUR] = {gItemIcon_Excalibur, gItemIconPalette_Excalibur},
+    [ITEM_SHRINK_RAY] = {gItemIcon_ShrinkRay, gItemIconPalette_ShrinkRay},
+    [ITEM_BURGER_COUPON] = {gItemIcon_BurgerCoupon, gItemIconPalette_BurgerCoupon},
+    [ITEM_SOUL_LOCKET] = {gItemIcon_HeartLocket, gItemIconPalette_SoulLocket},
+    [ITEM_DEVIL_LOCKET] = {gItemIcon_HeartLocket, gItemIconPalette_DevilLocket},
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };

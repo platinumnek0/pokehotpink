@@ -1455,7 +1455,6 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_SyrupSplat, 0x400, ANIM_TAG_SYRUP_SPLAT_RED},
     {gBattleAnimSpriteGfx_SyrupSplat, 0x400, ANIM_TAG_SYRUP_SPLAT_YELLOW},
     {gBattleAnimSpriteGfx_Scale, 0x0180, ANIM_TAG_SCALE},
-    {gBattleAnimSpriteGfx_BindingChain, 0x0200, ANIM_TAG_WRAPPING_CHAIN},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1707,7 +1706,11 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Spiral, ANIM_TAG_SPIRAL},
     {gBattleAnimSpritePal_SnoreZ, ANIM_TAG_SNORE_Z},
     {gBattleAnimSpritePal_Explosion, ANIM_TAG_EXPLOSION},
+#if B_NEW_CURSE_NAIL_PARTICLE
+    {gBattleAnimSpritePal_NewNail, ANIM_TAG_NAIL},
+#else
     {gBattleAnimSpritePal_Nail, ANIM_TAG_NAIL},
+#endif
     {gBattleAnimSpritePal_GhostlySpirit, ANIM_TAG_GHOSTLY_SPIRIT},
     {gBattleAnimSpritePal_WarmRock, ANIM_TAG_WARM_ROCK},
     {gBattleAnimSpritePal_BreakingEgg, ANIM_TAG_BREAKING_EGG},
@@ -1912,6 +1915,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_SyrupRed, ANIM_TAG_SYRUP_SPLAT_RED},
     {gBattleAnimSpritePal_SyrupYellow, ANIM_TAG_SYRUP_SPLAT_YELLOW},
     {gBattleAnimSpritePal_Scale, ANIM_TAG_SCALE},
+    {gBattleAnimSpritePal_SaltCrystals, ANIM_TAG_SALT_CRYSTALS},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =

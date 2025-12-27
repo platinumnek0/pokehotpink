@@ -43,17 +43,17 @@
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
 #define FLAG_AMIIBO_GOTTEN   0x20 // amiibo gift
-#define FLAG_UNUSED_0x021    0x21 // hides dad in the beginning
-#define FLAG_UNUSED_0x022    0x22 // hides quigley in your house
-#define FLAG_UNUSED_0x023    0x23 // disables capture
-#define FLAG_UNUSED_0x024    0x24 // hides cokbern in the lab, pre-fighting-quigley
-#define FLAG_UNUSED_0x025    0x25 // hides croconut ball
-#define FLAG_UNUSED_0x026    0x26 // hides skrappup ball
-#define FLAG_UNUSED_0x027    0x27 // hides kitfisk ball
-#define FLAG_UNUSED_0x028    0x28 // hides quigley in the lab
-#define FLAG_UNUSED_0x029    0x29 // hides quigley in beaston
-#define FLAG_UNUSED_0x02A    0x2A // hides post-rival-battle cokbern in the lab
-#define FLAG_UNUSED_0x02B    0x2B // hides cokbern in beaston
+#define FLAG_HIDE_DAD_INTRO 0x21 // hides dad in the beginning
+#define FLAG_HIDE_QUIGLEY_PLAYER_HOUSE 0x22 // hides quigley in your house
+#define FLAG_NO_CAPTURE 0x23 // disables capture
+#define FLAG_HIDE_AMANITA_LAB 0x24 // hides amanita in the lab, pre-fighting-quigley
+#define FLAG_UNUSED_0x025 0x25
+#define FLAG_UNUSED_0x026 0x26
+#define FLAG_UNUSED_0x027 0x27
+#define FLAG_HIDE_QUIGLEY_LAB 0x28 // hides quigley in the lab
+#define FLAG_HIDE_QUIGLEY_BEASTON 0x29 // hides quigley in beaston
+#define FLAG_UNUSED_0x02A    0x2A // hides post-rival-battle amanita in the lab
+#define FLAG_HIDE_AMANITA_BEASTON 0x2B // hides amanita in beaston
 #define FLAG_UNUSED_0x02C    0x2C // hides the egg man in subflora
 #define FLAG_DISABLE_RUNNING 0x2D // disables running when set
 #define FLAG_UNUSED_0x02E    0x2E // exp share flag
@@ -1346,7 +1346,7 @@
 #define FLAG_SYS_POKEMON_GET                         (SYSTEM_FLAGS + 0x0) // FLAG_0x860
 #define FLAG_SYS_POKEDEX_GET                         (SYSTEM_FLAGS + 0x1)
 #define FLAG_SYS_POKENAV_GET                         (SYSTEM_FLAGS + 0x2)
-#define FLAG_UNUSED_0x863                            (SYSTEM_FLAGS + 0x3) // Unused Flag
+#define FLAG_SYS_MOVE_INFO                           (SYSTEM_FLAGS + 0x3) // used to display move info mid-battle
 #define FLAG_SYS_GAME_CLEAR                          (SYSTEM_FLAGS + 0x4)
 #define FLAG_SYS_CHAT_USED                           (SYSTEM_FLAGS + 0x5)
 #define FLAG_UNLOCKED_TRENDY_SAYINGS                 (SYSTEM_FLAGS + 0x6)

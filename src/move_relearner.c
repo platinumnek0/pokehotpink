@@ -844,7 +844,7 @@ static void CreateUISprites(void)
 
     sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
     sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
-    //AddScrollArrows();
+    AddScrollArrows();
 
     // These are the appeal hearts.
     for (i = 0; i < 8; i++)
@@ -864,8 +864,8 @@ static void CreateUISprites(void)
 
 static void AddScrollArrows(void)
 {
-    if (sMoveRelearnerStruct->moveDisplayArrowTask == TASK_NONE)
-        sMoveRelearnerStruct->moveDisplayArrowTask = AddScrollIndicatorArrowPair(&sDisplayModeArrowsTemplate, &sMoveRelearnerStruct->scrollOffset);
+    //if (sMoveRelearnerStruct->moveDisplayArrowTask != TASK_NONE)
+        //sMoveRelearnerStruct->moveDisplayArrowTask != AddScrollIndicatorArrowPair(&sDisplayModeArrowsTemplate, &sMoveRelearnerStruct->scrollOffset);
 
     if (sMoveRelearnerStruct->moveListScrollArrowTask == TASK_NONE)
     {

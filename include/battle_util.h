@@ -240,6 +240,7 @@ bool32 CanBeConfused(u32 battler);
 bool32 IsBattlerTerrainAffected(u32 battler, u32 terrainFlag);
 u32 GetBattlerAffectionHearts(u32 battler);
 u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc);
+u32 CountBattlerStatDrops(u32 battler, bool32 countEvasionAcc);
 bool32 IsMyceliumMightOnField(void);
 bool32 ChangeTypeBasedOnTerrain(u32 battler);
 void RemoveConfusionStatus(u32 battler);
@@ -255,5 +256,6 @@ void RemoveBattlerType(u32 battler, u8 type);
 void CosmicAuraAllyBoost(u32 battler, u8 statId);
 bool32 IsBattlerAboveOneTenthHP(u32 battler);
 bool32 IsBattlerImmuneToStatChanges(u32 battler);
+u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, bool32 updateFlags, u32 atkAbility, u32 defAbility, u32 holdEffectAtk, u32 weather);
 
 #endif // GUARD_BATTLE_UTIL_H

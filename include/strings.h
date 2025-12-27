@@ -948,6 +948,7 @@ extern const u8 gText_UsedVar2WildRepelled[];
 extern const u8 gText_BoxFull[];
 extern const u8 gText_WontHaveEffect[];
 extern const u8 gText_NextFusionMon[];
+extern const u8 gText_ChooseFieldMove[];
 
 extern const u8 gText_LevelSymbol[];
 extern const u8 gText_PkmnInfo[];
@@ -3066,7 +3067,13 @@ extern const u8 gText_PlantBerry[];
 
 extern const u8 gText_Moves_Menu[];
 
-//party menu evo option
+//party menu options
 extern const u8 gText_Evolution[];
+extern const u8 gText_FieldMoveSelection[];
+
+//move relearner categorties
+extern const u8 gText_MoveRelearner_Physical[];
+extern const u8 gText_MoveRelearner_Special[];
+extern const u8 gText_MoveRelearner_Status[];
 
 #endif // GUARD_STRINGS_H

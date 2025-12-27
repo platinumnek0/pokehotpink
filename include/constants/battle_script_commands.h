@@ -240,6 +240,7 @@
 #define VARIOUS_TRY_REVIVAL_BLESSING                 148
 #define VARIOUS_SET_DULLED                           149
 #define VARIOUS_TRY_HEAL_MORE_POISONED               150
+#define VARIOUS_TRY_ACTIVATE_HAMFIST                 151
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -317,9 +318,10 @@
 #define MOVEEND_SYMBIOSIS                         34
 #define MOVEEND_OPPORTUNIST                       35    // Occurs after other stat change items/abilities to try and copy the boosts
 #define MOVEEND_SAME_MOVE_TURNS                   36
-#define MOVEEND_SET_EVOLUTION_TRACKER             37
-#define MOVEEND_CLEAR_BITS                        38
-#define MOVEEND_COUNT                             39
+#define MOVEEND_DECREASE_CHARGE                   37
+#define MOVEEND_SET_EVOLUTION_TRACKER             38
+#define MOVEEND_CLEAR_BITS                        39
+#define MOVEEND_COUNT                             40
 
 // switch cases
 #define B_SWITCH_NORMAL     0

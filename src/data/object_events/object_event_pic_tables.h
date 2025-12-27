@@ -1142,7 +1142,7 @@ static const struct SpriteFrameImage sPicTable_Statue[] = {
 };
 
 static const struct SpriteFrameImage sPicTable_Dusclops[] = {
-    overworld_ascending_frames(gObjectEventPic_Dusclops, 2, 4),
+    overworld_ascending_frames(gObjectEventPic_Dusclops, 2, 2),
 };
 
 static const struct SpriteFrameImage sPicTable_Kirlia[] = {

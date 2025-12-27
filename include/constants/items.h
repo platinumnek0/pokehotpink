@@ -1007,11 +1007,26 @@
 #define ITEM_BERRY_BAIT 834
 #define ITEM_MASTER_BAIT 835
 #define ITEM_EXCALIBUR 836
+#define ITEM_RUBBER_BIRD 837
+#define ITEM_GOLDEN_NEEDLE 838
+#define ITEM_WINTER_COAT 839
+#define ITEM_DREAM_SAND 840
+#define ITEM_VORPAL_SWORD 841
+#define ITEM_MOON_CHARM 842
+#define ITEM_DOUBLOON 843
+#define ITEM_OMNI_HELIX 844
+#define ITEM_SNARE_DRUM 845
+#define ITEM_FROST_ORB 846
+#define ITEM_POISON_ORB 847
+#define ITEM_SHRINK_RAY 848
+#define ITEM_BURGER_COUPON 849
+#define ITEM_SOUL_LOCKET 850
+#define ITEM_DEVIL_LOCKET 851
 
 // HOPO BERRY
 // LEGEND PLATE
 
-#define ITEMS_COUNT 837
+#define ITEMS_COUNT 852
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

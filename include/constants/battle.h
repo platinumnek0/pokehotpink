@@ -198,6 +198,7 @@
 #define STATUS4_DIVORCED                (1 << 11)
 #define STATUS4_INFAT_TIMER             (1 << 12 | 1 << 13 | 1 << 14 | 1 << 15 | 1 << 16)
 #define STATUS4_INFATUATION_TURN(num)   (((num) << 12) & STATUS4_INFAT_TIMER)
+#define STATUS4_PANIC                   (1 << 17)
 
 #define HITMARKER_WAKE_UP_CLEAR         (1 << 4) // Cleared when waking up. Never set or checked.
 #define HITMARKER_IGNORE_BIDE           (1 << 5)
@@ -410,8 +411,14 @@
 #define MOVE_EFFECT_CLEAR_TAILWIND      84
 #define MOVE_EFFECT_TAUNT               85
 #define MOVE_EFFECT_TORMENT             86
+#define MOVE_EFFECT_DISABLE             87
+#define MOVE_EFFECT_HEAL_BLOCK_3_TURNS  88
+#define MOVE_EFFECT_POWDER              89
+#define MOVE_EFFECT_SPEED_EVASION_DOWN  90
+#define MOVE_EFFECT_MINIMIZE            91
+#define MOVE_EFFECT_SALT_CURE           92
 
-#define NUM_MOVE_EFFECTS                87
+#define NUM_MOVE_EFFECTS                93
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000

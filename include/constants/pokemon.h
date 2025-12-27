@@ -93,7 +93,7 @@
 #define MAX_STAT_STAGE    12
 
 // Shiny odds
-#define SHINY_ODDS 64 // Actual probability is SHINY_ODDS/65536
+#define SHINY_ODDS 128 // Actual probability is SHINY_ODDS/65536
 
 // Ribbon IDs used by TV and Pokénav
 #define CHAMPION_RIBBON       0
@@ -302,6 +302,8 @@
 #define EVO_LEVEL_PARTY_OF_FOUR           54     // evolves at a given level, when the party has 4 or more pokemon
 #define EVO_LEVEL_FULL_PARTY              55     // evolves at a given level, when the party is full
 #define EVO_MOVE_20_TIMES_ON_GRASS_TYPES  56     // evolves after hitting a grass-type with a given move 20 times
+#define EVO_KO_10_TIMES_WITH_SLASHING_MOVES 57   // evolves after ko'ing 10 opponents with slashing moves
+#define EVO_LEVEL_MOVE_TEN_TIMES          58     // levels up after using a move 10 times
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0
@@ -327,9 +329,8 @@
 
 #define SKIP_FRONT_ANIM (1 << 7)
 
-#define NUM_ABILITY_SLOTS (NUM_NORMAL_ABILITY_SLOTS + NUM_HIDDEN_ABILITY_SLOTS)
-#define NUM_NORMAL_ABILITY_SLOTS 2
-#define NUM_HIDDEN_ABILITY_SLOTS 1
+#define NUM_ABILITY_SLOTS (NUM_NORMAL_ABILITY_SLOTS)
+#define NUM_NORMAL_ABILITY_SLOTS 3
 
 // Used as a signal for givemon to generate a default ability by personality.
 #define NUM_ABILITY_PERSONALITY 0xFF

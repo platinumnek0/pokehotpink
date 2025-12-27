@@ -4,7 +4,7 @@ Beaston_MapScripts::
 	.byte 0
 
 beaston_onWarp::
-    map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, beaston_checkVar
+    map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, beaston_quigleyAsk
     .2byte 0
 `
 script beastonSign{
@@ -23,11 +23,6 @@ script beastonLabSign{
     msgbox("beaston research lab", MSGBOX_SIGN)
 }
 
-script beaston_checkVar{
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 3)
-    goto(beaston_quigleyAsk)
-}
-
 script beaston_quigleyAsk{
     lockall
     applymovement(1, playerSurprise)
@@ -41,10 +36,11 @@ script beaston_quigleyAsk{
 }
 
 script beaston_sendYouBack{
-    msgbox ("yeah thought so\pget ur stuff and come back")
+    msgbox ("yeah thought so\pget ur stuff and come back", MSGBOX_AUTOCLOSE)
     waitmessage
     speakername(NULL)
-    opendoor(26, 24)
+    opendoor(30, 24)
+    waitdooranim
     applymovement(OBJ_EVENT_ID_PLAYER, beaston_playerWalkBack)
     waitmovement(OBJ_EVENT_ID_PLAYER)
     warp(MAP_BEASTON_PLAYERS_HOUSE_FLOOR1, 2, 10)
@@ -55,9 +51,7 @@ script beaston_labEscort{
     speakername("Quigley")
     msgbox("sweet c'mon", MSGBOX_AUTOCLOSE)
     waitmessage
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 3)
-    setflag(FLAG_UNUSED_0x024)
-    setflag(FLAG_UNUSED_0x02A)
+    setflag(FLAG_HIDE_AMANITA_LAB)
     applymovement(1, beaston_quigleyEscort1)
     applymovement(OBJ_EVENT_ID_PLAYER, beaston_playerFollowQuigley1)
     waitmovement(OBJ_EVENT_ID_PLAYER)
@@ -69,7 +63,8 @@ script beaston_labEscort{
     msgbox("idk why he didn't pick me but\pguess that doesn't really matter now\pc'mon", MSGBOX_AUTOCLOSE)
     waitmessage
     speakername(NULL)
-    opendoor(10, 16)
+    opendoor(14, 16)
+    waitdooranim
     applymovement(1, beaston_playerWalkBack)
     waitmovement(1)
     removeobject(1)
@@ -107,34 +102,19 @@ movement beaston_playerFollowQuigley2{
 
 script beaston_rivalBattleLoss_setup{
     lockall
-    clearflag(FLAG_UNUSED_0x02B)
+    clearflag(FLAG_HIDE_AMANITA_LAB)
     addobject(2)
 }
 
 script beaston_rivalBattleLoss_text{
     applymovement(OBJ_EVENT_ID_PLAYER, look_left)
-    speakername("Prof. Cokbern")
+    speakername(nameplateProfessor)
     msgbox("{PLAYER}! There you are!\pI'm glad you're alright, seems things\ndidn't quite go to plan…\pRegardless, I've something to ask of\nyou.\pMy niece, Stella, lives in the next town\nover. I'm sure you two are familiar\lwith each other.\pI'd like for you to bring her back to my\nlab, I've got something special for\lyou two.\pI'll be logging my recent findings, if\nyou need me.", MSGBOX_AUTOCLOSE)
-    setflag(FLAG_UNUSED_0x024)
-    setflag(FLAG_UNUSED_0x028)
+    setflag(FLAG_HIDE_AMANITA_LAB)
+    setflag(FLAG_HIDE_QUIGLEY_LAB)
     clearflag(FLAG_UNUSED_0x02A)
     speakername(NULL)
-    setvar(VAR_LITTLEROOT_INTRO_STATE, 7)
-    if(var(VAR_STARTER_MON) == 1)
-    {
-        setflag(FLAG_UNUSED_0x026)
-        setflag(FLAG_UNUSED_0x027)
-    }
-    elif(var(VAR_STARTER_MON) == 2)
-    {
-        setflag(FLAG_UNUSED_0x025)
-        setflag(FLAG_UNUSED_0x027)
-    }
-    elif(var(VAR_STARTER_MON) == 3)
-    {
-        setflag(FLAG_UNUSED_0x025)
-        setflag(FLAG_UNUSED_0x026)
-    }
+    setvar(VAR_LITTLEROOT_INTRO_STATE, 6)
 }
 
 script beaston_rivalBattleLoss_left{
@@ -146,7 +126,7 @@ script beaston_rivalBattleLoss_left{
     applymovement(2, beaston_cokbern_rivalBattleLoss_left_leave)
     waitmovement(2)
     removeobject(2)
-    setflag(FLAG_UNUSED_0x02B)
+    setflag(FLAG_HIDE_AMANITA_LAB)
     releaseall
 }
 movement beaston_cokbern_rivalBattleLoss_left_enter{
@@ -169,7 +149,7 @@ script beaston_rivalBattleLoss_down{
     applymovement(2, beaston_cokbern_rivalBattleLoss_down_leave)
     waitmovement(2)
     removeobject(2)
-    setflag(FLAG_UNUSED_0x02B)
+    setflag(FLAG_HIDE_AMANITA_LAB)
     releaseall
 }
 movement beaston_cokbern_rivalBattleLoss_down_enter{
@@ -192,7 +172,7 @@ script beaston_rivalBattleLoss_right{
     applymovement(2, beaston_cokbern_rivalBattleLoss_right_leave)
     waitmovement(2)
     removeobject(2)
-    setflag(FLAG_UNUSED_0x02B)
+    setflag(FLAG_HIDE_AMANITA_LAB)
     releaseall
 }
 movement beaston_cokbern_rivalBattleLoss_right_enter{
@@ -231,4 +211,206 @@ script beaston_BlockNorthExit{
 
 movement beaston_player_stepBack{
     walk_down
+}
+
+script beaston_burgerGuyRoadblockItemCheck{
+    lockall
+    faceplayer
+    checkitem(ITEM_BURGER_COUPON)
+    goto_if_eq(VAR_RESULT, FALSE, beaston_burgerGuyRoadblockTalkedTo)
+    msgbox(beaston_text_burgerGuyPigleys, MSGBOX_NPC)
+    waitmessage
+    releaseall
+}
+
+script beaston_burgerGuyRoadblockTalkedTo{
+    call(beaston_burgerGuyRoadblockAskQuestion)
+    waitmessage
+    releaseall
+}
+
+script beaston_burgerGuyRoadblockAskQuestion{
+    msgbox(beaston_text_burgerGuyRoadblock, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES)
+    {
+        msgbox(beaston_text_burgerGuyYes, MSGBOX_DEFAULT)
+    }
+    else
+    {
+        msgbox(beaston_text_burgerGuyNo, MSGBOX_DEFAULT)
+    }
+    waitmessage
+    giveitem(ITEM_BURGER_COUPON, 1)
+    msgbox(beaston_text_burgerGuyCoupon, MSGBOX_AUTOCLOSE)
+}
+
+text beaston_text_burgerGuyRoadblock{
+    "Hey, hey, hey!\p"
+    "Tell me… d'ya like burgers?"
+}
+
+text beaston_text_burgerGuyPigleys{
+    "Man… Pigby's has gotta be my favorite\nrestaurant!\p"
+    "Nothing beats the fries and lemonade!"
+}
+
+text beaston_text_burgerGuyYes{
+    "Now that's what I like to hear!"
+}
+
+text beaston_text_burgerGuyNo{
+    "Aww… well I've got somethin' that'll\nchange your mind for sure!"
+}
+
+text beaston_text_burgerGuyCoupon{
+    "This'll get ya one free burger at\nPigby's. Just tell 'em Jimmy sent\lya."
+}
+
+text beaston_text_burgerHaveCoupon{
+    "Hey, hey, hey!\p"
+    "I'm not givin' out more coupons for\nfree!\p"
+    "You already got one!"
+}
+
+script beaston_burgerGuyRoadblock_top{
+    lockall
+    applymovement(3, beaston_movement_burgerGuyUp)
+    applymovement(OBJ_EVENT_ID_PLAYER, look_down)
+    waitmovement(3)
+    checkitem(ITEM_BURGER_COUPON)
+    goto_if_eq(VAR_RESULT, TRUE, beaston_burgerGuyRoadblock_topHaveVoucher)
+    call(beaston_burgerGuyRoadblockAskQuestion)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_movement_playerLeaveBurgerGuy)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    applymovement(3, beaston_movement_burgerGuyDefault)
+    waitmovement(3)
+    releaseall
+}
+
+script beaston_burgerGuyRoadblock_topHaveVoucher{
+    msgbox(beaston_text_burgerHaveCoupon, MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_movement_playerLeaveBurgerGuy)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    applymovement(3, beaston_movement_burgerGuyDefault)
+    waitmovement(3)
+    releaseall
+}
+
+script beaston_burgerGuyRoadblock_bottom{
+    lockall
+    applymovement(3, beaston_movement_burgerGuyDown)
+    applymovement(OBJ_EVENT_ID_PLAYER, look_up)
+    waitmovement(3)
+    checkitem(ITEM_BURGER_COUPON)
+    goto_if_eq(VAR_RESULT, TRUE, beaston_burgerGuyRoadblock_topHaveVoucher)
+    call(beaston_burgerGuyRoadblockAskQuestion)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_movement_playerLeaveBurgerGuy)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    applymovement(3, beaston_movement_burgerGuyDefault)
+    waitmovement(3)
+    releaseall
+}
+
+script beaston_burgerGuyRoadblock_extraBottom{
+    lockall
+    applymovement(3, beaston_movement_burgerGuyExtraDown)
+    applymovement(OBJ_EVENT_ID_PLAYER, look_up)
+    waitmovement(3)
+    checkitem(ITEM_BURGER_COUPON)
+    goto_if_eq(VAR_RESULT, TRUE, beaston_burgerGuyRoadblock_bottomHaveVoucher)
+    call(beaston_burgerGuyRoadblockAskQuestion)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_movement_playerLeaveBurgerGuy)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    applymovement(3, beaston_movement_burgerGuyReturn)
+    waitmovement(3)
+    releaseall
+}
+
+script beaston_burgerGuyRoadblock_bottomHaveVoucher{
+    msgbox(beaston_text_burgerHaveCoupon, MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_movement_playerLeaveBurgerGuy)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    applymovement(3, beaston_movement_burgerGuyReturn)
+    waitmovement(3)
+    releaseall
+}
+
+movement beaston_movement_burgerGuyUp{
+    emote_exclamation_mark
+    face_up
+}
+
+movement beaston_movement_burgerGuyDown{
+    emote_exclamation_mark
+    face_down
+}
+
+movement beaston_movement_burgerGuyExtraDown{
+    emote_exclamation_mark
+    face_down
+    delay_4
+    walk_down
+}
+
+movement beaston_movement_burgerGuyDefault{
+    face_right
+}
+
+movement beaston_movement_burgerGuyReturn{
+    walk_up
+    face_right
+}
+
+movement beaston_movement_playerLeaveBurgerGuy{
+    walk_right * 2
+}
+
+script beaston_blockWestExit{
+    lockall
+    msgbox(beaston_text_cantLeaveYet, MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_movement_blockWestExit)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    releaseall
+}
+
+script beaston_blockEastExit{
+    lockall
+    msgbox(beaston_text_cantLeaveYet, MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_movement_blockEastExit)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    releaseall
+}
+
+script beaston_blockSouthExit{
+    lockall
+    msgbox(beaston_text_cantLeaveYet, MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, beaston_movement_blockSouthExit)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    releaseall
+}
+
+text beaston_text_cantLeaveYet{
+    "You feel like you really shouldn't\n"
+    "leave without telling the professor\l"
+    "about what you saw…"
+}
+
+movement beaston_movement_blockWestExit{
+    walk_right
+}
+
+movement beaston_movement_blockEastExit{
+    walk_left
+}
+
+movement beaston_movement_blockSouthExit{
+    walk_up
 }

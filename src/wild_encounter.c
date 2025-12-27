@@ -851,8 +851,7 @@ void SetUpHeadbuttBattle(void)
         }
         else
         {
-            CreateWildMon(SPECIES_JIBJAB, 15);
-            //CreateWildMon(SPECIES_BAOBABY, 15);
+            CreateWildMon(SPECIES_BAOBABY, 15);
             BattleSetup_StartWildBattle();
         }
         gSpecialVar_Result = TRUE;

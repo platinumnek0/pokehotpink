@@ -4982,13 +4982,16 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
     else if (ability == ABILITY_SLOW_START && gDisableStructs[battler].slowStartTimer == 0)
         speed *= 2;
     else if (ability == ABILITY_PROTOSYNTHESIS && gBattleWeather & B_WEATHER_SUN && highestStat == STAT_SPEED)
-        speed = (speed * 150) / 100;
+        speed = (speed * 130) / 100;
     else if (ability == ABILITY_QUARK_DRIVE && gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && highestStat == STAT_SPEED)
-        speed = (speed * 150) / 100;
+        speed = (speed * 130) / 100;
 
-    // stat stages
-    speed *= gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][0];
-    speed /= gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][1];
+    // stat stages- don't apply if ability is apathy, OR ability is dulled with speed boosts
+    if(!(ability == ABILITY_APATHY || (ability == ABILITY_DULLED && gBattleMons[battler].statStages[STAT_SPEED] > DEFAULT_STAT_STAGE)))
+    {
+        speed *= gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][0];
+        speed /= gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][1];
+    }
 
     // player's badge boost
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_FRONTIER))
@@ -5077,6 +5080,10 @@ s8 GetMovePriority(u32 battler, u16 move)
         priority++;
     }
     else if (ability == ABILITY_JUMPSCARE && (gDisableStructs[battler].isFirstTurn) && (IsJumpscareAffected(move)))
+    {
+        priority++;
+    }
+    else if(move == MOVE_COLD_SNAP && gBattleWeather & B_WEATHER_HAIL)
     {
         priority++;
     }

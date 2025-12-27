@@ -607,82 +607,62 @@ testSignPost::
 	return
 
 
-dadCallForYou::
-# 309 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
-	setflag FLAG_SYS_B_DASH
-# 310 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
-	setvar VAR_LITTLEROOT_INTRO_STATE, 1
-# 311 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
-	setflag FLAG_SHOW_SPEAKER_NAME
-# 312 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
-	speakername dadCallForYou_Text_0
-# 313 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
-	msgbox dadCallForYou_Text_1, MSGBOX_NPC
-# 314 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
-	speakername NULL
-# 315 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
-	setflag FLAG_UNUSED_0x021
-# 316 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
-	setflag FLAG_UNUSED_0x022
-	end
-
-
 bedroom_amiiboGift::
-# 321 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 309 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	lockall
-# 324 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 312 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	msgbox bedroom_amiiboGift_Text_0, MSGBOX_YESNO
-# 326 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 314 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	compare VAR_RESULT, 1
 	goto_if_eq bedroom_amiiboGift_1
-# 337 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 325 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	msgbox bedroom_amiiboGift_Text_2
-# 338 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 326 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	releaseall
 	return
 
 bedroom_amiiboGift_1:
-# 328 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 316 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	removeobject 1
-# 329 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 317 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	setflag FLAG_AMIIBO_GOTTEN
-# 330 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 318 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	msgbox bedroom_amiiboGift_Text_1
-# 331 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 319 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	giveitem ITEM_AMIIBO, 1
-# 332 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 320 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	releaseall
 	return
 
 
 bedroom_emptyDesk::
-# 344 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 332 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	msgbox bedroom_emptyDesk_Text_0
-# 345 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 333 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	releaseall
 	return
 
 
 bedroom_yourBed::
-# 349 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 337 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	msgbox bedroom_yourBed_Text_0, MSGBOX_SIGN
 	return
 
 
 bedroom_gamecube::
-# 353 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 341 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	msgbox bedroom_gamecube_Text_0, MSGBOX_SIGN
 	return
 
 
 bedroom_pc::
-# 356 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 344 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	msgbox bedroom_pc_Text_0, MSGBOX_SIGN
 	return
 
 
 bedroom_shelves::
-# 359 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 347 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	msgbox bedroom_shelves_Text_0, MSGBOX_SIGN
 	return
 
@@ -691,42 +671,34 @@ testSignPost_Text_0:
 # 305 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	.string "This is a test!$"
 
-dadCallForYou_Text_0:
-# 312 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
-	.string "Dad$"
-
-dadCallForYou_Text_1:
-# 313 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
-	.string "hey {PLAYER}\pcome downstairs some kid wants you$"
-
 bedroom_amiiboGift_Text_0:
-# 324 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 312 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	.string "amiibo on tha desk\ptake it?$"
 
 bedroom_amiiboGift_Text_1:
-# 330 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 318 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	.string "here u go$"
 
 bedroom_amiiboGift_Text_2:
-# 337 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 325 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	.string "leave him there$"
 
 bedroom_emptyDesk_Text_0:
-# 344 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 332 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	.string "nothing on tha desk anymore$"
 
 bedroom_yourBed_Text_0:
-# 349 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 337 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	.string "messy$"
 
 bedroom_gamecube_Text_0:
-# 353 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 341 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	.string "your dad's old gamecube$"
 
 bedroom_pc_Text_0:
-# 356 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 344 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	.string "computah$"
 
 bedroom_shelves_Text_0:
-# 359 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
+# 347 "data/maps/LittlerootTown_BrendansHouse_2F/scripts.pory"
 	.string "games n shit$"
