@@ -1889,3 +1889,4 @@ const u8 gText_ChooseFieldMove[] = _("Use which move?");
 const u8 gText_MoveRelearner_Physical[] = _("/Phys");
 const u8 gText_MoveRelearner_Special[] = _("/Spec");
 const u8 gText_MoveRelearner_Status[] = _("/Status");
+const u8 gText_MoveRelearner_GreenColor[] = _("{COLOR GREEN}");

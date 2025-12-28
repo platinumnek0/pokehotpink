@@ -3071,9 +3071,10 @@ extern const u8 gText_Moves_Menu[];
 extern const u8 gText_Evolution[];
 extern const u8 gText_FieldMoveSelection[];
 
-//move relearner categorties
+//move relearner stuff
 extern const u8 gText_MoveRelearner_Physical[];
 extern const u8 gText_MoveRelearner_Special[];
 extern const u8 gText_MoveRelearner_Status[];
+extern const u8 gText_MoveRelearner_GreenColor[];
 
 #endif // GUARD_STRINGS_H
