@@ -1500,13 +1500,15 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Hydro Pump"),
         .description = COMPOUND_STRING(
-            "Blasts water at high power\n"
-            "to strike the foe."),
+            "The foe is blasted with a huge\n"
+            "volume of high-pressure water,\n"
+            "striking like a geyser to\n"
+            "inflict damage."),
         .effect = EFFECT_HIT,
-        .power = 80,
+        .power = 120,
         .type = TYPE_WATER,
-        .accuracy = 100,
-        .pp = 15,
+        .accuracy = 80,
+        .pp = 5,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
@@ -1547,8 +1549,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "The foe is blasted with a beam of\n"
             "pure cold. This may leave the foe\n"
-            "with frostbite."
-        ),
+            "with frostbite."),
         .effect = EFFECT_HIT,
         .power = 90,
         .type = TYPE_ICE,
@@ -1576,8 +1577,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             "The foes are battered with an icy\n"
             "maelstrom that may leave them\n"
             "with frostbite. This attack never\n"
-            "misses in a hailstorm."
-        ),
+            "misses in a hailstorm."),
         .effect = B_BLIZZARD_HAIL >= GEN_4 ? EFFECT_BLIZZARD : EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 110 : 120,
         .type = TYPE_ICE,
@@ -1754,13 +1754,14 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "The user tackles the foe and pins\n"
             "it to the ground, forcing it to\n"
-            "move last."),
+            "move last. This also hurts the\n"
+            "user a little."),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = B_UPDATED_MOVE_DATA >= GEN_6 ? 15 : 25,
-        //.recoil = 25,
+        .recoil = 25,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,

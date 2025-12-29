@@ -8970,10 +8970,7 @@ u32 CalcRolloutBasePower(u32 battlerAtk, u32 basePower, u32 rolloutTimer)
 
 u32 CalcFuryCutterBasePower(u32 basePower, u32 furyCutterCounter)
 {
-    if(furyCutterCounter > 0)
-    {
-        basePower *= furyCutterCounter;
-    }
+    basePower += (basePower * furyCutterCounter);
     
     if(basePower > 160)
     {
