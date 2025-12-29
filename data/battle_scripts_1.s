@@ -2391,6 +2391,13 @@ BattleScript_EffectQuash::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_QuashEffectReturn::
+	tryquash BattleScript_QuashEffectReturn_End
+	printstring STRINGID_QUASHSUCCESS
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_QuashEffectReturn_End:
+	return
+
 BattleScript_EffectHealPulse::
 	attackcanceler
 	attackstring

@@ -3982,7 +3982,6 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     gBattleMons[gEffectBattler].status2 |= STATUS2_POWDER;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_PowderMessageReturn;
-                    break;
                 }
                 break;
             case MOVE_EFFECT_MINIMIZE:
@@ -3991,7 +3990,6 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     gStatuses3[gBattlerTarget] |= STATUS3_MINIMIZED;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_MinimizeEffectReturn;
-                    break;
                 }
                 break;
             case MOVE_EFFECT_SALT_CURE:
@@ -4000,7 +3998,14 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     gStatuses4[gBattlerTarget] |= STATUS4_SALT_CURE;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_SaltCureEffectReturn;
-                    break;
+                }
+                break;
+            case MOVE_EFFECT_QUASH:
+                if(!(GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
+                && (gProtectStructs[gBattlerTarget].quash == FALSE))
+                {
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_QuashEffectReturn;
                 }
                 break;
             }
@@ -9903,6 +9908,7 @@ static void Cmd_various(void)
         gLastUsedAbility = gBattleMons[battler].ability;
         break;
     }
+    /*
     case VARIOUS_TRY_QUASH:
     {
         VARIOUS_ARGS(const u8 *failInstr);
@@ -9917,6 +9923,7 @@ static void Cmd_various(void)
         }
         return;
     }
+    */
     case VARIOUS_INVERT_STAT_STAGES:
     {
         VARIOUS_ARGS();
@@ -13040,6 +13047,13 @@ static void Cmd_dmgtolevel(void)
     CMD_ARGS();
 
     gBattleMoveDamage = gBattleMons[gBattlerAttacker].level;
+
+    if((gCurrentMove == MOVE_SONIC_BOOM)
+    || (gCurrentMove == MOVE_SEISMIC_TOSS && (gFieldStatuses & STATUS_FIELD_GRAVITY)))
+    {
+        gBattleMoveDamage *= 1.5;
+    }
+
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
@@ -17676,4 +17690,34 @@ void BS_JumpIfCharged(void)
     {
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
+}
+
+void BS_TryQuash(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    u32 i, j;
+
+    // It's true if foe is faster, has a bigger priority, or switches
+    if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    // If the above condition is not true, it means we are faster than the foe, so we can set the quash bit
+    gProtectStructs[gBattlerTarget].quash = TRUE;
+
+    // this implementation assumes turn order is correct when using Quash
+    i = GetBattlerTurnOrderNum(gBattlerTarget);
+    for (j = i + 1; j < gBattlersCount; j++)
+    {
+        // Gen 7- config makes target go last so that the order of quash targets is kept for the correct turn order
+        // Gen 8+ config alters Turn Order of the target according to speed, dynamic speed should handle the rest
+        if (GetWhichBattlerFaster(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], FALSE) == -1)
+            SwapTurnOrder(i, j);
+        else
+            break;
+        i++;
+    }
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }

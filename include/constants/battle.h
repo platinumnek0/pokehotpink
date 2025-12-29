@@ -417,8 +417,9 @@
 #define MOVE_EFFECT_SPEED_EVASION_DOWN  90
 #define MOVE_EFFECT_MINIMIZE            91
 #define MOVE_EFFECT_SALT_CURE           92
+#define MOVE_EFFECT_QUASH               93
 
-#define NUM_MOVE_EFFECTS                93
+#define NUM_MOVE_EFFECTS                94
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000

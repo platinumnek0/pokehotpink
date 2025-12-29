@@ -1900,7 +1900,7 @@
 	.endm
 
 	.macro tryquash failInstr:req
-	various BS_ATTACKER, VARIOUS_TRY_QUASH
+	callnative BS_TryQuash
 	.4byte \failInstr
 	.endm
 

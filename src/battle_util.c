@@ -1767,8 +1767,7 @@ u8 DoFieldEndTurnEffects(void)
                 s32 j;
                 for (j = i + 1; j < gBattlersCount; j++)
                 {
-                    if (!gProtectStructs[i].quash
-                            && !gProtectStructs[j].quash
+                    if (!(gProtectStructs[i].quash && gProtectStructs[j].quash)
                             && GetWhichBattlerFaster(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], FALSE) == -1)
                         SwapTurnOrder(i, j);
                 }
@@ -8971,11 +8970,15 @@ u32 CalcRolloutBasePower(u32 battlerAtk, u32 basePower, u32 rolloutTimer)
 
 u32 CalcFuryCutterBasePower(u32 basePower, u32 furyCutterCounter)
 {
-    basePower *= furyCutterCounter;
+    if(furyCutterCounter > 0)
+    {
+        basePower *= furyCutterCounter;
+    }
+    
     if(basePower > 160)
-        {
-            basePower = 160;
-        }
+    {
+        basePower = 160;
+    }
     return basePower;
 }
 
@@ -11830,7 +11833,8 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
         secondaryEffectChance = 27;
     }
 
-    if(gCurrentMove == MOVE_AURORA_BEAM && (gBattleWeather & B_WEATHER_HAIL))
+    if((gCurrentMove == MOVE_AURORA_BEAM && (gBattleWeather & B_WEATHER_HAIL))
+    || (gCurrentMove == MOVE_POISON_TAIL && gIsCriticalHit))
     {
         secondaryEffectChance = 100;
     }

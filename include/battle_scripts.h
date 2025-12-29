@@ -883,5 +883,6 @@ extern const u8 BattleScript_MinimizeEffectReturn[];
 extern const u8 BattleScript_SoulLocketMsgBreak[];
 extern const u8 BattleScript_DevilLocketMsgBreak[];
 extern const u8 BattleScript_SaltCureEffectReturn[];
+extern const u8 BattleScript_QuashEffectReturn[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
