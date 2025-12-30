@@ -914,8 +914,9 @@
 	.4byte \failInstr
 	.endm
 
-	.macro setalwayshitflag
+	.macro setalwayshitflag failInstr:req
 	.byte 0xa7
+	.4byte \failInstr
 	.endm
 
 	.macro copymovepermanently failInstr:req

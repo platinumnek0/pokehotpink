@@ -11831,7 +11831,8 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
     }
 
     if((gCurrentMove == MOVE_AURORA_BEAM && (gBattleWeather & B_WEATHER_HAIL))
-    || (gCurrentMove == MOVE_POISON_TAIL && gIsCriticalHit))
+    || (gCurrentMove == MOVE_POISON_TAIL && gIsCriticalHit)
+    || (gCurrentMove == MOVE_ROCK_SMASH && (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_ROCK) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_STEEL))))
     {
         secondaryEffectChance = 100;
     }

@@ -1757,6 +1757,32 @@ static void MoveSelectionDisplayPpNumber(u32 battler)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
+static const u8 sTerrainToType[BATTLE_TERRAIN_COUNT] =
+{
+    [BATTLE_TERRAIN_GRASS]            = TYPE_GRASS,
+    [BATTLE_TERRAIN_LONG_GRASS]       = TYPE_GRASS,
+    [BATTLE_TERRAIN_SAND]             = TYPE_GROUND,
+    [BATTLE_TERRAIN_UNDERWATER]       = TYPE_WATER,
+    [BATTLE_TERRAIN_WATER]            = TYPE_WATER,
+    [BATTLE_TERRAIN_POND]             = TYPE_WATER,
+    [BATTLE_TERRAIN_CAVE]             = TYPE_ROCK,
+    [BATTLE_TERRAIN_BUILDING]         = TYPE_NORMAL,
+    [BATTLE_TERRAIN_SOARING]          = TYPE_FLYING,
+    [BATTLE_TERRAIN_SKY_PILLAR]       = TYPE_FLYING,
+    [BATTLE_TERRAIN_BURIAL_GROUND]    = TYPE_GHOST,
+    [BATTLE_TERRAIN_PUDDLE]           = TYPE_GROUND,
+    [BATTLE_TERRAIN_MARSH]            = TYPE_GROUND,
+    [BATTLE_TERRAIN_SWAMP]            = TYPE_GROUND,
+    [BATTLE_TERRAIN_SNOW]             = TYPE_ICE,
+    [BATTLE_TERRAIN_ICE]              = TYPE_ICE,
+    [BATTLE_TERRAIN_VOLCANO]          = TYPE_FIRE,
+    [BATTLE_TERRAIN_DISTORTION_WORLD] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_SPACE]            = TYPE_DRAGON,
+    [BATTLE_TERRAIN_ULTRA_SPACE]      = TYPE_PSYCHIC,
+    [BATTLE_TERRAIN_MOUNTAIN]         = (B_CAMOUFLAGE_TYPES >= GEN_5 ? TYPE_GROUND : TYPE_ROCK),
+    [BATTLE_TERRAIN_PLAIN]            = (B_CAMOUFLAGE_TYPES >= GEN_4 ? TYPE_GROUND : TYPE_NORMAL),
+};
+
 static void MoveSelectionDisplayMoveType(u32 battler)
 {
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
@@ -1786,6 +1812,27 @@ static void MoveSelectionDisplayMoveType(u32 battler)
         {
             LoadTypeIcon(TYPE_ELECTRIC);
         }
+        else if(moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_CAMOUFLAGE)
+        {
+            switch(gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
+            {
+                case STATUS_FIELD_ELECTRIC_TERRAIN:
+                    LoadTypeIcon(TYPE_ELECTRIC);
+                    break;
+                case STATUS_FIELD_GRASSY_TERRAIN:
+                    LoadTypeIcon(TYPE_GRASS);
+                    break;
+                case STATUS_FIELD_MISTY_TERRAIN:
+                    LoadTypeIcon(TYPE_FAIRY);
+                    break;
+                case STATUS_FIELD_PSYCHIC_TERRAIN:
+                    LoadTypeIcon(TYPE_PSYCHIC);
+                    break;
+                default:
+                    LoadTypeIcon(sTerrainToType[gBattleTerrain]);
+                    break;
+            }
+        }
         else
         {
         LoadTypeIcon(gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type);
@@ -1814,7 +1861,28 @@ static void MoveSelectionDisplayMoveType(u32 battler)
         }
         else if(GetBattlerAbility(battler) == 318 && gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].soundMove == TRUE)
         {
-             SetTypeIconPal(TYPE_ELECTRIC, gBattleMoveTypeSpriteId);
+            SetTypeIconPal(TYPE_ELECTRIC, gBattleMoveTypeSpriteId);
+        }
+        else if(moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_CAMOUFLAGE)
+        {
+            switch(gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
+            {
+                case STATUS_FIELD_ELECTRIC_TERRAIN:
+                    SetTypeIconPal(TYPE_ELECTRIC, gBattleMoveTypeSpriteId);
+                    break;
+                case STATUS_FIELD_GRASSY_TERRAIN:
+                    SetTypeIconPal(TYPE_GRASS, gBattleMoveTypeSpriteId);
+                    break;
+                case STATUS_FIELD_MISTY_TERRAIN:
+                    SetTypeIconPal(TYPE_FAIRY, gBattleMoveTypeSpriteId);
+                    break;
+                case STATUS_FIELD_PSYCHIC_TERRAIN:
+                    SetTypeIconPal(TYPE_PSYCHIC, gBattleMoveTypeSpriteId);
+                    break;
+                default:
+                    SetTypeIconPal(sTerrainToType[gBattleTerrain], gBattleMoveTypeSpriteId);
+                    break;
+            }
         }
         else
         {

@@ -1655,7 +1655,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
         || (B_ILLUMINATE_EFFECT >= GEN_9 && atkAbility == ABILITY_ILLUMINATE))
         && (evasionStage > DEFAULT_STAT_STAGE))
         evasionStage = DEFAULT_STAT_STAGE;
-    if ((gMovesInfo[move].ignoresTargetDefenseEvasionStages) && (evasionStage > DEFAULT_STAT_STAGE))
+    if ((gMovesInfo[move].ignoresTargetDefenseEvasionStages || gMovesInfo[move].effect == EFFECT_PUNISHMENT) && (evasionStage > DEFAULT_STAT_STAGE))
         evasionStage = DEFAULT_STAT_STAGE;
     if (defAbility == ABILITY_UNAWARE)
         accStage = DEFAULT_STAT_STAGE;
@@ -1942,7 +1942,8 @@ s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 rec
         || gMovesInfo[gCurrentMove].alwaysCriticalHit
         || ((gCurrentMove == MOVE_DESERT_DAGGER) && (gBattleWeather & B_WEATHER_SANDSTORM))
         || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
-        || (gCurrentMove == MOVE_PIG_DREAMS && gBattleMons[battlerDef].status1 & STATUS1_SLEEP))
+        || (gCurrentMove == MOVE_PIG_DREAMS && gBattleMons[battlerDef].status1 & STATUS1_SLEEP)
+        || (gCurrentMove == MOVE_ROCK_SMASH && (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ROCK) || IS_BATTLER_OF_TYPE(battlerDef, TYPE_STEEL))))
     {
         critChance = -2;
     }
@@ -13276,12 +13277,19 @@ static void Cmd_settypetorandomresistance(void)
 
 static void Cmd_setalwayshitflag(void)
 {
-    CMD_ARGS();
+    CMD_ARGS(const u8 *failInstr);
 
-    gStatuses3[gBattlerTarget] &= ~STATUS3_ALWAYS_HITS;
-    gStatuses3[gBattlerTarget] |= STATUS3_ALWAYS_HITS_TURN(2);
-    gDisableStructs[gBattlerTarget].battlerWithSureHit = gBattlerAttacker;
-    gBattlescriptCurrInstr = cmd->nextInstr;
+    if(gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
+        gStatuses3[gBattlerTarget] &= ~STATUS3_ALWAYS_HITS;
+        gStatuses3[gBattlerTarget] |= STATUS3_ALWAYS_HITS_TURN(2);
+        gDisableStructs[gBattlerTarget].battlerWithSureHit = gBattlerAttacker;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
 }
 
 // Sketch
