@@ -9284,7 +9284,7 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         break;
     case EFFECT_RICOCHET:
         basePower += (CountSpecificStatBoosts(battlerAtk, STAT_SPEED) * 10);
-    case EFFECT_PRIMORDIAL_PULSE:
+    case EFFECT_SCALE_DEF:
         basePower += (CountSpecificStatBoosts(battlerAtk, STAT_DEF) * 15);
     }
 
@@ -9401,9 +9401,11 @@ u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 battlerDef, u3
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
     if (gMovesInfo[move].gravityBoosted && (gFieldStatuses & STATUS_FIELD_GRAVITY))
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
-    if (move == MOVE_HEART_STAMP && gBattleMons[battlerDef].status2 & STATUS2_INFATUATED_WITH(battlerAtk))
+    if ((move == MOVE_HEART_STAMP || move == MOVE_DRAINING_KISS) && gBattleMons[battlerDef].status2 & STATUS2_INFATUATED_WITH(battlerAtk))
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
     if(move == MOVE_AIR_CUTTER && (gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_TAILWIND))
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+    if(move == MOVE_VACUUM_WAVE && gBattleMons[battlerAtk].status2 & STATUS2_FOCUS_ENERGY_ANY)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
 
     // attacker's abilities

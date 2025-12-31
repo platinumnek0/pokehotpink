@@ -552,6 +552,7 @@ struct AdditionalEffect
     u8 onlyInHail:1;
     u8 onlyInSand:1;
     u8 onlyInTailwind:1;
+    u8 onlyOnArgStatus:1;
 };
 
 struct Ability

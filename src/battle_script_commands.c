@@ -4048,6 +4048,10 @@ static bool32 CanApplyAdditionalEffect(const struct AdditionalEffect *additional
     //only apply in tailwind
     if (additionalEffect->onlyInTailwind && !(gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_TAILWIND))
         return FALSE;
+
+    //only apply for a given status
+    if(additionalEffect->onlyOnArgStatus && !(gBattleMons[gBattlerTarget].status1 & (gMovesInfo[gCurrentMove].argument)))
+        return FALSE;
     
     if(gCurrentMove == MOVE_DISARMING_VOICE && !(gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATED_WITH(gBattlerAttacker)))
         return FALSE;
