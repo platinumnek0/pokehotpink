@@ -41,6 +41,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/rgb.h"
+#include "constants/abilities.h"
 #include "level_caps.h"
 
 static void PlayerBufferExecCompleted(u32 battler);
@@ -2519,8 +2520,10 @@ static void MoveSelectionDisplayInfo(u32 battler)
     PutWindowTilemap(B_WIN_MOVE_NAME_4 );
 	CopyWindowToVram(B_WIN_MOVE_NAME_4 , 3);
 
-    // Contact Move
-    if (gMovesInfo[move].category == DAMAGE_CATEGORY_PHYSICAL)
+    // category
+    if (gMovesInfo[move].category == DAMAGE_CATEGORY_PHYSICAL
+        || (gMovesInfo[move].soundMove && atkAbility == ABILITY_DRUMMER
+            && gMovesInfo[move].power > 0))
     {
 	    StringExpandPlaceholders(gStringVar4, gPhysicalText);
     }

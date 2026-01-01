@@ -9763,11 +9763,13 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
         atkStat = gBattleMons[battlerAtk].speed;
         atkStage = gBattleMons[battlerAtk].statStages[STAT_SPEED];
     }
+    /*
     else if(gMovesInfo[move].soundMove && atkAbility == ABILITY_DRUMMER)
     {
         atkStat = gBattleMons[battlerAtk].attack;
         atkStage = gBattleMons[battlerAtk].statStages[STAT_ATK];
     }
+    */
     else
     {
         if (IS_MOVE_PHYSICAL(move))

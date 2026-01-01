@@ -17326,7 +17326,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Snipe Shot"),
         .description = COMPOUND_STRING(
-            "High critical hit ratio. Never\n"
+            "High critical-hit ratio. Never\n"
             "misses- ignores any and all\n"
             "redirection."),
         .effect = EFFECT_SNIPE_SHOT,
@@ -17374,8 +17374,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Stuff Cheeks"),
         .description = COMPOUND_STRING(
-            "Consumes the user's Berry,\n"
-            "then sharply raises Def."),
+            "The user eats the Berry it's\n"
+            "holding and sharply raises\n"
+            "its Defense. This fails if the\n"
+            "user has no Berry."),
         .effect = EFFECT_STUFF_CHEEKS,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -17397,8 +17399,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("No Retreat"),
         .description = COMPOUND_STRING(
-            "Raises all of the user's\n"
-            "stats but prevents escape."),
+            "The user makes a final stand,\n"
+            "boosting all its stats but\n"
+            "preventing it from fleeing\n"
+            "or being switched out."),
         .effect = EFFECT_NO_RETREAT,
         .power = 0,
         .type = TYPE_FIGHTING,
@@ -17420,8 +17424,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Tar Shot"),
         .description = COMPOUND_STRING(
-            "Lowers the foe's Speed and\n"
-            "makes it weak to Fire."),
+            "A blob of sticky tar is hurled\n"
+            "at the foe, making it weak to\n"
+            "Fire-type attacks."),
         .effect = EFFECT_HIT,
         .power = 65,
         .type = TYPE_ROCK,
@@ -17432,6 +17437,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_TAR_SHOT,
+            .chance = 100,
         }),
     },
 
@@ -17508,8 +17514,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .name = COMPOUND_STRING("Octolock"),
         .description = COMPOUND_STRING(
             "Traps the foe with binding\n"
-            "tentacles. Lowers Def and Sp.\n"
-            "Def each turn."),
+            "tentacles. Each turn, the foe's\n"
+            "Defense and Sp. Def are lowered."),
         .effect = EFFECT_OCTOLOCK,
         .power = 0,
         .type = TYPE_WATER,
@@ -17574,8 +17580,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Court Change"),
         .description = COMPOUND_STRING(
-            "The user swaps effects on\n"
-            "either side of the field."),
+            "The battlefield is flipped\n"
+            "around, swapping what side\n"
+            "hazards, barriers, etc. are\n"
+            "on."),
         .effect = EFFECT_COURT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -17621,8 +17629,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Body Press"),
         .description = COMPOUND_STRING(
-            "Does more damage the\n"
-            "higher the user's Def."),
+            "The user crushes the foe with\n"
+            "its full weight. This attack\n"
+            "uses the user's Defense instead\n"
+            "of its Attack."),
         .effect = EFFECT_BODY_PRESS,
         .power = 80,
         .type = TYPE_FIGHTING,
@@ -17666,18 +17676,20 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_DRUM_BEATING] =
     {
-        .name = COMPOUND_STRING("Drum Beating"),
+        .name = COMPOUND_STRING("War Drum"),
         .description = COMPOUND_STRING(
-            "An intimidating war drum that\n"
-            "lowers the foe's Speed."),
+            "The user bangs out an\n"
+            "intimidating drum rhythm that\n"
+            "scares the foe and lowers its\n"
+            "Speed."),
         .effect = EFFECT_HIT,
         .power = 80,
-        .type = TYPE_ROCK,
+        .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .category = DAMAGE_CATEGORY_SPECIAL,
         .metronomeBanned = TRUE,
         .soundMove = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({

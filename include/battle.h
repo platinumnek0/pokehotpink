@@ -4,6 +4,7 @@
 // should they be included here or included individually by every file?
 #include "constants/battle.h"
 #include "constants/form_change_types.h"
+#include "constants/abilities.h"
 #include "battle_main.h"
 #include "battle_message.h"
 #include "battle_util.h"
@@ -805,7 +806,7 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
         typeArg = gMovesInfo[move].type;                            \
 }
 
-#define IS_MOVE_PHYSICAL(move)(GetBattleMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL)
+#define IS_MOVE_PHYSICAL(move)( (GetBattleMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL) || (gMovesInfo[move].soundMove && gBattleMons[gBattlerAttacker].ability == ABILITY_DRUMMER) )
 #define IS_MOVE_SPECIAL(move)(GetBattleMoveCategory(move) == DAMAGE_CATEGORY_SPECIAL)
 #define IS_MOVE_STATUS(move)(gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
 

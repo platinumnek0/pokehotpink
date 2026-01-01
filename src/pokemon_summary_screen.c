@@ -48,6 +48,7 @@
 #include "constants/party_menu.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
+#include "constants/abilities.h"
 #include "constants/songs.h"
 
 enum {
@@ -3774,7 +3775,17 @@ static void PrintMoveDetails(u16 move)
         {
             moveEffect = gMovesInfo[move].effect;
             if (B_SHOW_CATEGORY_ICON == TRUE)
-                ShowCategoryIcon(GetBattleMoveCategory(move));
+            {
+                if((GetAbilityBySpecies(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum) == ABILITY_DRUMMER
+                && gMovesInfo[move].soundMove == TRUE) && gMovesInfo[move].power > 0)
+                {
+                    ShowCategoryIcon(DAMAGE_CATEGORY_PHYSICAL);
+                }
+                else
+                {
+                    ShowCategoryIcon(GetBattleMoveCategory(move));
+                }
+            }
             PrintMovePowerAndAccuracy(move);
 
             if (moveEffect != EFFECT_PLACEHOLDER)
@@ -3980,7 +3991,7 @@ static void SetMoveTypeIcons(void)
                     SetTypeSpritePosAndPal(gMovesInfo[summary->moves[i]].type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
                 }
             }
-            else if(GetAbilityBySpecies(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum) == 318
+            else if(GetAbilityBySpecies(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum) == ABILITY_BROADCAST
             && gMovesInfo[summary->moves[i]].soundMove == TRUE)
             {
                 SetTypeSpritePosAndPal(TYPE_ELECTRIC, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
