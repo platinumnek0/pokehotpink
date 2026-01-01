@@ -1356,6 +1356,12 @@
 	.4byte \failInstr
 	.endm
 
+	.macro tryhealfullhealth failInstr:req, battler:req
+	callnative BS_TryHealFullHP
+	.4byte \failInstr
+	.byte \battler
+	.endm
+
 	.macro trypanic failInstr:req
 	callnative BS_TryPanic
 	.4byte \failInstr

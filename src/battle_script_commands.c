@@ -17733,3 +17733,30 @@ void BS_TryQuash(void)
     }
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+
+void BS_TryHealFullHP(void)
+{
+    NATIVE_ARGS(const u8 *failInstr, u8 battler);
+
+    const u8 *failInstr = cmd->failInstr;
+
+    if (cmd->battler == BS_ATTACKER)
+        gBattlerTarget = gBattlerAttacker;
+
+    if(gLastMoves[gBattlerTarget] == gChosenMoveByBattler[gBattlerTarget])
+    {
+        gBattleMoveDamage = (GetNonDynamaxMaxHP(gBattlerTarget) / 20) * 7;
+    }
+    else
+    {
+        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget);
+    }
+    if (gBattleMoveDamage == 0)
+        gBattleMoveDamage = 1;
+    gBattleMoveDamage *= -1;
+
+    if (gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
+        gBattlescriptCurrInstr = failInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
