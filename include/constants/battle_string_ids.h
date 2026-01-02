@@ -750,8 +750,9 @@
 #define STRINGID_TARGETMINIMIZEDBYITEM                748
 #define STRINGID_LOCKETSHATTERED                      749
 #define STRINGID_ONECHARGELEFT                        750
+#define STRINGID_CURLEDINTOABALL                      751
 
-#define BATTLESTRINGS_COUNT                           751
+#define BATTLESTRINGS_COUNT                           752
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

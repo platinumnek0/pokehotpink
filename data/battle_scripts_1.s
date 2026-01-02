@@ -5008,7 +5008,7 @@ BattleScript_EffectDefenseCurl::
 	attackanimation
 	waitanimation
 BattleScript_DefenseCurlDoStatUpAnim::
-	goto BattleScript_StatUpDoAnim
+	goto BattleScript_CurledEffectMovesStatUpAnim
 
 BattleScript_EffectCurlUp::
 	attackcanceler
@@ -5021,7 +5021,16 @@ BattleScript_EffectCurlUp::
 	attackanimation
 	waitanimation
 BattleScript_CurlUpDoStatUpAnim::
-	goto BattleScript_StatUpDoAnim
+	goto BattleScript_CurledEffectMovesStatUpAnim
+
+BattleScript_CurledEffectMovesStatUpAnim:
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_CURLEDINTOABALL
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectSoftboiled::
 	attackcanceler

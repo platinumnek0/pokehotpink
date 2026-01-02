@@ -887,9 +887,11 @@ static const u8 sText_TargetWasMinimizedByItem[] = _("{B_DEF_NAME_WITH_PREFIX} w
 static const u8 sText_TargetWasMinimized[] = _("{B_DEF_NAME_WITH_PREFIX} shrank down!");
 static const u8 sText_LocketShattered[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM} shattered!");
 static const u8 sText_OneChargeLeft[] = _("{B_ATK_NAME_WITH_PREFIX} has {B_BUFF3}\nCharge left!");
+static const u8 sText_CurledIntoABall[] = _("{B_ATK_NAME_WITH_PREFIX} curled up!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_CURLEDINTOABALL - BATTLESTRINGS_TABLE_START] = sText_CurledIntoABall,
     [STRINGID_ONECHARGELEFT - BATTLESTRINGS_TABLE_START] = sText_OneChargeLeft,
     [STRINGID_LOCKETSHATTERED - BATTLESTRINGS_TABLE_START] = sText_LocketShattered,
     [STRINGID_TARGETMINIMIZEDBYITEM - BATTLESTRINGS_TABLE_START] = sText_TargetWasMinimizedByItem,

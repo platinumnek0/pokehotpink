@@ -4053,7 +4053,7 @@ static bool32 CanApplyAdditionalEffect(const struct AdditionalEffect *additional
     if(additionalEffect->onlyOnArgStatus && !(gBattleMons[gBattlerTarget].status1 & (gMovesInfo[gCurrentMove].argument)))
         return FALSE;
     
-    if(gCurrentMove == MOVE_DISARMING_VOICE && !(gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATED_WITH(gBattlerAttacker)))
+    if((gCurrentMove == MOVE_DISARMING_VOICE || gCurrentMove == MOVE_ALLURING_VOICE) && !(gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATED_WITH(gBattlerAttacker)))
         return FALSE;
 
     return TRUE;
