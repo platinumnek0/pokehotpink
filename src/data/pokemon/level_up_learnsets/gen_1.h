@@ -8,7 +8,7 @@ static const struct LevelUpMove sNoneLevelUpLearnset[] = {
 
 #if P_FAMILY_BULBASAUR
 static const struct LevelUpMove sBulbasaurLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_SEAR),
+    //LEVEL_UP_MOVE( 1, MOVE_SEAR),
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
     LEVEL_UP_MOVE( 7, MOVE_LEECH_SEED),
     LEVEL_UP_MOVE(13, MOVE_VINE_WHIP),

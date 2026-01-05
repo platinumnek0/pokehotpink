@@ -4056,6 +4056,9 @@ static bool32 CanApplyAdditionalEffect(const struct AdditionalEffect *additional
     if((gCurrentMove == MOVE_DISARMING_VOICE || gCurrentMove == MOVE_ALLURING_VOICE) && !(gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATED_WITH(gBattlerAttacker)))
         return FALSE;
 
+    if(gCurrentMove == MOVE_GLACIAL_LANCE && (gBattleMons[gBattlerTarget].statStages[STAT_DEF] > DEFAULT_STAT_STAGE))
+        return FALSE;
+
     return TRUE;
 }
 

@@ -875,9 +875,9 @@ gBattleAnims_Moves::
 	.4byte Move_PSYCHIC_NOISE
 	.4byte Move_UPPER_HAND
 	.4byte Move_MALIGNANT_CHAIN
-	.4byte Move_SEAR
+	.4byte Move_UNUSED_48
 	.4byte Move_RICOCHET
-	.4byte Move_ENERGY_BURST
+	.4byte Move_UNUSED_49
 	.4byte Move_OIL_SLICK
 	.4byte Move_HELLRAZE
 	.4byte Move_AMPBUSH
@@ -891,33 +891,33 @@ gBattleAnims_Moves::
 	.4byte Move_UNUSED_4
 	.4byte Move_SLOW_SLOW_BEAM
 	.4byte Move_UNUSED_5
-	.4byte Move_THINK_FAST
+	.4byte Move_UNUSED_50
 	.4byte Move_BAND_SLAP
 	.4byte Move_UNUSED_43
 	.4byte Move_REBOUND
 	.4byte Move_HOLLOW_WHIRL
 	.4byte Move_UNUSED_6
 	.4byte Move_HOLLOW_GUARD
-	.4byte Move_EVIL_EYE
+	.4byte Move_UNUSED_51
 	.4byte Move_JET_STREAM
 	.4byte Move_GHASTLY_HAZE
 	.4byte Move_NEWTON_TACKLE
 	.4byte Move_DEBATE
 	.4byte Move_GHOOSEHAMMER
 	.4byte Move_UNUSED_7
-	.4byte Move_SILK_SNARE
-	.4byte Move_METAL_GNAW
+	.4byte Move_UNUSED_52
+	.4byte Move_FERAL_GNAW
 	.4byte Move_UNUSED_8
 	.4byte Move_UNUSED_9
 	.4byte Move_UNUSED_10
 	.4byte Move_GUM_BARRAGE
 	.4byte Move_COSMIC_ONSLAUGHT
-	.4byte Move_LUXBURST 
+	.4byte Move_UNUSED_53
 	.4byte Move_UNUSED_11
 	.4byte Move_BATTLECRY 
-	.4byte Move_NINJUTSU 
+	.4byte Move_UNUSED_54
 	.4byte Move_UNUSED_12
-	.4byte Move_AURA_BLADE 
+	.4byte Move_UNUSED_55 
 	.4byte Move_FEATHER_WIND 
 	.4byte Move_SKYSTRIKE 
 	.4byte Move_UNUSED_13 
@@ -926,7 +926,7 @@ gBattleAnims_Moves::
 	.4byte Move_UNUSED_16 
 	.4byte Move_UNUSED_17 
 	.4byte Move_UNUSED_18 
-	.4byte Move_SANDBLAST 
+	.4byte Move_UNUSED_56 
 	.4byte Move_QUICKSAND 
 	.4byte Move_DUST_DEVIL 
 	.4byte Move_UNUSED_19 
@@ -939,35 +939,35 @@ gBattleAnims_Moves::
 	.4byte Move_UNUSED_23 
 	.4byte Move_UNUSED_24 
 	.4byte Move_UNUSED_25 
-	.4byte Move_SLIME_BALL 
+	.4byte Move_UNUSED_57 
 	.4byte Move_BEFUDDLE 
 	.4byte Move_UNUSED_26 
 	.4byte Move_TERROR_WAVE 
-	.4byte Move_SCRAP_SHOT 
+	.4byte Move_UNUSED_58
 	.4byte Move_UNUSED_27 
 	.4byte Move_MELTDOWN 
 	.4byte Move_UNUSED_28 
 	.4byte Move_SEARING_SLAM 
-	.4byte Move_LINE_CAST 
+	.4byte Move_UNUSED_59
 	.4byte Move_TORPEDO_RUSH 
 	.4byte Move_UNUSED_29 
 	.4byte Move_UNUSED_30 
 	.4byte Move_UNUSED_31 
 	.4byte Move_SPARKSURF 
-	.4byte Move_10K_VOLTS 
+	.4byte Move_UNUSED_60
 	.4byte Move_UNUSED_32 
 	.4byte Move_WARP_STRIKE 
 	.4byte Move_MIND_GAMES 
 	.4byte Move_UNUSED_33 
-	.4byte Move_SUBZERO_SLAM 
+	.4byte Move_UNUSED_61
 	.4byte Move_FLASH_FREEZE 
 	.4byte Move_UNUSED_34 
 	.4byte Move_UNUSED_35 
-	.4byte Move_WYRMWIND 
-	.4byte Move_ALCHEMAR 
+	.4byte Move_UNUSED_62
+	.4byte Move_UNUSED_63 
 	.4byte Move_UNUSED_36 
 	.4byte Move_HOARD_CRASH 
-	.4byte Move_DEVASTATION 
+	.4byte Move_UNUSED_64 
 	.4byte Move_UNUSED_37 
 	.4byte Move_UNUSED_38 
 	.4byte Move_TRASH_TALK 
@@ -975,14 +975,14 @@ gBattleAnims_Moves::
 	.4byte Move_UNUSED_40 
 	.4byte Move_UNUSED_41 
 	.4byte Move_SUGAR_RUSH 
-	.4byte Move_MOONGLOW 
+	.4byte Move_UNUSED_65
 	.4byte Move_UNUSED_42 
 	.4byte Move_STAR_STRIKE 
 	.4byte Move_KINETIC_SHOT 
 	.4byte Move_TENSION_SNAP 
 	.4byte Move_GOO_TRAP 
 	.4byte Move_RUBBER_LASH 
-	.4byte Move_WARBLE 
+	.4byte Move_UNUSED_66
 	.4byte Move_REVERBERATE 
 	.4byte Move_UNUSED_44 
 	.4byte Move_UNUSED_45 
@@ -1004,8 +1004,8 @@ gBattleAnims_Moves::
 	.4byte Move_PLIA_BALL
 	.4byte Move_SMITE
 	.4byte Move_SIPHON
-	.4byte Move_DONUTS
-	.4byte Move_SCRUB_CLEAN
+	.4byte Move_UNUSED_67
+	.4byte Move_UNUSED_68
 	.4byte Move_TRANSMUTE
 	.4byte Move_WARM_WELCOME
 	.4byte Move_CINDER_SLIDE
@@ -34811,29 +34811,7 @@ Move_G_MAX_GOLD_RUSH:
 	goto Move_PAY_DAY
 	end
 
-Move_SEAR:
-	loadspritegfx ANIM_TAG_HANDS_AND_FEET
-	loadspritegfx ANIM_TAG_SMALL_EMBER
-	loadspritegfx ANIM_TAG_IMPACT
-	monbg ANIM_DEF_PARTNER
-	setalpha 12, 8
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 9, RGB_RED
-	createsprite gFireSpiralInwardSpriteTemplate, ANIM_TARGET, 1, 0
-	createsprite gFireSpiralInwardSpriteTemplate, ANIM_TARGET, 1, 64
-	createsprite gFireSpiralInwardSpriteTemplate, ANIM_TARGET, 1, 128
-	createsprite gFireSpiralInwardSpriteTemplate, ANIM_TARGET, 1, 196
-	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
-	waitforvisualfinish
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, ANIM_TARGET, 2
-	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 15, 1
-	call FireSpreadEffect
-	delay 4
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
-	waitforvisualfinish
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB_RED
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	blendoff
+Move_UNUSED_48:
 	end
 
 Move_RICOCHET:
@@ -34855,7 +34833,7 @@ Move_RICOCHET:
 	blendoff
 	end
 
-Move_ENERGY_BURST:
+Move_UNUSED_49:
 	loadspritegfx ANIM_TAG_THIN_RING
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
@@ -35236,21 +35214,7 @@ Move_SLOW_SLOW_BEAM:
 Move_UNUSED_5:
 	end
 
-Move_THINK_FAST:
-	monbg ANIM_DEF_PARTNER
-	call SetPsychicBackground
-	setalpha 8, 8
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 10, 1
-	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 0, 2, 0, 8, RGB_WHITE
-	waitforvisualfinish
-	playsewithpan SE_M_SUPERSONIC, SOUND_PAN_TARGET
-	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 15, 1
-	createvisualtask AnimTask_ScaleMonAndRestore, 5, -4, -4, 15, ANIM_TARGET, 1
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	blendoff
-	delay 1
-	call UnsetPsychicBg
+Move_UNUSED_50:
 	end
 
 Move_BAND_SLAP:
@@ -35333,7 +35297,7 @@ Move_HOLLOW_GUARD:
 	delay 8
 	goto Move_PROTECT
 
-Move_EVIL_EYE:
+Move_UNUSED_51:
 	loadspritegfx ANIM_TAG_SMALL_RED_EYE
 	loadspritegfx ANIM_TAG_EYE_SPARKLE
 	loadspritegfx ANIM_TAG_EYE
@@ -35507,48 +35471,10 @@ Move_GHOOSEHAMMER:
 Move_UNUSED_7:
 	end
 
-Move_SILK_SNARE:
-	loadspritegfx ANIM_TAG_SPIDER_WEB
-	loadspritegfx ANIM_TAG_WEB_THREAD
-	loadspritegfx ANIM_TAG_STRING
-	monbg ANIM_DEF_PARTNER
-	delay 0
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 5, F_PAL_BG, 2, 0, 9, RGB_BLACK
-	waitforvisualfinish
-	splitbgprio ANIM_TARGET
-	loopsewithpan SE_M_STRING_SHOT, SOUND_PAN_ATTACKER, 9, 6
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	call SpiderWebThread
-	waitforvisualfinish
-	playsewithpan SE_M_STRING_SHOT2, SOUND_PAN_TARGET
-	createsprite gSpiderWebSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, FALSE
-	waitforvisualfinish
-	delay 16
-	playsewithpan SE_M_STRING_SHOT2, SOUND_PAN_TARGET
-	createsprite gStringWrapSpriteTemplate, ANIM_TARGET, 2, 0, 10
-	delay 4
-	createsprite gStringWrapSpriteTemplate, ANIM_TARGET, 2, 0, -2
-	delay 4
-	createsprite gStringWrapSpriteTemplate, ANIM_TARGET, 2, 0, 22
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	delay 1
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 5, F_PAL_BG, 2, 9, 0, RGB_BLACK
+Move_UNUSED_52:
 	end
 
-Move_METAL_GNAW:
+Move_FERAL_GNAW:
 	loadspritegfx ANIM_TAG_SHARP_TEETH
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_MUD_SAND
@@ -35764,13 +35690,7 @@ Move_COSMIC_ONSLAUGHT:
 	waitforvisualfinish
 	end
 
-Move_LUXBURST:
-	playsewithpan SE_M_LEER, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_Flash, 2
-	delay 16
-	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 10, 0
-    createvisualtask AnimTask_ShakeMon, 2, ANIM_DEF_PARTNER, 5, 0, 10, 0
-    waitforvisualfinish
+Move_UNUSED_53:
 	end
 
 Move_UNUSED_11:
@@ -35793,11 +35713,11 @@ Move_BATTLECRY:
 	waitforvisualfinish
 	end
 
-Move_NINJUTSU:
+Move_UNUSED_54:
 
 Move_UNUSED_12:
 
-Move_AURA_BLADE:
+Move_UNUSED_55:
 
 Move_FEATHER_WIND:
 
@@ -35815,7 +35735,7 @@ Move_UNUSED_17:
 
 Move_UNUSED_18:
 
-Move_SANDBLAST:
+Move_UNUSED_56:
 
 Move_QUICKSAND:
 
@@ -35869,7 +35789,7 @@ Move_UNUSED_24:
 
 Move_UNUSED_25:
 
-Move_SLIME_BALL:
+Move_UNUSED_57:
 
 Move_BEFUDDLE:
 
@@ -35877,7 +35797,7 @@ Move_UNUSED_26:
 
 Move_TERROR_WAVE:
 
-Move_SCRAP_SHOT:
+Move_UNUSED_58:
 
 Move_UNUSED_27:
 
@@ -35887,7 +35807,7 @@ Move_UNUSED_28:
 
 Move_SEARING_SLAM:
 
-Move_LINE_CAST:
+Move_UNUSED_59:
 
 Move_TORPEDO_RUSH:
 
@@ -35899,7 +35819,7 @@ Move_UNUSED_31:
 
 Move_SPARKSURF:
 
-Move_10K_VOLTS:
+Move_UNUSED_60:
 
 Move_UNUSED_32:
 
@@ -35909,7 +35829,7 @@ Move_MIND_GAMES:
 
 Move_UNUSED_33:
 
-Move_SUBZERO_SLAM:
+Move_UNUSED_61:
 	end
 
 Move_FLASH_FREEZE:
@@ -35931,15 +35851,15 @@ Move_UNUSED_34:
 
 Move_UNUSED_35:
 
-Move_WYRMWIND:
+Move_UNUSED_62:
 
-Move_ALCHEMAR:
+Move_UNUSED_63:
 
 Move_UNUSED_36:
 
 Move_HOARD_CRASH:
 
-Move_DEVASTATION:
+Move_UNUSED_64:
 
 Move_UNUSED_37:
 
@@ -35955,7 +35875,7 @@ Move_UNUSED_41:
 
 Move_SUGAR_RUSH:
 
-Move_MOONGLOW:
+Move_UNUSED_65:
 
 Move_UNUSED_42:
 
@@ -35969,7 +35889,7 @@ Move_GOO_TRAP:
 
 Move_RUBBER_LASH:
 
-Move_WARBLE:
+Move_UNUSED_66:
 
 Move_REVERBERATE:
 
@@ -36094,54 +36014,10 @@ Move_SIPHON:
 	blendoff
 	end
 
-Move_DONUTS:
+Move_UNUSED_67:
 	end
 
-Move_SCRUB_CLEAN:
-	loadspritegfx ANIM_TAG_BUBBLE
-	loadspritegfx ANIM_TAG_SMALL_BUBBLES
-	loadspritegfx ANIM_TAG_PINK_CLOUD
-	loadspritegfx ANIM_TAG_WRING_OUT
-	monbg ANIM_TARGET
-	setalpha 12, 8
-	loopsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER, 38, 4
-	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, FALSE
-	delay 3
-	createsprite gSpriteTemplate_ScrubCleanSoapBubbles, ANIM_TARGET, 0x7a, 0x3, 0xfff2, 0x12, 0x2e
-	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
-	delay 3
-	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
-	delay 3
-	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
-	delay 3
-	createsprite gSpriteTemplate_ScrubCleanSoapBubbles, ANIM_TARGET, 0x79, 0x3, 0xe, 0xfff2, 0x2e
-	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
-	delay 3
-	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
-	delay 6
-	createsprite gSpriteTemplate_ScrubCleanSoapBubbles, ANIM_TARGET, 0x78, 0x3, 0xfff4, 0xfff6, 0x2e
-	delay 9
-	createsprite gSpriteTemplate_ScrubCleanSoapBubbles, ANIM_TARGET, 0x77, 0x3, 0xe, 0xe, 0x2e
-	delay 9
-	createsprite gSpriteTemplate_ScrubCleanSoapBubbles, ANIM_TARGET, 0x7b, 0x3, 0x4, 0x4, 0x1e
-	delay 9
-	createsprite gSpriteTemplate_ScrubCleanSoapBubbles, ANIM_TARGET, 0x7a, 0x3, 0xfff2, 0x12, 0x2e
-	delay 9
-	createsprite gSpriteTemplate_ScrubCleanSoapBubbles, ANIM_TARGET, 0x79, 0x3, 0xe, 0xfff2, 0x2e
-	delay 9
-	createsprite gSpriteTemplate_ScrubCleanSoapBubbles, ANIM_TARGET, 0x78, 0x3, 0xfff4, 0xfff6, 0x2e
-	delay 9
-	createsprite gSpriteTemplate_ScrubCleanSoapBubbles, ANIM_TARGET, 0x77, 0x3, 0xe, 0xe, 0x2e
-	delay 9
-	createsprite gSpriteTemplate_ScrubCleanSoapBubbles, ANIM_TARGET, 0x7b, 0x3, 0x4, 0x4, 0x1e
-	waitforvisualfinish
-	delay 12
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 18, 1
-	call WaterBubblesEffectShort
-	waitforvisualfinish
-	clearmonbg ANIM_TARGET
-	blendoff
-	waitforvisualfinish
+Move_UNUSED_68:
 	end
 
 Move_TRANSMUTE:
