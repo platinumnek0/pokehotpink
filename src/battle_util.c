@@ -8949,22 +8949,14 @@ const struct TypePower gNaturalGiftTable[] =
 
 u32 CalcRolloutBasePower(u32 battlerAtk, u32 basePower, u32 rolloutTimer)
 {
-    basePower *= rolloutTimer;
+    u32 i;
+    if(rolloutTimer > 0)
+    {
+        for (i = 1; i < (5 - rolloutTimer); i++)
+            basePower *= 2;
+    }
     if (gBattleMons[battlerAtk].status2 & STATUS2_DEFENSE_CURL)
-    {
         basePower *= 2;
-        if (basePower > 200)
-        {
-            basePower = 200;
-        }
-    }
-    else
-    {
-        if(basePower > 160)
-        {
-            basePower = 160;
-        }
-    }
     return basePower;
 }
 
@@ -9294,6 +9286,24 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         if (gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH)
             basePower = 20;
         break;
+    case MOVE_VACUUM_WAVE:
+        if(gBattleMons[battlerAtk].status2 & STATUS2_FOCUS_ENERGY_ANY)
+            basePower *= (3/2);
+        break;
+    case MOVE_HEART_STAMP:
+    case MOVE_DRAINING_KISS:
+        if(gBattleMons[battlerDef].status2 & STATUS2_INFATUATED_WITH(battlerAtk))
+            basePower *= (3/2);
+        break;
+    case MOVE_AIR_CUTTER:
+        if(gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_TAILWIND)
+            basePower *= (3/2);
+        break;
+    }
+
+    if(gMovesInfo[move].curlBoosted && gBattleMons[battlerAtk].status2 & STATUS2_DEFENSE_CURL)
+    {
+        basePower *= (3/2);
     }
 
     if (basePower == 0)
@@ -9394,6 +9404,7 @@ u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 battlerDef, u3
         modifier = uq4_12_multiply(modifier, UQ_4_12(B_SPORT_DMG_REDUCTION >= GEN_5 ? 0.23 : 0.5));
     if ( (moveType == TYPE_FIRE || MoveHasAdditionalEffect(gCurrentMove, MOVE_EFFECT_BURN)) && gBattleMons[gBattlerTarget].status1 & STATUS1_FREEZE)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
+    /*
     if (gMovesInfo[move].curlBoosted && gBattleMons[gBattlerAttacker].status2 & STATUS2_DEFENSE_CURL)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
     if(gMovesInfo[move].effect == EFFECT_SKYSTRIKE && (IsBattlerGrounded(battlerDef) == FALSE))
@@ -9406,6 +9417,7 @@ u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 battlerDef, u3
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
     if(move == MOVE_VACUUM_WAVE && gBattleMons[battlerAtk].status2 & STATUS2_FOCUS_ENERGY_ANY)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+    */
 
     // attacker's abilities
     switch (atkAbility)

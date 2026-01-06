@@ -4615,15 +4615,14 @@ BattleScript_EffectSandstorm::
 BattleScript_EffectRollout::
 	attackcanceler
 	attackstring
+	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_RolloutCheckAccuracy
 	ppreduce
+BattleScript_RolloutCheckAccuracy::
 	accuracycheck BattleScript_RolloutHit, ACC_CURR_MOVE
 BattleScript_RolloutHit::
+	typecalc
 	handlerollout
-	critcalc
-	damagecalc
-	jumpifmovehadnoeffect BattleScript_RolloutHit
-	adjustdamage
-	goto BattleScript_HitFromAtkAnimation
+	goto BattleScript_HitFromCritCalc
 
 BattleScript_EffectSwagger::
 	attackcanceler

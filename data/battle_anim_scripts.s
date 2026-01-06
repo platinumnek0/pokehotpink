@@ -995,7 +995,7 @@ gBattleAnims_Moves::
 	.4byte Move_DOZEN_HANDS 
 	.4byte Move_WHITE_NOISE 
 	.4byte Move_PIG_DREAMS 
-	.4byte Move_CURL_UP 
+	.4byte Move_UNUSED_69 
 	.4byte Move_GREGA_IMPACT
 	.4byte Move_HOG_WILD
 	.4byte Move_BACKSTAB
@@ -16038,6 +16038,11 @@ Move_GLACIAL_LANCE::
 	loadspritegfx ANIM_TAG_ICICLE_SPEAR
 	loadspritegfx ANIM_TAG_ICE_CUBE
 	loadspritegfx ANIM_TAG_ICE_CRYSTALS @ice
+	loadspritegfx ANIM_TAG_BLUE_LIGHT_WALL @Screen
+	loadspritegfx ANIM_TAG_TORN_METAL @Broken Screen
+	choosetwoturnanim GlacialLanceNormal, GlacialLanceShatteredWall
+GlacialLanceNormal:
+GlacialLanceShatteredWall:
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0xA, 0x3C00 @;Royal Blue
 	monbg ANIM_TARGET
 	playsewithpan SE_M_HAIL, SOUND_PAN_TARGET
@@ -16048,10 +16053,12 @@ Move_GLACIAL_LANCE::
 	playsewithpan SE_M_DETECT, SOUND_PAN_TARGET
 	delay 38
 	playsewithpan SE_M_BRICK_BREAK, SOUND_PAN_TARGET
-	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 6, 0, 52, 1
-	createvisualtask AnimTask_ShakeMon, 5, ANIM_DEF_PARTNER, 6, 0, 52, 1
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 6, 0, 32, 1
 	delay 4
-	call IceCrystalEffectLong
+	createsprite gBrickBreakWallShardSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, 0, -8, -12
+	createsprite gBrickBreakWallShardSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, 1, 8, -12
+	createsprite gBrickBreakWallShardSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, 2, -8, 12
+	createsprite gBrickBreakWallShardSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, 3, 8, 12
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x0, 0xA, 0x0, 0x3C00 @;Royal Blue
 	waitforvisualfinish
@@ -35291,8 +35298,10 @@ Move_HOLLOW_GUARD:
 	loadspritegfx ANIM_TAG_PROTECT  @protect
 	loadspritegfx ANIM_TAG_GHOSTLY_SPIRIT
 	loadspritegfx ANIM_TAG_PURPLE_FLAME
+	monbg ANIM_ATK_PARTNER
 	createvisualtask AnimTask_PurpleFlamesOnTarget, 0x3
 	createspriteontargets gCurseGhostSpriteTemplate, ANIM_ATTACKER, 3, 2, 8, -5, ANIM_ATTACKER, 0
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	delay 8
 	goto Move_PROTECT
@@ -35914,7 +35923,7 @@ Move_WHITE_NOISE:
 Move_PIG_DREAMS:
 	end
 
-Move_CURL_UP:
+Move_UNUSED_69:
 	loadspritegfx ANIM_TAG_ECLIPSING_ORB
 	loopsewithpan SE_M_TRI_ATTACK, SOUND_PAN_ATTACKER, 18, 3
 	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, ANIM_ATTACKER, FALSE

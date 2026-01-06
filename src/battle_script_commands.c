@@ -4056,7 +4056,7 @@ static bool32 CanApplyAdditionalEffect(const struct AdditionalEffect *additional
     if((gCurrentMove == MOVE_DISARMING_VOICE || gCurrentMove == MOVE_ALLURING_VOICE) && !(gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATED_WITH(gBattlerAttacker)))
         return FALSE;
 
-    if(gCurrentMove == MOVE_GLACIAL_LANCE && (gBattleMons[gBattlerTarget].statStages[STAT_DEF] > DEFAULT_STAT_STAGE))
+    if(gCurrentMove == MOVE_GLACIAL_LANCE && (gBattleMons[gBattlerTarget].statStages[STAT_DEF] <= DEFAULT_STAT_STAGE))
         return FALSE;
 
     return TRUE;
@@ -13680,14 +13680,22 @@ static void Cmd_handlerollout(void)
 
     if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
     {
-        gDisableStructs[gBattlerAttacker].rolloutTimer = 0;
+        CancelMultiTurnMoves(gBattlerAttacker);
         gBattlescriptCurrInstr = BattleScript_MoveMissedPause;
     }
     else
     {
-        if (gDisableStructs[gBattlerAttacker].rolloutTimer != 5
-            && gSpecialStatuses[gBattlerAttacker].parentalBondState != PARENTAL_BOND_1ST_HIT) // Don't increment counter on first hit
-            gDisableStructs[gBattlerAttacker].rolloutTimer++;
+        if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)) // First hit.
+        {
+            gDisableStructs[gBattlerAttacker].rolloutTimer = 5;
+            gDisableStructs[gBattlerAttacker].rolloutTimerStartValue = 5;
+            gBattleMons[gBattlerAttacker].status2 |= STATUS2_MULTIPLETURNS;
+            gLockedMoves[gBattlerAttacker] = gCurrentMove;
+        }
+        if (--gDisableStructs[gBattlerAttacker].rolloutTimer == 0) // Last hit.
+        {
+            gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_MULTIPLETURNS;
+        }
 
         gBattlescriptCurrInstr = cmd->nextInstr;
     }

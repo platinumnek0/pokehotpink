@@ -2868,10 +2868,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Defense Curl"),
         .description = COMPOUND_STRING(
-            "The user curls up into a ball,\n"
-            "protecting any weak spots to\n"
-            "raise its Defense and become\n"
-            "Curled."),
+            "The user rolls up into a ball,\n"
+            "curling up to conceal any weak\n"
+            "points and raise its Defense."
+        ),
         .effect = EFFECT_DEFENSE_CURL,
         .power = 0,
         .type = TYPE_ROCK,
@@ -2888,25 +2888,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .contestCategory = CONTEST_CATEGORY_CUTE,
         .contestComboStarterId = COMBO_STARTER_DEFENSE_CURL,
         .contestComboMoves = {0}
-    },
-
-    [MOVE_CURL_UP] =
-    {
-        .name = COMPOUND_STRING("Curl Up"),
-        .description = COMPOUND_STRING(
-            "Rolls into a ball to sharply\n"
-            "boost Defense."),
-        .effect = EFFECT_CURL_UP,
-        .power = 0,
-        .type = TYPE_STEEL,
-        .accuracy = 0,
-        .pp = 15,
-        .target = MOVE_TARGET_USER,
-        .priority = 0,
-        .category = DAMAGE_CATEGORY_STATUS,
-        .ignoresProtect = TRUE,
-        .mirrorMoveBanned = TRUE,
-        .snatchAffected = TRUE,
     },
 
     [MOVE_BARRIER] =
@@ -5254,13 +5235,13 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Rollout"),
         .description = COMPOUND_STRING(
-            "The user rolls over the target\n"
-            "like a boulder. This attack gets\n"
-            "stronger when used repeatedly or\n"
-            "when the user is Curled."),
-        .effect = EFFECT_FURY_CUTTER,
-        .power = 40,
-        .type = TYPE_ROCK,
+            "The user rolls over the foe like\n"
+            "a boulder for 5 turns, dealing\n"
+            "more damage each turn. This move\n"
+            "is stronger if the user is curled."),
+        .effect = EFFECT_ROLLOUT,
+        .power = 30,
+        .type = TYPE_ICE,
         .accuracy = 90,
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
@@ -5269,7 +5250,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .instructBanned = TRUE,
         .parentalBondBanned = TRUE,
-        .curlBoosted = TRUE,
         .gravityBoosted = TRUE,
         .contestEffect = CONTEST_EFFECT_DONT_EXCITE_AUDIENCE,
         .contestCategory = CONTEST_CATEGORY_TOUGH,
@@ -7692,12 +7672,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Ice Ball"),
         .description = COMPOUND_STRING(
-            "The user rolls over the target\n"
-            "like a snowball. This attack gets\n"
-            "stronger when used repeatedly or\n"
-            "when the user is Curled."),
-        .effect = EFFECT_FURY_CUTTER,
-        .power = 40,
+            "The user rolls over the foe like\n"
+            "a snowball for 5 turns, dealing\n"
+            "more damage each turn. This move\n"
+            "is stronger if the user is curled."),
+        .effect = EFFECT_ROLLOUT,
+        .power = 30,
         .type = TYPE_ICE,
         .accuracy = 90,
         .pp = 20,
@@ -7708,7 +7688,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .ballisticMove = TRUE,
         .instructBanned = TRUE,
         .parentalBondBanned = TRUE,
-        .curlBoosted = TRUE,
         .gravityBoosted = TRUE,
         .contestEffect = CONTEST_EFFECT_DONT_EXCITE_AUDIENCE,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
@@ -18199,9 +18178,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Steel Roller"),
         .description = COMPOUND_STRING(
-            "A violent rolling attack that's\n"
-            "stronger in Terrains, but\n"
-            "destroys them."),
+            "The user attacks by violently\n"
+            "rolling over the foe. This move\n"
+            "becomes stronger when Terrain is\n"
+            "active and destroys Terrains."),
         .effect = EFFECT_BULLDOZE,
         .power = 80,
         .type = TYPE_STEEL,
@@ -18853,7 +18833,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_ICE,
         .accuracy = 85,
         .pp = 10,
-        .target = MOVE_TARGET_BOTH,
+        .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .piercingMove = TRUE,
@@ -19244,10 +19224,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Shelter"),
         .description = COMPOUND_STRING(
-            "The user rolls up and shelters\n"
-            "itself in its shell, sharply\n"
-            "raising its Defense and becoming\n"
-            "Curled."),
+            "The user shelters itself in its\n"
+            "shell, curling up to hide any\n"
+            "weak spots and raising its\n"
+            "Defense."),
         .effect = EFFECT_CURL_UP,
         .power = 0,
         .type = TYPE_STEEL,
