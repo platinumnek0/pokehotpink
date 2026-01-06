@@ -98,7 +98,9 @@ const u8 gText_DefaultNameLillie[] = _("LILLIE");
 const u8 gText_DefaultNameTerra[] = _("TERRA");
 const u8 gText_DefaultNameLucy[] = _("LUCY");
 const u8 gText_DefaultNameHalie[] = _("HALIE");
-const u8 gText_ThisIsAPokemon[] = _("This is what we call a “Pokémon.”{PAUSE 96}\p");
+const u8 gText_ThisIsAPokemon[] = _("As a researcher, you will be given a\n"
+                                    "partner Pokémon like so to assist with\l"
+                                    "field work.{PAUSE 96}\p");
 const u8 gText_5MarksPokemon[] = _("????? Pokémon");
 const u8 gText_UnkHeight[] = _("{CLEAR_TO 0x0C}??'??”");
 const u8 gText_UnkHeightMetric[] = _("???.? m");
