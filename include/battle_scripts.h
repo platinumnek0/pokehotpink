@@ -511,6 +511,7 @@ extern const u8 BattleScript_DefiantRaiseAttack[];
 extern const u8 BattleScript_CompetitiveRaiseSpAtk[];
 extern const u8 BattleScript_TailwindEndsReturn[];
 extern const u8 BattleScript_ChargeCountLeft[];
+extern const u8 BattleScript_MagicCoatWoreOff[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
@@ -869,7 +870,6 @@ extern const u8 BattleScript_EffectCynicize[];
 extern const u8 BattleScript_LeveledUpCanEvolve[];
 extern const u8 BattleScript_EffectHolistics[];
 extern const u8 BattleScript_EffectTrapLowerSpeed[];
-extern const u8 BattleScript_EffectDetectParry[];
 extern const u8 BattleScript_TauntMessageReturn[];
 extern const u8 BattleScript_TormentMessageReturn[];
 extern const u8 BattleScript_DisableMessageReturn[];
@@ -884,5 +884,7 @@ extern const u8 BattleScript_SoulLocketMsgBreak[];
 extern const u8 BattleScript_DevilLocketMsgBreak[];
 extern const u8 BattleScript_SaltCureEffectReturn[];
 extern const u8 BattleScript_QuashEffectReturn[];
+extern const u8 BattleScript_EffectDetect[];
+extern const u8 BattleScript_DetectSetUp[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

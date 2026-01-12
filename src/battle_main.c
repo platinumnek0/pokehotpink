@@ -5435,6 +5435,9 @@ static bool32 TryDoMoveEffectsBeforeMoves(void)
                 case MOVE_SHELL_TRAP:
                     BattleScriptExecute(BattleScript_ShellTrapSetUp);
                     return TRUE;
+                case MOVE_DETECT:
+                    BattleScriptExecute(BattleScript_DetectSetUp);
+                    return TRUE;
                 }
             }
         }

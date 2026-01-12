@@ -133,6 +133,7 @@ struct DisableStruct
     u8 usedProteanLibero:1;
     u8 recursionCounter;
     u8 chargeDecreased:1;
+    u8 magicCoatTimer:4;
 };
 
 struct ProtectStruct
@@ -189,7 +190,8 @@ struct ProtectStruct
     u8 specialBattlerId;
     u16 hollowGuarded;
     u16 usedSoundMove:1;
-    u16 detected;
+    u16 detected:1;
+    u16 touchedDetect:1;
 };
 
 struct SpecialStatus

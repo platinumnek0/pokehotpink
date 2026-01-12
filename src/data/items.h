@@ -126,7 +126,7 @@ static const u8 sFigyBerryDesc[]      = _("A hold item that\n"
                                           "restores HP but\n"
                                           "may confuse.");
 
-static const u8 sQuestionMarksDesc[]  = _("?????");
+static const u8 sQuestionMarksDesc[]  = _("No held item.");
 
 static const u8 sKeyToRoomDesc[]      = _("A key that opens a\n"
                                           "door inside the\n"

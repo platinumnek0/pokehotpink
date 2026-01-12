@@ -318,6 +318,11 @@ BattleScript_EffectHit_Pledge::
 	tryfaintmon BS_TARGET
 	return
 
+BattleScript_MagicCoatWoreOff::
+	printstring STRINGID_MAGICCOATWOREOFF
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
 BattleScript_EffectSaltCure::
 	call BattleScript_EffectHit_Ret
 	tryfaintmon BS_TARGET
@@ -598,6 +603,27 @@ BattleScript_EffectShellTrap::
 	printstring STRINGID_SHELLTRAPDIDNTWORK
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_DetectSetUp::
+	flushtextbox
+	setdetectstatus
+	printstring STRINGID_USEDMOVE
+	playanimation BS_ATTACKER, B_ANIM_DETECT_SETUP, NULL
+	printstring STRINGID_TOOKPARRYSTANCE
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_EffectDetect::
+	attackcanceler
+	jumpifshelltrap BS_ATTACKER, BattleScript_DetectParryMove
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING | HITMARKER_NO_PPDEDUCT, BattleScript_MoveEnd
+	ppreduce
+	goto BattleScript_MoveEnd
+BattleScript_DetectParryMove:
+	trycopycat BattleScript_CopycatFail
+	setdetectparrytarget
+	waitmessage B_WAIT_TIME_LONG
+	jumptocalledmove TRUE
 
 BattleScript_EffectMaxHp50Recoil::
 	attackcanceler
@@ -3340,17 +3366,6 @@ BattleScript_EffectMirrorMove::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectDetectParry::
-	attackcanceler
-	printstring STRINGID_PARRIEDATTACK
-	waitmessage B_WAIT_TIME_LONG
-	tryparry BattleScript_ParryFail
-	jumptocalledmove TRUE
-BattleScript_ParryFail:
-	printstring STRINGID_PARRYFAILED
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
-
 BattleScript_EffectAttackUp::
 	setstatchanger STAT_ATK, 1, FALSE
 	goto BattleScript_EffectStatUp
@@ -5155,6 +5170,7 @@ BattleScript_StockpileStatChangeDown_Ret:
 BattleScript_EffectSpitUp::
 	attackcanceler
 	jumpifbyte CMP_EQUAL, cMISS_TYPE, B_MSG_PROTECTED, BattleScript_SpitUpFailProtect
+	jumpifbyte CMP_EQUAL, cMISS_TYPE, B_MSG_PARRIED, BattleScript_SpitUpFailProtect
 	attackstring
 	ppreduce
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE

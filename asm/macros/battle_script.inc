@@ -1528,6 +1528,14 @@
 	.4byte \jumpInstr
 	.endm
 
+	.macro setdetectstatus
+	callnative BS_SetDetectStatus
+	.endm
+
+	.macro setdetectparrytarget
+	callnative BS_SetDetectParryTarget
+	.endm
+
 	.macro jumpifemergencyexited battler:req, jumpInstr:req
 	callnative BS_JumpIfEmergencyExited
 	.byte \battler

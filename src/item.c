@@ -86,6 +86,12 @@ void CopyItemName(u16 itemId, u8 *dst)
     StringCopy(dst, ItemId_GetName(itemId));
 }
 
+
+void CopyItemDescription(u16 itemId, u8 *dst)
+{
+    StringCopy(dst, ItemId_GetDescription(itemId));
+}
+
 const u8 sText_s[] =_("s");
 
 void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)

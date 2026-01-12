@@ -1383,10 +1383,11 @@ static void Cmd_attackcanceler(void)
         return;
     }
 
-    if (gProtectStructs[gBattlerTarget].bounceMove
+    if ((gDisableStructs[gBattlerTarget].magicCoatTimer > 0)
         && gMovesInfo[gCurrentMove].magicCoatAffected
         && !gProtectStructs[gBattlerAttacker].usesBouncedMove)
     {
+        gDisableStructs[gBattlerTarget].magicCoatTimer = 0;
         gProtectStructs[gBattlerTarget].usesBouncedMove = TRUE;
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         // Edge case for bouncing a powder move against a grass type pokemon.
@@ -1479,6 +1480,10 @@ static void Cmd_attackcanceler(void)
     {
         if (IsMoveMakingContact(gCurrentMove, gBattlerAttacker))
             gProtectStructs[gBattlerAttacker].touchedProtectLike = TRUE;
+        
+        if(IS_MOVE_PHYSICAL(gCurrentMove) && gProtectStructs[gBattlerTarget].detected)
+            gProtectStructs[gBattlerAttacker].touchedDetect = TRUE;
+
         CancelMultiTurnMoves(gBattlerAttacker);
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gLastLandedMoves[gBattlerTarget] = 0;
@@ -1490,7 +1495,14 @@ static void Cmd_attackcanceler(void)
             gSpecialStatuses[gBattlerAttacker].multiHitOn = 0;
             gMultiHitCounter = 0;
         }
-        gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
+        if(gProtectStructs[gBattlerTarget].detected)
+        {
+            gBattleCommunication[MISS_TYPE] = B_MSG_PARRIED;
+        }
+        else
+        {
+            gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
+        }
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else if (gProtectStructs[gBattlerTarget].beakBlastCharge && IsMoveMakingContact(gCurrentMove, gBattlerAttacker))
@@ -1546,7 +1558,14 @@ static bool8 JumpIfMoveAffectedByProtect(u16 move)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         JumpIfMoveFailed(7, move);
-        gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
+        if(gProtectStructs[gBattlerTarget].detected)
+        {
+            gBattleCommunication[MISS_TYPE] = B_MSG_PARRIED;
+        }
+        else
+        {
+            gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
+        }
         affected = TRUE;
     }
     return affected;
@@ -2555,9 +2574,9 @@ static void Cmd_resultmessage(void)
         return;
     }
 
-    if (gMoveResultFlags & MOVE_RESULT_MISSED && (!(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE) || gBattleCommunication[MISS_TYPE] > B_MSG_AVOIDED_ATK))
+    if (gMoveResultFlags & MOVE_RESULT_MISSED && (!(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE) || (gBattleCommunication[MISS_TYPE] > B_MSG_AVOIDED_ATK)))
     {
-        if (gBattleCommunication[MISS_TYPE] > B_MSG_AVOIDED_ATK) // Wonder Guard or Levitate - show the ability pop-up
+        if ( (gBattleCommunication[MISS_TYPE] > B_MSG_AVOIDED_ATK) && (gBattleCommunication[MISS_TYPE] != B_MSG_PARRIED)) // Wonder Guard or Levitate - show the ability pop-up
             CreateAbilityPopUp(gBattlerTarget, gBattleMons[gBattlerTarget].ability, (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) != 0);
         stringId = gMissStringIds[gBattleCommunication[MISS_TYPE]];
         gBattleCommunication[MSG_DISPLAY] = 1;
@@ -5721,16 +5740,6 @@ static void Cmd_moveend(void)
                     gBattlescriptCurrInstr = BattleScript_KingsShieldEffect;
                     effect = 1;
                 }
-                else if (gProtectStructs[gBattlerTarget].detected)
-                {
-                    gProtectStructs[gBattlerAttacker].touchedProtectLike = FALSE;
-                    i = gBattlerAttacker;
-                    gBattlerAttacker = gBattlerTarget;
-                    gBattlerTarget = i;
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_EffectDetectParry;
-                    effect = 1;
-                }
                 // Not strictly a protect effect, but works the same way
                 else if (gProtectStructs[gBattlerTarget].beakBlastCharge
                          && CanBeBurned(gBattlerAttacker)
@@ -6042,6 +6051,21 @@ static void Cmd_moveend(void)
                 && GetBattlerSide(gBattlerTarget) != GetBattlerSide(gBattlerAttacker)
                 && gProtectStructs[gBattlerTarget].physicalDmg
                 && gProtectStructs[gBattlerTarget].physicalBattlerId == gBattlerAttacker
+                && !TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
+            {
+                gProtectStructs[gBattlerTarget].shellTrap = TRUE;
+                // Change move order in double battles, so the hit mon with shell trap moves immediately after being hit.
+                if (IsDoubleBattle())
+                {
+                    ChangeOrderTargetAfterAttacker();
+                }
+            }
+
+            // set detect to retaliate after the attacker's turn if the target was hit by a physical move
+            if (gMovesInfo[gChosenMoveByBattler[gBattlerTarget]].effect == EFFECT_DETECT
+                && gBattlerTarget != gBattlerAttacker
+                && GetBattlerSide(gBattlerTarget) != GetBattlerSide(gBattlerAttacker)
+                && gProtectStructs[gBattlerAttacker].touchedDetect
                 && !TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
             {
                 gProtectStructs[gBattlerTarget].shellTrap = TRUE;
@@ -11214,17 +11238,13 @@ static void Cmd_setprotectlike(void)
                 gProtectStructs[gBattlerAttacker].endured = TRUE;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BRACED_ITSELF;
             }
-            else if (gCurrentMove == MOVE_PROTECT || gCurrentMove == MOVE_DETECT)
+            else if (gCurrentMove == MOVE_PROTECT
+                    //|| gCurrentMove == MOVE_DETECT
+                    )
             {
                 gProtectStructs[gBattlerAttacker].protected = TRUE;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECTED_ITSELF;
             }
-            /*
-            else if (gCurrentMove == MOVE_DETECT)
-            {
-                gProtectStructs[gBattlerAttacker].detected = TRUE;
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECTED_ITSELF;
-            }*/
             else if (gCurrentMove == MOVE_SPIKY_SHIELD)
             {
                 gProtectStructs[gBattlerAttacker].spikyShielded = TRUE;
@@ -11733,7 +11753,7 @@ static void Cmd_stockpiletobasedamage(void)
     }
     else
     {
-        if (gBattleCommunication[MISS_TYPE] != B_MSG_PROTECTED)
+        if (!(gBattleCommunication[MISS_TYPE] == B_MSG_PROTECTED || gBattleCommunication[MISS_TYPE] == B_MSG_PARRIED))
             gBattleScripting.animTurn = gDisableStructs[gBattlerAttacker].stockpileCounter;
 
         if (!(gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT && gBattleMons[gBattlerTarget].hp != 0))
@@ -14944,8 +14964,37 @@ static void Cmd_trysetmagiccoat(void)
     }
     else
     {
+        if(gDisableStructs[gBattlerAttacker].magicCoatTimer < 1) //if the user doesn't have magic coat, set it
+        {
+            gDisableStructs[gBattlerAttacker].magicCoatTimer = 3;
+            //check if it's a dobule battle and the ally doesn't have magic coat
+            if((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            && (gDisableStructs[BATTLE_PARTNER(gBattlerAttacker)].magicCoatTimer < 1))
+            {
+                gDisableStructs[BATTLE_PARTNER(gBattlerAttacker)].magicCoatTimer = 3;
+            }
+            
+            //move on with the battle script
+            gBattlescriptCurrInstr = cmd->nextInstr;
+
+        } //if the user DOES have magic coat...
+        else if((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        && (gDisableStructs[BATTLE_PARTNER(gBattlerAttacker)].magicCoatTimer < 1)) //check if the ally has magic coat, but ONLY in a double battle
+        {
+            gDisableStructs[BATTLE_PARTNER(gBattlerAttacker)].magicCoatTimer = 3;
+
+            //move on with the battle script
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        }
+        else //both have magic coat, so the move fails
+        {
+            gBattlescriptCurrInstr = cmd->failInstr;
+        }
+        
+        /*
         gProtectStructs[gBattlerAttacker].bounceMove = TRUE;
         gBattlescriptCurrInstr = cmd->nextInstr;
+        */
     }
 }
 
@@ -16062,6 +16111,28 @@ static void Cmd_callnative(void)
     CMD_ARGS(void (*func)(void));
     void (*func)(void) = cmd->func;
     func();
+}
+
+void BS_SetDetectParryTarget(void)
+{
+    NATIVE_ARGS();
+
+    s32 i;
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (i != gBattlerAttacker
+            && IsBattlerAlive(i)
+            && !(gBattleStruct->targetsDone[gBattlerAttacker] & gBitTable[i])
+            && (GetBattlerSide(i) != GetBattlerSide(gBattlerAttacker))
+            && gProtectStructs[i].touchedDetect)
+            {
+                gBattlerTarget = i;
+                gProtectStructs[i].touchedDetect = FALSE;
+                break;
+            }
+    }
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 // Callnative Funcs
@@ -17770,4 +17841,15 @@ void BS_TryHealFullHP(void)
         gBattlescriptCurrInstr = failInstr;
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetDetectStatus(void)
+{
+    NATIVE_ARGS();
+
+    gProtectStructs[gBattlerAttacker].detected = TRUE;
+
+    StringCopy(gBattleTextBuff3, GetMoveName(MOVE_DETECT));
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }

@@ -1183,6 +1183,7 @@ gBattleAnims_General::
 	.4byte General_Gravity					@ B_ANIM_GRAVITY
 	.4byte General_Shrink           		@ B_ANIM_SHRINK
 	.4byte General_DevilLocketCurse			@ B_ANIM_DEVIL_LOCKET_CURSE
+	.4byte General_DetectSetup				@ B_ANIM_DETECT_SETUP
 
 	.align 2
 gBattleAnims_Special::
@@ -19410,6 +19411,7 @@ Move_PROTECT:
 	clearmonbg ANIM_ATK_PARTNER
 	end
 
+General_DetectSetup:
 Move_DETECT:
 	loadspritegfx ANIM_TAG_SPARKLE_4
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 2, 0, 9, RGB_BLACK

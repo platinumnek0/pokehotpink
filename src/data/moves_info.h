@@ -5042,15 +5042,17 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Detect"),
         .description = COMPOUND_STRING(
-            "Evades attack, but may fail\n"
-            "if used in succession."),
-        .effect = EFFECT_PROTECT,
+            "The user takes a defensive\n"
+            "stance. If hit by a physical move,\n"
+            "instead of taking damage, the\n"
+            "move is parried back to the foe."),
+        .effect = EFFECT_DETECT,
         .power = 0,
         .type = TYPE_FIGHTING,
         .accuracy = 0,
         .pp = 5,
-        .target = MOVE_TARGET_USER,
-        .priority = B_UPDATED_MOVE_DATA >= GEN_5 ? 4 : 3,
+        .target = MOVE_TARGET_DEPENDS,
+        .priority = -3,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_EVSN_UP_1 },
         .ignoresProtect = TRUE,
@@ -7080,15 +7082,17 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Magic Coat"),
         .description = COMPOUND_STRING(
-            "Reflects special effects\n"
-            "back to the attacker."),
+            "For three turns, the user and its\n"
+            "ally reflect the foes' status\n"
+            "moves back to them. Reflecting a\n"
+            "move removes the magical coat."),
         .effect = EFFECT_MAGIC_COAT,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
         .pp = 15,
         .target = MOVE_TARGET_DEPENDS,
-        .priority = 4,
+        .priority = 2,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_SPDEF_UP_2 },
         .ignoresProtect = TRUE,

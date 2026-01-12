@@ -743,7 +743,7 @@
 #define STRINGID_CHARGECOUNTFELL                      741
 #define STRINGID_DEFCHARGECOUNTROSE                   742
 #define STRINGID_PARRIEDATTACK                        743
-#define STRINGID_PARRYFAILED                          744
+#define STRINGID_TOOKPARRYSTANCE                      744
 #define STRINGID_CURSEDBODYTORMENTED                  745
 #define STRINGID_STARTEDTOPANIC                       746
 #define STRINGID_TARGETMINIMIZED                      747
@@ -751,8 +751,9 @@
 #define STRINGID_LOCKETSHATTERED                      749
 #define STRINGID_ONECHARGELEFT                        750
 #define STRINGID_CURLEDINTOABALL                      751
+#define STRINGID_MAGICCOATWOREOFF                     752
 
-#define BATTLESTRINGS_COUNT                           752
+#define BATTLESTRINGS_COUNT                           753
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -784,6 +785,7 @@
 #define B_MSG_AVOIDED_ATK  2
 #define B_MSG_AVOIDED_DMG  3
 #define B_MSG_GROUND_MISS  4
+#define B_MSG_PARRIED      5
 
 // gAbsorbDrainStringIds
 #define B_MSG_ABSORB      0

@@ -2368,6 +2368,7 @@ enum
     ENDTURN_SYRUP_BOMB,
     ENDTURN_DYNAMAX,
     ENDTURN_SEA_OF_FIRE_DAMAGE,
+    ENDTURN_MAGIC_COAT,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -3012,6 +3013,20 @@ u8 DoBattlerEndTurnEffects(void)
                 BtlController_EmitStatusAnimation(battler, BUFFER_A, FALSE, STATUS1_BURN);
                 MarkBattlerForControllerExec(battler);
                 BattleScriptExecute(BattleScript_HurtByTheSeaOfFire);
+                effect++;
+            }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_MAGIC_COAT:
+            if(IsBattlerAlive(battler) && gDisableStructs[battler].magicCoatTimer > 0)
+            {
+                gDisableStructs[battler].magicCoatTimer--;
+                if(gDisableStructs[battler].magicCoatTimer == 0)
+                {
+                    gDisableStructs[battler].magicCoatTimer = 0;
+                    //gProtectStructs[battler].bounceMove = FALSE;
+                    BattleScriptExecute(BattleScript_MagicCoatWoreOff);
+                }
                 effect++;
             }
             gBattleStruct->turnEffectsTracker++;
@@ -5157,7 +5172,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             }
             else if (GetChosenMovePriority(gBattlerAttacker) > 0
                      && BlocksPrankster(move, gBattlerAttacker, gBattlerTarget, TRUE)
-                     && !(IS_MOVE_STATUS(move) && (targetAbility == ABILITY_MAGIC_BOUNCE || gProtectStructs[gBattlerTarget].bounceMove)))
+                     && !(IS_MOVE_STATUS(move) && (targetAbility == ABILITY_MAGIC_BOUNCE || (gDisableStructs[gBattlerTarget].magicCoatTimer > 0))))
             {
                 if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(moveTarget & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
                     CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
@@ -8636,7 +8651,7 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
     // This means extra logic is needed to handle Shell Side Arm.
     if ( (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNSEEN_FIST
         && (gMovesInfo[move].makesContact || (gMovesInfo[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->swapDamageCategory))
-        && !gProtectStructs[battler].maxGuarded) || (gProtectStructs[gBattlerAttacker].detected)) // Max Guard cannot be bypassed by Unseen Fist
+        && !gProtectStructs[battler].maxGuarded)) // Max Guard cannot be bypassed by Unseen Fist
         return FALSE;
     else if (gMovesInfo[move].ignoresProtect)
         return FALSE;
@@ -8649,8 +8664,7 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
         return TRUE;
     else if (gProtectStructs[battler].burningBulwarked)
         return TRUE;
-    else if ((gProtectStructs[battler].obstructed || gProtectStructs[battler].silkTrapped || gProtectStructs[battler].hollowGuarded
-        || gProtectStructs[battler].detected) && !IS_MOVE_STATUS(move))
+    else if ((gProtectStructs[battler].obstructed || gProtectStructs[battler].silkTrapped || gProtectStructs[battler].hollowGuarded) && !IS_MOVE_STATUS(move))
         return TRUE;
     else if (gProtectStructs[battler].spikyShielded)
         return TRUE;
@@ -8661,11 +8675,11 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
     else if (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_QUICK_GUARD
              && GetChosenMovePriority(gBattlerAttacker) > 0)
         return TRUE;
-    else if (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_CRAFTY_SHIELD
-      && IS_MOVE_STATUS(move))
+    else if ((gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_CRAFTY_SHIELD) && IS_MOVE_STATUS(move))
         return TRUE;
-    else if (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_MAT_BLOCK
-      && !IS_MOVE_STATUS(move))
+    else if ((gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_MAT_BLOCK) && !IS_MOVE_STATUS(move))
+        return TRUE;
+    else if (gProtectStructs[gBattlerAttacker].detected && IS_MOVE_PHYSICAL(move))
         return TRUE;
     else
         return FALSE;
