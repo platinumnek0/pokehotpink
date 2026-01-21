@@ -18035,6 +18035,7 @@ Move_AXE_KICK::
 Move_ORDER_UP::
 Move_SPICY_EXTRACT::
 	end
+	
 Move_SPIN_OUT::
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_GUST
@@ -18075,9 +18076,80 @@ Move_SPIN_OUT::
 	end
 
 Move_POPULATION_BOMB::
+	end
+
 Move_GLAIVE_RUSH::
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_SWORD
+	loadspritegfx ANIM_TAG_AIR_WAVE
+	monbg ANIM_ATTACKER
+	splitbgprio ANIM_ATTACKER
+	delay 0x1
+	setalpha 12, 8
+	playsewithpan SE_M_SWORDS_DANCE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 16, 6, 1, 4
+	createsprite gSwordsDanceBladeSpriteTemplate, ANIM_ATTACKER, 2, 0, 0
+	delay 22
+	createvisualtask AnimTask_FlashAnimTagWithColor, 2, ANIM_TAG_SWORD, 2, 2, RGB(18, 31, 31), 16, 0, 0
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
+	blendoff
+	createvisualtask AnimTask_AllBattlersInvisibleExceptAttackerAndTarget, 10
+	waitforvisualfinish
+	fadetobg BG_DRILL
+	waitbgfadeout
+	createvisualtask AnimTask_StartSlidingBg, 0x5, 0xf700, 0x300, 0x1, 0xffff
+	waitbgfadein
+	setalpha 12, 8
+	delay 0x10
+	createvisualtask AnimTask_WindUpLunge, 5, ANIM_ATTACKER, -24, 8, 23, 10, 40, 10
+	delay 0x23
+	invisible ANIM_ATTACKER
+	call SonicBoomProjectile
+	call SonicBoomProjectile
+	call SonicBoomProjectile
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	delay 0x5
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, ANIM_TARGET, 2
+	delay 0x1
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0xa, 0xfff6, ANIM_TARGET, 2
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	delay 0x1
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0xf, 0xfff1, ANIM_TARGET, 2
+	delay 0x1
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0x14, 0xffec, ANIM_TARGET, 2
+	delay 0x1
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0x19, 0xffe7, ANIM_TARGET, 2
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, 0xffe6, 0x10, 0x1, 0x4
+	waitforvisualfinish
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -512, ANIM_TARGET, 0
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 4, 0, 12, 1
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 12, 1
+	waitforvisualfinish
+	delay 0x4
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -512, ANIM_TARGET, 1
+	delay 0xa
+	delay 0x19
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, 0x0, 0x6
+	delay 0x2
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0x0, 0x5
+	waitforvisualfinish
+	delay 0x10
+	blendoff
+	clearmonbg ANIM_DEF_PARTNER
+	createvisualtask AnimTask_AllBattlersVisible, 0xA
+	waitforvisualfinish
+	call UnsetPsychicBg
+	end
+
 Move_REVIVAL_BLESSING::
 	end
+
 Move_SALT_CURE::
 	loadspritegfx ANIM_TAG_ICE_CRYSTALS
 	loadspritegfx ANIM_TAG_SALT_CRYSTALS
@@ -18092,6 +18164,7 @@ Move_SALT_CURE::
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
+
 Move_TRIPLE_DIVE::
 	end
 Move_MORTAL_SPIN::
@@ -18147,7 +18220,30 @@ Move_TACHYON_CUTTER::
 Move_HARD_PRESS::
 Move_DRAGON_CHEER::
 Move_SUPERCELL_SLAM::
+	end
 Move_MALIGNANT_CHAIN::
+	loadspritegfx ANIM_TAG_PURPLE_CHAIN
+	loadspritegfx ANIM_TAG_POISON_BUBBLE
+	loopsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET, 7, 4
+	createsprite gChainBindingSpriteTemplate, ANIM_TARGET, 4, 0, 16, 0, 1
+	delay 7
+	createsprite gChainBindingSpriteTemplate, ANIM_TARGET, 2, 0, 6, 1, 1
+	delay 7
+	createsprite gChainBindingSpriteTemplate, ANIM_TARGET, 4, 0, 6, 0, 1
+	delay 7
+	createsprite gChainBindingSpriteTemplate, ANIM_TARGET, 2, 2, 16, 1, 1
+	delay 3
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 8, 1
+	delay 20
+	setarg 7, -1
+	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
+	delay 5
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 8, 1
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_TARGET, 2, 2, 0, 12, RGB(30, 0, 31)
+	call PoisonBubblesEffect
+	waitforvisualfinish
+	end
+
 	end @to do
 
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 1-3 @@@@@@@@@@@@@@@@@@@@@@@

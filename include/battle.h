@@ -134,6 +134,7 @@ struct DisableStruct
     u8 recursionCounter;
     u8 chargeDecreased:1;
     u8 magicCoatTimer:4;
+    u8 ASuses:4;
 };
 
 struct ProtectStruct

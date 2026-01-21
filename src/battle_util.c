@@ -8493,7 +8493,7 @@ u8 IsMonDisobedient(void)
     // is not obedient
     if (gCurrentMove == MOVE_RAGE)
         gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_RAGE;
-    if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP && (gCurrentMove == MOVE_SNORE || gCurrentMove == MOVE_SLEEP_TALK))
+    if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP && (gMovesInfo[gCurrentMove].effect == EFFECT_SNORE || gCurrentMove == MOVE_SLEEP_TALK))
     {
         gBattlescriptCurrInstr = BattleScript_IgnoresWhileAsleep;
         return 1;
@@ -9288,7 +9288,7 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         basePower += (basePower * min(100, GetBattlerSideFaintCounter(battlerAtk)));
         break;
     case EFFECT_RICOCHET:
-        basePower += (CountSpecificStatBoosts(battlerAtk, STAT_SPEED) * 10);
+        basePower += (CountSpecificStatBoosts(battlerAtk, STAT_SPEED) * 5);
     case EFFECT_SCALE_DEF:
         basePower += (CountSpecificStatBoosts(battlerAtk, STAT_DEF) * 15);
     }
@@ -11871,7 +11871,8 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
         //secondaryEffectChance = 50;
     }
 
-    if((gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_LUCKY_CHANT) && secondaryEffectChance < 100)
+    if((gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_LUCKY_CHANT) && secondaryEffectChance < 100
+    && !(additionalEffect->self))
     {
         secondaryEffectChance *= 0.7;
     }

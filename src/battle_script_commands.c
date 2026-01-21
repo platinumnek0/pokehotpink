@@ -969,7 +969,10 @@ static const struct SpriteTemplate sSpriteTemplate_MonIconOnLvlUpBanner =
     .callback = SpriteCB_MonIconOnLvlUpBanner
 };
 
-static const u16 sProtectSuccessRates[] = {USHRT_MAX, USHRT_MAX / 2, USHRT_MAX / 4, USHRT_MAX / 8};
+static const u16 sProtectSuccessRates[] = {USHRT_MAX, (3 * USHRT_MAX) / 4,
+                                           USHRT_MAX / 2, (3 * USHRT_MAX) / 8,
+                                           USHRT_MAX / 4, (3 * USHRT_MAX) / 16, 
+                                           USHRT_MAX / 8};
 
 static const u16 sFinalStrikeOnlyEffects[] =
 {
@@ -11223,7 +11226,7 @@ static void Cmd_setprotectlike(void)
     bool32 fail = TRUE;
     bool32 notLastTurn = TRUE;
 
-    TryResetProtectUseCounter(gBattlerAttacker);
+    //TryResetProtectUseCounter(gBattlerAttacker);
     if (gCurrentTurnActionNumber == (gBattlersCount - 1))
         notLastTurn = FALSE;
 
@@ -11286,7 +11289,18 @@ static void Cmd_setprotectlike(void)
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECTED_ITSELF;
             }
 
-            gDisableStructs[gBattlerAttacker].protectUses++;
+            if(gDisableStructs[gBattlerAttacker].protectUses < 6)
+            {
+                if(gMovesInfo[gChosenMoveByBattler[gBattlerAttacker]].effect ==
+                   gMovesInfo[gLastMoves[gBattlerAttacker]].effect && gDisableStructs[gBattlerAttacker].protectUses < 5)
+                {
+                    gDisableStructs[gBattlerAttacker].protectUses += 2;
+                }
+                else
+                {
+                    gDisableStructs[gBattlerAttacker].protectUses++;
+                }
+            }
             fail = FALSE;
         }
         else // Protects the whole side.
@@ -11296,21 +11310,54 @@ static void Cmd_setprotectlike(void)
             {
                 gSideStatuses[side] |= SIDE_STATUS_WIDE_GUARD;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECTED_TEAM;
-                gDisableStructs[gBattlerAttacker].protectUses++;
+                if(gDisableStructs[gBattlerAttacker].protectUses < 6)
+                {
+                    if(gMovesInfo[gChosenMoveByBattler[gBattlerAttacker]].effect ==
+                    gMovesInfo[gLastMoves[gBattlerAttacker]].effect && gDisableStructs[gBattlerAttacker].protectUses < 5)
+                    {
+                        gDisableStructs[gBattlerAttacker].protectUses += 2;
+                    }
+                    else
+                    {
+                        gDisableStructs[gBattlerAttacker].protectUses++;
+                    }
+                }
                 fail = FALSE;
             }
             else if (gCurrentMove == MOVE_QUICK_GUARD && !(gSideStatuses[side] & SIDE_STATUS_QUICK_GUARD))
             {
                 gSideStatuses[side] |= SIDE_STATUS_QUICK_GUARD;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECTED_TEAM;
-                gDisableStructs[gBattlerAttacker].protectUses++;
+                if(gDisableStructs[gBattlerAttacker].protectUses < 6)
+                {
+                    if(gMovesInfo[gChosenMoveByBattler[gBattlerAttacker]].effect ==
+                    gMovesInfo[gLastMoves[gBattlerAttacker]].effect && gDisableStructs[gBattlerAttacker].protectUses < 5)
+                    {
+                        gDisableStructs[gBattlerAttacker].protectUses += 2;
+                    }
+                    else
+                    {
+                        gDisableStructs[gBattlerAttacker].protectUses++;
+                    }
+                }
                 fail = FALSE;
             }
             else if (gCurrentMove == MOVE_CRAFTY_SHIELD && !(gSideStatuses[side] & SIDE_STATUS_CRAFTY_SHIELD))
             {
                 gSideStatuses[side] |= SIDE_STATUS_CRAFTY_SHIELD;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECTED_TEAM;
-                gDisableStructs[gBattlerAttacker].protectUses++;
+                if(gDisableStructs[gBattlerAttacker].protectUses < 6)
+                {
+                    if(gMovesInfo[gChosenMoveByBattler[gBattlerAttacker]].effect ==
+                    gMovesInfo[gLastMoves[gBattlerAttacker]].effect && gDisableStructs[gBattlerAttacker].protectUses < 5)
+                    {
+                        gDisableStructs[gBattlerAttacker].protectUses += 2;
+                    }
+                    else
+                    {
+                        gDisableStructs[gBattlerAttacker].protectUses++;
+                    }
+                }
                 fail = FALSE;
             }
             else if (gCurrentMove == MOVE_MAT_BLOCK && !(gSideStatuses[side] & SIDE_STATUS_MAT_BLOCK))
@@ -11324,7 +11371,7 @@ static void Cmd_setprotectlike(void)
 
     if (fail)
     {
-        gDisableStructs[gBattlerAttacker].protectUses = 0;
+        //gDisableStructs[gBattlerAttacker].protectUses = 0;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECT_FAILED;
         gMoveResultFlags |= MOVE_RESULT_MISSED;
     }
@@ -13914,7 +13961,7 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
 
     if (gChosenActionByBattler[gBattlerTarget] == B_ACTION_USE_MOVE
         && gBattlerAttacker == *(gBattleStruct->moveTarget + gBattlerTarget)
-        && !(gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
+        && !(gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP))
         && gBattleMons[gBattlerAttacker].hp
         && !gDisableStructs[gBattlerTarget].truantCounter
         && gMovesInfo[gChosenMoveByBattler[gBattlerTarget]].effect == EFFECT_PURSUIT)
@@ -17288,15 +17335,18 @@ void BS_AllySwitchFailChance(void)
     if (B_ALLY_SWITCH_FAIL_CHANCE >= GEN_9)
     {
         TryResetProtectUseCounter(gBattlerAttacker);
-        if (sProtectSuccessRates[gDisableStructs[gBattlerAttacker].protectUses] < Random())
+        if (sProtectSuccessRates[gDisableStructs[gBattlerAttacker].ASuses] < Random())
         {
-            gDisableStructs[gBattlerAttacker].protectUses = 0;
+            gDisableStructs[gBattlerAttacker].ASuses = 0;
             gBattlescriptCurrInstr = cmd->failInstr;
             return;
         }
         else
         {
-            gDisableStructs[gBattlerAttacker].protectUses++;
+            if(gDisableStructs[gBattlerAttacker].ASuses < 5)
+            {
+                gDisableStructs[gBattlerAttacker].ASuses += 2;
+            }
         }
     }
     gBattlescriptCurrInstr = cmd->nextInstr;
@@ -17845,11 +17895,50 @@ void BS_TryHealFullHP(void)
 
 void BS_SetDetectStatus(void)
 {
+    NATIVE_ARGS(const u8 *failInstr);
+
+    bool32 fail = TRUE;
+
+    const u8 *failInstr = cmd->failInstr;
+
+    //check if the move succeeds- if it will, block off failure and set the detect status
+    if (sProtectSuccessRates[gDisableStructs[gBattlerAttacker].protectUses] >= Random())
+    {
+        gProtectStructs[gBattlerAttacker].detected = TRUE;
+        fail = FALSE;
+    }
+
+    //if the protectUses counter can be incremented, do so
+    if(gDisableStructs[gBattlerAttacker].protectUses < 6)
+    {
+        //increase by 2 if using a similar move twice (and below 5 uses). otherwise, increase by 1
+        if(gMovesInfo[gChosenMoveByBattler[gBattlerAttacker]].effect ==
+            gMovesInfo[gLastMoves[gBattlerAttacker]].effect && gDisableStructs[gBattlerAttacker].protectUses < 5)
+            {
+                gDisableStructs[gBattlerAttacker].protectUses += 2;
+            }
+            else
+            {
+                gDisableStructs[gBattlerAttacker].protectUses++;
+            }
+                   
+    }
+    
+    //if the move fails, go to the fail instruction
+    if(fail)
+    {
+        gBattlescriptCurrInstr = failInstr;
+    }
+    else //otherwise, carry on as usual
+    {
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
+void BS_CopyDetectName(void)
+{
     NATIVE_ARGS();
 
-    gProtectStructs[gBattlerAttacker].detected = TRUE;
-
     StringCopy(gBattleTextBuff3, GetMoveName(MOVE_DETECT));
-
     gBattlescriptCurrInstr = cmd->nextInstr;
 }

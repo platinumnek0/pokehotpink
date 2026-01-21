@@ -886,5 +886,6 @@ extern const u8 BattleScript_SaltCureEffectReturn[];
 extern const u8 BattleScript_QuashEffectReturn[];
 extern const u8 BattleScript_EffectDetect[];
 extern const u8 BattleScript_DetectSetUp[];
+extern const u8 BattleScript_EffectEerieImpulse[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

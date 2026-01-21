@@ -3600,6 +3600,8 @@ const u8* FaintClearSetData(u32 battler)
     gProtectStructs[battler].usedSoundMove = FALSE;
 
     gDisableStructs[battler].isFirstTurn = 2;
+    gDisableStructs[battler].chargeTimer = 0;
+    gDisableStructs[battler].protectUses = 0;
 
     gLastMoves[battler] = MOVE_NONE;
     gLastLandedMoves[battler] = MOVE_NONE;
@@ -6053,7 +6055,8 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
     {
         gBattleStruct->dynamicMoveType = ItemId_GetSecondaryId(gBattleMons[battlerAtk].item) | F_DYNAMIC_TYPE_SET;
     }
-    else if (gMovesInfo[move].effect == EFFECT_REVELATION_DANCE)
+    else if (gMovesInfo[move].effect == EFFECT_REVELATION_DANCE
+            || gMovesInfo[move].effect == EFFECT_RAGING_BULL)
     {
         if (gBattleMons[battlerAtk].type1 != TYPE_MYSTERY)
             gBattleStruct->dynamicMoveType = gBattleMons[battlerAtk].type1 | F_DYNAMIC_TYPE_SET;
@@ -6061,13 +6064,6 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
             gBattleStruct->dynamicMoveType = gBattleMons[battlerAtk].type2 | F_DYNAMIC_TYPE_SET;
         else if (gBattleMons[battlerAtk].type3 != TYPE_MYSTERY)
             gBattleStruct->dynamicMoveType = gBattleMons[battlerAtk].type3 | F_DYNAMIC_TYPE_SET;
-    }
-    else if (gMovesInfo[move].effect == EFFECT_RAGING_BULL
-            && (gBattleMons[battlerAtk].species == SPECIES_TAUROS_PALDEAN_COMBAT_BREED
-             || gBattleMons[battlerAtk].species == SPECIES_TAUROS_PALDEAN_BLAZE_BREED
-             || gBattleMons[battlerAtk].species == SPECIES_TAUROS_PALDEAN_AQUA_BREED))
-    {
-            gBattleStruct->dynamicMoveType = gBattleMons[battlerAtk].type2 | F_DYNAMIC_TYPE_SET;
     }
     else if (gMovesInfo[move].effect == EFFECT_IVY_CUDGEL
             && (gBattleMons[battlerAtk].species == SPECIES_OGERPON_WELLSPRING_MASK || gBattleMons[battlerAtk].species == SPECIES_OGERPON_WELLSPRING_MASK_TERA

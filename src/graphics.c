@@ -225,6 +225,9 @@ const u32 gBattleAnimSpritePal_PoisonColumn[] = INCBIN_U32("graphics/battle_anim
 const u32 gBattleAnimSpriteGfx_PowerTrick[] = INCBIN_U32("graphics/battle_anims/sprites/power_trick.4bpp.lz");
 const u32 gBattleAnimSpritePal_PowerTrick[] = INCBIN_U32("graphics/battle_anims/sprites/power_trick.gbapal.lz");
 
+const u32 gBattleAnimSpriteGfx_PurpleChain[] = INCBIN_U32("graphics/battle_anims/sprites/purple_chain.4bpp.lz");
+const u32 gBattleAnimSpritePal_PurpleChain[] = INCBIN_U32("graphics/battle_anims/sprites/purple_chain.gbapal.lz");
+
 const u32 gBattleAnimSpriteGfx_PurpleDrake[] = INCBIN_U32("graphics/battle_anims/sprites/purple_drake.4bpp.lz");
 const u32 gBattleAnimSpritePal_PurpleDrake[] = INCBIN_U32("graphics/battle_anims/sprites/purple_drake.gbapal.lz");
 

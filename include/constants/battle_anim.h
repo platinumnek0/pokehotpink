@@ -407,6 +407,7 @@
 #define ANIM_TAG_SYRUP_SPLAT_YELLOW         (ANIM_SPRITES_START + 393)
 #define ANIM_TAG_SCALE                      (ANIM_SPRITES_START + 394)
 #define ANIM_TAG_SALT_CRYSTALS              (ANIM_SPRITES_START + 395)
+#define ANIM_TAG_PURPLE_CHAIN               (ANIM_SPRITES_START + 396)
 
 // battlers
 #define ANIM_ATTACKER         0

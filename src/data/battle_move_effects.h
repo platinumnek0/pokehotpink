@@ -2377,4 +2377,10 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectDetect,
         .battleTvScore = 0, // TODO: Assign points
     },
+
+    [EFFECT_SPATK_SPDEF_DOWN] =
+    {
+        .battleScript = BattleScript_EffectEerieImpulse,
+        .battleTvScore = 0, // TODO: Assign points
+    },
 };

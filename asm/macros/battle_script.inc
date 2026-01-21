@@ -1528,8 +1528,13 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro setdetectstatus
+	.macro setdetectstatus failInstr:req
 	callnative BS_SetDetectStatus
+	.4byte \failInstr
+	.endm
+
+	.macro copydetectname
+	callnative BS_CopyDetectName
 	.endm
 
 	.macro setdetectparrytarget

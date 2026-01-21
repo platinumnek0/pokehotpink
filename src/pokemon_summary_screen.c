@@ -3473,7 +3473,7 @@ static void PrintHeldItemName(void)
     FormatTextByWidth(gStringVar3, 144, FONT_SMALL_NARROW, gStringVar2, 0);
     text = gStringVar3;
 
-    PrintTextOnWindowSmallNarrow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_HELD_ITEM), text, 0, 14, 0, 0);
+    PrintTextOnWindowSmallNarrow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_HELD_ITEM), text, 0, 14, 1, 0);
 }
 
 /*

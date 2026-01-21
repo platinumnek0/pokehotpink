@@ -606,10 +606,17 @@ BattleScript_EffectShellTrap::
 
 BattleScript_DetectSetUp::
 	flushtextbox
-	setdetectstatus
-	printstring STRINGID_USEDMOVE
+	copydetectname
+	printstring STRINGID_PKMNUSEDX
+	setdetectstatus BattleScript_DetectSetupFailed
 	playanimation BS_ATTACKER, B_ANIM_DETECT_SETUP, NULL
 	printstring STRINGID_TOOKPARRYSTANCE
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_DetectSetupFailed:
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_BUTITFAILED
 	waitmessage B_WAIT_TIME_LONG
 	end3
 
@@ -2037,6 +2044,34 @@ BattleScript_NobleRoarTryLowerSpAtk::
 	printfromtable gStatDownStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_NobleRoarEnd::
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectEerieImpulse::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_SPATK, MIN_STAT_STAGE, BattleScript_EerieImpulseDoMoveAnim
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPDEF, MIN_STAT_STAGE, BattleScript_CantLowerMultipleStats
+BattleScript_EerieImpulseDoMoveAnim::
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	attackanimation
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_SPATK | BIT_SPDEF, STAT_CHANGE_NEGATIVE | STAT_CHANGE_MULTIPLE_STATS
+	playstatchangeanimation BS_TARGET, BIT_SPATK, STAT_CHANGE_NEGATIVE
+	setstatchanger STAT_SPATK, 1, TRUE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_EerieImpulseTryLowerSpDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_EerieImpulseTryLowerSpDef
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EerieImpulseTryLowerSpDef::
+	playstatchangeanimation BS_TARGET, BIT_SPDEF, STAT_CHANGE_NEGATIVE
+	setstatchanger STAT_SPDEF, 1, TRUE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_EerieImpulseEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_EerieImpulseEnd
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EerieImpulseEnd::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectShellSmash::
