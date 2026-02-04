@@ -2875,10 +2875,86 @@ BattleScript_EffectEmbargo::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
-	setembargo BattleScript_ButItFailed
+	setembargo BattleScript_EmbargoTryTrap
+	trytraptarget BattleScript_MoveEnd
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNCANTUSEITEMSANYMORE
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_TARGETCANTESCAPENOW
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+BattleScript_EmbargoTryTrap:
+	trytraptarget BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_TARGETCANTESCAPENOW
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+
+BattleScript_EffectDarkVoid::
+.if B_DARK_VOID_FAIL >= GEN_7
+	jumpifspecies BS_ATTACKER, SPECIES_DARKRAI, BattleScript_EffectSleep
+	goto BattleScript_PokemonCantUseTheMove
+.endif
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifsubstituteblocks BattleScript_ButItFailed
+	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_AlreadyAsleep @fail
+	jumpifuproarwakes BattleScript_CantMakeAsleep @fail
+	jumpifability BS_TARGET, ABILITY_INSOMNIA, BattleScript_DarkVoidTrap_Insomnia 
+	jumpifability BS_TARGET, ABILITY_VITAL_SPIRIT, BattleScript_DarkVoidTrap_Insomnia 
+	jumpifability BS_TARGET,  ABILITY_BAD_DREAMS, BattleScript_DarkVoidTrap_Insomnia 
+	jumpifability BS_TARGET, ABILITY_COMATOSE, BattleScript_DarkVoidTrap_AbilityProtects
+	jumpifability BS_TARGET, ABILITY_PURIFYING_SALT, BattleScript_DarkVoidTrap_AbilityProtects
+	jumpifability BS_TARGET_SIDE, ABILITY_SWEET_VEIL, BattleScript_DarkVoidTrap_SweetVeilProtects
+	jumpifleafguardprotected BS_TARGET, BattleScript_DarkVoidTrap_AbilityProtects
+	jumpifshieldsdown BS_TARGET, BattleScript_DarkVoidTrap_AbilityProtects
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed @fail
+	jumpifterrainaffected BS_TARGET, STATUS_FIELD_ELECTRIC_TERRAIN, BattleScript_ElectricTerrainPrevents @fail
+	jumpifterrainaffected BS_TARGET, STATUS_FIELD_MISTY_TERRAIN, BattleScript_MistyTerrainPrevents @fail
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	jumpifsafeguard BattleScript_SafeguardProtected @fail
+	trytraptarget BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	seteffectprimary MOVE_EFFECT_SLEEP
+	printstring STRINGID_TARGETCANTESCAPENOW
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+BattleScript_DarkVoidTrap_Insomnia:
+	trytraptarget BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNSTAYEDAWAKEUSING
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_TARGETCANTESCAPENOW
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+BattleScript_DarkVoidTrap_AbilityProtects:
+	trytraptarget BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	call BattleScript_AbilityProtectsDoesntAffectRet
+	printstring STRINGID_TARGETCANTESCAPENOW
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+BattleScript_DarkVoidTrap_SweetVeilProtects:
+	trytraptarget BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	call BattleScript_SweetVeilProtectsRet
+	printstring STRINGID_TARGETCANTESCAPENOW
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+BattleScript_DarkVoidTryTrap:
+	trytraptarget BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_TARGETCANTESCAPENOW
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
@@ -3104,11 +3180,6 @@ BattleScript_MoveMissed::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectDarkVoid::
-.if B_DARK_VOID_FAIL >= GEN_7
-	jumpifspecies BS_ATTACKER, SPECIES_DARKRAI, BattleScript_EffectSleep
-	goto BattleScript_PokemonCantUseTheMove
-.endif
 BattleScript_EffectSleep::
 	attackcanceler
 	attackstring

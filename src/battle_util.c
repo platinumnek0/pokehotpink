@@ -11868,13 +11868,18 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
 
     if((gCurrentMove == MOVE_BRINE) && (gBattleMons[gBattlerTarget].hp <= (gBattleMons[gBattlerTarget].maxHP / 2)))
     {
-        //secondaryEffectChance = 50;
+        secondaryEffectChance = 50;
     }
 
     if((gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_LUCKY_CHANT) && secondaryEffectChance < 100
     && !(additionalEffect->self))
     {
         secondaryEffectChance *= 0.7;
+    }
+
+    if(gCurrentMove ==  MOVE_STEEL_WING && gBattleMons[gBattlerTarget].statStages[STAT_DEF] >= 1)
+    {
+        secondaryEffectChance = (100 - (20 * (gBattleMons[gBattlerTarget].statStages[STAT_DEF])));
     }
 
     return secondaryEffectChance;

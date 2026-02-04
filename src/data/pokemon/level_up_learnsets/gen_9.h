@@ -23107,7 +23107,7 @@ static const struct LevelUpMove sBumblinLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const struct LevelUpMove sBumblcrustLevelUpLearnset[] = {
+static const struct LevelUpMove sBumblecrustLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 0, MOVE_SIPHON),
     LEVEL_UP_MOVE( 1, MOVE_SIPHON),
     LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
@@ -23256,7 +23256,7 @@ static const struct LevelUpMove sDemolizardLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const struct LevelUpMove sJonfyrkendLevelUpLearnset[] = {
+static const struct LevelUpMove sJonfyrkendiLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_POUND),
     LEVEL_UP_MOVE( 1, MOVE_LEER),
     LEVEL_UP_MOVE( 5, MOVE_EMBER),

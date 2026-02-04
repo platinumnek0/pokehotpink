@@ -897,9 +897,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             "beak, horn, or the like anywhere\n"
             "from 2 to 5 times in a row."),
         .effect = EFFECT_MULTI_HIT,
-        .power = 15,
+        .power = 20,
         .type = TYPE_NORMAL,
-        .accuracy = 85,
+        .accuracy = 90,
         .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -5392,8 +5392,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .name = COMPOUND_STRING("Steel Wing"),
         .description = COMPOUND_STRING(
             "The foe is struck with steel-\n"
-            "hard wings spread wide. This\n"
-            "may raise the user's Defense."),
+            "hard wings. This raises the\n"
+            "user's Defense, but becomes less\n"
+            "likely with each Defense boost."),
         .effect = EFFECT_HIT,
         .power = 70,
         .type = TYPE_STEEL,
@@ -5406,7 +5407,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_DEF_PLUS_1,
             .self = TRUE,
-            .chance = 50,
+            .chance = 100,
         }),
         .contestEffect = CONTEST_EFFECT_BETTER_IF_SAME_TYPE,
         .contestCategory = CONTEST_CATEGORY_COOL,
@@ -5426,7 +5427,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .power = 0,
         .type = TYPE_DARK,
         .accuracy = 0,
-        .pp = 5,
+        .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .lightMove = TRUE,
@@ -6080,9 +6081,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_FIGHTING,
-        .accuracy = 80,
+        .accuracy = 90,
         .criticalHitStage = 1,
-        .pp = 5,
+        .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
@@ -6100,7 +6101,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Foes are battered with a vicious\n"
             "arcane whirlwind. This may make\n"
-            "the foes flinch."),
+            "the targets flinch."),
         .effect = EFFECT_HIT,
         .power = 40,
         .type = TYPE_DRAGON,
@@ -6177,8 +6178,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "The target is viciously crunched\n"
             "with sharp, cruel fangs. This\n"
-            "may lower the foe's Defense."
-        ),
+            "may lower the foe's Defense."),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_DARK,
@@ -6332,17 +6332,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Future Sight"),
         .description = COMPOUND_STRING(
-            "Heightens inner power to\n"
-            "strike 2 turns later."),
-        #if B_UPDATED_MOVE_DATA >= GEN_6
-            .power = 120,
-        #elif B_UPDATED_MOVE_DATA >= GEN_5
-            .power = 100,
-        #else
-            .power = 80,
-        #endif
+            "The user channels psychic power\n"
+            "to attack. This attack lands two\n"
+            "turns after it's first used."),
         .effect = EFFECT_FUTURE_SIGHT,
         .type = TYPE_PSYCHIC,
+        .power = 120,
         .accuracy = B_UPDATED_MOVE_DATA >= GEN_5 ? 100 : 90,
         .pp = B_UPDATED_MOVE_DATA >= GEN_5 ? 10 : 15,
         .target = MOVE_TARGET_SELECTED,
@@ -9198,7 +9193,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     [MOVE_HEALING_WISH] =
     {
         .name = COMPOUND_STRING("Healing Wish"),
-        .description = sHealingWishDescription,
+        .description = COMPOUND_STRING(
+            "The user faints. In return, the\n"
+            "Pokémon switching in will have\n"
+            "its HP fully restored and its\n"
+            "status condition will be healed."),
         .effect = EFFECT_HEALING_WISH,
         .power = 0,
         .type = TYPE_PSYCHIC,
@@ -9484,15 +9483,15 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Embargo"),
         .description = COMPOUND_STRING(
-            "Until the target switches out,\n"
-            "it can no longer use its held\n"
-            "item, or have any items from\n"
+            "The target is trapped in battle.\n"
+            "It can no longer use its held\n"
+            "item or have any items from\n"
             "the bag used on it."),
         .effect = EFFECT_EMBARGO,
         .power = 0,
         .type = TYPE_DARK,
         .accuracy = 100,
-        .pp = 15,
+        .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
@@ -10435,20 +10434,17 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "The user attacks with a blast of\n"
             "concentrated fighting spirit.\n"
-            "This may lower the foe's Sp. Def."),
+            "If the user is pumped up, this\n"
+            "move becomes more accurate."),
         .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_FIGHTING,
-        .accuracy = 85,
+        .accuracy = 75,
         .pp = 5,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .ballisticMove = TRUE,
-        .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_SP_DEF_MINUS_1,
-            .chance = 10,
-        }),
         .contestEffect = CONTEST_EFFECT_STARTLE_MON_WITH_JUDGES_ATTENTION,
         .contestCategory = CONTEST_CATEGORY_COOL,
         .contestComboStarterId = 0,
@@ -11694,7 +11690,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     [MOVE_LUNAR_DANCE] =
     {
         .name = COMPOUND_STRING("Lunar Dance"),
-        .description = sHealingWishDescription,
+        .description = COMPOUND_STRING(
+            "The user faints. In return, the\n"
+            "Pokémon switching in will have\n"
+            "its HP, PP, and status condition\n"
+            "fully restored."),
         .effect = EFFECT_HEALING_WISH,
         .power = 0,
         .type = TYPE_PSYCHIC,
@@ -11769,7 +11769,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .effect = EFFECT_DARK_VOID,
         .power = 0,
         .type = TYPE_DARK,
-        .accuracy = B_UPDATED_MOVE_DATA >= GEN_7 ? 50 : 80,
+        .accuracy = 70,
         .pp = 10,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
@@ -19104,7 +19104,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_MOUNTAIN_GALE] =
     {
-        .name = HANDLE_EXPANDED_MOVE_NAME("MountainGale", "Mountain Gale"),
+        .name = HANDLE_EXPANDED_MOVE_NAME("MountainGale", "Mountain Crash"),
         .description = COMPOUND_STRING(
             "Giant chunks of ice damage\n"
             "the foe. It may flinch."),
@@ -19408,8 +19408,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = HANDLE_EXPANDED_MOVE_NAME("LunarBlessng", "Lunar Blessing"),
         .description = COMPOUND_STRING(
-            "The user heals and cures\n"
-            "itself and its ally."),
+            "A cosmic blessing heals the\n"
+            "user and its ally's HP and any\n"
+            "status conditions they may be\n"
+            "afflicted with."),
         .effect = EFFECT_JUNGLE_HEALING,
         .power = 0,
         .type = TYPE_PSYCHIC,
@@ -20689,15 +20691,15 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = HANDLE_EXPANDED_MOVE_NAME("MightyCleave", "Mighty Cleave"),
         .description = COMPOUND_STRING(
-            "Both foes are cleaved with a\n"
-            "huge stone blade that breaks\n"
-            "barriers like Reflect. this move\n"
-            "can't be used consecutively."),
+            "The foe is cleaved with a huge\n"
+            "stone blade, breaking any\n"
+            "barriers protecting it like\n"
+            "Reflect or Light Screen."),
         .effect = EFFECT_BRICK_BREAK,
         .power = 90,
         .type = TYPE_ROCK,
-        .accuracy = 100,
-        .pp = 5,
+        .accuracy = 90,
+        .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
@@ -20749,9 +20751,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .name = COMPOUND_STRING("Dragon Cheer"),
         .description = COMPOUND_STRING(
             "A rousing cry that boosts the\n"
-            "user's and its ally's critical-\n"
-            "hit chance. Dragon-types receive\n"
-            "a greater boost."),
+            "ally's critical-hit ratio.\n"
+            "Dragon-types receive a greater\n"
+            "boost than other Pokémon."),
         .effect = EFFECT_DRAGON_CHEER,
         .power = 0,
         .type = TYPE_DRAGON,

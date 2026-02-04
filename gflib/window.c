@@ -712,3 +712,8 @@ static u32 GetNumActiveWindowsOnBg8Bit(u32 bgId)
     }
     return windowsNum;
 }
+
+u32 WindowWidthPx(u32 windowId)
+{
+    return gWindows[windowId].window.width * TILE_WIDTH;
+}

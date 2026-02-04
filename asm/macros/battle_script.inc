@@ -1537,6 +1537,16 @@
 	callnative BS_CopyDetectName
 	.endm
 
+	.macro trytraptarget failInstr:req
+	callnative BS_TryTrapTarget
+	.4byte \failInstr
+	.endm
+
+	.macro trytrapforever failInstr:req
+	callnative BS_TryTrapForever
+	.4byte \failInstr
+	.endm
+
 	.macro setdetectparrytarget
 	callnative BS_SetDetectParryTarget
 	.endm

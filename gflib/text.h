@@ -26,6 +26,10 @@ enum {
     FONT_NARROW,
     FONT_SMALL_NARROW, // Very similar to FONT_SMALL, some glyphs are narrower
     FONT_BOLD, // JP glyph set only
+    FONT_NARROWER,
+    FONT_SMALL_NARROWER,
+    FONT_SHORT_NARROW,
+    FONT_SHORT_NARROWER,
 };
 
 // Return values for font functions
@@ -189,5 +193,7 @@ u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension);
 // braille.c
 u16 FontFunc_Braille(struct TextPrinter *textPrinter);
 u32 GetGlyphWidth_Braille(u16 glyphId, bool32 isJapanese);
+
+u32 GetFontIdToFit(const u8 *string, u32 widestFontId, u32 letterSpacing, u32 widthPx);
 
 #endif // GUARD_TEXT_H

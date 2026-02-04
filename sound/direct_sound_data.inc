@@ -6203,8 +6203,8 @@ Cry_Horrohorra::
 	.incbin "sound/direct_sound_samples/cries/horrohorra.bin"
 
 	.align 2
-Cry_Jonfyrkend::
-	.incbin "sound/direct_sound_samples/cries/jonfyrkend.bin"
+Cry_Jonfyrkendi::
+	.incbin "sound/direct_sound_samples/cries/jonfyrkendi.bin"
 
 	.align 2
 DirectSoundWaveData_register_noise::

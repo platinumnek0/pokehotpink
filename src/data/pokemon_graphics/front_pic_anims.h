@@ -10520,7 +10520,7 @@ static const union AnimCmd sAnim_Coleox_1[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_Jonfyrkend_1[] =
+static const union AnimCmd sAnim_Jonfyrkendi_1[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(1, 55),
@@ -10578,7 +10578,7 @@ static const union AnimCmd sAnim_Salamancer_1[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_Alchemandr_1[] =
+static const union AnimCmd sAnim_Alchemander_1[] =
 {
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_FRAME(1, 30),
@@ -13326,14 +13326,14 @@ SINGLE_ANIMATION(Parasoul);
 SINGLE_ANIMATION(Horrohorra);
 SINGLE_ANIMATION(Glirub);
 SINGLE_ANIMATION(Coleox);
-SINGLE_ANIMATION(Jonfyrkend);
+SINGLE_ANIMATION(Jonfyrkendi);
 SINGLE_ANIMATION(Jakikendi);
 SINGLE_ANIMATION(Frightuff);
 SINGLE_ANIMATION(Delicausty);
 SINGLE_ANIMATION(Amewba);
 SINGLE_ANIMATION(Mewkaryote);
 SINGLE_ANIMATION(Salamancer);
-SINGLE_ANIMATION(Alchemandr);
+SINGLE_ANIMATION(Alchemander);
 SINGLE_ANIMATION(Baobaby);
 SINGLE_ANIMATION(Baobaboon);
 SINGLE_ANIMATION(Arrengai);

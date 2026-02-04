@@ -1718,7 +1718,7 @@
 #define SPECIES_CAPYBUD                                 1606
 #define SPECIES_CAPYDOZER                               1607
 #define SPECIES_BUMBLIN                                 1608
-#define SPECIES_BUMBLCRUST                              1609
+#define SPECIES_BUMBLECRUST                             1609
 #define SPECIES_CIXNO                                   1610
 #define SPECIES_MAGPILE                                 1611
 #define SPECIES_RAVENNUI                                1612
@@ -1807,7 +1807,7 @@
 #define SPECIES_DOZAI                                   1692
 #define SPECIES_EASLUMBER                               1693
 #define SPECIES_JAKIKENDI                               1694
-#define SPECIES_JONFYRKEND                              1695
+#define SPECIES_JONFYRKENDI                             1695
 #define SPECIES_GRUBCAP                                 1696
 #define SPECIES_CARAB                                   1697
 #define SPECIES_DIVHORSE                                1698
@@ -1855,7 +1855,7 @@
 #define SPECIES_OROBORING_MOBIUS                        1738
 #define SPECIES_JIBJAB                                  1739
 #define SPECIES_WACKERSNACK                             1740
-#define SPECIES_JIBBERWACK                              1741
+#define SPECIES_JIBBERWACKY                             1741
 #define SPECIES_RASKART                                 1742
 #define SPECIES_SIMPSDON                                1743
 #define SPECIES_TINGTANG                                1744

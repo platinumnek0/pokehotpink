@@ -1702,6 +1702,11 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     if ( ( (defAbility == ABILITY_WONDER_SKIN) || (defAbility == ABILITY_WITCH_DOCTOR) ) && IS_MOVE_STATUS(move) && moveAcc > 50)
         moveAcc = 50;
 
+    if(move == MOVE_FOCUS_BLAST && gBattleMons[battlerAtk].status2 & STATUS2_FOCUS_ENERGY_ANY)
+    {
+        moveAcc = 90;
+    }
+
     calc = gAccuracyStageRatios[buff].dividend * moveAcc;
     calc /= gAccuracyStageRatios[buff].divisor;
 
@@ -13809,7 +13814,7 @@ static void Cmd_setembargo(void)
     else
     {
         gStatuses3[gBattlerTarget] |= STATUS3_EMBARGO;
-        gDisableStructs[gBattlerTarget].embargoTimer = 5;
+        //gDisableStructs[gBattlerTarget].embargoTimer = 5;
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
@@ -17941,4 +17946,40 @@ void BS_CopyDetectName(void)
 
     StringCopy(gBattleTextBuff3, GetMoveName(MOVE_DETECT));
     gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_TryTrapTarget()
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    const u8 *failInstr = cmd->failInstr;
+
+    if(gBattleMons[gBattlerTarget].status2 & STATUS2_ESCAPE_PREVENTION)
+    {
+        gBattlescriptCurrInstr = failInstr;
+    }
+    else
+    {
+        gBattleMons[gBattlerTarget].status2 |= STATUS2_ESCAPE_PREVENTION;
+        gDisableStructs[gBattlerTarget].battlerPreventingEscape = gBattlerAttacker;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
+void BS_TryTrapForever()
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    const u8 *failInstr = cmd->failInstr;
+
+    if(gBattleMons[gBattlerTarget].status2 & STATUS2_ESCAPE_PREVENTION)
+    {
+        gBattlescriptCurrInstr = failInstr;
+    }
+    else
+    {
+        gBattleMons[gBattlerTarget].status2 |= STATUS2_ESCAPE_PREVENTION;
+        gDisableStructs[gBattlerTarget].battlerPreventingEscape = gBattlerTarget;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
 }

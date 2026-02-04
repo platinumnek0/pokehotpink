@@ -2438,7 +2438,7 @@ gCryTable::
 	cry Cry_Cixno
 	cry Cry_Parasoul
 	cry Cry_Horrohorra
-	cry Cry_Jonfyrkend
+	cry Cry_Jonfyrkendi
 
 	.align 2
 gCryTable_Reverse::
@@ -4880,4 +4880,4 @@ gCryTable_Reverse::
 	cry_reverse Cry_Cixno
 	cry_reverse Cry_Parasoul
 	cry_reverse Cry_Horrohorra
-	cry_reverse Cry_Jonfyrkend
+	cry_reverse Cry_Jonfyrkendi
