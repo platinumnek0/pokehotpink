@@ -3286,7 +3286,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
             "The Pokémon's sharp fangs boost\n"
             "the power of its biting and\n"
             "draining moves. Draining moves\n"
-            "additionally heal more HP."),
+            "heal a bit more more HP."),
         .aiRating = 7,
     },
 

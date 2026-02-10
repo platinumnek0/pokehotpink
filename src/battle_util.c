@@ -9497,9 +9497,8 @@ u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 battlerDef, u3
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_VAMPIRIC:
-        if (gMovesInfo[move].bitingMove)
-           modifier = uq4_12_multiply(modifier, UQ_4_12(1.3)); 
-        if (gMovesInfo[move].effect == EFFECT_ABSORB)
+        if (gMovesInfo[move].bitingMove || gMovesInfo[move].effect == EFFECT_ABSORB
+            || gMovesInfo[move].effect == EFFECT_SIPHON)
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_ARTILLERY:
