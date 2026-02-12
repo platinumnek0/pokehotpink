@@ -574,6 +574,7 @@
 #define B_ANIM_SHRINK                   50
 #define B_ANIM_DEVIL_LOCKET_CURSE       51
 #define B_ANIM_DETECT_SETUP             52
+#define B_ANIM_SLOW_SLOW_BEAM_SPEED_DROP 53
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

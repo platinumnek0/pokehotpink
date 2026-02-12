@@ -2366,6 +2366,7 @@ enum
     ENDTURN_TORMENT, // supposedly this goes after Taunt, before Encore, but Encore is first right now?
     ENDTURN_SALT_CURE,
     ENDTURN_SYRUP_BOMB,
+    ENDTURN_SLOW_SLOW_BEAM,
     ENDTURN_DYNAMAX,
     ENDTURN_SEA_OF_FIRE_DAMAGE,
     ENDTURN_MAGIC_COAT,
@@ -2980,6 +2981,19 @@ u8 DoBattlerEndTurnEffects(void)
                 gBattlerTarget = battler;
                 PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SYRUP_BOMB);
                 gBattlescriptCurrInstr = BattleScript_SyrupBombEndTurn;
+                BattleScriptExecute(gBattlescriptCurrInstr);
+                effect++;
+            }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_SLOW_SLOW_BEAM:
+            if ((gStatuses4[battler] & STATUS4_SLOW_SLOW_BEAM) && (gBattleMons[battler].hp != 0))
+            {
+                if (gDisableStructs[battler].syrupBombTimer > 0 && --gDisableStructs[battler].syrupBombTimer == 0)
+                    gStatuses4[battler] &= ~STATUS4_SLOW_SLOW_BEAM;
+                gBattlerTarget = battler;
+                PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SYRUP_BOMB);
+                gBattlescriptCurrInstr = BattleScript_SlowSlowBeamEndTurn;
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
             }

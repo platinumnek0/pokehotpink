@@ -140,6 +140,11 @@ BattleScript_SyrupBombActivates::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_SlowSlowBeamActivates::
+	printstring STRINGID_TARGETCOVEREDINSLOWTONS
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_SyrupBombEndTurn::
 	flushtextbox
 	playanimation BS_ATTACKER, B_ANIM_SYRUP_BOMB_SPEED_DROP
@@ -148,6 +153,15 @@ BattleScript_SyrupBombEndTurn::
 	printfromtable gStatDownStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_SyrupBombTurnDmgEnd:
+	end2
+
+BattleScript_SlowSlowBeamEndTurn::
+	flushtextbox
+	playanimation BS_ATTACKER, B_ANIM_SLOW_SLOW_BEAM_SPEED_DROP
+	setstatchanger STAT_SPEED, 1, TRUE
+	statbuffchange STAT_CHANGE_ALLOW_PTR | STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_SyrupBombTurnDmgEnd
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
 	end2
 
 BattleScript_EffectChillyReception::
@@ -6423,15 +6437,15 @@ BattleScript_TryLearnMoveLoop::
 BattleScript_AskToLearnMove::
 	buffermovetolearn
 	printstring STRINGID_TRYTOLEARNMOVE1
-	printstring STRINGID_TRYTOLEARNMOVE2
+	@printstring STRINGID_TRYTOLEARNMOVE2
 	printstring STRINGID_TRYTOLEARNMOVE3
 	waitstate
 	setbyte sLEARNMOVE_STATE, 0
 	yesnoboxlearnmove BattleScript_ForgotAndLearnedNewMove
-	printstring STRINGID_STOPLEARNINGMOVE
+	@printstring STRINGID_STOPLEARNINGMOVE
 	waitstate
 	setbyte sLEARNMOVE_STATE, 0
-	yesnoboxstoplearningmove BattleScript_AskToLearnMove
+	@yesnoboxstoplearningmove BattleScript_AskToLearnMove
 	printstring STRINGID_DIDNOTLEARNMOVE
 	goto BattleScript_TryLearnMoveLoop
 BattleScript_ForgotAndLearnedNewMove::

@@ -887,5 +887,7 @@ extern const u8 BattleScript_QuashEffectReturn[];
 extern const u8 BattleScript_EffectDetect[];
 extern const u8 BattleScript_DetectSetUp[];
 extern const u8 BattleScript_EffectEerieImpulse[];
+extern const u8 BattleScript_SlowSlowBeamEndTurn[];
+extern const u8 BattleScript_SlowSlowBeamActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

@@ -1184,6 +1184,7 @@ gBattleAnims_General::
 	.4byte General_Shrink           		@ B_ANIM_SHRINK
 	.4byte General_DevilLocketCurse			@ B_ANIM_DEVIL_LOCKET_CURSE
 	.4byte General_DetectSetup				@ B_ANIM_DETECT_SETUP
+	.4byte General_SlowSlowBeamSpeedDrop    @ B_ANIM_SLOW_SLOW_BEAM_SPEED_DROP
 
 	.align 2
 gBattleAnims_Special::
@@ -17121,17 +17122,33 @@ SyrupBombProjectileYellow:
 	delay 3
 	return
 
-General_SyrupBombSpeedDrop::
-	createvisualtask AnimTask_StickySyrup, 0x5
-	jumpargeq 0x0, FALSE, SyrupBombSpeedDropRed
-	jumpargeq 0x0, TRUE, SyrupBombSpeedDropYellow
-
-SyrupBombSpeedDropRed:
+General_SlowSlowBeamSpeedDrop::
 	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_SwayMon, 5, 0, 6, 2048, 4, ANIM_TARGET
 	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_TARGET, 2, 2, 0, 12, RGB(31, 18, 31)
 	waitforvisualfinish
 	end
+
+General_SyrupBombSpeedDrop::
+	loadspritegfx ANIM_TAG_SYRUP_BLOB_RED
+	loadspritegfx ANIM_TAG_SYRUP_SHELL_RED
+	loopsewithpan SE_M_TOXIC, SOUND_PAN_TARGET, 13, 6
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 3, 0, 15, 1
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_TARGET, 1, 2, 0, 12, RGB(20, 3, 3)
+	createsprite gSyrupBombRedShellBSpriteTemplate, ANIM_TARGET, 1, ANIM_TARGET, 60
+	waitforvisualfinish
+	end
+
+SyrupBombSpeedDropRed:
+	loadspritegfx ANIM_TAG_SYRUP_BLOB_RED
+	loadspritegfx ANIM_TAG_SYRUP_SHELL_RED
+	loopsewithpan SE_M_TOXIC, SOUND_PAN_TARGET, 13, 6
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 3, 0, 15, 1
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_TARGET, 1, 2, 0, 12, RGB(20, 3, 3)
+	createsprite gSyrupBombRedShellBSpriteTemplate, ANIM_TARGET, 1, ANIM_TARGET, 60
+	waitforvisualfinish
+	end
+
 
 SyrupBombSpeedDropYellow:
 	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER

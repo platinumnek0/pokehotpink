@@ -3840,7 +3840,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 }
                 break;
             case MOVE_EFFECT_SYRUP_BOMB:
-                if (!(gStatuses4[gEffectBattler] & STATUS4_SYRUP_BOMB))
+                if (!(gStatuses4[gEffectBattler] & STATUS4_SYRUP_BOMB) && !(gStatuses4[gEffectBattler] & STATUS4_SLOW_SLOW_BEAM))
                 {
                     struct Pokemon *party = GetBattlerParty(gBattlerAttacker);
 
@@ -3850,6 +3850,19 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     gBattleStruct->stickySyrupdBy[gEffectBattler] = gBattlerAttacker;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_SyrupBombActivates;
+                }
+                break;
+            case MOVE_EFFECT_SLOW_SLOW_BEAM:
+                if (!(gStatuses4[gEffectBattler] & STATUS4_SYRUP_BOMB) && !(gStatuses4[gEffectBattler] & STATUS4_SLOW_SLOW_BEAM))
+                {
+                    struct Pokemon *party = GetBattlerParty(gBattlerAttacker);
+
+                    gStatuses4[gEffectBattler] |= STATUS4_SLOW_SLOW_BEAM;
+                    gDisableStructs[gEffectBattler].syrupBombTimer = 3;
+                    gDisableStructs[gEffectBattler].syrupBombIsShiny = IsMonShiny(&party[gBattlerPartyIndexes[gBattlerAttacker]]);
+                    gBattleStruct->stickySyrupdBy[gEffectBattler] = gBattlerAttacker;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_SlowSlowBeamActivates;
                 }
                 break;
             case MOVE_EFFECT_SECRET_POWER:

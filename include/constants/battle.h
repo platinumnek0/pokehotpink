@@ -195,7 +195,7 @@
 #define STATUS4_GLAIVE_RUSH             (1 << 6)
 #define STATUS4_HEARTBREAK              (1 << 7 | 1 << 8 | 1 << 9 | 1 << 10)
 #define STATUS4_HEARTBREAK_TURN(num)    (((num) << 7) & STATUS4_HEARTBREAK)
-#define STATUS4_DIVORCED                (1 << 11)
+#define STATUS4_SLOW_SLOW_BEAM          (1 << 11)
 #define STATUS4_INFAT_TIMER             (1 << 12 | 1 << 13 | 1 << 14 | 1 << 15 | 1 << 16)
 #define STATUS4_INFATUATION_TURN(num)   (((num) << 12) & STATUS4_INFAT_TIMER)
 #define STATUS4_PANIC                   (1 << 17)
@@ -419,8 +419,9 @@
 #define MOVE_EFFECT_SALT_CURE           92
 #define MOVE_EFFECT_QUASH               93
 #define MOVE_EFFECT_SLUDGE_WAVE         94
+#define MOVE_EFFECT_SLOW_SLOW_BEAM      95
 
-#define NUM_MOVE_EFFECTS                95
+#define NUM_MOVE_EFFECTS                96
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000

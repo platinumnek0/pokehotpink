@@ -649,7 +649,7 @@ enum {
 // States for the switch in EVOSTATE_REPLACE_MOVE
 enum {
     MVSTATE_INTRO_MSG_1,
-    MVSTATE_INTRO_MSG_2,
+    //MVSTATE_INTRO_MSG_2,
     MVSTATE_INTRO_MSG_3,
     MVSTATE_PRINT_YES_NO,
     MVSTATE_HANDLE_YES_NO,
@@ -914,6 +914,7 @@ static void Task_EvolutionScene(u8 taskId)
                 gTasks[taskId].tLearnMoveState++;
             }
             break;
+        /*
         case MVSTATE_INTRO_MSG_2:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
@@ -923,6 +924,7 @@ static void Task_EvolutionScene(u8 taskId)
                 gTasks[taskId].tLearnMoveState++;
             }
             break;
+        */
         case MVSTATE_INTRO_MSG_3:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
@@ -930,7 +932,7 @@ static void Task_EvolutionScene(u8 taskId)
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE3 - BATTLESTRINGS_TABLE_START]);
                 BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
                 gTasks[taskId].tLearnMoveYesState = MVSTATE_SHOW_MOVE_SELECT;
-                gTasks[taskId].tLearnMoveNoState = MVSTATE_ASK_CANCEL;
+                gTasks[taskId].tLearnMoveNoState = MVSTATE_CANCEL;
                 gTasks[taskId].tLearnMoveState++;
             }
         case MVSTATE_PRINT_YES_NO:
@@ -1006,7 +1008,7 @@ static void Task_EvolutionScene(u8 taskId)
                 if (var == MAX_MON_MOVES)
                 {
                     // Didn't select move slot
-                    gTasks[taskId].tLearnMoveState = MVSTATE_ASK_CANCEL;
+                    gTasks[taskId].tLearnMoveState = MVSTATE_CANCEL;
                 }
                 else
                 {
@@ -1101,7 +1103,7 @@ enum {
 // States for the switch in T_EVOSTATE_REPLACE_MOVE
 enum {
     T_MVSTATE_INTRO_MSG_1,
-    T_MVSTATE_INTRO_MSG_2,
+    //T_MVSTATE_INTRO_MSG_2,
     T_MVSTATE_INTRO_MSG_3,
     T_MVSTATE_PRINT_YES_NO,
     T_MVSTATE_HANDLE_YES_NO,
@@ -1315,6 +1317,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
                 gTasks[taskId].tLearnMoveState++;
             }
             break;
+        /*
         case T_MVSTATE_INTRO_MSG_2:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
@@ -1324,6 +1327,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
                 gTasks[taskId].tLearnMoveState++;
             }
             break;
+        */
         case T_MVSTATE_INTRO_MSG_3:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
@@ -1331,7 +1335,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
                 BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_TRYTOLEARNMOVE3 - BATTLESTRINGS_TABLE_START]);
                 DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                 gTasks[taskId].tLearnMoveYesState = T_MVSTATE_SHOW_MOVE_SELECT;
-                gTasks[taskId].tLearnMoveNoState = T_MVSTATE_ASK_CANCEL;
+                gTasks[taskId].tLearnMoveNoState = T_MVSTATE_CANCEL;
                 gTasks[taskId].tLearnMoveState++;
             }
         case T_MVSTATE_PRINT_YES_NO:
@@ -1388,7 +1392,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
                 if (var == MAX_MON_MOVES)
                 {
                     // Didn't select move slot
-                    gTasks[taskId].tLearnMoveState = T_MVSTATE_ASK_CANCEL;
+                    gTasks[taskId].tLearnMoveState = T_MVSTATE_CANCEL;
                 }
                 else
                 {

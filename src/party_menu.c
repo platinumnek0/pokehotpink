@@ -5618,7 +5618,7 @@ static void Task_HandleReplaceMoveYesNoInput(u8 taskId)
         PlaySE(SE_SELECT);
         // fallthrough
     case 1:
-        StopLearningMovePrompt(taskId);
+        Task_HandleStopLearningMoveYesNoInput(taskId);
         break;
     }
 }
@@ -5654,7 +5654,7 @@ static void Task_ReturnToPartyMenuWhileLearningMove(u8 taskId)
         if (GetMoveSlotToReplace() != MAX_MON_MOVES)
             DisplayPartyMenuForgotMoveMessage(taskId);
         else
-            StopLearningMovePrompt(taskId);
+            Task_HandleStopLearningMoveYesNoInput(taskId);
     }
 }
 
@@ -5708,7 +5708,10 @@ static void Task_HandleStopLearningMoveYesNoInput(u8 taskId)
 
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-    case 0:
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        // fallthrough
+    case 1:
         GetMonNickname(mon, gStringVar1);
         StringCopy(gStringVar2, GetMoveName(gPartyMenu.data1));
         StringExpandPlaceholders(gStringVar4, gText_MoveNotLearned);
@@ -5724,10 +5727,7 @@ static void Task_HandleStopLearningMoveYesNoInput(u8 taskId)
             gTasks[taskId].func = Task_ClosePartyMenuAfterText;
         }
         break;
-    case MENU_B_PRESSED:
-        PlaySE(SE_SELECT);
-        // fallthrough
-    case 1:
+    case 0:
         GetMonNickname(mon, gStringVar1);
         StringCopy(gStringVar2, GetMoveName(gPartyMenu.data1));
         DisplayLearnMoveMessage(gText_PkmnNeedsToReplaceMove);
@@ -5909,7 +5909,7 @@ static void Task_TryLearnNewMoves(u8 taskId)
             {
             case 0: // No moves to learn
                 if (sInitialLevel >= sFinalLevel)
-                    PartyMenuTryEvolution(taskId);
+                    gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
                 break;
             case MON_HAS_MAX_MOVES:
                 DisplayMonNeedsToReplaceMove(taskId);
@@ -5938,7 +5938,7 @@ static void Task_TryLearningNextMove(u8 taskId)
         {
         case 0: // No moves to learn
             if (sInitialLevel >= sFinalLevel)
-                PartyMenuTryEvolution(taskId);
+                gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
             break;
         case MON_HAS_MAX_MOVES:
             DisplayMonNeedsToReplaceMove(taskId);

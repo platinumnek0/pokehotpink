@@ -3444,6 +3444,8 @@ void SwitchInClearSetData(u32 battler)
             gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
         if ((gStatuses4[i] & STATUS4_SYRUP_BOMB) && *(gBattleStruct->stickySyrupdBy + i) == battler)
             gStatuses4[i] &= ~STATUS4_SYRUP_BOMB;
+        if ((gStatuses4[i] & STATUS4_SLOW_SLOW_BEAM) && *(gBattleStruct->stickySyrupdBy + i) == battler)
+            gStatuses4[i] &= ~STATUS4_SLOW_SLOW_BEAM;
     }
 
     gActionSelectionCursor[battler] = 0;
@@ -3556,6 +3558,8 @@ const u8* FaintClearSetData(u32 battler)
             gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
         if ((gStatuses4[i] & STATUS4_SYRUP_BOMB) && *(gBattleStruct->stickySyrupdBy + i) == battler)
             gStatuses4[i] &= ~STATUS4_SYRUP_BOMB;
+        if ((gStatuses4[i] & STATUS4_SLOW_SLOW_BEAM) && *(gBattleStruct->stickySyrupdBy + i) == battler)
+            gStatuses4[i] &= ~STATUS4_SLOW_SLOW_BEAM;
     }
 
     gActionSelectionCursor[battler] = 0;
